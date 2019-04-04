@@ -3,14 +3,36 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.5",
+    "lodash.throttle": "^4.1.1",
+    "nav-frontend-core": "^4.0.5",
+    "nav-frontend-js-utils": "^1.0.6",
+    "nav-frontend-knapper": "^1.0.15",
+    "nav-frontend-knapper-style": "^0.3.14",
+    "nav-frontend-paneler-style": "^0.3.11",
+    "nav-frontend-skjema": "^1.0.25",
+    "nav-frontend-skjema-style": "^1.0.10",
+    "nav-frontend-typografi": "^2.0.6",
+    "nav-frontend-typografi-style": "^1.0.10",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
   },
+  "devDependencies": {
+    "less": "^3.5.2",
+    "less-plugin-npm-import": "^2.1.0",
+    "less-watch-compiler": "^1.11.3",
+    "npm-run-all": "^4.0.2"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start:js": "react-scripts start",
+    "build:js": "react-scripts build",
+    "start:css": "less-watch-compiler --config less.json",
+    "build:css": "less-watch-compiler --run-once --config less.json",
+    "start": "npm-run-all -p start:*",
+    "build": "npm run build:css && npm run build:js",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
