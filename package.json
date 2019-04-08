@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.5",
+    "eslint-config-airbnb": "^17.1.0",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-core": "^4.0.5",
     "nav-frontend-js-utils": "^1.0.6",
@@ -19,7 +20,8 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "stylelint": "^9.10.1"
   },
   "devDependencies": {
     "less": "^3.5.2",
@@ -35,10 +37,14 @@
     "start": "npm-run-all -p start:*",
     "build": "npm run build:css && npm run build:js",
     "test": "react-scripts test --env=jsdom",
+    "test:less": "stylelint \"src/**/*.less\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "airbnb"
+    ]
   },
   "browserslist": [
     ">0.2%",

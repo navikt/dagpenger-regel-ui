@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Dashboard = (
-  location
+  location,
 ) => {
   const routeParams = location.match.params;
-
+  const b = 'dsfdsfdsfd';
   const { aktorId, beregningdato, vilkarid } = routeParams;
- return (
- <div>bacon</div>
- )
+
+  const [data, setData] = useState({ inntekter: {} });
+
+  useEffect(async () => {
+    const result = await axios(
+      'http://localhost:3000/mock/inntekter.json',
+    );
+
+    setData(result.data);
+  });
+
+  return (
+    <div />
+  );
 };
 
 export default Dashboard;
