@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Dashboard = (
-  location,
-) => {
-  const routeParams = location.match.params;
-  const b = 'dsfdsfdsfd';
-  const { aktorId, beregningdato, vilkarid } = routeParams;
+const Dashboard = (location) => {
+  // const routeParams = location.match.params;
+  // const { aktorId, beregningdato, vilkarid } = routeParams;
 
   const [data, setData] = useState({ inntekter: {} });
 
