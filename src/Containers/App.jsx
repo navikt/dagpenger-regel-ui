@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 
@@ -12,7 +12,7 @@ class App extends Component {
   // http://localhost:3000/aktorId/1/beregningdato/2019-08-04/vilkarId/2
   render() {
     return (
-      <div>
+      <div className="app">
         <header>
           dsfdsfd
         </header>
