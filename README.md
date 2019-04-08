@@ -1,4 +1,4 @@
-## dp-inntekt-frontend
+## dagpenger-regel-ui
 
 Verktøy for visning og redigering av inntekter ved behandling av dagpengevedtak.
 
