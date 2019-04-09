@@ -637,6 +637,12 @@ body .blokk-xl {
     display: none !important;
   }
 }
+body {
+  color: #3E3832;
+  height: 100%;
+  line-height: 1.42857143;
+  margin: 0;
+}
 @font-face {
   font-family: 'Source Sans Pro';
   font-weight: 400;

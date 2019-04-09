@@ -1,34 +1,55 @@
+@import '~nav-frontend-core/less/_variabler';
+
+@width: 300px;
+@height: 300px;
+
 .grid {
   display: flex;
   flex-direction: row;
   justify-content: start;
   overflow-x: auto;
-  width: 100vh;
+  width: 100%;
+
+  .item {
+    padding: 16px;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+  }
 
   .arbeidsgivere {
-    width: 200px;
+    background: @navGra20;
+    width: @width;
+    position: absolute;
+    left: 0;
 
     .arbeidsgiver {
-      background: red;
-      height: 200px;
+      height: @height;
     }
   }
 
-  .maaned {
-    background: blue;
-    border: 1px solid black;
-    width: 200px;
+  .maaneder {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    overflow-x: auto;
+    margin-left: @width;
+    width: 100%;
 
-    .--navn {
-      background: pink;
-    }
+    .maaned {
+      background: white;
+      width: @width;
 
-    .inntekter {
-      background: yellow;
-      height: 200px;
+      .maanednavn {
+        background: @navMorkGra;
+        color: white;
+      }
 
-      .inntekt {
-        background: green;
+      .inntekter {
+        height: @height;
+
+        .inntekt {
+
+        }
       }
     }
   }
