@@ -8,7 +8,7 @@ import styles from './App.css';
 const App = () => (
   <div className={styles.app}>
     <header>
-      dsfdsfd
+      Dagpenger
     </header>
     <Router>
       <Route exact path="/aktorId/:aktorId/beregningdato/:beregningdato/vilkarId/:vilkarid" component={Dashboard} />

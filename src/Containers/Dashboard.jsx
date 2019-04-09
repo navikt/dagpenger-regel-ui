@@ -1,28 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+
+import './Dashboard.css';
 
 const Dashboard = (location) => {
   // const routeParams = location.match.params;
   // const { aktorId, beregningdato, vilkarid } = routeParams;
 
   const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {} });
-
-  const groupByArbeidsgiver = (list) => {
-    const map = new Map();
-    list.forEach((maaned) => {
-      maaned.arbeidsInntektInformasjon.inntektListe.forEach((inntekt) => {
-        const arbeidsgiver = inntekt.virksomhet.identifikator;
-        const månederForArbeidsgiver = map.get(arbeidsgiver);
-        if (!månederForArbeidsgiver) {
-          map.set(arbeidsgiver, [inntekt]);
-        } else {
-          månederForArbeidsgiver.push(inntekt);
-        }
-      });
-    });
-    return map;
-  };
 
   useEffect(() => {
     const getMock = async () => {
@@ -34,18 +19,19 @@ const Dashboard = (location) => {
     };
 
     getMock();
-  });
+  }, []);
   return (
-    <div>
-      {[...groupByArbeidsgiver(data.arbeidsInntektMaaned).entries()].map(val => (
-        <div key={val[0]}>
-          <Ekspanderbartpanel tittel={val[0]} tittelProps="normaltekst">
-            <ul>
-              {val[1].map((inntekt => (<li key={inntekt.beloep}>{inntekt.beloep}</li>)))}
-            </ul>
-          </Ekspanderbartpanel>
+    <div className="container">
+      <div className="grid">
+        <div className="item ident">
+        dfdfd
         </div>
-      ))}
+        {data.arbeidsInntektMaaned.map(maaned => (
+          <div key={maaned.aarMaaned} className="item">
+            {maaned.aarMaaned}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
