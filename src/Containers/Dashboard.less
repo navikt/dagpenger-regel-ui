@@ -1,0 +1,17 @@
+.container {
+  overflow-x: auto;
+  max-width: 300px;
+
+  .grid {
+    display: inline-grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+  }
+
+  .item {
+    border: 1px solid black;
+
+    &.ident {
+      grid-column-start: 1;
+    }
+  }
+}
