@@ -12,6 +12,7 @@ const App = () => (
     </header>
     <Router>
       <Route exact path="/aktorId/:aktorId/beregningdato/:beregningdato/vilkarId/:vilkarid" component={Dashboard} />
+      <Route component={Dashboard} />
     </Router>
   </div>
 );

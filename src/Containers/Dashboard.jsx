@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
 const Dashboard = (location) => {
   // const routeParams = location.match.params;
@@ -7,10 +8,26 @@ const Dashboard = (location) => {
 
   const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {} });
 
+  const groupByArbeidsgiver = (list) => {
+    const map = new Map();
+    list.forEach((maaned) => {
+      maaned.arbeidsInntektInformasjon.inntektListe.forEach((inntekt) => {
+        const arbeidsgiver = inntekt.virksomhet.identifikator;
+        const månederForArbeidsgiver = map.get(arbeidsgiver);
+        if (!månederForArbeidsgiver) {
+          map.set(arbeidsgiver, [inntekt]);
+        } else {
+          månederForArbeidsgiver.push(inntekt);
+        }
+      });
+    });
+    return map;
+  };
+
   useEffect(() => {
     const getMock = async () => {
       const result = await axios(
-        'http://localhost:3000/mock/inntekter.json',
+        'http://localhost:3000/mock/flereinntekter.json',
       );
 
       setData(result.data);
@@ -18,12 +35,15 @@ const Dashboard = (location) => {
 
     getMock();
   });
-
   return (
     <div>
-      {data.arbeidsInntektMaaned.map(maaned => (
-        <div key={maaned.aarMaaned}>
-          {maaned.aarMaaned}
+      {[...groupByArbeidsgiver(data.arbeidsInntektMaaned).entries()].map(val => (
+        <div key={val[0]}>
+          <Ekspanderbartpanel tittel={val[0]} tittelProps="normaltekst">
+            <ul>
+              {val[1].map((inntekt => (<li key={inntekt.beloep}>{inntekt.beloep}</li>)))}
+            </ul>
+          </Ekspanderbartpanel>
         </div>
       ))}
     </div>
