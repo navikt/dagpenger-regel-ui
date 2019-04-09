@@ -20,18 +20,29 @@ const Dashboard = (location) => {
 
     getMock();
   }, []);
+
+
   return (
-    <div className="container">
-      <div className="grid">
-        <div className="item ident">
-        dfdfd
-        </div>
-        {data.arbeidsInntektMaaned.map(maaned => (
-          <div key={maaned.aarMaaned} className="item">
+    <div className="grid">
+      <div className="arbeidsgivere">
+        arbeidsgivere
+      </div>
+      {data.arbeidsInntektMaaned.map(maaned => (
+        <div className="maaned">
+          <div key={maaned.aarMaaned} className="--navn">
             {maaned.aarMaaned}
           </div>
-        ))}
-      </div>
+          {maaned.arbeidsInntektInformasjon.arbeidsgivere.map(arbeidsgiver => (
+            <div key={1} className="inntekter">
+              {arbeidsgiver.inntektListe.map(inntekt => (
+                <div key={1} className="inntekt">
+                  Inntekt
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

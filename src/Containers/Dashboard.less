@@ -1,17 +1,19 @@
-.container {
-  overflow-x: auto;
-  max-width: 300px;
+.grid {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 
-  .grid {
-    display: inline-grid;
-    grid-template-columns: repeat(auto-fill, 250px);
-  }
-
-  .item {
+  .maaned {
+    background: blue;
     border: 1px solid black;
 
-    &.ident {
-      grid-column-start: 1;
+    .--navn {
+      background: pink;
+    }
+
+    .inntekter {
+      background: yellow;
+      width: 200px;
     }
   }
 }
