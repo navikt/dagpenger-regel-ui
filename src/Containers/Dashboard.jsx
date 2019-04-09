@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Undertittel, Element, EtikettLiten } from 'nav-frontend-typografi';
 
 import './Dashboard.css';
 
@@ -24,9 +25,27 @@ const Dashboard = (location) => {
 
   return (
     <div className="grid">
+
       <div className="arbeidsgivere">
-        arbeidsgivere
+        <div className="maaned">&laquo;</div>
+        <div className="arbeidsgiver">
+          <Undertittel>Arbeidsgiver</Undertittel>
+
+        </div>
+        <div className="arbeidsgiver">
+          <Undertittel>Arbeidsgiver</Undertittel>
+
+        </div>
+        <div className="arbeidsgiver">
+          <Undertittel>Arbeidsgiver</Undertittel>
+
+        </div>
+        <div className="arbeidsgiver">
+          <Undertittel>Arbeidsgiver</Undertittel>
+
+        </div>
       </div>
+
       {data.arbeidsInntektMaaned.map(maaned => (
         <div className="maaned">
           <div key={maaned.aarMaaned} className="--navn">
@@ -36,7 +55,8 @@ const Dashboard = (location) => {
             <div key={1} className="inntekter">
               {arbeidsgiver.inntektListe.map(inntekt => (
                 <div key={1} className="inntekt">
-                  Inntekt
+                  <EtikettLiten>{inntekt.header}</EtikettLiten>
+                  <Element>{inntekt.beloep}</Element>
                 </div>
               ))}
             </div>

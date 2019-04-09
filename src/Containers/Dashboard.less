@@ -1,11 +1,23 @@
 .grid {
-  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: start;
+  overflow-x: auto;
+  width: 100vh;
+
+  .arbeidsgivere {
+    width: 200px;
+
+    .arbeidsgiver {
+      background: red;
+      height: 200px;
+    }
+  }
 
   .maaned {
     background: blue;
     border: 1px solid black;
+    width: 200px;
 
     .--navn {
       background: pink;
@@ -13,7 +25,11 @@
 
     .inntekter {
       background: yellow;
-      width: 200px;
+      height: 200px;
+
+      .inntekt {
+        background: green;
+      }
     }
   }
 }
