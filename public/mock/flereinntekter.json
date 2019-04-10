@@ -7,6 +7,7 @@
           {
             "identifikator": "222222",
             "aktoerType": "ORGANISASJON",
+            "navn": "Tototo",
             "inntektListe": [
               {
                 "inntektType": "LOENNSINNTEKT",
@@ -40,6 +41,7 @@
           {
             "identifikator": "1111111",
             "aktoerType": "ORGANISASJON",
+            "navn": "Enenenen",
             "inntektListe": [
               {
                 "inntektType": "LOENNSINNTEKT",
@@ -106,6 +108,7 @@
           {
             "identifikator": "222222",
             "aktoerType": "ORGANISASJON",
+            "navn": "Tototo",
             "inntektListe": [
               {
                 "inntektType": "LOENNSINNTEKT",
@@ -146,6 +149,7 @@
           {
             "identifikator": "222222",
             "aktoerType": "ORGANISASJON",
+            "navn": "Tototo",
             "inntektListe": [
               {
                 "inntektType": "LOENNSINNTEKT",
@@ -179,6 +183,7 @@
           {
             "identifikator": "1111111",
             "aktoerType": "ORGANISASJON",
+            "navn": "Enenenen",
             "inntektListe": [
               {
                 "inntektType": "LOENNSINNTEKT",
@@ -271,6 +276,7 @@
           {
             "identifikator": "222222",
             "aktoerType": "ORGANISASJON",
+            "navn": "Tototo",
             "inntektListe": [
               {
                 "inntektType": "LOENNSINNTEKT",
@@ -307,6 +313,7 @@
           {
             "identifikator": "1111111",
             "aktoerType": "ORGANISASJON",
+            "navn": "Enenenen",
             "inntektListe": [
               {
                 "inntektType": "LOENNSINNTEKT",
@@ -373,6 +380,7 @@
           {
             "identifikator": "1111111",
             "aktoerType": "ORGANISASJON",
+            "navn": "Enenenen",
             "inntektListe":[
               {
                 "inntektType": "LOENNSINNTEKT",
@@ -466,6 +474,7 @@
           {
             "identifikator": "222222",
             "aktoerType": "ORGANISASJON",
+            "navn": "Tototo",
             "inntektListe": [
               {
                 "inntektType": "LOENNSINNTEKT",
@@ -502,6 +511,7 @@
           {
             "identifikator": "1111111",
             "aktoerType": "ORGANISASJON",
+            "navn": "Enenenen",
             "inntektListe": [
               {
                 "inntektType": "LOENNSINNTEKT",
