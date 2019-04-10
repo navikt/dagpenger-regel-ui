@@ -43,7 +43,7 @@ const Dashboard = (location) => {
           &laquo; &raquo;
         </div>
         {data.arbeidsgivere.map(arbeidsgiver => (
-          <Arbeidsgiver arbeidsgiver={arbeidsgiver} />
+          <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
         ))}
 
       </div>
@@ -53,7 +53,7 @@ const Dashboard = (location) => {
             <MaanedHeader maaned={maaned.aarMaaned} />
             {data.arbeidsgivere.map((arbeidsgiver) => {
               const inntekter = maaned.arbeidsInntektInformasjon.inntektListe.filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
-              return <Inntekt inntekter={inntekter} />;
+              return <Inntekt key={arbeidsgiver.identifikator} inntekter={inntekter} />;
             })}
           </div>
         ))}
