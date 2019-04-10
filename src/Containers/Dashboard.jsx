@@ -4,11 +4,21 @@ import { Undertittel, Element, EtikettLiten } from 'nav-frontend-typografi';
 
 import './Dashboard.css';
 
+const findArbeidsgivere = (data) => {
+  const map = new Map();
+  data.arbeidsInntektMaaned
+    .forEach(mnd => mnd.arbeidsInntektInformasjon.arbeidsgivere
+      .forEach((arbeidsgiver) => { map.set(arbeidsgiver.identifikator, arbeidsgiver); }));
+
+  return Array.from(map.values())
+    .sort((first, second) => second.identifikator - first.identifikator);
+};
+
 const Dashboard = (location) => {
   // const routeParams = location.match.params;
   // const { aktorId, beregningdato, vilkarid } = routeParams;
 
-  const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {} });
+  const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {}, arbeidsgivere: [] });
 
   useEffect(() => {
     const getMock = async () => {
@@ -16,12 +26,11 @@ const Dashboard = (location) => {
         'http://localhost:3000/mock/flereinntekter.json',
       );
 
-      setData(result.data);
+      setData({ arbeidsgivere: findArbeidsgivere(result.data), ...result.data });
     };
 
     getMock();
   }, []);
-
 
   return (
     <div className="grid">
