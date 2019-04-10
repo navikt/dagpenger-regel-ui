@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Undertittel, Element, EtikettLiten } from 'nav-frontend-typografi';
-
+import { Element, EtikettLiten } from 'nav-frontend-typografi';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
-
 import './Dashboard.css';
+import MaanedHeader from '../Components/MaanedHeader';
 
 const findArbeidsgivere = (data) => {
   const map = new Map();
@@ -51,10 +50,7 @@ const Dashboard = (location) => {
       <div className="maaneder">
         {data.arbeidsInntektMaaned.map(maaned => (
           <div key={maaned.aarMaaned} className="maaned">
-            <div className="item maanednavn">
-              <Element>{maaned.aarMaaned}</Element>
-            </div>
-
+            <MaanedHeader maaned={maaned.aarMaaned} />
             {data.arbeidsgivere.map((arbeidsgiver) => {
               const inntekter = maaned.arbeidsInntektInformasjon.inntektListe.filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
               if (inntekter.length) {
