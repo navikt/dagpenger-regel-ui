@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Undertittel, Element, EtikettLiten } from 'nav-frontend-typografi';
 
+import Arbeidsgiver from '../Components/Arbeidsgiver';
+
 import './Dashboard.css';
 
 const findArbeidsgivere = (data) => {
@@ -32,6 +34,8 @@ const Dashboard = (location) => {
     getMock();
   }, []);
 
+  // TODO lage komponenter for de ulike visningene, arbeidsgiver, inntekt osv
+
   return (
     <div className="grid">
 
@@ -39,30 +43,10 @@ const Dashboard = (location) => {
         <div className="item nav">
           &laquo; &raquo;
         </div>
-        <div className="item arbeidsgiver">
-          <Undertittel>Bacon AS</Undertittel>
-          <EtikettLiten>Org nr</EtikettLiten>
-          <Element>910047388</Element>
+        {data.arbeidsgivere.map(arbeidsgiver => (
+          <Arbeidsgiver arbeidsgiver={arbeidsgiver} />
+        ))}
 
-        </div>
-        <div className="item arbeidsgiver">
-          <Undertittel>Bacon AS</Undertittel>
-          <EtikettLiten>Org nr</EtikettLiten>
-          <Element>910047388</Element>
-
-        </div>
-        <div className="item arbeidsgiver">
-          <Undertittel>Bacon AS</Undertittel>
-          <EtikettLiten>Org nr</EtikettLiten>
-          <Element>910047388</Element>
-
-        </div>
-        <div className="item arbeidsgiver">
-          <Undertittel>Bacon AS</Undertittel>
-          <EtikettLiten>Org nr</EtikettLiten>
-          <Element>910047388</Element>
-
-        </div>
       </div>
       <div className="maaneder">
         {data.arbeidsInntektMaaned.map(maaned => (
