@@ -5,7 +5,7 @@ import { Undertittel, Element, EtikettLiten } from 'nav-frontend-typografi';
 import ArbeidsgiverPropType from '../PropTypes/arbeidsgiverPropType';
 
 const Arbeidsgiver = ({ arbeidsgiver }) => (
-  <div className="item arbeidsgiver">
+  <div className={`item arbeidsgiver arbeidsgiver--${arbeidsgiver.identifikator}`}>
     <Undertittel>{arbeidsgiver.navn}</Undertittel>
     <EtikettLiten>Org nr</EtikettLiten>
     <Element>{arbeidsgiver.identifikator}</Element>

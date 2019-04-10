@@ -38,35 +38,26 @@ const Dashboard = (location) => {
 
   return (
     <div className="grid">
-
-      <div className="arbeidsgivere">
-        <div className="item nav">
-          &laquo; &raquo;
-        </div>
-        {data.arbeidsgivere.map(arbeidsgiver => (
-          <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
-        ))}
-
-      </div>
-      <div className="maaneder">
-        {data.arbeidsInntektMaaned.map(maaned => (
-          <div key={maaned.aarMaaned}>
-            <Maaned maaned={maaned.aarMaaned} />
-            {data.arbeidsgivere.map((arbeidsgiver) => {
-              const inntekter = maaned.arbeidsInntektInformasjon.inntektListe
-                .filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
-              return (
-                <Inntekt
-                  rowId={arbeidsgiver.identifikator}
-                  columnId={maaned.aarMaaned}
-                  key={arbeidsgiver.identifikator}
-                  inntekter={inntekter}
-                />
-              );
-            })}
-          </div>
-        ))}
-      </div>
+      {data.arbeidsgivere.map(arbeidsgiver => (
+        <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
+      ))}
+      {data.arbeidsInntektMaaned.map(maaned => (
+        <>
+          <Maaned key={maaned.aarMaaned} maaned={maaned.aarMaaned} />
+          {data.arbeidsgivere.map((arbeidsgiver) => {
+            const inntekter = maaned.arbeidsInntektInformasjon.inntektListe
+              .filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
+            return (
+              <Inntekt
+                rowId={arbeidsgiver.identifikator}
+                columnId={maaned.aarMaaned}
+                key={arbeidsgiver.identifikator}
+                inntekter={inntekter}
+              />
+            );
+          })}
+        </>
+      ))}
     </div>
   );
 };
