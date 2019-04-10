@@ -55,7 +55,14 @@ const Dashboard = (location) => {
             {data.arbeidsgivere.map((arbeidsgiver) => {
               const inntekter = maaned.arbeidsInntektInformasjon.inntektListe
                 .filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
-              return <Inntekt key={arbeidsgiver.identifikator} inntekter={inntekter} />;
+              return (
+                <Inntekt
+                  rowId={arbeidsgiver.identifikator}
+                  columnId={maaned.aarMaaned}
+                  key={arbeidsgiver.identifikator}
+                  inntekter={inntekter}
+                />
+              );
             })}
           </div>
         ))}
