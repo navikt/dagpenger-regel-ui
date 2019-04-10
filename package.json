@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "date-fns": "^2.0.0-alpha.27",
     "eslint-config-airbnb": "^17.1.0",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-chevron-style": "^0.3.4",

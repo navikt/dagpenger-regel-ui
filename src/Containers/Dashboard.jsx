@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
-import './Dashboard.css';
 import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
+
+import './Dashboard.css';
 
 const findArbeidsgivere = (data) => {
   const map = new Map();
   data.arbeidsInntektMaaned
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
-      .forEach((arbeidsgiver) => { map.set(arbeidsgiver.virksomhet.identifikator, arbeidsgiver.virksomhet); }));
+      .forEach((arbeidsgiver) => {
+        map.set(arbeidsgiver.virksomhet.identifikator, arbeidsgiver.virksomhet);
+      }));
 
   return Array.from(map.values())
     .sort((first, second) => second.identifikator - first.identifikator);
@@ -33,8 +36,6 @@ const Dashboard = (location) => {
     getMock();
   }, []);
 
-  // TODO lage komponenter for de ulike visningene, arbeidsgiver, inntekt osv
-
   return (
     <div className="grid">
 
@@ -52,7 +53,8 @@ const Dashboard = (location) => {
           <div key={maaned.aarMaaned}>
             <Maaned maaned={maaned.aarMaaned} />
             {data.arbeidsgivere.map((arbeidsgiver) => {
-              const inntekter = maaned.arbeidsInntektInformasjon.inntektListe.filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
+              const inntekter = maaned.arbeidsInntektInformasjon.inntektListe
+                .filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
               return <Inntekt key={arbeidsgiver.identifikator} inntekter={inntekter} />;
             })}
           </div>
