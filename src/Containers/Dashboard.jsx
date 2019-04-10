@@ -9,8 +9,8 @@ import './Dashboard.css';
 const findArbeidsgivere = (data) => {
   const map = new Map();
   data.arbeidsInntektMaaned
-    .forEach(mnd => mnd.arbeidsInntektInformasjon.arbeidsgivere
-      .forEach((arbeidsgiver) => { map.set(arbeidsgiver.identifikator, arbeidsgiver); }));
+    .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
+      .forEach((arbeidsgiver) => { map.set(arbeidsgiver.virksomhet.identifikator, arbeidsgiver.virksomhet); }));
 
   return Array.from(map.values())
     .sort((first, second) => second.identifikator - first.identifikator);
