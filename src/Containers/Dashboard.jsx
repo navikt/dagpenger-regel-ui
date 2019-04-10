@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Element, EtikettLiten } from 'nav-frontend-typografi';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
 import './Dashboard.css';
 import MaanedHeader from '../Components/MaanedHeader';
+import Inntekt from '../Components/Inntekt';
 
 const findArbeidsgivere = (data) => {
   const map = new Map();
@@ -53,23 +53,8 @@ const Dashboard = (location) => {
             <MaanedHeader maaned={maaned.aarMaaned} />
             {data.arbeidsgivere.map((arbeidsgiver) => {
               const inntekter = maaned.arbeidsInntektInformasjon.inntektListe.filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
-              if (inntekter.length) {
-                return (
-                  <div key={1} className="item inntekter">
-                    {inntekter.map(inntekt => (
-                      <div key={1} className="inntekt">
-                  xxx
-                        <EtikettLiten>{inntekt.header}</EtikettLiten>
-                        <Element>{inntekt.beloep}</Element>
-                      </div>
-                    ))
-                    }
-                  </div>
-                );
-              }
-              return <div key={1} className="inntekt" />;
+              return <Inntekt inntekter={inntekter} />;
             })}
-
           </div>
         ))}
       </div>
