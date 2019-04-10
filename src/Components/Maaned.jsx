@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DatoLabel from './DatoLabel';
 
-const Maaned = ({ dato }) => (
+const Maaned = ({ maaned }) => (
   <div className="item maaned">
-    <DatoLabel dato={dato} />
+    <DatoLabel dato={maaned} />
   </div>
 );
 
 Maaned.propTypes = {
-  dato: PropTypes.string.isRequired,
+  maaned: PropTypes.string.isRequired,
 };
 
 export default Maaned;

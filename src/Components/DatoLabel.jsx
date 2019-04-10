@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'nav-frontend-typografi';
 
+
 const DatoLabel = ({ dato }) => (
   <Element>{dato}</Element>
 );

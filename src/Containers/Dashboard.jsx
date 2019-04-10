@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
 import './Dashboard.css';
-import MaanedHeader from '../Components/MaanedHeader';
+import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
 
 const findArbeidsgivere = (data) => {
@@ -49,8 +49,8 @@ const Dashboard = (location) => {
       </div>
       <div className="maaneder">
         {data.arbeidsInntektMaaned.map(maaned => (
-          <div key={maaned.aarMaaned} className="maaned">
-            <MaanedHeader maaned={maaned.aarMaaned} />
+          <div key={maaned.aarMaaned}>
+            <Maaned maaned={maaned.aarMaaned} />
             {data.arbeidsgivere.map((arbeidsgiver) => {
               const inntekter = maaned.arbeidsInntektInformasjon.inntektListe.filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
               return <Inntekt key={arbeidsgiver.identifikator} inntekter={inntekter} />;
