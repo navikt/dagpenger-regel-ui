@@ -54,17 +54,26 @@ const Dashboard = (location) => {
             <div className="item maanednavn">
               <Element>{maaned.aarMaaned}</Element>
             </div>
-            {maaned.arbeidsInntektInformasjon.arbeidsgivere.map(arbeidsgiver => (
-              <div key={1} className="item inntekter">
-                {arbeidsgiver.inntektListe.map(inntekt => (
-                  <div key={1} className={`inntekt ${arbeidsgiver.identifikator}`}>
 
-                    <EtikettLiten>{inntekt.header}</EtikettLiten>
-                    <Element>{inntekt.beloep}</Element>
+            {data.arbeidsgivere.map((arbeidsgiver) => {
+              const inntekter = maaned.arbeidsInntektInformasjon.inntektListe.filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
+              if (inntekter.length) {
+                return (
+                  <div key={1} className="item inntekter">
+                    {inntekter.map(inntekt => (
+                      <div key={1} className="inntekt">
+                  xxx
+                        <EtikettLiten>{inntekt.header}</EtikettLiten>
+                        <Element>{inntekt.beloep}</Element>
+                      </div>
+                    ))
+                    }
                   </div>
-                ))}
-              </div>
-            ))}
+                );
+              }
+              return <div key={1} className="inntekt" />;
+            })}
+
           </div>
         ))}
       </div>
