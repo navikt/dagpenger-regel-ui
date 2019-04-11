@@ -12,11 +12,14 @@
 
   .item {
     padding: 16px;
-    border-left: 1px solid black;
+    border-right: 1px solid black;
     border-bottom: 1px solid black;
 
     &.arbeidsgiver {
       background-color: @navLysGra;
+      position: sticky;
+      left: 0;
+      z-index: 2;
 
       &.arbeidsgiver--1111111 {
         grid-area: arbeidsgiver--1111111;
