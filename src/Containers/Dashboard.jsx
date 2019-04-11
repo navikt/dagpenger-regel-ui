@@ -20,7 +20,7 @@ const findArbeidsgivere = (data) => {
 
 const Dashboard = (location) => {
   // const routeParams = location.match.params;
-  // const { aktorId, beregningdato, vilkarid } = routeParams;
+  // const { aktorId, beregningdato, vedtakId, inntektId } = routeParams;
 
   const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {}, arbeidsgivere: [] });
 
