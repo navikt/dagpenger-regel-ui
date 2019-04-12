@@ -38,7 +38,7 @@ const Dashboard = (location) => {
   useEffect(() => {
     const getMock = async () => {
       const result = await axios(
-        'http://localhost:3000/mock/flereinntekter.json',
+        process.env.PUBLIC_URL + '/mock/flereinntekter.json',
       );
       setData({ arbeidsgivere: findArbeidsgivere(result.data), ...result.data });
     };

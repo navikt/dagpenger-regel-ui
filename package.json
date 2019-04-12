@@ -2,6 +2,7 @@
   "name": "dagpenger-regel-ui",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://app.adeo.no/inntekter",
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
