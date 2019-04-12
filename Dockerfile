@@ -1,22 +1,10 @@
-FROM node:current-alpine
+FROM navikt/nginx-oidc:latest
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+ENV APP_DIR="/app" \
+	APP_PATH_PREFIX="/inntekter" \
+	APP_CALLBACK_PATH="/inntekter/oidc-callback-url"
 
-RUN chown node:node /usr/src/app
+COPY build /app/inntekter/
 
-USER node
-
-ARG NODE_ENV
-ENV NODE_ENV $NODE_ENV
-
-COPY .npmrc .npmrc
-COPY package.json /usr/src/app/
-RUN npm install && npm cache clean --force && rm -f .npmrc
-
-COPY . /usr/src/app
-RUN npm run build
-
-EXPOSE 3000
-
-CMD [ "npm", "start" ]
+COPY k8s/proxy.nginx      /nginx/proxy.nginx
+EXPOSE 9080 3000

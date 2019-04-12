@@ -1,0 +1,24 @@
+version: '3'
+services:
+  nginx:
+    build: .
+    ports:
+      - 9080:9080
+    environment:
+      - APP_PORT=9080
+      - OIDC_AGENTNAME=foo
+      - OIDC_PASSWORD=bar
+      - OIDC_HOST_URL=http://oidc-provider:4352
+      - OIDC_REDIRECT_URI=http://localhost:9080/inntekter/oidc-callback-url
+      - REDIS_HOST=redis
+    links:
+      - redis
+  redis:
+    image: redis
+  oidc-provider:
+    image: qlik/simple-oidc-provider
+    ports:
+      - 4352:4352
+    environment:
+      - REDIRECTS=http://localhost:9080/inntekter/oidc-callback-url
+      - PORT=4352
