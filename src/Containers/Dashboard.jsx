@@ -6,6 +6,8 @@ import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
 
 import './Dashboard.css';
+import '../PropTypes/dashBoardPropType';
+import dashboardPropType from '../PropTypes/dashBoardPropType';
 
 const findArbeidsgivere = (data) => {
   const map = new Map();
@@ -29,9 +31,10 @@ const mapToFieldValues = (data) => {
   return x;
 };
 
-const Dashboard = (location) => {
-  // const routeParams = location.match.params;
-  // const { aktorId, beregningdato, vedtakId, inntektId } = routeParams;
+const Dashboard = ({ readOnly, location }) => {
+  // const queryParams = new URLSearchParams(location.search);
+  // queryParams.get('aktorId'));
+  console.log(readOnly);
 
   const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {}, arbeidsgivere: [] });
 
@@ -67,6 +70,7 @@ const Dashboard = (location) => {
                   .filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
                 return (
                   <Inntekt
+                    readOnly={readOnly}
                     rowId={arbeidsgiver.identifikator}
                     columnId={maaned.aarMaaned}
                     key={arbeidsgiver.identifikator}
@@ -81,5 +85,8 @@ const Dashboard = (location) => {
     </Formik>
   );
 };
+
+Dashboard.propTypes = dashboardPropType;
+Dashboard.defaultProps = { readOnly: false };
 
 export default Dashboard;
