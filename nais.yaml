@@ -2,6 +2,13 @@ name: dagpenger-regel-ui
 image: repo.adeo.no:5443/dagpenger-regel-ui
 team: teamdagpenger
 port: 3000
+healthcheck:
+  liveness:
+    initialDelay: 20
+    path: /
+  readiness:
+    initialDelay: 20
+    path: /
 replicas:
   min: 2
   max: 4
