@@ -1,0 +1,9 @@
+bases:
+  - ./../base
+
+commonLabels:
+  app: dagpenger-regel-ui
+  team: teamdagpenger
+
+patchesStrategicMerge:
+  - nais.yaml
