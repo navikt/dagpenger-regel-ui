@@ -3,3 +3,13 @@ location  /inntekter/v1 {
     access_by_lua_file oidc_protected.lua;
     # proxy_pass "http://dp-inntekt-api/inntekter/v1";
 }
+
+location /isAlive {
+    add_header Content-Type text/plain;
+    return 200 'I am alive';
+}
+
+location /isReady {
+    add_header Content-Type text/plain;
+    return 200 'I am ready';
+}
