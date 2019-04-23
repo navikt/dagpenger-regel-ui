@@ -5,10 +5,10 @@ port: 3000
 healthcheck:
   liveness:
     initialDelay: 20
-    path: /
+    path: /inntekter/health/isAlive
   readiness:
     initialDelay: 20
-    path: /
+    path: /inntekter/health/isAlive
 replicas:
   min: 2
   max: 4
