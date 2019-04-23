@@ -6,9 +6,11 @@ spec:
   image: repo.adeo.no:5443/dagpenger-regel-ui:latest
   port: 3000
   liveness:
-    path: /
+    initialDelay: 20
+    path: /inntekter/health/isAlive
   readiness:
-    path: /
+    initialDelay: 20
+    path: /inntekter/health/isReady
   prometheus:
     enabled: false
   replicas:
