@@ -12,6 +12,7 @@ pipeline {
     stage('Install dependencies') {
       steps {
         sh "npm install"
+        sh "npm run-script build"
         sh "cp ~/.npmrc .npmrc"
       }
     }

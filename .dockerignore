@@ -1,4 +1,6 @@
-.git
-.next
-Dockerfile
-Jenkinsfile
+# Ignore everything
+**
+
+# Except build
+!build/*
+!k8s/*
