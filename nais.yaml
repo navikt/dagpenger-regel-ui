@@ -8,7 +8,7 @@ healthcheck:
     path: /inntekter/health/isAlive
   readiness:
     initialDelay: 20
-    path: /inntekter/health/isAlive
+    path: /inntekter/health/isReady
 replicas:
   min: 2
   max: 4
