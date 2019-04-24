@@ -4,4 +4,4 @@ metadata:
   name: dagpenger-regel-ui
 spec:
   ingresses:
-    - "https://dagpenger-regel-ui.nais.adeo.no/inntekter"
+    - "https://dagpenger-regel-ui.nais.adeo.no/"

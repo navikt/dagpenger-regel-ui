@@ -7,4 +7,4 @@ ENV APP_DIR="/app" \
 COPY build /app/inntekter/
 
 COPY k8s/proxy.nginx      /nginx/proxy.nginx
-EXPOSE 9080 3000
+EXPOSE 443 3000
