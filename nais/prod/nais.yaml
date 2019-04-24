@@ -1,0 +1,7 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: dagpenger-regel-ui
+spec:
+  ingresses:
+    - "https://dagpenger-regel-ui.nais.adeo.no/"

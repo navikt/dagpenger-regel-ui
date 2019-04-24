@@ -1,0 +1,25 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: dagpenger-regel-ui
+spec:
+  image: repo.adeo.no:5443/dagpenger-regel-ui:latest
+  port: 3000
+  liveness:
+    initialDelay: 20
+    path: /inntekter/health/isAlive
+  readiness:
+    initialDelay: 20
+    path: /inntekter/health/isReady
+  prometheus:
+    enabled: false
+  replicas:
+    min: 2
+    max: 4
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 384Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi

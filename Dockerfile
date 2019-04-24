@@ -8,3 +8,4 @@ COPY build /app/inntekter/
 
 COPY k8s/proxy.nginx      /nginx/proxy.nginx
 EXPOSE 3000 443
+
