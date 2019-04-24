@@ -46,7 +46,6 @@
     "start": "npm-run-all -p start:*",
     "build": "npm run build:css && npm run build:js",
     "test": "react-scripts test --env=jsdom",
-    "test:ci": "react-scripts --watchAll=false test --env=jsdom",
     "test:less": "stylelint \"src/**/*.less\"",
     "eject": "react-scripts eject"
   },
