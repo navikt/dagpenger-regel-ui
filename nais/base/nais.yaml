@@ -4,7 +4,7 @@ metadata:
   name: dagpenger-regel-ui
 spec:
   image: repo.adeo.no:5443/dagpenger-regel-ui:latest
-  port: 3000
+  port: 443
   liveness:
     initialDelay: 20
     path: /inntekter/health/isAlive
