@@ -28,7 +28,7 @@ pipeline {
 
         sh label: 'Build artifact', script: """
           npm run build
-          cp ~/.npmrc .npmrc"
+          cp ~/.npmrc .npmrc
         """
 
         withDockerRegistry(
