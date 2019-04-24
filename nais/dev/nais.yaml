@@ -10,3 +10,7 @@ spec:
       value: fpsak-redis.default.svc.nais.local
     - name: REDIS_PORT
       value: "80"
+    - name: OIDC_HOST_URL
+      value: https://isso-t.adeo.no:443/isso
+    - name: OIDC_AGENTNAME
+      value: dp-regel-ui-t
