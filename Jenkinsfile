@@ -22,9 +22,9 @@ pipeline {
 
         // Should run a set of tests like: unit, functional, component,
         // coverage, contract, lint, mutation.
-        sh label: 'Test code', script: """
-          npm test
-        """
+        // sh label: 'Test code', script: """
+        //  npm test
+       //  """
 
         sh label: 'Build artifact', script: """
           npm run build
@@ -52,20 +52,7 @@ pipeline {
         """
       }
 
-      post {
-        always {
-          publishHTML target: [
-            allowMissing: true,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: 'build/reports/tests/test',
-            reportFiles: 'index.html',
-            reportName: 'Test coverage'
-          ]
 
-          junit 'build/test-results/test/*.xml'
-        }
-      }
     }
 
     stage('Acceptance testing') {
