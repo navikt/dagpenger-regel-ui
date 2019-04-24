@@ -5,3 +5,8 @@ metadata:
 spec:
   ingresses:
     - "https://dagpenger-regel-ui.nais.preprod.local/"
+  env:
+    - name: REDIS_HOST
+      value: fpsak-redis.default.svc.nais.local
+    - name: REDIS_PORT
+      value: "80"

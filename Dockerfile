@@ -9,3 +9,9 @@ COPY build /app/inntekter/
 COPY k8s/proxy.nginx      /nginx/proxy.nginx
 EXPOSE 3000 443
 
+
+#
+#FROM nginx:alpine
+#COPY /build /usr/share/nginx/html/inntekter
+#EXPOSE 80
+#CMD ["nginx", "-g", "daemon off;"]
