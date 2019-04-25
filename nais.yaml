@@ -1,7 +1,7 @@
 name: dagpenger-regel-ui
 image: repo.adeo.no:5443/dagpenger-regel-ui
 team: teamdagpenger
-port: 443
+port: 80
 healthcheck:
   liveness:
     initialDelay: 20
