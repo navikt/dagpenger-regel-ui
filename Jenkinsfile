@@ -22,9 +22,9 @@ pipeline {
 
         // Should run a set of tests like: unit, functional, component,
         // coverage, contract, lint, mutation.
-        // sh label: 'Test code', script: """
-        //  npm test
-       //  """
+         sh label: 'Test code', script: """
+          CI=true npm test
+         """
 
         sh label: 'Build artifact', script: """
           npm run build
