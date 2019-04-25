@@ -10,7 +10,7 @@ server {
   #access_log  /var/log/nginx/host.access.log  main;
 
   location / {
-    root   /usr/share/nginx/html;
+    root   /usr/local/openresty/nginx/html/;
     index  index.html index.htm;
   }
 
@@ -26,6 +26,9 @@ server {
     default_type text/plain;
   }
 
+  location  /inntekter/api/v1/inntekt {
+    proxy_pass "${APP_INNTEKT_API_PATH}";
+  }
 
   #error_page  404              /404.html;
 

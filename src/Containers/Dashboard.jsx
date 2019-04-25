@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Formik, Form } from 'formik';
+import React, {useEffect, useState} from 'react';
+import {Form, Formik} from 'formik';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
+import axios from 'axios';
 
 import './Dashboard.css';
 import '../PropTypes/dashBoardPropType';
 import dashboardPropType from '../PropTypes/dashBoardPropType';
+import getInntekt from '../lib/inntektApiClient'
 
 const findArbeidsgivere = (data) => {
   const map = new Map();
@@ -32,18 +33,32 @@ const mapToFieldValues = (data) => {
 };
 
 const Dashboard = ({ readOnly, location }) => {
-  // const queryParams = new URLSearchParams(location.search);
-  // queryParams.get('aktorId'));
+  const queryParams = new URLSearchParams(location.search);
+  const aktorId = queryParams.get('aktorId');
+  const vedtakId = queryParams.get('vedtakId');
+  const beregningsDato = queryParams.get('beregningsDato');
+  let inntektApiRequest = {
+    aktørId: aktorId,
+    vedtakId: vedtakId,
+    beregningsDato: beregningsDato
+  };
+
   console.log(readOnly);
 
   const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {}, arbeidsgivere: [] });
 
   useEffect(() => {
     const getMock = async () => {
-      const result = await axios(
-        process.env.PUBLIC_URL + '/mock/flereinntekter.json',
-      );
-      setData({ arbeidsgivere: findArbeidsgivere(result.data), ...result.data });
+      if (process.env.NODE_ENV !== "production"){
+        const result = await axios(
+          process.env.PUBLIC_URL + '/mock/flereinntekter.json',
+        );
+        setData({ arbeidsgivere: findArbeidsgivere(result.data), ...result.data });
+      } else {
+        const result = await getInntekt(process.env.PUBLIC_URL, inntektApiRequest);
+        setData({ arbeidsgivere: findArbeidsgivere(result.data.inntekt), ...result.data.inntekt});
+      }
+
     };
 
     getMock();
