@@ -34,7 +34,7 @@
   "devDependencies": {
     "less": "^3.5.2",
     "less-plugin-npm-import": "^2.1.0",
-    "less-watch-compiler": "^1.11.3",
+    "less-watch-compiler": "^1.13.0",
     "npm-run-all": "^4.0.2",
     "react-test-renderer": "^16.8.6"
   },
