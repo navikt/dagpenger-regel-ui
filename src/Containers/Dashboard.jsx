@@ -10,9 +10,9 @@ import '../PropTypes/dashBoardPropType';
 import dashboardPropType from '../PropTypes/dashBoardPropType';
 import getInntekt from '../lib/inntektApiClient'
 
-const findArbeidsgivere = (data) => {
+const findArbeidsgivere = (inntekt) => {
   const map = new Map();
-  data.arbeidsInntektMaaned
+  inntekt.arbeidsInntektMaaned
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
         map.set(arbeidsgiver.virksomhet.identifikator, arbeidsgiver.virksomhet);
@@ -33,27 +33,25 @@ const mapToFieldValues = (data) => {
 };
 
 const Dashboard = ({ readOnly, location }) => {
-  const queryParams = new URLSearchParams(location.search);
-  const aktorId = queryParams.get('aktorId');
-  const vedtakId = queryParams.get('vedtakId');
-  const beregningsDato = queryParams.get('beregningsDato');
-  let inntektApiRequest = {
-    aktørId: aktorId,
-    vedtakId: vedtakId,
-    beregningsDato: beregningsDato
-  };
-
-  console.log(readOnly);
-
   const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {}, arbeidsgivere: [] });
 
   useEffect(() => {
-    const getMock = async () => {
+    let queryParams = new URLSearchParams(location.search);
+    let aktorId = queryParams.get('aktorId');
+    let vedtakId = queryParams.get('vedtakId');
+    let beregningsDato = queryParams.get('beregningsDato');
+
+    let inntektApiRequest = {
+      aktørId: aktorId,
+      vedtakId: vedtakId,
+      beregningsDato: beregningsDato
+    };
+    const getInntektFromApi = async () => {
       if (process.env.NODE_ENV !== "production"){
         const result = await axios(
           process.env.PUBLIC_URL + '/mock/flereinntekter.json',
         );
-        setData({ arbeidsgivere: findArbeidsgivere(result.data), ...result.data });
+        setData({ arbeidsgivere: findArbeidsgivere(result.data.inntekt), ...result.data.inntekt });
       } else {
         const result = await getInntekt(process.env.PUBLIC_URL, inntektApiRequest);
         setData({ arbeidsgivere: findArbeidsgivere(result.data.inntekt), ...result.data.inntekt});
@@ -61,7 +59,7 @@ const Dashboard = ({ readOnly, location }) => {
 
     };
 
-    getMock();
+    getInntektFromApi();
     // console.log(data.arbeidsinntektMaaned[0].arbeidsInntektInformasjon.inntektListe[0].beloep)
   }, []);
 
