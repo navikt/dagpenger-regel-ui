@@ -39,12 +39,12 @@ const Dashboard = ({ readOnly, location }) => {
     let queryParams = new URLSearchParams(location.search);
     let aktorId = queryParams.get('aktorId');
     let vedtakId = queryParams.get('vedtakId');
-    let beregningsDato = queryParams.get('beregningsDato');
+    let beregningdato = queryParams.get('beregningdato');
 
     let inntektApiRequest = {
       aktørId: aktorId,
       vedtakId: vedtakId,
-      beregningsDato: beregningsDato
+      beregningsDato: beregningdato
     };
     const getInntektFromApi = async () => {
       if (process.env.NODE_ENV !== "production"){

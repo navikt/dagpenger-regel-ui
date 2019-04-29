@@ -1,6 +1,22 @@
-access_log on; # Handled by trafic
+access_log /dev/stdout debug; # Handled by trafic
 error_log /dev/stdout debug;
+client_body_buffer_size 10M; # Default er satt veldig lavt. Får problemer med enkelte dokument queries.
 charset utf-8;
+
+gzip_types
+    text/css
+    text/javascript
+    text/xml
+    text/plain
+    application/javascript
+    application/x-javascript
+    application/json
+    application/xml
+    application/rss+xml
+    application/atom+xml
+    font/truetype
+    font/opentype
+    image/svg+xml;
 
 server {
   listen       80;
