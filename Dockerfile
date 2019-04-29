@@ -16,6 +16,14 @@ FROM openresty/openresty:alpine
 
 
 
+# # setup http proxy
+ARG http_proxy=http://webproxy-utvikler.nav.no:8088
+ENV http_proxy ${http_proxy}
+ENV https_proxy ${http_proxy}
+ENV no_proxy 155.55.,192.168.,10.,.local,.adeo.no,.nav.no,.aetat.no,.devillo.no,.oera.no,.nais.preprod.local,.nais-iapp.preprod.local,.nais.oera-q.local
+
+
+
 # Installing the dependencies
 RUN apk add --no-cache --update bash gettext
 
