@@ -1,4 +1,4 @@
-access_log /dev/stdout debug; # Handled by trafic
+access_log off; # Handled by trafic
 error_log /dev/stdout debug;
 client_body_buffer_size 10M; # Default er satt veldig lavt. Får problemer med enkelte dokument queries.
 charset utf-8;
