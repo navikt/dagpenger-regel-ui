@@ -11,7 +11,7 @@ it("Should handle 200 response", async () => {
   };
   let baseUrl = 'http://localhost';
   nock(baseUrl)
-    .post('/v1/inntektkomponenten', inntektApiRequest)
+    .post('/api/v1/inntekt', inntektApiRequest)
     .reply(200, expectedReturn);
 
 
@@ -29,7 +29,7 @@ it("Should handle 500 response", async () => {
   };
   let baseUrl = 'http://localhost';
   nock(baseUrl)
-    .post('/v1/inntektkomponenten', inntektApiRequest)
+    .post('/api/v1/inntekt', inntektApiRequest)
     .reply(500, {})
 
   try {
