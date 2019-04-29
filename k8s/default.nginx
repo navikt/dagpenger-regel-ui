@@ -1,5 +1,5 @@
-access_log off; # Handled by trafic
-error_log /dev/stdout info;
+access_log on; # Handled by trafic
+error_log /dev/stdout debug;
 charset utf-8;
 
 server {
