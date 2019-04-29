@@ -15,4 +15,4 @@ spec:
     - name: OIDC_AGENTNAME
       value: dp-regel-ui-prod
     - name: APP_INNTEKT_API_PATH
-      value: http://dp-inntekt-api
+      value: http://dp-inntekt-api/v1/inntekt/uklassifisert
