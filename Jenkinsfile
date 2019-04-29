@@ -36,7 +36,7 @@ pipeline {
           url: "https://${DOCKER_REPO}"
         ) {
           sh label: 'Build and push Docker image', script: """
-            docker build . --pull -t ${DOCKER_IMAGE_VERSION}
+            docker build  --build-arg http_proxy=http://webproxy-internett.nav.no:8088 --build-arg https_proxy=http://webproxy-internett.nav.no:8088 . --pull -t ${DOCKER_IMAGE_VERSION}
             docker push ${DOCKER_IMAGE_VERSION} || true
           """
         }
