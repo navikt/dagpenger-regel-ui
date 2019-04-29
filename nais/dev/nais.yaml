@@ -14,3 +14,5 @@ spec:
       value: https://isso-t.adeo.no:443/isso
     - name: OIDC_AGENTNAME
       value: dp-regel-ui-t
+    - name: APP_INNTEKT_API_PATH
+      value: http://dp-inntekt-api/v1/inntekt/uklassifisert

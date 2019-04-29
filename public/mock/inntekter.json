@@ -1,143 +1,148 @@
 {
-  "arbeidsInntektMaaned": [
-    {
-      "aarMaaned": "2017-09",
-      "arbeidsInntektInformasjon": {
-        "inntektListe": [
-          {
-            "inntektType": "LOENNSINNTEKT",
-            "beloep": 362000,
-            "fordel": "kontantytelse",
-            "inntektskilde": "A-ordningen",
-            "inntektsperiodetype": "Maaned",
-            "inntektsstatus": "LoependeInnrapportert",
-            "leveringstidspunkt": "2019-02",
-            "utbetaltIMaaned": "2017-09",
-            "opplysningspliktig": {
-              "identifikator": "1111111",
-              "aktoerType": "ORGANISASJON"
-            },
-            "virksomhet": {
-              "identifikator": "1111111",
-              "aktoerType": "ORGANISASJON"
-            },
-            "inntektsmottaker": {
-              "identifikator": "99999999999",
-              "aktoerType": "NATURLIG_IDENT"
-            },
-            "inngaarIGrunnlagForTrekk": true,
-            "utloeserArbeidsgiveravgift": true,
-            "informasjonsstatus": "InngaarAlltid",
-            "beskrivelse": "feriepenger"
-          }
-        ]
+  "inntektId": {
+    "id": "01D8G6FS9QGRT3JKBTA5KEE64C"
+  },
+  "inntekt": {
+    "arbeidsInntektMaaned": [
+      {
+        "aarMaaned": "2017-09",
+        "arbeidsInntektInformasjon": {
+          "inntektListe": [
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": 362000,
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-09",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "beskrivelse": "feriepenger"
+            }
+          ]
+        }
+      },
+      {
+        "aarMaaned": "2017-08",
+        "arbeidsInntektInformasjon": {
+          "inntektListe": [
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": 18900,
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "beskrivelse": "fastloenn"
+            }
+          ]
+        }
+      },
+      {
+        "aarMaaned": "2018-04",
+        "arbeidsInntektInformasjon": {
+          "inntektListe": [
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": 89700,
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2018-04",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "tilleggsinformasjon": {
+                "kategori": "Nettoloennsordning"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "beskrivelse": "fastloenn"
+            }
+          ]
+        }
+      },
+      {
+        "aarMaaned": "2018-03",
+        "arbeidsInntektInformasjon": {
+          "inntektListe": [
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": 25000,
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2018-03",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "beskrivelse": "fastloenn"
+            }
+          ]
+        }
       }
-    },
-    {
-      "aarMaaned": "2017-08",
-      "arbeidsInntektInformasjon": {
-        "inntektListe": [
-          {
-            "inntektType": "LOENNSINNTEKT",
-            "beloep": 18900,
-            "fordel": "kontantytelse",
-            "inntektskilde": "A-ordningen",
-            "inntektsperiodetype": "Maaned",
-            "inntektsstatus": "LoependeInnrapportert",
-            "leveringstidspunkt": "2019-02",
-            "utbetaltIMaaned": "2017-08",
-            "opplysningspliktig": {
-              "identifikator": "1111111",
-              "aktoerType": "ORGANISASJON"
-            },
-            "virksomhet": {
-              "identifikator": "1111111",
-              "aktoerType": "ORGANISASJON"
-            },
-            "inntektsmottaker": {
-              "identifikator": "99999999999",
-              "aktoerType": "NATURLIG_IDENT"
-            },
-            "inngaarIGrunnlagForTrekk": true,
-            "utloeserArbeidsgiveravgift": true,
-            "informasjonsstatus": "InngaarAlltid",
-            "beskrivelse": "fastloenn"
-          }
-        ]
-      }
-    },
-    {
-      "aarMaaned": "2018-04",
-      "arbeidsInntektInformasjon": {
-        "inntektListe": [
-          {
-            "inntektType": "LOENNSINNTEKT",
-            "beloep": 89700,
-            "fordel": "kontantytelse",
-            "inntektskilde": "A-ordningen",
-            "inntektsperiodetype": "Maaned",
-            "inntektsstatus": "LoependeInnrapportert",
-            "leveringstidspunkt": "2019-02",
-            "utbetaltIMaaned": "2018-04",
-            "opplysningspliktig": {
-              "identifikator": "1111111",
-              "aktoerType": "ORGANISASJON"
-            },
-            "virksomhet": {
-              "identifikator": "1111111",
-              "aktoerType": "ORGANISASJON"
-            },
-            "tilleggsinformasjon": {
-              "kategori": "Nettoloennsordning"
-            },
-            "inntektsmottaker": {
-              "identifikator": "99999999999",
-              "aktoerType": "NATURLIG_IDENT"
-            },
-            "inngaarIGrunnlagForTrekk": true,
-            "utloeserArbeidsgiveravgift": true,
-            "informasjonsstatus": "InngaarAlltid",
-            "beskrivelse": "fastloenn"
-          }
-        ]
-      }
-    },
-    {
-      "aarMaaned": "2018-03",
-      "arbeidsInntektInformasjon": {
-        "inntektListe": [
-          {
-            "inntektType": "LOENNSINNTEKT",
-            "beloep": 25000,
-            "fordel": "kontantytelse",
-            "inntektskilde": "A-ordningen",
-            "inntektsperiodetype": "Maaned",
-            "inntektsstatus": "LoependeInnrapportert",
-            "leveringstidspunkt": "2019-02",
-            "utbetaltIMaaned": "2018-03",
-            "opplysningspliktig": {
-              "identifikator": "1111111",
-              "aktoerType": "ORGANISASJON"
-            },
-            "virksomhet": {
-              "identifikator": "1111111",
-              "aktoerType": "ORGANISASJON"
-            },
-            "inntektsmottaker": {
-              "identifikator": "99999999999",
-              "aktoerType": "NATURLIG_IDENT"
-            },
-            "inngaarIGrunnlagForTrekk": true,
-            "utloeserArbeidsgiveravgift": true,
-            "informasjonsstatus": "InngaarAlltid",
-            "beskrivelse": "fastloenn"
-          }
-        ]
-      }
+    ],
+    "ident": {
+      "identifikator": "99999999999",
+      "aktoerType": "NATURLIG_IDENT"
     }
-  ],
-  "ident": {
-    "identifikator": "99999999999",
-    "aktoerType": "NATURLIG_IDENT"
   }
 }

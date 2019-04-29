@@ -12,8 +12,16 @@
 #EXPOSE 3000 443
 
 
-FROM nginx:alpine
-COPY /build /usr/share/nginx/html/inntekter
+FROM openresty/openresty:alpine
+
+
+
+# Installing the dependencies
+RUN apk add --no-cache --update bash gettext
+
+COPY /build /usr/local/openresty/nginx/html/inntekter/
 EXPOSE 80
-COPY k8s/default.nginx /etc/nginx/conf.d/default.conf
-CMD ["nginx", "-g", "daemon off;"]
+COPY k8s/default.nginx /etc/nginx/conf.d/app.conf.template
+COPY k8s/start-nginx.sh       /usr/sbin/start-nginx
+RUN chmod u+x /usr/sbin/start-nginx
+CMD ["start-nginx"]

@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Formik, Form } from 'formik';
+import React, {useEffect, useState} from 'react';
+import {Form, Formik} from 'formik';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
+import axios from 'axios';
 
 import './Dashboard.css';
 import '../PropTypes/dashBoardPropType';
 import dashboardPropType from '../PropTypes/dashBoardPropType';
+import getInntekt from '../lib/inntektApiClient'
 
-const findArbeidsgivere = (data) => {
+const findArbeidsgivere = (inntekt) => {
   const map = new Map();
-  data.arbeidsInntektMaaned
+  inntekt.arbeidsInntektMaaned
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
         map.set(arbeidsgiver.virksomhet.identifikator, arbeidsgiver.virksomhet);
@@ -32,21 +33,33 @@ const mapToFieldValues = (data) => {
 };
 
 const Dashboard = ({ readOnly, location }) => {
-  // const queryParams = new URLSearchParams(location.search);
-  // queryParams.get('aktorId'));
-  console.log(readOnly);
-
   const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {}, arbeidsgivere: [] });
 
   useEffect(() => {
-    const getMock = async () => {
-      const result = await axios(
-        process.env.PUBLIC_URL + '/mock/flereinntekter.json',
-      );
-      setData({ arbeidsgivere: findArbeidsgivere(result.data), ...result.data });
+    let queryParams = new URLSearchParams(location.search);
+    let aktorId = queryParams.get('aktorId');
+    let vedtakId = queryParams.get('vedtakId');
+    let beregningsDato = queryParams.get('beregningsDato');
+
+    let inntektApiRequest = {
+      aktørId: aktorId,
+      vedtakId: vedtakId,
+      beregningsDato: beregningsDato
+    };
+    const getInntektFromApi = async () => {
+      if (process.env.NODE_ENV !== "production"){
+        const result = await axios(
+          process.env.PUBLIC_URL + '/mock/flereinntekter.json',
+        );
+        setData({ arbeidsgivere: findArbeidsgivere(result.data.inntekt), ...result.data.inntekt });
+      } else {
+        const result = await getInntekt(process.env.PUBLIC_URL, inntektApiRequest);
+        setData({ arbeidsgivere: findArbeidsgivere(result.data.inntekt), ...result.data.inntekt});
+      }
+
     };
 
-    getMock();
+    getInntektFromApi();
     // console.log(data.arbeidsinntektMaaned[0].arbeidsInntektInformasjon.inntektListe[0].beloep)
   }, []);
 
