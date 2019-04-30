@@ -6,8 +6,9 @@ charset utf-8;
 
 
 server {
-  listen       8080;
+  listen       80;
   # where the root here
+  server_name _;
   root   /usr/local/openresty/nginx/html/inntekter;
 
 
