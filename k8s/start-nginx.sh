@@ -7,10 +7,9 @@ export APP_INNTEKT_API_PATH="${APP_INNTEKT_API_PATH:-/http://dp-inntekt-api/v1/i
 envsubst '$APP_INNTEKT_API_PATH' < /etc/nginx/conf.d/app.conf.template > /etc/nginx/conf.d/default.conf
 
 
-echo -s "Using APP_INNTEKT_API_PATH=" + ${APP_INNTEKT_API_PATH}
+echo "Using APP_INNTEKT_API_PATH=${APP_INNTEKT_API_PATH}"
 
 
-# replace above envs
 echo "Startup.... "
 /usr/local/openresty/bin/openresty -g 'daemon off;'
 exec "$@"
