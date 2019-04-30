@@ -17,7 +17,7 @@ FROM openresty/openresty:alpine
 # Installing the dependencies
 RUN apk add --no-cache --update bash gettext
 
-COPY /build /usr/local/openresty/nginx/html/inntekter/
+COPY ./build /usr/local/openresty/nginx/html/inntekter/
 EXPOSE 80
 COPY k8s/default.nginx /etc/nginx/conf.d/app.conf.template
 COPY k8s/start-nginx.sh       /usr/sbin/start-nginx
