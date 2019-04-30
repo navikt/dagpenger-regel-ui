@@ -3,13 +3,71 @@ error_log /dev/stdout debug;
 client_body_buffer_size 10M; # Default er satt veldig lavt. Får problemer med enkelte dokument queries.
 charset utf-8;
 
+proxy_buffering off;
+resolver "${RESOLVER}" ipv6=off;
+resolver_timeout 3s;
+tcp_nodelay off; ## No need to bleed constant updates. Send the all shebang in one fell swoop.
+tcp_nopush off;
+gzip off;
+gzip_proxied any;
+absolute_redirect off;
+
+gzip_types
+    text/css
+    text/javascript
+    text/xml
+    text/plain
+    application/javascript
+    application/x-javascript
+    application/json
+    application/xml
+    application/rss+xml
+    application/atom+xml
+    font/truetype
+    font/opentype
+    image/svg+xml;
+
 server {
   listen       8080;
   server_name  _;
   root   /usr/local/openresty/nginx/html/inntekter;
 
+  # Proxy headers. Will be overwritten if you set them in blocks.
+  proxy_hide_header       Content-Security-Policy;
+  proxy_hide_header       Set-Cookie;
+  proxy_http_version      1.1;
+  proxy_ignore_headers    Set-Cookie; # We don't want the backend to set cookies.
+  proxy_intercept_errors  off;
+  proxy_pass_header       Nav-Callid;
+  proxy_set_header        Connection "";
+  proxy_set_header        Referer $http_referer;
+  proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header        X-NginX-Proxy true;
+  proxy_set_header        X-Real-IP $remote_addr;
+  proxy_ssl_verify        off;
+
+  # complete disable cache and send some debug headers
+  add_header              Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+  add_header              Last-Modified $date_gmt;
+  add_header              X-Cache-Status $upstream_cache_status;
+  etag                    off;
+  expires                 off;
+  if_modified_since       off;
+  sendfile                off;
+
   location / {
     try_files $uri $uri/ /index.html;
+  }
+
+  ## All static files will be served directly and cached
+  location ~* ^.+\.(?:css|cur|js|jpe?g|gif|htc|ico|png|xml|otf|ttf|eot|woff|svg|map|json)$ {
+    add_header Cache-Control "public";
+    expires 365d;
+    ## Set the OS file cache.
+    open_file_cache max=3000 inactive=120s;
+    open_file_cache_valid 45s;
+    open_file_cache_min_uses 2;
+    open_file_cache_errors off;
   }
 
   # Readiness check for NAIS
