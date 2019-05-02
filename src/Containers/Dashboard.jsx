@@ -40,14 +40,11 @@ const Dashboard = ({ readOnly, location }) => {
     let aktorId = queryParams.get('aktorId');
     let vedtakId = queryParams.get('vedtakId');
     let beregningdato = queryParams.get('beregningdato');
-
-    console.log(beregningdato);
     let inntektApiRequest = {
       aktørId: aktorId,
       vedtakId: vedtakId,
       beregningsDato: beregningdato
     };
-    console.log(inntektApiRequest);
     const getInntektFromApi = async () => {
       if (process.env.NODE_ENV !== "production"){
         const result = await axios(
