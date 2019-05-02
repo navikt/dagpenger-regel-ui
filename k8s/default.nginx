@@ -2,14 +2,34 @@ access_log off; # Handled by trafic
 error_log /dev/stdout debug;
 client_body_buffer_size 10M; # Default er satt veldig lavt. Får problemer med enkelte dokument queries.
 charset utf-8;
+tcp_nodelay off; ## No need to bleed constant updates. Send the all shebang in one fell swoop.
+tcp_nopush off;
+gzip off;
+gzip_proxied any;
+absolute_redirect off;
 
+
+gzip_types
+    text/css
+    text/javascript
+    text/xml
+    text/plain
+    application/javascript
+    application/x-javascript
+    application/json
+    application/xml
+    application/rss+xml
+    application/atom+xml
+    font/truetype
+    font/opentype
+    image/svg+xml;
 
 
 server {
   listen       80;
   # where the root here
   server_name _;
-  root   /usr/local/openresty/nginx/html/inntekter;
+  root   /usr/local/openresty/nginx/html/;
 
 
   # Proxy headers. Will be overwritten if you set them in blocks.
@@ -34,8 +54,21 @@ server {
   if_modified_since       off;
   sendfile                off;
 
-  location ~ ^/inntekter(.*) {
-    try_files $1 $1/ /index.html;
+
+  # Just slap frontend directly to the prefix
+  location = / {
+    return 301 "/inntekter/?$args";
+  }
+
+  # To make sure any assets can get through :)
+  location ~ "/inntekter/(.*)$" {
+    try_files $uri @rewrites;
+  }
+
+
+  # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
+  location @rewrites {
+    rewrite ^(.+)$ "/inntekter/index.html" last;
   }
 
   ## All static files will be served directly and cached
