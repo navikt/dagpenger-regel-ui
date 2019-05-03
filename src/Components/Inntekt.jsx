@@ -12,7 +12,7 @@ const formatertPengesum = tall => new Intl.NumberFormat('nb-NO', { style: 'curre
 
 const InputField = ({
   beskrivelse, field, form, ...props
-}) => (<Input label={beskrivelse} {...field} value={field.value} />);
+}) => (<Input label={beskrivelse} type="number" {...field} value={field.value} />);
 
 const ReadOnlyField = ({
   beskrivelse, field, form, ...props
@@ -31,7 +31,7 @@ const Inntekt = ({
   return (
     <div className={`item inntekter inntekter--${rowId}--${columnId}`}>
       <Ekspanderbartpanel
-        tittel={formatertPengesum(sumInntekter(inntekter))}
+        tittel={formatertPengesum(sumInntekter(inntekter.filter(inntekt => inntekt.virksomhet.identifikator === rowId)))}
         tittelProps="element"
       >
         {!readOnly && <Knapp htmlType="button" onClick={() => setEditMode(!editMode)}>Rediger</Knapp>}

@@ -59,33 +59,34 @@ const Dashboard = ({ readOnly, location }) => {
       enableReinitialize
       initialValues={data}
       onSubmit={submitInntektToApi}
-    >
-      <Form>
-        <div className="grid">
-          {data.arbeidsgivere.map(arbeidsgiver => (
-            <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
-          ))}
+      render={props =>
+        <Form>
+          <div className="grid">
+            {data.arbeidsgivere.map(arbeidsgiver => (
+              <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
+            ))}
 
-          {data.arbeidsInntektMaaned.map((maaned, monthIndex) => (
-            <>
-              <Maaned key={maaned.aarMaaned} maaned={maaned.aarMaaned} />
-              {data.arbeidsgivere.map((arbeidsgiver) => {
-                return (
-                  <Inntekt
-                    readOnly={readOnly}
-                    rowId={arbeidsgiver.identifikator}
-                    columnId={maaned.aarMaaned}
-                    key={arbeidsgiver.identifikator}
-                    inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
-                    monthIndex={monthIndex}
-                  />
-                );
-              })}
-            </>
-          ))}
-        </div>
-      </Form>
-    </Formik>
+            {props.values.arbeidsInntektMaaned.map((maaned, monthIndex) => (
+              <>
+                <Maaned key={maaned.aarMaaned} maaned={maaned.aarMaaned} />
+                {data.arbeidsgivere.map((arbeidsgiver) => {
+                  return (
+                    <Inntekt
+                      readOnly={readOnly}
+                      rowId={arbeidsgiver.identifikator}
+                      columnId={maaned.aarMaaned}
+                      key={arbeidsgiver.identifikator}
+                      inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
+                      monthIndex={monthIndex}
+                    />
+                  );
+                })}
+              </>
+            ))}
+          </div>
+        </Form>
+      }
+    />
   );
 };
 
