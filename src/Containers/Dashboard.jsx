@@ -22,14 +22,8 @@ const findArbeidsgivere = (inntekt) => {
     .sort((first, second) => second.identifikator - first.identifikator);
 };
 
-const mapToFieldValues = (data) => {
-  const x = data.arbeidsInntektMaaned.reduce((acc, maaned) => (
-    {
-      ...acc,
-      ...maaned.arbeidsInntektInformasjon.inntektListe
-        .reduce((acc2, inntekt) => ({ ...acc2, ...{ [`${inntekt.virksomhet.identifikator}_${maaned.aarMaaned}_${inntekt.beskrivelse}`]: inntekt.beloep } }), {}),
-    }), {});
-  return x;
+const submitInntektToApi = (data) => {
+    alert (data)
 };
 
 const Dashboard = ({ readOnly, location }) => {
@@ -55,18 +49,16 @@ const Dashboard = ({ readOnly, location }) => {
         const result = await getInntekt(process.env.PUBLIC_URL, inntektApiRequest);
         setData({ arbeidsgivere: findArbeidsgivere(result.data.inntekt), ...result.data.inntekt});
       }
-
     };
 
     getInntektFromApi();
-    // console.log(data.arbeidsinntektMaaned[0].arbeidsInntektInformasjon.inntektListe[0].beloep)
   }, []);
 
   return (
     <Formik
       enableReinitialize
-      initialValues={mapToFieldValues(data)}
-      onSubmit={undefined}
+      initialValues={data}
+      onSubmit={submitInntektToApi}
     >
       <Form>
         <div className="grid">
@@ -74,19 +66,18 @@ const Dashboard = ({ readOnly, location }) => {
             <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
           ))}
 
-          {data.arbeidsInntektMaaned.map(maaned => (
+          {data.arbeidsInntektMaaned.map((maaned, monthIndex) => (
             <>
               <Maaned key={maaned.aarMaaned} maaned={maaned.aarMaaned} />
               {data.arbeidsgivere.map((arbeidsgiver) => {
-                const inntekter = maaned.arbeidsInntektInformasjon.inntektListe
-                  .filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator);
                 return (
                   <Inntekt
                     readOnly={readOnly}
                     rowId={arbeidsgiver.identifikator}
                     columnId={maaned.aarMaaned}
                     key={arbeidsgiver.identifikator}
-                    inntekter={inntekter}
+                    inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
+                    monthIndex={monthIndex}
                   />
                 );
               })}

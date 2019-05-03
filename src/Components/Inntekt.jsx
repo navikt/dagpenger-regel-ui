@@ -23,23 +23,22 @@ const ReadOnlyField = ({
   </div>
 );
 
-
 const Inntekt = ({
-  readOnly, inntekter, rowId, columnId,
+  readOnly, inntekter, rowId, columnId, monthIndex
 }) => {
   const [editMode, setEditMode] = useState(true);
 
   return (
     <div className={`item inntekter inntekter--${rowId}--${columnId}`}>
       <Ekspanderbartpanel
-        // onClick={() => setData(resize(rowId, columnId))}
         tittel={formatertPengesum(sumInntekter(inntekter))}
         tittelProps="element"
       >
         {!readOnly && <Knapp onClick={() => setEditMode(!editMode)}>Rediger</Knapp>}
-        {inntekter.map(inntekt => (
+        {inntekter.map((inntekt, index) => (
+          inntekt.virksomhet.identifikator === rowId &&
           <div key={inntekt.beskrivelse} className="inntekt">
-            <Field beskrivelse={inntekt.beskrivelse} name={`${rowId}_${columnId}_${inntekt.beskrivelse}`} component={editMode ? ReadOnlyField : InputField} />
+            <Field beskrivelse={inntekt.beskrivelse} name={`arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`} component={editMode ? ReadOnlyField : InputField} />
           </div>
         ))}
       </Ekspanderbartpanel>
