@@ -4,7 +4,7 @@ import { Element, EtikettLiten } from 'nav-frontend-typografi';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Input } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
-import { Formik, Form, Field } from 'formik';
+import { Field } from 'formik';
 
 const sumInntekter = inntekter => inntekter.reduce((acc, val) => acc + val.beloep, 0);
 
@@ -34,7 +34,7 @@ const Inntekt = ({
         tittel={formatertPengesum(sumInntekter(inntekter))}
         tittelProps="element"
       >
-        {!readOnly && <Knapp onClick={() => setEditMode(!editMode)}>Rediger</Knapp>}
+        {!readOnly && <Knapp htmlType="button" onClick={() => setEditMode(!editMode)}>Rediger</Knapp>}
         {inntekter.map((inntekt, index) => (
           inntekt.virksomhet.identifikator === rowId &&
           <div key={inntekt.beskrivelse} className="inntekt">
