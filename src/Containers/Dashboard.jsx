@@ -31,15 +31,13 @@ const buildCSSGrid = (data, arbeidsgivere) => {
   const maaneder = arbeidsInntektMaaned.map(maaned => `maaned--${maaned.aarMaaned}`);
   // "arbeidsgiver--1111111 inntekter--1111111--2017-07 ..."
   const arbeidsgivereMedInntekter = arbeidsgivere.map((arbeidsgiver) => {
-    const inntekter = arbeidsInntektMaaned.map(maaned => maaned.arbeidsInntektInformasjon.inntektListe
-      .filter(inntekt => inntekt.virksomhet.identifikator === arbeidsgiver.identifikator)
-      .map(inntekt => `inntekter--${arbeidsgiver.identifikator}--${maaned.aarMaaned}`));
-    return `"arbeidsgiver--${arbeidsgiver.identifikator} ${inntekter.join(' ').replace(/,/g, ' ')}"`;
+    const inntekter = arbeidsInntektMaaned.map(maaned => `inntekter--${arbeidsgiver.identifikator}--${maaned.aarMaaned} `);
+    return `"arbeidsgiver--${arbeidsgiver.identifikator} ${inntekter.join(' ')}"`;
   });
 
   return `
   .grid {
-    grid-template-areas: ". ${maaneder.join(' ')}" ${arbeidsgivereMedInntekter};
+    grid-template-areas: ". ${maaneder.join(' ')}" ${arbeidsgivereMedInntekter.join(' ')};
 `;
 };
 
