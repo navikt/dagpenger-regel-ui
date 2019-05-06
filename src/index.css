@@ -642,6 +642,7 @@ body {
   height: 100%;
   line-height: 1.42857143;
   margin: 0;
+  text-align: left;
 }
 @font-face {
   font-family: 'Source Sans Pro';
@@ -1242,6 +1243,11 @@ body {
   box-shadow: 0 0 0px 3px #FFBD66;
   outline: none;
 }
+.bekreftCheckboksPanel:focus,
+.bekreftCheckboksPanel--focus {
+  box-shadow: 0 0 0px 3px #FFBD66;
+  outline: none;
+}
 .bekreftCheckboksPanel .bekreftCheckboksPanel__innhold {
   margin-bottom: 1rem;
 }
@@ -1560,6 +1566,15 @@ body {
   box-shadow: 0 0 0px 3px #FFBD66;
   outline: none;
 }
+.ekspanderbartPanel:hover,
+.ekspanderbartPanel--hover {
+  box-shadow: #B7B1A9 0 2px 1px 0;
+}
+.ekspanderbartPanel:focus,
+.ekspanderbartPanel--focus {
+  box-shadow: 0 0 0px 3px #FFBD66;
+  outline: none;
+}
 .ekspanderbartPanel__hode {
   background: transparent;
   border: 0px;
@@ -1639,6 +1654,10 @@ body {
 }
 .ekspanderbartPanel--border {
   border: 1px solid #78706A;
+}
+.ekspanderbartPanel--border:hover,
+.ekspanderbartPanel--border.panel-interaktiv-mixin--hover {
+  border: 1px solid #0067C5;
 }
 .ekspanderbartPanel--border:hover,
 .ekspanderbartPanel--border.panel-interaktiv-mixin--hover {

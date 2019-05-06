@@ -23,26 +23,41 @@ const ReadOnlyField = ({
   </div>
 );
 
+const inntektStyle = (rowId, columnId) => `
+.inntekter--${rowId}--${columnId} {
+  grid-area: inntekter--${rowId}--${columnId};
+}
+`;
+
 const Inntekt = ({
-  readOnly, inntekter, rowId, columnId, monthIndex
+  readOnly, inntekter, rowId, columnId, monthIndex,
 }) => {
   const [editMode, setEditMode] = useState(true);
 
   return (
-    <div className={`item inntekter inntekter--${rowId}--${columnId}`}>
-      <Ekspanderbartpanel
-        tittel={formatertPengesum(sumInntekter(inntekter.filter(inntekt => inntekt.virksomhet.identifikator === rowId)))}
-        tittelProps="element"
-      >
-        {!readOnly && <Knapp htmlType="button" onClick={() => setEditMode(!editMode)}>Rediger</Knapp>}
-        {inntekter.map((inntekt, index) => (
-          inntekt.virksomhet.identifikator === rowId &&
+    <>
+      <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
+        __html: inntektStyle(rowId, columnId),
+      }}
+      />
+      <div className={`item inntekter inntekter--${rowId}--${columnId}`}>
+        <Ekspanderbartpanel
+          tittel={formatertPengesum(sumInntekter(inntekter
+            .filter(inntekt => inntekt.virksomhet.identifikator === rowId)))}
+          tittelProps="element"
+        >
+          {!readOnly && <Knapp htmlType="button" onClick={() => setEditMode(!editMode)}>Rediger</Knapp>}
+          {inntekter.map((inntekt, index) => (
+            inntekt.virksomhet.identifikator === rowId
+          && (
           <div key={inntekt.beskrivelse} className="inntekt">
             <Field beskrivelse={inntekt.beskrivelse} name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`} component={editMode ? ReadOnlyField : InputField} />
           </div>
-        ))}
-      </Ekspanderbartpanel>
-    </div>
+          )
+          ))}
+        </Ekspanderbartpanel>
+      </div>
+    </>
   );
 };
 

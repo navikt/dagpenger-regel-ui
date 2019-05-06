@@ -4,112 +4,31 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: ". maaned--2017-07 maaned--2017-08 maaned--2017-09 maaned--2017-10 maaned--2017-11 maaned--2017-12" "arbeidsgiver--1111111 inntekter--1111111--2017-07 inntekter--1111111--2017-08 inntekter--1111111--2017-09  inntekter--1111111--2017-10 inntekter--1111111--2017-11 inntekter--1111111--2017-12" "arbeidsgiver--222222 inntekter--222222--2017-07 inntekter--222222--2017-08 inntekter--222222--2017-09 inntekter--222222--2017-10 inntekter--222222--2017-11 inntekter--222222--2017-12";
   overflow-x: auto;
   width: 100%;
   position: relative;
+  grid-template-areas: ". maaned--2017-07 maaned--2017-08 maaned--2017-09 maaned--2017-10 maaned--2017-11 maaned--2017-12" "arbeidsgiver--1111111 inntekter--1111111--2017-07inntekter--1111111--2017-07  inntekter--1111111--2017-09inntekter--1111111--2017-09inntekter--1111111--2017-09 inntekter--1111111--2017-10inntekter--1111111--2017-10 inntekter--1111111--2017-11inntekter--1111111--2017-11inntekter--1111111--2017-11 inntekter--1111111--2017-12inntekter--1111111--2017-12inntekter--1111111--2017-12","arbeidsgiver--222222 inntekter--222222--2017-07 inntekter--222222--2017-08 inntekter--222222--2017-09 inntekter--222222--2017-10  inntekter--222222--2017-12";
 
   .item {
     padding: 16px;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    border-right: 1px solid @navGra20;
+    border-bottom: 1px solid @navGra20;
 
     &.arbeidsgiver {
       background-color: @navLysGra;
       position: sticky;
       left: 0;
       z-index: 2;
-
-      &.arbeidsgiver--1111111 {
-        grid-area: arbeidsgiver--1111111;
-      }
-
-      &.arbeidsgiver--222222 {
-        grid-area: arbeidsgiver--222222;
-      }
     }
 
     &.maaned {
       width: @width;
       background: @navMorkGra;
       color: white;
-
-      &.maaned--2017-07 {
-        grid-area: maaned--2017-07;
-      }
-
-      &.maaned--2017-08 {
-        grid-area: maaned--2017-08;
-      }
-
-      &.maaned--2017-09 {
-        grid-area: maaned--2017-09;
-      }
-
-      &.maaned--2017-10 {
-        grid-area: maaned--2017-10;
-      }
-
-      &.maaned--2017-11 {
-        grid-area: maaned--2017-11;
-      }
-
-      &.maaned--2017-12 {
-        grid-area: maaned--2017-12;
-      }
     }
 
     &.inntekter {
       // height: @height;
-
-      &.inntekter--1111111--2017-07 {
-        grid-area: inntekter--1111111--2017-07;
-      }
-
-      &.inntekter--1111111--2017-08 {
-        grid-area: inntekter--1111111--2017-08;
-      }
-
-      &.inntekter--1111111--2017-09 {
-        grid-area: inntekter--1111111--2017-09;
-      }
-
-      &.inntekter--1111111--2017-10 {
-        grid-area: inntekter--1111111--2017-10;
-      }
-
-      &.inntekter--1111111--2017-11 {
-        grid-area: inntekter--1111111--2017-11;
-      }
-
-      &.inntekter--1111111--2017-12 {
-        grid-area: inntekter--1111111--2017-12;
-      }
-
-      &.inntekter--222222--2017-07 {
-        grid-area: inntekter--222222--2017-07;
-      }
-
-      &.inntekter--222222--2017-08 {
-        grid-area: inntekter--222222--2017-08;
-      }
-
-      &.inntekter--222222--2017-09 {
-        grid-area: inntekter--222222--2017-09;
-      }
-
-      &.inntekter--222222--2017-10 {
-        grid-area: inntekter--222222--2017-10;
-      }
-
-      &.inntekter--222222--2017-11 {
-        grid-area: inntekter--222222--2017-11;
-      }
-
-      &.inntekter--222222--2017-12 {
-        grid-area: inntekter--222222--2017-12;
-      }
     }
   }
 }
