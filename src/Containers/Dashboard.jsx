@@ -8,7 +8,8 @@ import axios from 'axios';
 import './Dashboard.css';
 import '../PropTypes/dashBoardPropType';
 import dashboardPropType from '../PropTypes/dashBoardPropType';
-import getInntekt from '../lib/inntektApiClient'
+import {getInntekt, lagreInntekt} from "../lib/inntektApiClient";
+import {Knapp} from "nav-frontend-knapper";
 
 const findArbeidsgivere = (inntekt) => {
   const map = new Map();
@@ -22,33 +23,32 @@ const findArbeidsgivere = (inntekt) => {
     .sort((first, second) => second.identifikator - first.identifikator);
 };
 
-const submitInntektToApi = (data) => {
-    alert (data)
+const submitInntektToApi = async (data) => {
+  await lagreInntekt(process.env.PUBLIC_URL, data);
 };
 
-const Dashboard = ({ readOnly, location }) => {
-  const [data, setData] = useState({ arbeidsInntektMaaned: [], ident: {}, arbeidsgivere: [] });
+const Dashboard = ({readOnly, location}) => {
+  const [data, setData] = useState({inntektId: '', inntekt: {arbeidsInntektMaaned: [], ident: {}}});
+  const [arbeidsgivere, setArbeidsgivere] = useState([]);
 
   useEffect(() => {
     let queryParams = new URLSearchParams(location.search);
-    let aktorId = queryParams.get('aktorId');
-    let vedtakId = queryParams.get('vedtakId');
-    let beregningdato = queryParams.get('beregningdato');
     let inntektApiRequest = {
-      aktørId: aktorId,
-      vedtakId: vedtakId,
-      beregningsDato: beregningdato
+      aktørId: queryParams.get('aktorId'),
+      vedtakId: queryParams.get('vedtakId'),
+      beregningsDato: queryParams.get('beregningdato'),
     };
     const getInntektFromApi = async () => {
-      if (process.env.NODE_ENV !== "production"){
-        const result = await axios(
+      let result;
+      if (process.env.NODE_ENV !== "production") {
+        result = await axios(
           process.env.PUBLIC_URL + '/mock/flereinntekter.json',
         );
-        setData({ arbeidsgivere: findArbeidsgivere(result.data.inntekt), ...result.data.inntekt });
       } else {
-        const result = await getInntekt(process.env.PUBLIC_URL, inntektApiRequest);
-        setData({ arbeidsgivere: findArbeidsgivere(result.data.inntekt), ...result.data.inntekt});
+        result = await getInntekt(process.env.PUBLIC_URL, inntektApiRequest);
       }
+      setData({...result.data});
+      setArbeidsgivere(findArbeidsgivere(result.data.inntekt))
     };
 
     getInntektFromApi();
@@ -62,14 +62,13 @@ const Dashboard = ({ readOnly, location }) => {
       render={props =>
         <Form>
           <div className="grid">
-            {data.arbeidsgivere.map(arbeidsgiver => (
-              <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
+            {arbeidsgivere.map(arbeidsgiver => (
+              <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver}/>
             ))}
-
-            {props.values.arbeidsInntektMaaned.map((maaned, monthIndex) => (
+            {props.values.inntekt.arbeidsInntektMaaned.map((maaned, monthIndex) => (
               <>
-                <Maaned key={maaned.aarMaaned} maaned={maaned.aarMaaned} />
-                {data.arbeidsgivere.map((arbeidsgiver) => {
+                <Maaned key={maaned.aarMaaned} maaned={maaned.aarMaaned}/>
+                {arbeidsgivere.map((arbeidsgiver) => {
                   return (
                     <Inntekt
                       readOnly={readOnly}
@@ -84,6 +83,9 @@ const Dashboard = ({ readOnly, location }) => {
               </>
             ))}
           </div>
+          <Knapp htmlType="submit">
+            Lagre
+          </Knapp>
         </Form>
       }
     />
@@ -91,6 +93,6 @@ const Dashboard = ({ readOnly, location }) => {
 };
 
 Dashboard.propTypes = dashboardPropType;
-Dashboard.defaultProps = { readOnly: false };
+Dashboard.defaultProps = {readOnly: false};
 
 export default Dashboard;

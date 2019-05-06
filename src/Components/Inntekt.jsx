@@ -38,7 +38,7 @@ const Inntekt = ({
         {inntekter.map((inntekt, index) => (
           inntekt.virksomhet.identifikator === rowId &&
           <div key={inntekt.beskrivelse} className="inntekt">
-            <Field beskrivelse={inntekt.beskrivelse} name={`arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`} component={editMode ? ReadOnlyField : InputField} />
+            <Field beskrivelse={inntekt.beskrivelse} name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`} component={editMode ? ReadOnlyField : InputField} />
           </div>
         ))}
       </Ekspanderbartpanel>
