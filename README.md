@@ -23,7 +23,7 @@ Applikasjonen har avhengigheter til dp-inntekt-api og Postgres som kan kjøres
 opp lokalt vha Docker Compose(som følger med Docker Desktop) 
 
 
-Starte dp-inntekt-api, Postgres og regel-ui (baseres på at dp-inntekt-api er bygget (`./gradlew build`) og regel-ui er bygget (`npm run build`)
+Starte dp-inntekt-api, Postgres og regel-ui (baseres på at dp-inntekt-api er bygget (`./gradlew build`) og regel-ui er bygget (`npm run build`))
 ```bash
 docker-compose -f docker-compose.yml up --build
 
