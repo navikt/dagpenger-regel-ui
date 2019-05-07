@@ -100,7 +100,11 @@ server {
   }
 
   location = /inntekter/api/v1/inntekt {
-    proxy_pass "${APP_INNTEKT_API_PATH}";
+    proxy_pass "${APP_INNTEKT_BASEURL}v1/inntekt/uklassifisert";
+  }
+
+  location = /inntekter/api/v1/inntekt/update {
+    proxy_pass "${APP_INNTEKT_BASEURL}v1/inntekt/uklassifisert/update";
   }
 
   error_page   500 502 503 504  /50x.html;

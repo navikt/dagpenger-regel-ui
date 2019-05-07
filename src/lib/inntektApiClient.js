@@ -17,7 +17,7 @@ export async function getInntekt(baseUrl, request) {
 export async function lagreInntekt(baseUrl, request) {
   return await axios({
     method: 'post',
-    url: `${baseUrl}/api/v1/inntekt`,
+    url: `${baseUrl}/api/v1/inntekt/update`,
     data: request,
   }).then(function (response) {
       return response;

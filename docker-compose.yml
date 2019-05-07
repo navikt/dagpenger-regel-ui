@@ -23,7 +23,7 @@ services:
     ports:
       - "80:80"
     environment:
-      APP_INNTEKT_API_PATH: "http://dp-inntekt-api:8099/v1/inntekt/uklassifisert"
+      APP_INNTEKT_BASEURL: "http://dp-inntekt-api:8099/"
     depends_on:
       - dp-inntekt-api
     links:

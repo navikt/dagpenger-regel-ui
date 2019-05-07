@@ -6,5 +6,5 @@ spec:
   ingresses:
     - "https://dagpenger-regel-ui.nais.preprod.local/"
   env:
-    - name: APP_INNTEKT_API_PATH
-      value: http://dp-inntekt-api/v1/inntekt/uklassifisert
+    - name: APP_INNTEKT_BASEURL
+      value: http://dp-inntekt-api/
