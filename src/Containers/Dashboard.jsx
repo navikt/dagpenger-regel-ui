@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
 import axios from 'axios';
-import { Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import Spinner from '../Components/Spinner';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
@@ -23,13 +24,10 @@ const findArbeidsgivere = (inntekt) => {
 };
 
 // TODO fikse slik at vi ikke trenger å traverese dataen på nytt
-// TODO simplify denne
-// maaneder, arbeidsgivere innteker
 const buildCSSGrid = (data, arbeidsgivere) => {
   const { arbeidsInntektMaaned } = data.inntekt;
 
   const maaneder = arbeidsInntektMaaned.map(maaned => `maaned--${maaned.aarMaaned}`);
-  // "arbeidsgiver--1111111 inntekter--1111111--2017-07 ..."
   const arbeidsgivereMedInntekter = arbeidsgivere.map((arbeidsgiver) => {
     const inntekter = arbeidsInntektMaaned.map(maaned => `inntekter--${arbeidsgiver.identifikator}--${maaned.aarMaaned} `);
     return `"arbeidsgiver--${arbeidsgiver.identifikator} ${inntekter.join(' ')}"`;
@@ -72,6 +70,10 @@ const Dashboard = ({ readOnly, location }) => {
     getInntektFromApi();
   }, [location.search]);
 
+  if (!arbeidsgivere.length && !data.inntekt.arbeidsInntektMaaned.length) {
+    return <Spinner type="XL" />;
+  }
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
@@ -89,8 +91,8 @@ const Dashboard = ({ readOnly, location }) => {
                 <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
               ))}
               {props.values.inntekt.arbeidsInntektMaaned.map((maaned, monthIndex) => (
-                <>
-                  <Maaned key={maaned.aarMaaned} maaned={maaned.aarMaaned} />
+                <React.Fragment key={maaned.aarMaaned}>
+                  <Maaned maaned={maaned.aarMaaned} />
                   {arbeidsgivere.map(arbeidsgiver => (
                     <Inntekt
                       readOnly={readOnly}
@@ -101,12 +103,15 @@ const Dashboard = ({ readOnly, location }) => {
                       monthIndex={monthIndex}
                     />
                   ))}
-                </>
+                </React.Fragment>
               ))}
             </div>
-            <Knapp htmlType="submit">
-            Lagre
-            </Knapp>
+            {props.errors.name && <div className="error">{props.errors.name}</div>}
+            <div className="flex flexend">
+              <Hovedknapp htmlType="submit" spinner={props.isSubmitting}>
+                Lagre
+              </Hovedknapp>
+            </div>
           </Form>
         )}
       />

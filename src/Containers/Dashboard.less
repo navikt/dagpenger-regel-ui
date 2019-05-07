@@ -6,15 +6,18 @@
   display: grid;
   overflow-x: auto;
   width: 100%;
+  margin-bottom: 24px;
   position: relative;
+  border-bottom: 1px solid @navGra20;
 
   .item {
     padding: 16px;
     border-right: 1px solid @navGra20;
-    border-bottom: 1px solid @navGra20;
+    border-top: 1px solid @navGra20;
 
     &.arbeidsgiver {
       background-color: @navLysGra;
+      border-left: 1px solid @navGra20;
       position: sticky;
       left: 0;
       z-index: 2;
@@ -24,10 +27,11 @@
       width: @width;
       background: @navMorkGra;
       color: white;
+      text-transform: capitalize;
     }
 
     &.inntekter {
-      // height: @height;
+
     }
   }
 }

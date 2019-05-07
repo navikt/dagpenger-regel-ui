@@ -67,8 +67,10 @@ Inntekt.propTypes = {
     beskrivelse: PropTypes.string,
     beloep: PropTypes.number,
   })).isRequired,
+  readOnly: PropTypes.bool.isRequired,
   rowId: PropTypes.string.isRequired,
   columnId: PropTypes.string.isRequired,
+  monthIndex: PropTypes.number.isRequired,
 };
 
 export default Inntekt;
