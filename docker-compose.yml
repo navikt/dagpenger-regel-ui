@@ -1,24 +1,30 @@
-version: '3'
+version: '3.3'
 services:
-  nginx:
+  postgres:
+    image: postgres:11
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dp-inntekt-db
+  dp-inntekt-api:
+    build: ./../dp-inntekt-api
+    hostname: dp-inntekt-api
+    ports:
+      - "8099:8099"
+    environment:
+      DATABASE_HOST: postgres
+    depends_on:
+      - postgres
+    external_links:
+      - dp-inntekt-api
+  dp-regel-ui:
     build: .
     ports:
-      - 9080:9080
+      - "80:80"
     environment:
-      - APP_PORT=9080
-      - OIDC_AGENTNAME=foo
-      - OIDC_PASSWORD=bar
-      - OIDC_HOST_URL=http://oidc-provider:4352
-      - OIDC_REDIRECT_URI=http://localhost:9080/inntekter/oidc-callback-url
-      - REDIS_HOST=redis
+      APP_INNTEKT_API_PATH: "http://dp-inntekt-api:8099/v1/inntekt/uklassifisert"
+    depends_on:
+      - dp-inntekt-api
     links:
-      - redis
-  redis:
-    image: redis
-  oidc-provider:
-    image: qlik/simple-oidc-provider
-    ports:
-      - 4352:4352
-    environment:
-      - REDIRECTS=http://localhost:9080/inntekter/oidc-callback-url
-      - PORT=4352
+      - dp-inntekt-api
