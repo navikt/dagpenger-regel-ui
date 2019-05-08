@@ -1,5 +1,6 @@
 import nock from 'nock'
-import getInntekt from '../inntektApiClient'
+import {getInntekt} from "../inntektApiClient";
+
 
 it("Should handle 200 response", async () => {
 
