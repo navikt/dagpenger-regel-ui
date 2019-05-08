@@ -103,6 +103,7 @@ const Dashboard = ({ readOnly, location }) => {
                       key={arbeidsgiver.identifikator}
                       inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
                       monthIndex={monthIndex}
+                      formProps={props}
                     />
                   ))}
                 </React.Fragment>

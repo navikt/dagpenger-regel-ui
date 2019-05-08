@@ -1,30 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Element, EtikettLiten } from 'nav-frontend-typografi';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { Input } from 'nav-frontend-skjema';
+
 import { Knapp } from 'nav-frontend-knapper';
 import { Field } from 'formik';
+import { InputField } from './InputField';
+import { ReadOnlyField } from './ReadOnlyField';
+import { required } from '../Utils/validering';
+import { formatertPengesum } from '../Utils/currencyFormat';
 
 const sumInntekter = inntekter => inntekter.reduce((acc, val) => acc + val.beloep, 0);
-
-const formatertPengesum = tall => new Intl.NumberFormat('nb-NO', { style: 'currency', currency: 'NOK' }).format(tall);
-
-// isValid?
-// feil={{ feilmelding: 'Her er det noe feil' }}
-
-const InputField = ({
-  beskrivelse, field, form,
-}) => (<Input label={beskrivelse} type="number" {...field} value={field.value} />);
-
-const ReadOnlyField = ({
-  beskrivelse, field, form,
-}) => (
-  <div>
-    <EtikettLiten>{beskrivelse}</EtikettLiten>
-    <Element className="inntektbeloep">{formatertPengesum(field.value)}</Element>
-  </div>
-);
 
 const inntektStyle = (rowId, columnId) => `
 .inntekter--${rowId}--${columnId} {
@@ -33,7 +18,7 @@ const inntektStyle = (rowId, columnId) => `
 `;
 
 const Inntekt = ({
-  readOnly, inntekter, rowId, columnId, monthIndex,
+  readOnly, inntekter, rowId, columnId, monthIndex, formProps,
 }) => {
   const [editMode, setEditMode] = useState(true);
 
@@ -49,15 +34,29 @@ const Inntekt = ({
             .filter(inntekt => inntekt.virksomhet.identifikator === rowId)))}
           tittelProps="element"
         >
-          {!readOnly && <Knapp htmlType="button" mini onClick={() => setEditMode(!editMode)}>Rediger</Knapp>}
+
           {inntekter.map((inntekt, index) => (
             inntekt.virksomhet.identifikator === rowId
           && (
           <div key={inntekt.beskrivelse} className="inntekt">
-            <Field beskrivelse={inntekt.beskrivelse} name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`} component={editMode ? ReadOnlyField : InputField} />
+            <Field
+              beskrivelse={inntekt.beskrivelse}
+              name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
+              component={editMode ? ReadOnlyField : InputField}
+              validate={required}
+            />
           </div>
           )
           ))}
+          {!readOnly && (
+          <Knapp
+            htmlType="button"
+            mini
+            onClick={() => setEditMode(formProps.isValid && !editMode)}
+          >
+            {editMode ? 'Rediger' : 'Oppdater'}
+          </Knapp>
+          )}
         </Ekspanderbartpanel>
       </div>
     </>
@@ -74,6 +73,7 @@ Inntekt.propTypes = {
   rowId: PropTypes.string.isRequired,
   columnId: PropTypes.string.isRequired,
   monthIndex: PropTypes.number.isRequired,
+  formProps: PropTypes.shape().isRequired, // TODO create a proptype for formik
 };
 
 export default Inntekt;
