@@ -41,6 +41,8 @@ const buildCSSGrid = (data, arbeidsgivere) => {
 
 const submitInntektToApi = async (data) => {
   await lagreInntekt(process.env.PUBLIC_URL, data);
+  // TODO sett submit til false etter kallet er ferdig
+  // setSubmitting(false);
 };
 
 const Dashboard = ({ readOnly, location }) => {
@@ -108,7 +110,7 @@ const Dashboard = ({ readOnly, location }) => {
             </div>
             {props.errors.name && <div className="error">{props.errors.name}</div>}
             <div className="flex flexend">
-              <Hovedknapp htmlType="submit" spinner={props.isSubmitting}>
+              <Hovedknapp htmlType="submit" spinner={props.isSubmitting} autoDisableVedSpinner disabled={!props.dirty}>
                 Lagre
               </Hovedknapp>
             </div>

@@ -3,18 +3,28 @@
 .app {
   margin: 0 auto;
 
-  .dekorator {
-    background-color: @navMorkGra;
-    color: white;
-    padding: 16px;
+  header {
     margin-bottom: 32px;
-    display: flex;
-    align-items: center;
 
-    .logo {
-      width: 60px;
-      height: auto;
-      margin-right: 16px;
+    .dekorator {
+      background-color: @navMorkGra;
+      color: white;
+      padding: 16px;
+
+      display: flex;
+      align-items: center;
+
+      .logo {
+        width: 60px;
+        height: auto;
+        margin-right: 16px;
+      }
+    }
+
+    .feilmelding {
+      color: white;
+      background-color: @navRod;
+      padding: 16px;
     }
   }
 
@@ -31,5 +41,4 @@
       justify-content: flex-end;
     }
   }
-
 }

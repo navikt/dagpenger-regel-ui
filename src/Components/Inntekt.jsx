@@ -10,12 +10,15 @@ const sumInntekter = inntekter => inntekter.reduce((acc, val) => acc + val.beloe
 
 const formatertPengesum = tall => new Intl.NumberFormat('nb-NO', { style: 'currency', currency: 'NOK' }).format(tall);
 
+// isValid?
+// feil={{ feilmelding: 'Her er det noe feil' }}
+
 const InputField = ({
-  beskrivelse, field, form, ...props
+  beskrivelse, field, form,
 }) => (<Input label={beskrivelse} type="number" {...field} value={field.value} />);
 
 const ReadOnlyField = ({
-  beskrivelse, field, form, ...props
+  beskrivelse, field, form,
 }) => (
   <div>
     <EtikettLiten>{beskrivelse}</EtikettLiten>
@@ -46,7 +49,7 @@ const Inntekt = ({
             .filter(inntekt => inntekt.virksomhet.identifikator === rowId)))}
           tittelProps="element"
         >
-          {!readOnly && <Knapp htmlType="button" onClick={() => setEditMode(!editMode)}>Rediger</Knapp>}
+          {!readOnly && <Knapp htmlType="button" mini onClick={() => setEditMode(!editMode)}>Rediger</Knapp>}
           {inntekter.map((inntekt, index) => (
             inntekt.virksomhet.identifikator === rowId
           && (
