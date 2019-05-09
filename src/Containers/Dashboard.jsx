@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Formik } from 'formik';
+import React, {useEffect, useState} from 'react';
+import {Form, Formik} from 'formik';
 import axios from 'axios';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import {Hovedknapp} from 'nav-frontend-knapper';
 import Spinner from '../Components/Spinner';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
 import dashboardPropType from '../PropTypes/dashBoardPropType';
-import { getInntekt, lagreInntekt } from '../lib/inntektApiClient';
-
+import AlertStripeSuksess from "nav-frontend-alertstriper/lib/suksess-alertstripe";
+import {getInntekt, lagreInntekt} from '../lib/inntektApiClient';
 import './Dashboard.css';
+import AlertStripeFeil from "nav-frontend-alertstriper/lib/feil-alertstripe";
 
 const findArbeidsgivere = (inntekt) => {
   const map = new Map();
@@ -25,7 +26,7 @@ const findArbeidsgivere = (inntekt) => {
 
 // TODO fikse slik at vi ikke trenger å traverese dataen på nytt
 const buildCSSGrid = (data, arbeidsgivere) => {
-  const { arbeidsInntektMaaned } = data.inntekt;
+  const {arbeidsInntektMaaned} = data.inntekt;
 
   const maaneder = arbeidsInntektMaaned.map(maaned => `maaned--${maaned.aarMaaned}`);
   const arbeidsgivereMedInntekter = arbeidsgivere.map((arbeidsgiver) => {
@@ -39,12 +40,6 @@ const buildCSSGrid = (data, arbeidsgivere) => {
 `;
 };
 
-const submitInntektToApi = async (data) => {
-  await lagreInntekt(process.env.PUBLIC_URL, data);
-  // TODO sett submit til false etter kallet er ferdig
-  // setSubmitting(false);
-};
-
 const Dashboard = ({ readOnly, location }) => {
   const [data, setData] = useState({ inntektId: '', inntekt: { arbeidsInntektMaaned: [], ident: {} } });
   const [arbeidsgivere, setArbeidsgivere] = useState([]);
@@ -56,6 +51,7 @@ const Dashboard = ({ readOnly, location }) => {
       vedtakId: queryParams.get('vedtakId'),
       beregningsDato: queryParams.get('beregningdato'),
     };
+
     const getInntektFromApi = async () => {
       let result;
       if (process.env.NODE_ENV !== 'production') {
@@ -73,7 +69,7 @@ const Dashboard = ({ readOnly, location }) => {
   }, [location.search]);
 
   if (!arbeidsgivere.length && !data.inntekt.arbeidsInntektMaaned.length) {
-    return <Spinner type="XL" />;
+    return <Spinner type="XL"/>;
   }
 
   return (
@@ -82,19 +78,40 @@ const Dashboard = ({ readOnly, location }) => {
         __html: buildCSSGrid(data, arbeidsgivere),
       }}
       />
+
       <Formik
         enableReinitialize
         initialValues={data}
-        onSubmit={submitInntektToApi}
+        onSubmit={(values, actions) => {
+          setTimeout(() => {
+            lagreInntekt(process.env.PUBLIC_URL, values)
+              .then(function (result) {
+                setData({...result.data});
+                setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+                actions.setStatus({success: true});
+              })
+              .catch(function (error) {
+                actions.setStatus({failure: true});
+              }).finally(() => {
+              actions.setSubmitting(false);
+            });
+
+          }, 1000);
+        }}
         render={props => (
           <Form>
+            {props.status && props.status.success &&
+            <div aria-live="polite"><AlertStripeSuksess>Inntekt er lagret</AlertStripeSuksess></div>}
+            {props.status && props.status.failure &&
+            <div aria-live="polite"><AlertStripeFeil>Uff da. Noe feil skjedde under lagring av inntekt</AlertStripeFeil>
+            </div>}
             <div className="grid">
               {arbeidsgivere.map(arbeidsgiver => (
-                <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
+                <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver}/>
               ))}
               {props.values.inntekt.arbeidsInntektMaaned.map((maaned, monthIndex) => (
                 <React.Fragment key={maaned.aarMaaned}>
-                  <Maaned maaned={maaned.aarMaaned} />
+                  <Maaned maaned={maaned.aarMaaned}/>
                   {arbeidsgivere.map(arbeidsgiver => (
                     <Inntekt
                       readOnly={readOnly}
@@ -123,6 +140,6 @@ const Dashboard = ({ readOnly, location }) => {
 };
 
 Dashboard.propTypes = dashboardPropType;
-Dashboard.defaultProps = { readOnly: false };
+Dashboard.defaultProps = {readOnly: false};
 
 export default Dashboard;

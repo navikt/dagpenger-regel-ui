@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Dashboard from './Dashboard';
 import { Header } from '../Components/Header';
 
@@ -13,8 +14,8 @@ const App = () => (
         <Route exact path="/inntekter/readonly" render={props => <Dashboard readOnly {...props} />} />
         <Route exact path="/inntekter" render={props => <Dashboard {...props} />} />
 
-        {/* Only for dev */}
-        <Route render={props => <Dashboard {...props} />} />
+
+        {process.env.NODE_ENV !== 'production' && <Route render={props => <Dashboard {...props} />}/>}
       </Router>
     </div>
   </div>
