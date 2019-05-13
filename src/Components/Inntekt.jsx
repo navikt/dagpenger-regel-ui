@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
-import { Knapp } from 'nav-frontend-knapper';
-import { Field } from 'formik';
-import { InputField } from './InputField';
-import { ReadOnlyField } from './ReadOnlyField';
-import { required } from '../Utils/validering';
-import { formatertPengesum } from '../Utils/currencyFormat';
+import {Knapp} from 'nav-frontend-knapper';
+import {Field} from 'formik';
+import {InputField} from './InputField';
+import {ReadOnlyField} from './ReadOnlyField';
+import {required} from '../Utils/validering';
+import {formatertPengesum} from '../Utils/currencyFormat';
 
-const sumInntekter = inntekter => inntekter.reduce((acc, val) => acc + val.beloep, 0);
+const sumInntekter = inntekter => inntekter.reduce((acc, val) => Number(acc) + Number(val.beloep), 0);
 
 const inntektStyle = (rowId, columnId) => `
 .inntekter--${rowId}--${columnId} {
@@ -21,7 +21,6 @@ const Inntekt = ({
   readOnly, inntekter, rowId, columnId, monthIndex, formProps,
 }) => {
   const [editMode, setEditMode] = useState(true);
-
   return (
     <>
       <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
@@ -67,7 +66,7 @@ Inntekt.propTypes = {
   inntekter: PropTypes.arrayOf(PropTypes.shape({
     header: PropTypes.string,
     beskrivelse: PropTypes.string,
-    beloep: PropTypes.number,
+    beloep: PropTypes.string,
   })).isRequired,
   readOnly: PropTypes.bool.isRequired,
   rowId: PropTypes.string.isRequired,

@@ -11,7 +11,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Total lønnsinntekt",
-              "beloep": 6410.26,
+              "beloep": "6410.26",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -39,7 +39,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Kontaktytelse",
-              "beloep": 41666.67,
+              "beloep": "41666.67",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -66,7 +66,7 @@
             },
             {
               "inntektType": "LOENNSINNTEKT",
-              "beloep": 48076.93,
+              "beloep": "48076.93",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -101,7 +101,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Total lønnsinntekt",
-              "beloep": 0.00,
+              "beloep": "0.00",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -136,7 +136,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Total lønnsinntekt",
-              "beloep": 54194.06,
+              "beloep": "54194.06",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -164,7 +164,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Kontaktytelse",
-              "beloep": 48076.26,
+              "beloep": "48076.26",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -191,7 +191,7 @@
             },
             {
               "inntektType": "LOENNSINNTEKT",
-              "beloep": 52.00,
+              "beloep": "52.00",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -218,7 +218,7 @@
             },
             {
               "inntektType": "LOENNSINNTEKT",
-              "beloep": 6065.80,
+              "beloep": "6065.80",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -253,7 +253,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Total lønnsinntekt",
-              "beloep": 36886.20,
+              "beloep": "36886.20",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -284,7 +284,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Kontaktytelse",
-              "beloep": 312.00,
+              "beloep": "312.00",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -311,7 +311,7 @@
             },
             {
               "inntektType": "LOENNSINNTEKT",
-              "beloep": 36574.20,
+              "beloep": "36574.20",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -346,7 +346,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Total lønnsinntekt",
-              "beloep": 39941.20,
+              "beloep": "39941.20",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -374,7 +374,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Kontantytelse",
-              "beloep": 182.00,
+              "beloep": "182.00",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -401,7 +401,7 @@
             },
             {
               "inntektType": "LOENNSINNTEKT",
-              "beloep": 39756.20,
+              "beloep": "39756.20",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -436,7 +436,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Total lønnsinntekt",
-              "beloep": 45569.00,
+              "beloep": "45569.00",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -467,7 +467,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Kontaktytelse",
-              "beloep": 44665.00,
+              "beloep": "44665.00",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -495,7 +495,7 @@
             {
               "inntektType": "LOENNSINNTEKT",
               "header": "Naturalytelse",
-              "beloep": 366.00,
+              "beloep": "366.00",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
@@ -522,7 +522,7 @@
             },
             {
               "inntektType": "LOENNSINNTEKT",
-              "beloep": 538.00,
+              "beloep": "538.00",
               "fordel": "kontantytelse",
               "inntektskilde": "A-ordningen",
               "inntektsperiodetype": "Maaned",
