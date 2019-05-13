@@ -18,6 +18,11 @@ test('No inntekt', () => {
 test('Sum inntekt correctly', () => {
 
   let inntekt = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'inntektliste.json'), 'utf8'));
+  const toLocaleString = Number.prototype.toLocaleString;
+  // eslint-disable-next-line no-extend-native
+  Number.prototype.toLocaleString = function(locale = 'nb-NO', ...args) {
+    return toLocaleString.call(this, locale, ...args);
+  };
   const component = renderer.create(
     <Inntekt inntekter={inntekt.inntektListe} readOnly={false} columnId={'1111111'} rowId={'1111111'} monthIndex={1}
              formProps={{}}/>
