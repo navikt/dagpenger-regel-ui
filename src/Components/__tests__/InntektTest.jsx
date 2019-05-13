@@ -1,11 +1,7 @@
 import React from 'react';
 
-const fs = require('fs');
-const path = require('path');
-
 test("Something", () => {
   let a = "a";
-
   expect(a).toEqual('a')
 
 });
