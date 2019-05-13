@@ -1,9 +1,14 @@
 import React from 'react';
-import Inntekt from '../Inntekt';
-import renderer from 'react-test-renderer';
 
 const fs = require('fs');
 const path = require('path');
+
+test("Something", () => {
+  let a = "a";
+
+  expect(a).toEqual('a')
+
+});
 
 /* TODO: Figure out how to get local and numberformat pass in CI
 test('No inntekt', () => {
