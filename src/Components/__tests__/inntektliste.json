@@ -1,0 +1,87 @@
+{
+  "inntektListe": [
+    {
+      "inntektType": "LOENNSINNTEKT",
+      "header": "Total lønnsinntekt",
+      "beloep": "6410.26",
+      "fordel": "kontantytelse",
+      "inntektskilde": "A-ordningen",
+      "inntektsperiodetype": "Maaned",
+      "inntektsstatus": "LoependeInnrapportert",
+      "leveringstidspunkt": "2019-02",
+      "utbetaltIMaaned": "2017-09",
+      "opplysningspliktig": {
+        "identifikator": "1111111",
+        "aktoerType": "ORGANISASJON"
+      },
+      "virksomhet": {
+        "identifikator": "222222",
+        "navn": "Totototo",
+        "aktoerType": "ORGANISASJON"
+      },
+      "inntektsmottaker": {
+        "identifikator": "99999999999",
+        "aktoerType": "NATURLIG_IDENT"
+      },
+      "inngaarIGrunnlagForTrekk": true,
+      "utloeserArbeidsgiveravgift": true,
+      "informasjonsstatus": "InngaarAlltid",
+      "beskrivelse": "Total lønnsinntekt"
+    },
+    {
+      "inntektType": "LOENNSINNTEKT",
+      "header": "Kontaktytelse",
+      "beloep": "41666.67",
+      "fordel": "kontantytelse",
+      "inntektskilde": "A-ordningen",
+      "inntektsperiodetype": "Maaned",
+      "inntektsstatus": "LoependeInnrapportert",
+      "leveringstidspunkt": "2019-02",
+      "utbetaltIMaaned": "2017-09",
+      "opplysningspliktig": {
+        "identifikator": "1111111",
+        "aktoerType": "ORGANISASJON"
+      },
+      "virksomhet": {
+        "identifikator": "1111111",
+        "navn": "Enenenenen",
+        "aktoerType": "ORGANISASJON"
+      },
+      "inntektsmottaker": {
+        "identifikator": "99999999999",
+        "aktoerType": "NATURLIG_IDENT"
+      },
+      "inngaarIGrunnlagForTrekk": true,
+      "utloeserArbeidsgiveravgift": true,
+      "informasjonsstatus": "InngaarAlltid",
+      "beskrivelse": "Fastlønn"
+    },
+    {
+      "inntektType": "LOENNSINNTEKT",
+      "beloep": "48076.93",
+      "fordel": "kontantytelse",
+      "inntektskilde": "A-ordningen",
+      "inntektsperiodetype": "Maaned",
+      "inntektsstatus": "LoependeInnrapportert",
+      "leveringstidspunkt": "2019-02",
+      "utbetaltIMaaned": "2017-09",
+      "opplysningspliktig": {
+        "identifikator": "1111111",
+        "aktoerType": "ORGANISASJON"
+      },
+      "virksomhet": {
+        "identifikator": "1111111",
+        "navn": "Enenenenen",
+        "aktoerType": "ORGANISASJON"
+      },
+      "inntektsmottaker": {
+        "identifikator": "99999999999",
+        "aktoerType": "NATURLIG_IDENT"
+      },
+      "inngaarIGrunnlagForTrekk": true,
+      "utloeserArbeidsgiveravgift": true,
+      "informasjonsstatus": "InngaarAlltid",
+      "beskrivelse": "Trekk i lønn for ferie"
+    }
+  ]
+}
