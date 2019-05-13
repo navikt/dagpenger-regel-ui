@@ -8,7 +8,7 @@ const path = require('path');
 
 test('No inntekt', () => {
   const component = renderer.create(
-    <Inntekt inntekter={[]} readOnly={false} columnId={'blabla'} rowId={'foofoo'} monthIndex={1} formProps={{}}/>
+    <Inntekt inntekter={[]} readOnly={false} columnId={'1'} rowId={'1'} monthIndex={1} formProps={{}}/>
   );
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();

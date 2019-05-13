@@ -6,15 +6,15 @@ Array [
     dangerouslySetInnerHTML={
       Object {
         "__html": "
-.inntekter--foofoo--blabla {
-  grid-area: inntekter--foofoo--blabla;
+.inntekter--1--1 {
+  grid-area: inntekter--1--1;
 }
 ",
       }
     }
   />,
   <div
-    className="item inntekter inntekter--foofoo--blabla"
+    className="item inntekter inntekter--1--1"
   >
     <div
       className="ekspanderbartPanel ekspanderbartPanel--lukket"

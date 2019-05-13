@@ -42,7 +42,6 @@
     "less-watch-compiler": "^1.13.0",
     "nock": "^10.0.6",
     "npm-run-all": "^4.0.2",
-    "full-icu": "^1.2.1",
     "react-test-renderer": "^16.8.6"
   },
   "scripts": {
@@ -52,7 +51,7 @@
     "build:css": "less-watch-compiler --run-once --config less.json",
     "start": "npm-run-all -p start:*",
     "build": "npm run build:css && npm run build:js",
-    "test": "NODE_ICU_DATA=node_modules/full-icu react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom",
     "test:less": "stylelint \"src/**/*.less\"",
     "eject": "react-scripts eject"
   },
