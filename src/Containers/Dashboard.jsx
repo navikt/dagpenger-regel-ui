@@ -59,7 +59,7 @@ const Dashboard = ({ readOnly, location }) => {
           `${process.env.PUBLIC_URL}/mock/flereinntekter.json`,
         );
       } else {
-        result = await getInntekt(process.env.PUBLIC_URL, inntektApiRequest);
+        result = await getInntekt(inntektApiRequest);
       }
       setData({ ...result.data });
       setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
@@ -84,7 +84,7 @@ const Dashboard = ({ readOnly, location }) => {
         initialValues={data}
         onSubmit={(values, actions) => {
           setTimeout(() => {
-            lagreInntekt(process.env.PUBLIC_URL, values)
+            lagreInntekt(values)
               .then(function (result) {
                 setData({...result.data});
                 setArbeidsgivere(findArbeidsgivere(result.data.inntekt));

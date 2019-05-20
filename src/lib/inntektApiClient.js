@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-export const getInntekt = async (baseUrl, request) => await axios({
+export const getInntekt = async (request) => await axios({
   method: 'post',
-  url: `${baseUrl}/api/v1/inntekt`,
+  url: `/api/v1/inntekt/uklassifisert`,
   data: request,
 }).then(response => response)
   .catch(error => error);
 
-export const lagreInntekt = async (baseUrl, request) => await axios({
+export const lagreInntekt = async (request) => await axios({
   method: 'post',
-  url: `${baseUrl}/api/v1/inntekt/update`,
+  url: `/api/v1/inntekt/uklassifisert/update`,
   data: request,
 }).then(response => response)
   .catch(error => error);
