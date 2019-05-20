@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 export const getInntekt = async (request) => await axios({
-  method: 'post',
-  url: `/api/v1/inntekt/uklassifisert`,
-  data: request,
+  method: 'get',
+  url: `/api/v1/inntekt/uklassifisert/${request.aktørId}/${request.vedtakId}/${request.beregningsDato}`,
 }).then(response => response)
   .catch(error => error);
 
