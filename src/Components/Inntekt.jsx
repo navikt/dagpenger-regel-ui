@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import Modal from 'nav-frontend-modal';
+import { Undertittel } from 'nav-frontend-typografi';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-import {Knapp} from 'nav-frontend-knapper';
-import {Field} from 'formik';
-import {InputField} from './InputField';
-import {ReadOnlyField} from './ReadOnlyField';
-import {required} from '../Utils/validering';
-import {formatertPengesum} from '../Utils/currencyFormat';
+import { Field, FieldArray } from 'formik';
+
+import { InputField } from './InputField';
+
+import { ReadOnlyField } from './ReadOnlyField';
+import { required } from '../Utils/validering';
+import { formatertPengesum } from '../Utils/currencyFormat';
+
+import NyInntekt from '../Containers/NyInntekt';
 
 const sumInntekter = inntekter => inntekter.reduce((acc, val) => Number(acc) + Number(val.beloep), 0);
 
@@ -17,10 +23,12 @@ const inntektStyle = (rowId, columnId) => `
 }
 `;
 
+// TODO lage egen komponent for innholdet i modal og egen for radio
 const Inntekt = ({
   readOnly, inntekter, rowId, columnId, monthIndex, formProps,
 }) => {
   const [editMode, setEditMode] = useState(true);
+  const [isModalOpen, setModal] = useState(false);
   return (
     <>
       <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
@@ -33,20 +41,55 @@ const Inntekt = ({
             .filter(inntekt => inntekt.virksomhet.identifikator === rowId)))}
           tittelProps="element"
         >
+          <FieldArray
+            name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe`}
+            render={arrayHelpers => (
+              <>
+                {inntekter.length > 0 && inntekter
+                  .map((inntekt, index) => (
+                    inntekt.virksomhet.identifikator === rowId && (
+                    <div key={inntekt.beskrivelse} className="flex inntekt">
+                      <Field
+                        beskrivelse={inntekt.beskrivelse}
+                        name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
+                        component={editMode ? ReadOnlyField : InputField}
+                        type="number"
+                        validate={required}
+                      />
+                      {editMode && (
+                      <Knapp
+                        htmlType="button"
+                        mini
+                        onClick={() => arrayHelpers.remove(index)}
+                      >
+                              X
+                      </Knapp>
+                      )}
+                    </div>
+                    )
+                  ))}
+                <Knapp
+                  htmlType="button"
+                  mini
+                  onClick={() => setModal(!isModalOpen)}
+                >
+                  Legg til inntektspost
+                </Knapp>
+                <Modal
+                  isOpen={isModalOpen}
+                  onRequestClose={() => setModal(false)}
+                  closeButton={false}
+                  contentLabel="Ny inntektspost"
+                >
+                  <NyInntekt arbeidsgiver={rowId} dato={columnId} arrayHelpers={arrayHelpers} closeModal={() => setModal(false)} />
 
-          {inntekter.map((inntekt, index) => (
-            inntekt.virksomhet.identifikator === rowId
-          && (
-          <div key={inntekt.beskrivelse} className="inntekt">
-            <Field
-              beskrivelse={inntekt.beskrivelse}
-              name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
-              component={editMode ? ReadOnlyField : InputField}
-              validate={required}
-            />
-          </div>
-          )
-          ))}
+                </Modal>
+
+
+              </>
+            )}
+          />
+
           {!readOnly && (
           <Knapp
             htmlType="button"

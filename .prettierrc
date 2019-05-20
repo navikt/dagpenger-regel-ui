@@ -6,7 +6,7 @@
     "jsxBracketSameLine": false,
     "jsxSingleQuote": false,
     "parser": "babel",
-    "printWidth": 120,
+    "printWidth": 100,
     "proseWrap": "preserve",
     "requirePragma": false,
     "semi": true,
