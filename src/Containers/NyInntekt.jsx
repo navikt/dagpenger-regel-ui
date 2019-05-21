@@ -66,8 +66,8 @@ export const NyInntekt = ({
 
     <Field component={SkjemaGruppe} name="nyInntektUtloeserArbeidsgiveravgift">
       <Fieldset legend="Utløser arbeidsgiveravgift?">
-        <Radio name="nyInntektUtloeserArbeidsgiveravgift" label="Ja" value />
-        <Radio name="nyInntektUtloeserArbeidsgiveravgift" label="Nei" value={false} />
+        <Radio id="nyInntektJa" name="nyInntektUtloeserArbeidsgiveravgift" label="Ja" value />
+        <Radio id="nyInntektNei" name="nyInntektUtloeserArbeidsgiveravgift" label="Nei" value={false} />
       </Fieldset>
     </Field>
 

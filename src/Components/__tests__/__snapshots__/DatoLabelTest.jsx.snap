@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Dato label with MMMM_YYYY_FORMAT 1`] = `
-<p
-  className="typo-element"
->
-  mai 2019
-</p>
-`;

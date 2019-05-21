@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dato label with MMMM_YYYY_FORMAT 1`] = `"mai 2019"`;
