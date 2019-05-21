@@ -6,23 +6,19 @@ it("Should handle 200 response", async () => {
 
   const expectedReturn = 'data';
   let inntektApiRequest = {
-    aktorId: "111",
+    aktørId: "111",
     vedtakId: 12345,
     beregningsDato: '2019-05-01'
   };
-  let baseUrl = 'http://localhost';
-  nock(baseUrl)
-    .post('/api/v1/inntekt', inntektApiRequest)
+  nock('http://localhost')
+    .get('/api/v1/inntekt/uklassifisert/111/12345/2019-05-01')
     .reply(200, expectedReturn);
 
-
-  await getInntekt(baseUrl, inntektApiRequest).then(function (result) {
+  await getInntekt(inntektApiRequest).then(function (result) {
     expect(result.data).toEqual(expectedReturn)
   })
     .catch(function (error) {
       throw error
-
-
     });
 });
 
@@ -33,13 +29,12 @@ it("Should handle 500 response", async () => {
     vedtakId: 12345,
     beregningsDato: '2019-05-01'
   };
-  let baseUrl = 'http://localhost';
-  nock(baseUrl)
-    .post('/api/v1/inntekt', inntektApiRequest)
+  nock('http://localhost')
+    .get('/api/v1/inntekt/uklassifisert/111/12345/2019-05-01')
     .reply(500, {});
 
   try {
-    await getInntekt(baseUrl, inntektApiRequest);
+    await getInntekt(inntektApiRequest);
   } catch (e) {
     expect(e.response.statusText).toMatch('Internal Server Error');
   }
@@ -48,12 +43,11 @@ it("Should handle 500 response", async () => {
 
 it("Should save inntekt with 200", async () => {
   let data = {field: "123"};
-  let baseUrl = 'http://localhost';
-  nock(baseUrl)
-    .post('/api/v1/inntekt/update', data)
+  nock('http://localhost')
+    .post('/api/v1/inntekt/uklassifisert/update', data)
     .reply(200, {success: true});
 
-  await lagreInntekt(baseUrl, data).then(function (result) {
+  await lagreInntekt(data).then(function (result) {
     expect(result.data).toEqual({success: true})
   }).catch(function (error) {
     throw error
@@ -63,13 +57,12 @@ it("Should save inntekt with 200", async () => {
 
 it("Should fail to save inntekt", async () => {
   let data = {field: "123"};
-  let baseUrl = 'http://localhost';
-  nock(baseUrl)
-    .post('/api/v1/inntekt/update', data)
+  nock('http://localhost')
+    .post('/api/v1/inntekt/uklassifisert/update', data)
     .reply(500, {});
 
   try {
-    await lagreInntekt(baseUrl, data);
+    await lagreInntekt(data);
   } catch (e) {
     expect(e.response.statusText).toMatch('Internal Server Error');
   }
