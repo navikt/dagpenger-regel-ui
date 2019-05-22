@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
 import axios from 'axios';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import AlertStripeSuksess from 'nav-frontend-alertstriper/lib/suksess-alertstripe';
 import AlertStripeFeil from 'nav-frontend-alertstriper/lib/feil-alertstripe';
 import Spinner from '../Components/Spinner';
@@ -9,9 +9,8 @@ import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
 import dashboardPropType from '../PropTypes/dashBoardPropType';
-import { getInntekt, lagreInntekt } from '../lib/inntektApiClient';
+import {getInntekt, getUncachedInntekt, lagreInntekt} from '../lib/inntektApiClient';
 import './Dashboard.css';
-
 
 const findArbeidsgivere = (inntekt) => {
   const map = new Map();
@@ -41,18 +40,20 @@ const buildCSSGrid = (data, arbeidsgivere) => {
 `;
 };
 
+const inntektRequest = (queryParams) => {
+  return {
+    aktørId: queryParams.get('aktorId'),
+    vedtakId: queryParams.get('vedtakId'),
+    beregningsDato: queryParams.get('beregningdato'),
+  };
+};
+
 const Dashboard = ({ readOnly, location }) => {
   const [data, setData] = useState({ inntektId: '', inntekt: { arbeidsInntektMaaned: [], ident: {} } });
   const [arbeidsgivere, setArbeidsgivere] = useState([]);
+  const [uncachedStatus, setUncachedStatus] = useState('');
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const inntektApiRequest = {
-      aktørId: queryParams.get('aktorId'),
-      vedtakId: queryParams.get('vedtakId'),
-      beregningsDato: queryParams.get('beregningdato'),
-    };
-
     const getInntektFromApi = async () => {
       let result;
       if (process.env.NODE_ENV !== 'production') {
@@ -60,7 +61,7 @@ const Dashboard = ({ readOnly, location }) => {
           `${process.env.PUBLIC_URL}/mock/flereinntekter.json`,
         );
       } else {
-        result = await getInntekt(inntektApiRequest);
+        result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
       }
       setData({ ...result.data });
       setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
@@ -68,6 +69,28 @@ const Dashboard = ({ readOnly, location }) => {
 
     getInntektFromApi();
   }, [location.search]);
+
+  const fetchUncachedInntekt = async () => {
+    setUncachedStatus('fetching');
+    if (process.env.NODE_ENV !== 'production') {
+      let result = await axios(
+        `${process.env.PUBLIC_URL}/mock/inntekter.json`,
+      );
+      setData({ ...result.data });
+      setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+      setUncachedStatus('success');
+    } else {
+      getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)))
+        .then((result) => {
+          setData({ ...result.data });
+          setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+          setUncachedStatus('success');
+        })
+        .catch((error) => {
+          setUncachedStatus('error');
+        });
+    }
+  };
 
   if (!arbeidsgivere.length && !data.inntekt.arbeidsInntektMaaned.length) {
     return <Spinner type="XL" />;
@@ -79,7 +102,17 @@ const Dashboard = ({ readOnly, location }) => {
         __html: buildCSSGrid(data, arbeidsgivere),
       }}
       />
-
+      {uncachedStatus === 'success'
+      && <div aria-live="polite"><AlertStripeSuksess>Ny inntekt hentet</AlertStripeSuksess></div>}
+      {uncachedStatus === 'error'
+      && (
+        <div aria-live="polite">
+          <AlertStripeFeil>En feil skjedde under henting av frisk inntekt</AlertStripeFeil>
+        </div>
+      )}
+      <Knapp onClick={fetchUncachedInntekt} autoDisableVedSpinner spinner={uncachedStatus === 'fetching'}>
+        Oppfrisk inntekt
+      </Knapp>
       <Formik
         enableReinitialize
         initialValues={data}
@@ -131,7 +164,7 @@ const Dashboard = ({ readOnly, location }) => {
             </div>
             {props.errors.name && <div className="error">{props.errors.name}</div>}
             <div className="flex flexend">
-              <Hovedknapp htmlType="submit" spinner={props.isSubmitting} autoDisableVedSpinner disabled={!props.dirty}>
+              <Hovedknapp htmlType="submit" spinner={props.isSubmitting} autoDisableVedSpinner disabled={!props.dirty && uncachedStatus ===! 'success'}>
                 Bekreft
               </Hovedknapp>
             </div>
