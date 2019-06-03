@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
-import RadioGroupField from '../Components/RadioGroupField';
+import { RadioGroupField } from '../Components/RadioGroupField';
 import InputField from '../Components/InputField';
 import SelectField from '../Components/SelectField';
 import { RadioOption } from '../Components/RadioOption';
@@ -47,6 +47,8 @@ const nyInntektTemplate = {
   },
 };
 
+
+// todo lukke modal onsubmit
 const NyInntekt = ({
   arrayHelpers, arbeidsgiver, dato, closeModal, values,
 }) => (

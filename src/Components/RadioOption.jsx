@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Radio } from 'nav-frontend-skjema';
@@ -19,7 +18,7 @@ export const RadioOption = ({
   const stringifiedValue = JSON.stringify(value);
   const checked = stringifiedValue === actualValue;
   return (
-    <div>
+    <>
       <Radio
         component={Radio}
         name={name}
@@ -29,9 +28,8 @@ export const RadioOption = ({
         onChange={onChange}
         disabled={disabled || groupDisabled}
       />
-      {(checked) && children
-      }
-    </div>
+      {checked && children}
+    </>
   );
 };
 
