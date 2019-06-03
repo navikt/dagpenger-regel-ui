@@ -14,6 +14,14 @@ const Label = ({ beskrivelse, isEdited, readOnly }) => {
   );
 };
 
+export const labelPropType = PropTypes.oneOfType([
+  PropTypes.node,
+  PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    args: PropTypes.shape(),
+  }),
+]);
+
 Label.propTypes = {
   beskrivelse: PropTypes.string,
   isEdited: PropTypes.bool,

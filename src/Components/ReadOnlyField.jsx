@@ -6,14 +6,14 @@ import { haystack } from '../Utils/objectUtils';
 import Label from './Label';
 
 export const ReadOnlyField = ({
-  beskrivelse, field, form,
+  beskrivelse, format, field, form, ...otherProps
 }) => {
-  const isEdited = !!haystack(form.touched, field.name);
+  const isEdited = !haystack(form.touched, field.name);
 
   return (
     <div>
       <Label beskrivelse={beskrivelse} isEdited={isEdited} />
-      <Element className="inntektbeloep">{formatertPengesum(field.value)}</Element>
+      <Element className="inntektbeloep">{format ? formatertPengesum(field.value) : field.value}</Element>
     </div>
   );
 };

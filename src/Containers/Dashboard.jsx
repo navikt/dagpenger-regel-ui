@@ -9,7 +9,7 @@ import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
 import dashboardPropType from '../PropTypes/dashBoardPropType';
-import {getInntekt, getUncachedInntekt, lagreInntekt} from '../lib/inntektApiClient';
+import { getInntekt, getUncachedInntekt, lagreInntekt } from '../lib/inntektApiClient';
 import './Dashboard.css';
 
 const findArbeidsgivere = (inntekt) => {
@@ -40,13 +40,11 @@ const buildCSSGrid = (data, arbeidsgivere) => {
 `;
 };
 
-const inntektRequest = (queryParams) => {
-  return {
+const inntektRequest = (queryParams) => ({
     aktørId: queryParams.get('aktorId'),
     vedtakId: queryParams.get('vedtakId'),
     beregningsDato: queryParams.get('beregningdato'),
-  };
-};
+  });
 
 const Dashboard = ({ readOnly, location }) => {
   const [data, setData] = useState({ inntektId: '', inntekt: { arbeidsInntektMaaned: [], ident: {} } });
@@ -73,7 +71,7 @@ const Dashboard = ({ readOnly, location }) => {
   const fetchUncachedInntekt = async () => {
     setUncachedStatus('fetching');
     if (process.env.NODE_ENV !== 'production') {
-      let result = await axios(
+      const result = await axios(
         `${process.env.PUBLIC_URL}/mock/inntekter.json`,
       );
       setData({ ...result.data });
@@ -164,7 +162,7 @@ const Dashboard = ({ readOnly, location }) => {
             </div>
             {props.errors.name && <div className="error">{props.errors.name}</div>}
             <div className="flex flexend">
-              <Hovedknapp htmlType="submit" spinner={props.isSubmitting} autoDisableVedSpinner disabled={!props.dirty && uncachedStatus ===! 'success'}>
+              <Hovedknapp htmlType="submit" spinner={props.isSubmitting} autoDisableVedSpinner disabled={!props.dirty && uncachedStatus === !'success'}>
                 Bekreft
               </Hovedknapp>
             </div>

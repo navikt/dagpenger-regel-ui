@@ -3,21 +3,22 @@ import PropTypes from 'prop-types';
 import { Field, withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
-import { SkjemaGruppe, Fieldset, Radio } from 'nav-frontend-skjema';
-
-import { InputField } from '../Components/InputField';
+import { RadioGroupField } from '../Components/RadioGroupField';
+import InputField from '../Components/InputField';
+import { RadioOption } from '../Components/RadioOption';
 import { required } from '../Utils/validering';
 import DatoLabel from '../Components/DatoLabel';
 import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
+import { DisplayFormikState } from '../Utils/formikUtils';
 
 
 // TODO denne er hardkodet for nå, byttets ut med de feltene vi trenger
 const nyInntektTemplate = {
-  beloep: '666.66',
-  beskrivelse: 'Test ny',
+  // beloep: '666.66',
+  // beskrivelse: 'Test ny',
   fordel: 'kontantytelse',
   informasjonsstatus: 'InngaarAlltid',
-  inngaarIGrunnlagForTrekk: true,
+  // inngaarIGrunnlagForTrekk: true,
   inntektType: 'LOENNSINNTEKT',
   inntektskilde: 'A-ordningen',
   inntektsmottaker: {
@@ -31,8 +32,8 @@ const nyInntektTemplate = {
     aktoerType: 'ORGANISASJON',
     identifikator: '1111111',
   },
-  utbetaltIMaaned: '2017-09',
-  utloeserArbeidsgiveravgift: true,
+  // utbetaltIMaaned: '2017-09',
+  // utloeserArbeidsgiveravgift: true,
   virksomhet: {
     aktoerType: 'ORGANISASJON',
     identifikator: '1111111',
@@ -49,48 +50,62 @@ export const NyInntekt = ({
       <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
     </Undertittel>
 
-    <Field
+    <InputField
       beskrivelse="Beskrivelse"
       name="beskrivelse"
-      component={InputField}
       validate={required}
     />
 
-    <Field
+    <InputField
       beskrivelse="Beløp"
       name="beloep"
-      component={InputField}
       validate={required}
       type="number"
     />
+    <RadioGroupField
+      label="Utløser arbeidsgiveravgift?"
+      name="utloeserArbeidsgiveravgift"
+      validate={[required]}
+    >
+      <RadioOption value label="Ja" />
+      <RadioOption value={false} label="Nei" />
+    </RadioGroupField>
 
-    <Field component={SkjemaGruppe} name="nyInntektUtloeserArbeidsgiveravgift">
-      <Fieldset legend="Utløser arbeidsgiveravgift?">
-        <Radio id="nyInntektJa" name="nyInntektUtloeserArbeidsgiveravgift" label="Ja" value />
-        <Radio id="nyInntektNei" name="nyInntektUtloeserArbeidsgiveravgift" label="Nei" value={false} />
-      </Fieldset>
-    </Field>
+    <RadioGroupField
+      label="Inngår i grunnlag for trekk?"
+      name="inngaarIGrunnlagForTrekk"
+      validate={[required]}
+    >
+      <RadioOption value label="Ja" />
+      <RadioOption value={false} label="Nei" />
+    </RadioGroupField>
 
-    <Hovedknapp
-      htmlType="button"
-      onClick={() => {
-        arrayHelpers.insert(0, {
-          ...nyInntektTemplate,
-          beskrivelse: values.beskrivelse,
-          beloep: values.beloep,
-        });
-        closeModal();
-      }
+    <DisplayFormikState {...values} />
+
+    <div className="knapprad">
+      <Hovedknapp
+        htmlType="submit"
+        onClick={() => {
+          arrayHelpers.insert(0, {
+            ...nyInntektTemplate,
+            beskrivelse: values.beskrivelse,
+            beloep: values.beloep,
+            utbetaltIMaaned: dato,
+            utloeserArbeidsgiveravgift: values.utloeserArbeidsgiveravgift,
+            inngaarIGrunnlagForTrekk: values.inngaarIGrunnlagForTrekk,
+          });
+        }
     }
-    >
+      >
       Legg til
-    </Hovedknapp>
-    <Knapp
-      htmlType="button"
-      onClick={closeModal}
-    >
+      </Hovedknapp>
+      <Knapp
+        htmlType="button"
+        onClick={closeModal}
+      >
       Avbryt
-    </Knapp>
+      </Knapp>
+    </div>
   </>
 );
 
@@ -103,5 +118,12 @@ NyInntekt.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({ beskrivelse: '', beloep: '0.00' }),
+  mapPropsToValues: () => ({
+    beskrivelse: '',
+    beloep: '0.00',
+    utloeserArbeidsgiveravgift: null,
+    inngaarIGrunnlagForTrekk: null,
+  }),
+  // legg til validering og submit
+
 })(NyInntekt);

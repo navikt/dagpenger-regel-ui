@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Modal from 'nav-frontend-modal';
-import { Undertittel } from 'nav-frontend-typografi';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-
-import { Field, FieldArray } from 'formik';
-
-import { InputField } from './InputField';
-
-import { ReadOnlyField } from './ReadOnlyField';
+import { Knapp } from 'nav-frontend-knapper';
+import { FieldArray } from 'formik';
+import SelectField from './SelectField';
+import InputField from './InputField';
 import { required } from '../Utils/validering';
 import { formatertPengesum } from '../Utils/currencyFormat';
 
-import NyInntekt from '../Containers/NyInntekt';
+import verdikoder from '../lib/verdikoder';
+
+import { NyInntekt } from '../Containers/NyInntekt';
+
+const mapTypeInntekter = typer => typer
+  .map(navn => (<option value={navn} key={navn}>{navn}</option>));
 
 const sumInntekter = inntekter => inntekter.reduce((acc, val) => Number(acc) + Number(val.beloep), 0);
 
@@ -48,13 +49,21 @@ const Inntekt = ({
                 {inntekter.length > 0 && inntekter
                   .map((inntekt, index) => (
                     inntekt.virksomhet.identifikator === rowId && (
-                    <div key={inntekt.beskrivelse} className="flex inntekt">
-                      <Field
-                        beskrivelse={inntekt.beskrivelse}
+                    <div key={inntekt.beskrivelse} className="inntekt">
+                      <SelectField
+                        bredde="xl"
+                        selectValues={mapTypeInntekter(verdikoder)}
+                        validate={[required]}
+                        name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beskrivelse`}
+                        readOnly={editMode}
+                      />
+                      <InputField
+                        beskrivelse=""
                         name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
-                        component={editMode ? ReadOnlyField : InputField}
                         type="number"
                         validate={required}
+                        format
+                        readOnly={editMode}
                       />
                       {editMode && (
                       <Knapp
@@ -62,7 +71,7 @@ const Inntekt = ({
                         mini
                         onClick={() => arrayHelpers.remove(index)}
                       >
-                              X
+                        X
                       </Knapp>
                       )}
                     </div>
@@ -73,15 +82,21 @@ const Inntekt = ({
                   mini
                   onClick={() => setModal(!isModalOpen)}
                 >
-                  Legg til inntektspost
+                  Legg til inntekt
                 </Knapp>
                 <Modal
                   isOpen={isModalOpen}
                   onRequestClose={() => setModal(false)}
                   closeButton={false}
                   contentLabel="Ny inntektspost"
+                  ariaHideApp={false}
                 >
-                  <NyInntekt arbeidsgiver={rowId} dato={columnId} arrayHelpers={arrayHelpers} closeModal={() => setModal(false)} />
+                  <NyInntekt
+                    arbeidsgiver={rowId}
+                    dato={columnId}
+                    arrayHelpers={arrayHelpers}
+                    closeModal={() => setModal(false)}
+                  />
 
                 </Modal>
 
