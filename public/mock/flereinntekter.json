@@ -34,6 +34,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Total lønnsinntekt"
             },
             {
@@ -62,6 +63,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Fastlønn"
             },
             {
@@ -89,6 +91,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Trekk i lønn for ferie"
             }
           ]
@@ -124,6 +127,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Total lønnsinntekt"
             }
           ]
@@ -159,6 +163,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Total lønnsinntekt"
             },
             {
@@ -187,6 +192,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Fastlønn"
             },
             {
@@ -214,6 +220,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Overtidsgodtgjørelse"
             },
             {
@@ -241,6 +248,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Timelønn"
             }
           ]
@@ -279,6 +287,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Total lønnsinntekt"
             },
             {
@@ -307,6 +316,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Overtidsgodtgjørelse"
             },
             {
@@ -334,6 +344,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Timelønn"
             }
           ]
@@ -369,6 +380,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Total lønnsinntekt"
             },
             {
@@ -397,6 +409,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Overtidsgodtgjørelse"
             },
             {
@@ -424,6 +437,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Timelønn"
             }
           ]
@@ -462,6 +476,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Total lønnsinntekt"
             },
             {
@@ -490,6 +505,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Fastlønn"
             },
             {
@@ -518,6 +534,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Elektronisk kommunikasjon"
             },
             {
@@ -545,6 +562,7 @@
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
               "beskrivelse": "Skattepliktig del av visse typer forsikring"
             }
           ]
