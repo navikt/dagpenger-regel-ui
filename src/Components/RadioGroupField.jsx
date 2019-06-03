@@ -6,9 +6,22 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { RadioOption } from './RadioOption';
 import RenderField from './RenderField';
 
-
+// todo fikse proptypes
 const renderRadioGroupField = RenderField(({
-  label, columns, id, name, value, onChange, bredde, readOnly, isEdited, feil, children, spaceBetween, rows, direction, field,
+  label,
+  columns,
+  id,
+  name,
+  value,
+  onChange,
+  bredde,
+  readOnly,
+  isEdited,
+  feil,
+  children,
+  spaceBetween,
+  rows,
+  direction,
 }) => {
   const optionProps = {
     name,
@@ -19,7 +32,7 @@ const renderRadioGroupField = RenderField(({
 
   return (
     <SkjemaGruppe feil={readOnly ? undefined : feil} className={`input--${bredde} radioGroup ${readOnly}`}>
-      {label.props.beskrivelse && <span className={`radioGroupLabel ${readOnly}`}>{label}</span>}
+      {label.props.label && <span className={`radioGroupLabel ${readOnly}`}>{label}</span>}
       { children
         .map(radioOption => React.cloneElement(radioOption, {
           key: JSON.stringify(radioOption.props.value),

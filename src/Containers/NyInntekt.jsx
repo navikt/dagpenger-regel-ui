@@ -1,16 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, withFormik } from 'formik';
+import { withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
-import { RadioGroupField } from '../Components/RadioGroupField';
+import RadioGroupField from '../Components/RadioGroupField';
 import InputField from '../Components/InputField';
+import SelectField from '../Components/SelectField';
 import { RadioOption } from '../Components/RadioOption';
 import { required } from '../Utils/validering';
 import DatoLabel from '../Components/DatoLabel';
 import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
 import { DisplayFormikState } from '../Utils/formikUtils';
 
+// to lage en compontent for dette
+import verdikoder from '../lib/verdikoder';
+
+const mapTypeInntekter = typer => typer
+  .map(navn => (<option value={navn} key={navn}>{navn}</option>));
 
 // TODO denne er hardkodet for nå, byttets ut med de feltene vi trenger
 const nyInntektTemplate = {
@@ -41,7 +47,7 @@ const nyInntektTemplate = {
   },
 };
 
-export const NyInntekt = ({
+const NyInntekt = ({
   arrayHelpers, arbeidsgiver, dato, closeModal, values,
 }) => (
   <>
@@ -50,17 +56,21 @@ export const NyInntekt = ({
       <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
     </Undertittel>
 
-    <InputField
-      beskrivelse="Beskrivelse"
+    <SelectField
+      bredde="xl"
+      label="Beskrivelse"
+      selectValues={mapTypeInntekter(verdikoder)}
+      validate={[required]}
       name="beskrivelse"
-      validate={required}
+      readOnly={false}
     />
 
     <InputField
-      beskrivelse="Beløp"
+      label="Beløp"
       name="beloep"
-      validate={required}
+      validate={[required]}
       type="number"
+      readOnly={false}
     />
     <RadioGroupField
       label="Utløser arbeidsgiveravgift?"
@@ -124,6 +134,7 @@ export default withFormik({
     utloeserArbeidsgiveravgift: null,
     inngaarIGrunnlagForTrekk: null,
   }),
+  displayName: 'nyInntekt',
   // legg til validering og submit
 
 })(NyInntekt);

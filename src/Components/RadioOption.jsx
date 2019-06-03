@@ -15,21 +15,21 @@ export const RadioOption = ({
   groupDisabled,
   onChange,
   children,
-  manualHideChildren,
 }) => {
   const stringifiedValue = JSON.stringify(value);
-  const actualStringifiedValue = JSON.stringify(actualValue);
-  const checked = stringifiedValue === actualStringifiedValue;
+  const checked = stringifiedValue === actualValue;
   return (
     <div>
       <Radio
+        component={Radio}
         name={name}
-        label={<Label beskrivelse={label} typographyElement={Normaltekst} />}
+        label={<Label label={label} typographyElement={Normaltekst} />}
         value={value}
         checked={checked}
+        onChange={onChange}
         disabled={disabled || groupDisabled}
       />
-      {(checked || manualHideChildren) && children
+      {(checked) && children
       }
     </div>
   );
@@ -44,7 +44,6 @@ RadioOption.propTypes = {
   groupDisabled: PropTypes.bool,
   onChange: PropTypes.func,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  manualHideChildren: PropTypes.bool,
 };
 
 RadioOption.defaultProps = {
@@ -55,7 +54,6 @@ RadioOption.defaultProps = {
   actualValue: undefined,
   onChange: () => undefined,
   children: undefined,
-  manualHideChildren: false,
 };
 
 RadioOption.displayName = 'RadioOption';

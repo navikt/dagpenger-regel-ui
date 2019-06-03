@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import EditedIkon from './EditedIkon';
 
-const Label = ({ beskrivelse, isEdited, readOnly }) => {
-  if (!beskrivelse) {
+const Label = ({ label, isEdited, readOnly }) => {
+  if (!label) {
     return null;
   }
   return (
     <div className="flex label">
-      {beskrivelse}
+      {label}
       {isEdited && <EditedIkon /> }
     </div>
   );
@@ -23,13 +23,13 @@ export const labelPropType = PropTypes.oneOfType([
 ]);
 
 Label.propTypes = {
-  beskrivelse: PropTypes.string,
+  label: PropTypes.string,
   isEdited: PropTypes.bool,
   readOnly: PropTypes.bool,
 };
 
 Label.defaultProps = {
-  beskrivelse: '',
+  label: '',
   isEdited: false,
   readOnly: false,
 };

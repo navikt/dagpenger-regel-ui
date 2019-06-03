@@ -6,7 +6,7 @@ import Label, { labelPropType } from './Label';
 // todo fikse props fra de forksjellige typene da de er litt ulike for input og select
 const renderNavField = (WrappedNavFieldComponent) => {
   const FieldComponent = ({
-    name, field, label, form, readOnly, isEdited, readOnlyHideEmpty, ...otherProps
+    field, label, form, readOnly, isEdited, readOnlyHideEmpty, ...otherProps
   }) => {
     const formatError = (submitFailed, error) => {
       if (submitFailed && error) {
@@ -22,7 +22,7 @@ const renderNavField = (WrappedNavFieldComponent) => {
     const fieldProps = {
       id: field.name,
       feil: formatError(!form.isValid, haystack(form.errors, field.name)),
-      label: <Label beskrivelse={label} readOnly={readOnly} />,
+      label: <Label label={label} readOnly={readOnly} />,
     };
 
     return (<WrappedNavFieldComponent {...fieldProps} {...field} {...otherProps} readOnly={readOnly} />);

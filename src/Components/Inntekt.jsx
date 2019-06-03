@@ -11,7 +11,7 @@ import { formatertPengesum } from '../Utils/currencyFormat';
 
 import verdikoder from '../lib/verdikoder';
 
-import { NyInntekt } from '../Containers/NyInntekt';
+import NyInntekt from '../Containers/NyInntekt';
 
 const mapTypeInntekter = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
@@ -52,17 +52,18 @@ const Inntekt = ({
                     <div key={inntekt.beskrivelse} className="inntekt">
                       <SelectField
                         bredde="xl"
+                        label=""
                         selectValues={mapTypeInntekter(verdikoder)}
                         validate={[required]}
                         name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beskrivelse`}
                         readOnly={editMode}
                       />
                       <InputField
-                        beskrivelse=""
+                        label=""
                         name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
                         type="number"
-                        validate={required}
-                        format
+                        validate={[required]}
+                        formater
                         readOnly={editMode}
                       />
                       {editMode && (
@@ -123,7 +124,7 @@ const Inntekt = ({
 Inntekt.propTypes = {
   inntekter: PropTypes.arrayOf(PropTypes.shape({
     header: PropTypes.string,
-    beskrivelse: PropTypes.string,
+    label: PropTypes.string,
     beloep: PropTypes.string,
   })).isRequired,
   readOnly: PropTypes.bool.isRequired,
