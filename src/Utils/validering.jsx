@@ -14,3 +14,4 @@ export const minValue = length => number => (number >= length ? null : `Feltet m
 export const maxValue = length => number => (number <= length ? null : `Feltet må være mindre eller lik ${length}`);
 export const isValidInteger = text => (hasValidNumber(text) || hasValidInt(text));
 export const isValidDecimal = text => (hasValidNumber(text) || hasValidDecimal(text));
+export const hasValidOrgNumber = number => (number.toString().trim().length === 9 ? null : 'Ugyldig orgnr');

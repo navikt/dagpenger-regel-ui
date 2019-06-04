@@ -13,46 +13,16 @@ import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
 import { DisplayFormikState } from '../Utils/formikUtils';
 
 // to lage en compontent for dette
-import verdikoder from '../lib/verdikoder';
+import { inntektTyper } from '../lib/verdikoder';
 
 const mapTypeInntekter = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
-
-// TODO denne er hardkodet for nå, byttets ut med de feltene vi trenger
-const nyInntektTemplate = {
-  // beloep: '666.66',
-  // beskrivelse: 'Test ny',
-  fordel: 'kontantytelse',
-  informasjonsstatus: 'InngaarAlltid',
-  // inngaarIGrunnlagForTrekk: true,
-  inntektType: 'LOENNSINNTEKT',
-  inntektskilde: 'A-ordningen',
-  inntektsmottaker: {
-    aktoerType: 'NATURLIG_IDENT',
-    identifikator: '99999999999',
-  },
-  inntektsperiodetype: 'Maaned',
-  inntektsstatus: 'LoependeInnrapportert',
-  leveringstidspunkt: '2019-02',
-  opplysningspliktig: {
-    aktoerType: 'ORGANISASJON',
-    identifikator: '1111111',
-  },
-  // utbetaltIMaaned: '2017-09',
-  // utloeserArbeidsgiveravgift: true,
-  virksomhet: {
-    aktoerType: 'ORGANISASJON',
-    identifikator: '1111111',
-    navn: 'Enenenenen',
-  },
-};
-
 
 // todo lukke modal onsubmit
 const NyInntekt = ({
   arrayHelpers, arbeidsgiver, dato, closeModal, values,
 }) => (
-  <>
+  <React.Fragment>
     <Undertittel>
       {`Legg til ny inntektspost for ${arbeidsgiver} i `}
       <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
@@ -61,7 +31,7 @@ const NyInntekt = ({
     <SelectField
       bredde="xl"
       label="Beskrivelse"
-      selectValues={mapTypeInntekter(verdikoder)}
+      selectValues={mapTypeInntekter(inntektTyper)}
       validate={[required]}
       name="beskrivelse"
       readOnly={false}
@@ -99,12 +69,31 @@ const NyInntekt = ({
         htmlType="submit"
         onClick={() => {
           arrayHelpers.insert(0, {
-            ...nyInntektTemplate,
             beskrivelse: values.beskrivelse,
             beloep: values.beloep,
             utbetaltIMaaned: dato,
             utloeserArbeidsgiveravgift: values.utloeserArbeidsgiveravgift,
             inngaarIGrunnlagForTrekk: values.inngaarIGrunnlagForTrekk,
+            inntektType: 'LOENNSINNTEKT',
+            fordel: 'kontantytelse',
+            informasjonsstatus: 'InngaarAlltid',
+            inntektskilde: 'A-ordningen',
+            leveringstidspunkt: '2019-02',
+            inntektsperiodetype: 'Maaned',
+            inntektsstatus: 'LoependeInnrapportert',
+            virksomhet: {
+              aktoerType: 'ORGANISASJON',
+              identifikator: arbeidsgiver,
+              navn: 'Enenenenen',
+            },
+            opplysningspliktig: {
+              aktoerType: 'ORGANISASJON',
+              identifikator: arbeidsgiver,
+            },
+            inntektsmottaker: {
+              aktoerType: 'NATURLIG_IDENT',
+              identifikator: '99999999999',
+            },
           });
         }
     }
@@ -118,7 +107,7 @@ const NyInntekt = ({
       Avbryt
       </Knapp>
     </div>
-  </>
+  </React.Fragment>
 );
 
 NyInntekt.propTypes = {
@@ -130,7 +119,7 @@ NyInntekt.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
+  mapPropsToValues: ({ props }) => ({
     beskrivelse: '',
     beloep: '0.00',
     utloeserArbeidsgiveravgift: null,

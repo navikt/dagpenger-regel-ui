@@ -29,6 +29,8 @@ const renderNavField = (WrappedNavFieldComponent) => {
   };
 
   FieldComponent.propTypes = {
+    field: PropTypes.shape().isRequired,
+    form: PropTypes.shape().isRequired,
     label: labelPropType,
     readOnly: PropTypes.bool,
     readOnlyHideEmpty: PropTypes.bool,

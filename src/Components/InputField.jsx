@@ -20,7 +20,6 @@ const InputField = ({
     label={label}
     {...otherProps}
     readOnly={readOnly}
-    readOnlyHideEmpty
     isEdited={isEdited}
     autoComplete="off"
   />

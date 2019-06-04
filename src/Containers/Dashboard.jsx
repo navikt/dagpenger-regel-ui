@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
 import axios from 'axios';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import Modal from 'nav-frontend-modal';
 import AlertStripeSuksess from 'nav-frontend-alertstriper/lib/suksess-alertstripe';
 import AlertStripeFeil from 'nav-frontend-alertstriper/lib/feil-alertstripe';
+import { DisplayFormikState } from '../Utils/formikUtils';
 import Spinner from '../Components/Spinner';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
+import NyArbeidsgiver from './NyArbeidsgiver';
 import dashboardPropType from '../PropTypes/dashBoardPropType';
 import { getInntekt, getUncachedInntekt, lagreInntekt } from '../lib/inntektApiClient';
 import './Dashboard.css';
@@ -40,16 +43,19 @@ const buildCSSGrid = (data, arbeidsgivere) => {
 `;
 };
 
-const inntektRequest = (queryParams) => ({
-    aktørId: queryParams.get('aktorId'),
-    vedtakId: queryParams.get('vedtakId'),
-    beregningsDato: queryParams.get('beregningdato'),
-  });
+// TODO
+
+const inntektRequest = queryParams => ({
+  aktørId: queryParams.get('aktorId'),
+  vedtakId: queryParams.get('vedtakId'),
+  beregningsDato: queryParams.get('beregningdato'),
+});
 
 const Dashboard = ({ readOnly, location }) => {
   const [data, setData] = useState({ inntektId: '', inntekt: { arbeidsInntektMaaned: [], ident: {} } });
   const [arbeidsgivere, setArbeidsgivere] = useState([]);
   const [uncachedStatus, setUncachedStatus] = useState('');
+  const [isModalOpen, setModal] = useState(false);
 
   useEffect(() => {
     const getInntektFromApi = async () => {
@@ -140,32 +146,63 @@ const Dashboard = ({ readOnly, location }) => {
             </div>
             )}
             <div className="grid">
-              {arbeidsgivere.map(arbeidsgiver => (
+              {arbeidsgivere.length > 0 && arbeidsgivere.map(arbeidsgiver => (
                 <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
               ))}
               {props.values.inntekt.arbeidsInntektMaaned.map((maaned, monthIndex) => (
                 <React.Fragment key={maaned.aarMaaned}>
                   <Maaned maaned={maaned.aarMaaned} />
-                  {arbeidsgivere.map(arbeidsgiver => (
-                    <Inntekt
-                      readOnly={readOnly}
-                      rowId={arbeidsgiver.identifikator}
-                      columnId={maaned.aarMaaned}
-                      key={arbeidsgiver.identifikator}
-                      inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
-                      monthIndex={monthIndex}
-                      formProps={props}
-                    />
-                  ))}
+                  <>
+                    {arbeidsgivere.map(arbeidsgiver => (
+                      <Inntekt
+                        readOnly={readOnly}
+                        rowId={arbeidsgiver.identifikator}
+                        columnId={maaned.aarMaaned}
+                        key={arbeidsgiver.identifikator}
+                        inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
+                        monthIndex={monthIndex}
+                        formProps={props}
+                      />
+                    ))}
+                  </>
                 </React.Fragment>
               ))}
             </div>
+
             {props.errors.name && <div className="error">{props.errors.name}</div>}
-            <div className="flex flexend">
-              <Hovedknapp htmlType="submit" spinner={props.isSubmitting} autoDisableVedSpinner disabled={!props.dirty && uncachedStatus === !'success'}>
+
+            <div className="flex">
+              <div className="">
+                <Knapp
+                  htmlType="button"
+                  mini
+                  onClick={() => setModal(!isModalOpen)}
+                >
+                  Legg til arbeidsgiver
+                </Knapp>
+                <Modal
+                  isOpen={isModalOpen}
+                  onRequestClose={() => setModal(false)}
+                  closeButton={false}
+                  contentLabel="Ny arbeidsgiver"
+                  ariaHideApp={false}
+                >
+                  <NyArbeidsgiver
+                    setArbeidsgivere={setArbeidsgivere}
+                    arbeidsgivere={arbeidsgivere}
+                    closeModal={() => setModal(false)}
+                  />
+                </Modal>
+
+              </div>
+              <div className="flexend">
+                <Hovedknapp htmlType="submit" spinner={props.isSubmitting} autoDisableVedSpinner disabled={!props.dirty && uncachedStatus === !'success'}>
                 Bekreft
-              </Hovedknapp>
+                </Hovedknapp>
+              </div>
             </div>
+
+            <DisplayFormikState {...props} />
           </Form>
         )}
       />

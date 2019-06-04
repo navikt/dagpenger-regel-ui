@@ -9,7 +9,8 @@ import InputField from './InputField';
 import { required } from '../Utils/validering';
 import { formatertPengesum } from '../Utils/currencyFormat';
 
-import verdikoder from '../lib/verdikoder';
+// to lage en compontent for dette
+import { inntektTyper } from '../lib/verdikoder';
 
 import NyInntekt from '../Containers/NyInntekt';
 
@@ -53,7 +54,7 @@ const Inntekt = ({
                       <SelectField
                         bredde="xl"
                         label=""
-                        selectValues={mapTypeInntekter(verdikoder)}
+                        selectValues={mapTypeInntekter(inntektTyper)}
                         validate={[required]}
                         name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beskrivelse`}
                         readOnly={editMode}

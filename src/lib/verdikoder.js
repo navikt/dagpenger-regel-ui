@@ -1,4 +1,4 @@
-const verdikoder = [
+export const inntektTyper = [
   'Aksjer/grunnfondsbevis til underkurs',
   'Annen arbeidsinntekt',
   'Arbeidsopphold kost',
@@ -87,6 +87,12 @@ const verdikoder = [
   'Tiltak - Timelønn',
   'Tiltak - Uregelmessige tillegg knyttet til arbeidet tid',
   'Tiltak - Uregelmessige tillegg knyttet til ikke-arbeidet tid',
-  'Trekk i lønn for ferie - Tiltak'];
+  'Trekk i lønn for ferie - Tiltak',
+];
 
-export default verdikoder;
+export const aktoerType = [
+  'ORGANISASJON',
+  'PRIVATPERSON',
+];
+
+export default { inntektTyper, aktoerType };
