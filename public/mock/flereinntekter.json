@@ -5,6 +5,42 @@
   "inntekt": {
     "arbeidsInntektMaaned": [
       {
+        "aarMaaned": "2017-08",
+        "arbeidsInntektInformasjon": {
+          "inntektListe": [
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Total lønnsinntekt",
+              "beloep": "0.00",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2018-03",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "222222",
+                "navn": "Totototo",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Total lønnsinntekt"
+            }
+          ]
+        }
+      },
+      {
         "aarMaaned": "2017-07",
         "arbeidsInntektInformasjon": {
           "inntektListe": [
@@ -97,42 +133,7 @@
           ]
         }
       },
-      {
-        "aarMaaned": "2017-08",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": [
-            {
-              "inntektType": "LOENNSINNTEKT",
-              "header": "Total lønnsinntekt",
-              "beloep": "0.00",
-              "fordel": "kontantytelse",
-              "inntektskilde": "A-ordningen",
-              "inntektsperiodetype": "Maaned",
-              "inntektsstatus": "LoependeInnrapportert",
-              "leveringstidspunkt": "2019-02",
-              "utbetaltIMaaned": "2018-03",
-              "opplysningspliktig": {
-                "identifikator": "1111111",
-                "aktoerType": "ORGANISASJON"
-              },
-              "virksomhet": {
-                "identifikator": "222222",
-                "navn": "Totototo",
-                "aktoerType": "ORGANISASJON"
-              },
-              "inntektsmottaker": {
-                "identifikator": "99999999999",
-                "aktoerType": "NATURLIG_IDENT"
-              },
-              "inngaarIGrunnlagForTrekk": true,
-              "utloeserArbeidsgiveravgift": true,
-              "informasjonsstatus": "InngaarAlltid",
-              "verdikode": "Fastlønn",
-              "beskrivelse": "Total lønnsinntekt"
-            }
-          ]
-        }
-      },
+
       {
         "aarMaaned": "2017-09",
         "arbeidsInntektInformasjon": {

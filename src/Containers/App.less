@@ -39,6 +39,22 @@
   color: @navOransje;
 }
 
+.ikon {
+  cursor: pointer;
+  appearance: none;
+  background: transparent;
+  padding: 0 0 0 12px;
+  border: 0;
+
+  &.ikon--slett {
+    fill: @navRod;
+  }
+
+  &.ikon--leggtil {
+    fill: @navBla;
+  }
+}
+
 .knapprad {
   text-align: right;
 
@@ -51,6 +67,7 @@
 .flex {
   display: flex;
   align-content: center;
+  align-items: center;
   justify-content: flex-start;
 
   &.flexend {

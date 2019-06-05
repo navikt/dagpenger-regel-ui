@@ -8,7 +8,7 @@ import SelectField from '../Components/SelectField';
 import { required, hasValidOrgNumber } from '../Utils/validering';
 import { DisplayFormikState } from '../Utils/formikUtils';
 
-import { aktoerType } from '../lib/verdikoder';
+import { aktoerType } from '../Kodeverk/verdikoder';
 
 const mapTypeInntekter = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));

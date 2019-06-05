@@ -25,6 +25,7 @@ const renderNavField = (WrappedNavFieldComponent) => {
       label: <Label label={label} readOnly={readOnly} />,
     };
 
+    // eslint-disable-next-line max-len
     return (<WrappedNavFieldComponent {...fieldProps} {...field} {...otherProps} readOnly={readOnly} />);
   };
 

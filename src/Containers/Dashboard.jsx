@@ -67,6 +67,12 @@ const Dashboard = ({ readOnly, location }) => {
       } else {
         result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
       }
+      // Weird stuff happening, mutable. JS feature/bug
+      // eslint-disable-next-line no-unused-vars
+      const sortedData = {
+        // eslint-disable-next-line max-len
+        inntekt: result.data.inntekt.arbeidsInntektMaaned.sort((a, b) => a.aarMaaned.localeCompare(b.aarMaaned)),
+      };
       setData({ ...result.data });
       setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
     };
@@ -90,6 +96,7 @@ const Dashboard = ({ readOnly, location }) => {
           setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
           setUncachedStatus('success');
         })
+        // eslint-disable-next-line no-unused-vars
         .catch((error) => {
           setUncachedStatus('error');
         });
@@ -114,7 +121,14 @@ const Dashboard = ({ readOnly, location }) => {
           <AlertStripeFeil>En feil skjedde under henting av frisk inntekt</AlertStripeFeil>
         </div>
       )}
-      <Knapp onClick={fetchUncachedInntekt} autoDisableVedSpinner spinner={uncachedStatus === 'fetching'}>
+      <div>{`AktørId: ${data.inntekt.ident.identifikator}`}</div>
+
+      <Knapp
+        mini
+        onClick={fetchUncachedInntekt}
+        autoDisableVedSpinner
+        spinner={uncachedStatus === 'fetching'}
+      >
         Oppfrisk inntekt
       </Knapp>
       <Formik
@@ -128,6 +142,7 @@ const Dashboard = ({ readOnly, location }) => {
                 setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
                 actions.setStatus({ success: true });
               })
+              // eslint-disable-next-line no-unused-vars
               .catch((error) => {
                 actions.setStatus({ failure: true });
               }).finally(() => {
@@ -145,6 +160,8 @@ const Dashboard = ({ readOnly, location }) => {
               <AlertStripeFeil>Uff da. Noe feil skjedde under lagring av inntekt</AlertStripeFeil>
             </div>
             )}
+
+
             <div className="grid">
               {arbeidsgivere.length > 0 && arbeidsgivere.map(arbeidsgiver => (
                 <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />

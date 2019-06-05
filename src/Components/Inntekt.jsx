@@ -10,13 +10,14 @@ import { required } from '../Utils/validering';
 import { formatertPengesum } from '../Utils/currencyFormat';
 
 // to lage en compontent for dette
-import { inntektTyper } from '../lib/verdikoder';
+import { inntektTyper } from '../Kodeverk/verdikoder';
 
 import NyInntekt from '../Containers/NyInntekt';
 
 const mapTypeInntekter = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
 
+// eslint-disable-next-line max-len
 const sumInntekter = inntekter => inntekter.reduce((acc, val) => Number(acc) + Number(val.beloep), 0);
 
 const inntektStyle = (rowId, columnId) => `
@@ -50,31 +51,50 @@ const Inntekt = ({
                 {inntekter.length > 0 && inntekter
                   .map((inntekt, index) => (
                     inntekt.virksomhet.identifikator === rowId && (
-                    <div key={inntekt.beskrivelse} className="inntekt">
-                      <SelectField
-                        bredde="xl"
-                        label=""
-                        selectValues={mapTypeInntekter(inntektTyper)}
-                        validate={[required]}
-                        name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beskrivelse`}
-                        readOnly={editMode}
-                      />
-                      <InputField
-                        label=""
-                        name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
-                        type="number"
-                        validate={[required]}
-                        formater
-                        readOnly={editMode}
-                      />
+                    <div key={inntekt.beskrivelse} className="flex inntekt">
+                      <div>
+                        <SelectField
+                          bredde="xl"
+                          label=""
+                          selectValues={mapTypeInntekter(inntektTyper)}
+                          validate={[required]}
+                          name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beskrivelse`}
+                          readOnly={editMode}
+                        />
+                        <InputField
+                          label=""
+                          name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
+                          type="number"
+                          validate={[required]}
+                          formater
+                          readOnly={editMode}
+                        />
+                      </div>
                       {editMode && (
-                      <Knapp
-                        htmlType="button"
-                        mini
-                        onClick={() => arrayHelpers.remove(index)}
-                      >
-                        X
-                      </Knapp>
+                        <div className="flexend">
+                          <button type="button" className="ikon ikon--slett" onClick={() => arrayHelpers.remove(index)} title="Slett inntekt">
+                            <svg
+                              version="1.1"
+                              id="Filled_Version"
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlnsXlink="http://www.w3.org/1999/xlink"
+                              x="0px"
+                              y="0px"
+                              width="18px"
+                              height="18px"
+                              viewBox="0 0 24 24"
+                              enableBackground="new 0 0 24 24"
+                              xmlSpace="preserve"
+                            >
+                              <path d="M13.414,12L23.707,1.707c0.391-0.391,0.391-1.023,0-1.414c-0.391-0.391-1.023-0.391-1.414,0L12,10.586L1.707,0.293
+	c-0.391-0.391-1.023-0.391-1.414,0c-0.391,0.391-0.391,1.023,0,1.414L10.586,12L0.293,22.293c-0.391,0.391-0.391,1.023,0,1.414
+	C0.488,23.902,0.744,24,1,24s0.512-0.098,0.707-0.293L12,13.414l10.293,10.293C22.488,23.902,22.744,24,23,24
+	c0.256,0,0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L13.414,12z"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+
                       )}
                     </div>
                     )
