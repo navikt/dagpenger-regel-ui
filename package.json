@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://app.adeo.no/inntekter",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "classnames": "^2.2.6",
     "date-fns": "^2.0.0-alpha.27",
     "eslint-config-airbnb": "^17.1.0",
