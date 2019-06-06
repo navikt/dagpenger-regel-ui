@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FieldArray } from 'formik';
 import axios from 'axios';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
@@ -11,6 +11,7 @@ import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
 import Inntekt from '../Components/Inntekt';
 import NyArbeidsgiver from './NyArbeidsgiver';
+import NyMaaned from './NyMaaned';
 import dashboardPropType from '../PropTypes/dashBoardPropType';
 import { getInntekt, getUncachedInntekt, lagreInntekt } from '../lib/inntektApiClient';
 import './Dashboard.css';
@@ -31,19 +32,17 @@ const findArbeidsgivere = (inntekt) => {
 const buildCSSGrid = (data, arbeidsgivere) => {
   const { arbeidsInntektMaaned } = data.inntekt;
 
-  const maaneder = arbeidsInntektMaaned.map(maaned => `maaned--${maaned.aarMaaned}`);
+  const maaneder = arbeidsInntektMaaned.sort((a, b) => a.aarMaaned.localeCompare(b.aarMaaned)).map(maaned => `maaned--${maaned.aarMaaned}`);
   const arbeidsgivereMedInntekter = arbeidsgivere.map((arbeidsgiver) => {
     const inntekter = arbeidsInntektMaaned.map(maaned => `inntekter--${arbeidsgiver.identifikator}--${maaned.aarMaaned} `);
-    return `"arbeidsgiver--${arbeidsgiver.identifikator} ${inntekter.join(' ')}"`;
+    return `"arbeidsgiver--${arbeidsgiver.identifikator} ${inntekter.join(' ')} ."`;
   });
 
   return `
   .grid {
-    grid-template-areas: ". ${maaneder.join(' ')}" ${arbeidsgivereMedInntekter.join(' ')};
+    grid-template-areas: ". ${maaneder.join(' ')} maaned--ny" ${arbeidsgivereMedInntekter.join(' ')};
 `;
 };
-
-// TODO
 
 const inntektRequest = queryParams => ({
   aktørId: queryParams.get('aktorId'),
@@ -55,7 +54,8 @@ const Dashboard = ({ readOnly, location }) => {
   const [data, setData] = useState({ inntektId: '', inntekt: { arbeidsInntektMaaned: [], ident: {} } });
   const [arbeidsgivere, setArbeidsgivere] = useState([]);
   const [uncachedStatus, setUncachedStatus] = useState('');
-  const [isModalOpen, setModal] = useState(false);
+  const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
+  const [isMånedModalOpen, setMånedModal] = useState(false);
 
   useEffect(() => {
     const getInntektFromApi = async () => {
@@ -67,12 +67,6 @@ const Dashboard = ({ readOnly, location }) => {
       } else {
         result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
       }
-      // Weird stuff happening, mutable. JS feature/bug
-      // eslint-disable-next-line no-unused-vars
-      const sortedData = {
-        // eslint-disable-next-line max-len
-        inntekt: result.data.inntekt.arbeidsInntektMaaned.sort((a, b) => a.aarMaaned.localeCompare(b.aarMaaned)),
-      };
       setData({ ...result.data });
       setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
     };
@@ -107,12 +101,10 @@ const Dashboard = ({ readOnly, location }) => {
     return <Spinner type="XL" />;
   }
   // TODO ingen behov settimeout lenger, bruk async og await
+
   return (
     <>
-      <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
-        __html: buildCSSGrid(data, arbeidsgivere),
-      }}
-      />
+
       {uncachedStatus === 'success'
       && <div aria-live="polite"><AlertStripeSuksess>Ny inntekt hentet</AlertStripeSuksess></div>}
       {uncachedStatus === 'error'
@@ -161,31 +153,65 @@ const Dashboard = ({ readOnly, location }) => {
             </div>
             )}
 
+            <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
+              __html: buildCSSGrid(props.values, arbeidsgivere),
+            }}
+            />
+
 
             <div className="grid">
               {arbeidsgivere.length > 0 && arbeidsgivere.map(arbeidsgiver => (
                 <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
               ))}
-              {props.values.inntekt.arbeidsInntektMaaned.map((maaned, monthIndex) => (
-                <React.Fragment key={maaned.aarMaaned}>
-                  <Maaned maaned={maaned.aarMaaned} />
-                  <>
-                    {arbeidsgivere.map(arbeidsgiver => (
-                      <Inntekt
-                        readOnly={readOnly}
-                        rowId={arbeidsgiver.identifikator}
-                        columnId={maaned.aarMaaned}
-                        key={arbeidsgiver.identifikator}
-                        inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
-                        monthIndex={monthIndex}
-                        formProps={props}
-                      />
-                    ))}
-                  </>
-                </React.Fragment>
-              ))}
-            </div>
 
+              <FieldArray
+                name="inntekt.arbeidsInntektMaaned"
+                render={arrayHelpers => (
+                  <>
+                    {props.values.inntekt.arbeidsInntektMaaned.map((maaned, monthIndex) => (
+                      <React.Fragment key={maaned.aarMaaned}>
+                        <Maaned maaned={maaned.aarMaaned} />
+                        <>
+                          {arbeidsgivere.map(arbeidsgiver => (
+                            <Inntekt
+                              readOnly={readOnly}
+                              rowId={arbeidsgiver.identifikator}
+                              columnId={maaned.aarMaaned}
+                              key={arbeidsgiver.identifikator}
+                              inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
+                              monthIndex={monthIndex}
+                              formProps={props}
+                            />
+                          ))}
+                        </>
+                      </React.Fragment>
+                    ))}
+                    <div className="item maaned maaned--ny">
+                      <Knapp
+                        htmlType="button"
+                        mini
+                        onClick={() => setMånedModal(!isMånedModalOpen)}
+                      >
+Legg til måned
+
+                      </Knapp>
+                      <Modal
+                        isOpen={isMånedModalOpen}
+                        onRequestClose={() => setMånedModal(false)}
+                        closeButton={false}
+                        contentLabel="Ny arbeidsgiver"
+                        ariaHideApp={false}
+
+                      >
+                        <NyMaaned closeModal={() => setMånedModal(false)} arrayHelpers={arrayHelpers} />
+                      </Modal>
+                    </div>
+
+
+                  </>
+                )}
+              />
+            </div>
             {props.errors.name && <div className="error">{props.errors.name}</div>}
 
             <div className="flex">
@@ -193,13 +219,13 @@ const Dashboard = ({ readOnly, location }) => {
                 <Knapp
                   htmlType="button"
                   mini
-                  onClick={() => setModal(!isModalOpen)}
+                  onClick={() => setArbeidsgiverModal(!isArbeidsgiverModalOpen)}
                 >
                   Legg til arbeidsgiver
                 </Knapp>
                 <Modal
-                  isOpen={isModalOpen}
-                  onRequestClose={() => setModal(false)}
+                  isOpen={isArbeidsgiverModalOpen}
+                  onRequestClose={() => setArbeidsgiverModal(false)}
                   closeButton={false}
                   contentLabel="Ny arbeidsgiver"
                   ariaHideApp={false}
@@ -207,19 +233,19 @@ const Dashboard = ({ readOnly, location }) => {
                   <NyArbeidsgiver
                     setArbeidsgivere={setArbeidsgivere}
                     arbeidsgivere={arbeidsgivere}
-                    closeModal={() => setModal(false)}
+                    closeModal={() => setArbeidsgiverModal(false)}
                   />
                 </Modal>
 
               </div>
               <div className="flexend">
                 <Hovedknapp htmlType="submit" spinner={props.isSubmitting} autoDisableVedSpinner disabled={!props.dirty && uncachedStatus === !'success'}>
-                Bekreft
+                Bekreft og lagre
                 </Hovedknapp>
               </div>
             </div>
 
-            <DisplayFormikState {...props} />
+            <DisplayFormikState {...props.values} />
           </Form>
         )}
       />

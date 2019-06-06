@@ -68,7 +68,6 @@ export const inntektTyper = [
   'Hyre - Timelønn',
   'Hyre - Uregelmessige tillegg knyttet til arbeidet tid',
   'Hyre - Uregelmessige tillegg knyttet til ikke-arbeidet tid',
-  'Hyre - Feriepenger',
   'Lott det skal beregnes trygdeavgift av',
   'Trekk i lønn for ferie - Hyre',
   'Vederlag lott',

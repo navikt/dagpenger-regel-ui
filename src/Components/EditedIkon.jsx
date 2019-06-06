@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 /*
  * EditedIkon
@@ -8,7 +7,7 @@ import PropTypes from 'prop-types';
  */
 
 const EditedIkon = () => (
-  <span className="editedikon">
+  <span className="ikon ikon--rediger">
     <svg
       contentScriptType="text/ecmascript"
       zoomAndPan="magnify"

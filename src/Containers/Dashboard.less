@@ -1,6 +1,6 @@
 @import 'nav-frontend-core/less/_variabler';
 
-@width: 300px;
+@width: 350px;
 
 .grid {
   display: grid;
@@ -20,15 +20,21 @@
       border-left: 1px solid @navGra20;
       position: sticky;
       left: 0;
-      width: @width;
+      min-width: @width;
       z-index: 2;
     }
 
     &.maaned {
-      width: @width;
+      min-width: @width;
       background: @navMorkGra;
       color: white;
       text-transform: capitalize;
+
+      &.maaned--ny {
+        grid-area: maaned--ny;
+        background-color: transparent;
+        text-align: center;
+      }
     }
 
     &.inntekter {

@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
-import { RadioGroupField } from '../Components/RadioGroupField';
 import InputField from '../Components/InputField';
 import SelectField from '../Components/SelectField';
-import { RadioOption } from '../Components/RadioOption';
 import { required } from '../Utils/validering';
 import DatoLabel from '../Components/DatoLabel';
 import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
-import { DisplayFormikState } from '../Utils/formikUtils';
 
 // to lage en compontent for dette
 import { inntektTyper } from '../Kodeverk/verdikoder';
@@ -20,9 +17,9 @@ const mapTypeInntekter = typer => typer
 
 // todo lukke modal onsubmit
 const NyInntekt = ({
-  arbeidsgiver, dato, closeModal, values, handleSubmit,
+  arbeidsgiver, dato, closeModal, handleSubmit,
 }) => (
-  <>
+  <React.Fragment key={`${arbeidsgiver} ${dato}`}>
     <Undertittel>
       {`Legg til ny inntektspost for ${arbeidsgiver} i `}
       <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
@@ -61,8 +58,7 @@ const NyInntekt = ({
       </Knapp>
     </div>
 
-    <DisplayFormikState {...values} />
-  </>
+  </React.Fragment>
 );
 
 NyInntekt.propTypes = {
@@ -75,16 +71,12 @@ NyInntekt.propTypes = {
 
 export default withFormik({
   mapPropsToValues: ({
-    arrayHelpers, arbeidsgiver, dato, closeModal,
+    arrayHelpers, arbeidsgiver, closeModal,
   }) => ({
     beskrivelse: '',
     beloep: '0.00',
-    utloeserArbeidsgiveravgift: null,
-    inngaarIGrunnlagForTrekk: null,
-    inntektsmottaker: arrayHelpers.form.values.inntekt.ident,
     closeModal,
     arbeidsgiver,
-    dato,
     arrayHelpers,
   }),
   // Custom sync validation

@@ -21,15 +21,467 @@ Array [
         Beskrivelse
       </div>
     </label>
-    <input
-      className="skjemaelement__input input--fullbredde"
-      id="beskrivelse"
-      name="beskrivelse"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
+    <div
+      className="selectContainer input--xl"
+    >
+      <select
+        className="skjemaelement__input"
+        disabled={false}
+        id="beskrivelse"
+        name="beskrivelse"
+        onBlur={[Function]}
+        onChange={[Function]}
+        readOnly={false}
+        value=""
+      >
+        <option
+          disabled={true}
+          value=""
+        >
+           
+        </option>
+        <option
+          value="Aksjer/grunnfondsbevis til underkurs"
+        >
+          Aksjer/grunnfondsbevis til underkurs
+        </option>
+        <option
+          value="Annen arbeidsinntekt"
+        >
+          Annen arbeidsinntekt
+        </option>
+        <option
+          value="Arbeidsopphold kost"
+        >
+          Arbeidsopphold kost
+        </option>
+        <option
+          value="Arbeidsopphold losji"
+        >
+          Arbeidsopphold losji
+        </option>
+        <option
+          value="Beregnet skatt"
+        >
+          Beregnet skatt
+        </option>
+        <option
+          value="Besøksreiser hjemmet annet"
+        >
+          Besøksreiser hjemmet annet
+        </option>
+        <option
+          value="Besøksreiser hjemmet kilometergodtgjørelse bil"
+        >
+          Besøksreiser hjemmet kilometergodtgjørelse bil
+        </option>
+        <option
+          value="Betalt utenlandsk skatt"
+        >
+          Betalt utenlandsk skatt
+        </option>
+        <option
+          value="Bil"
+        >
+          Bil
+        </option>
+        <option
+          value="Bolig"
+        >
+          Bolig
+        </option>
+        <option
+          value="Bonus"
+        >
+          Bonus
+        </option>
+        <option
+          value="Bonus fra forsvaret"
+        >
+          Bonus fra forsvaret
+        </option>
+        <option
+          value="Elektronisk kommunikasjon"
+        >
+          Elektronisk kommunikasjon
+        </option>
+        <option
+          value="Fast bilgodtgjørelse"
+        >
+          Fast bilgodtgjørelse
+        </option>
+        <option
+          value="Faste tillegg"
+        >
+          Faste tillegg
+        </option>
+        <option
+          value="Fastlønn"
+        >
+          Fastlønn
+        </option>
+        <option
+          value="Feriepenger"
+        >
+          Feriepenger
+        </option>
+        <option
+          value="Fond for idrettsutøvere"
+        >
+          Fond for idrettsutøvere
+        </option>
+        <option
+          value="Foreldrepenger fra folketrygden"
+        >
+          Foreldrepenger fra folketrygden
+        </option>
+        <option
+          value="Helligdagstillegg"
+        >
+          Helligdagstillegg
+        </option>
+        <option
+          value="Honorar, akkord, prosent eller provisjonslønn"
+        >
+          Honorar, akkord, prosent eller provisjonslønn
+        </option>
+        <option
+          value="Hyretillegg"
+        >
+          Hyretillegg
+        </option>
+        <option
+          value="Innbetaling til utenlandsk pensjonsordning"
+        >
+          Innbetaling til utenlandsk pensjonsordning
+        </option>
+        <option
+          value="Kilometergodtgjørelse bil"
+        >
+          Kilometergodtgjørelse bil
+        </option>
+        <option
+          value="Kommunal omsorgslønn og fosterhjemsgodtgjørelse"
+        >
+          Kommunal omsorgslønn og fosterhjemsgodtgjørelse
+        </option>
+        <option
+          value="Kost (dager)"
+        >
+          Kost (dager)
+        </option>
+        <option
+          value="Kost (døgn)"
+        >
+          Kost (døgn)
+        </option>
+        <option
+          value="Kostbesparelse i hjemmet"
+        >
+          Kostbesparelse i hjemmet
+        </option>
+        <option
+          value="Losji"
+        >
+          Losji
+        </option>
+        <option
+          value="Lønn mv som ikke er skattepliktig i Norge fra utenlandsk diplomatisk eller konsulær stasjon"
+        >
+          Lønn mv som ikke er skattepliktig i Norge fra utenlandsk diplomatisk eller konsulær stasjon
+        </option>
+        <option
+          value="Lønn og godtgjørelse til dagmamma eller praktikant som passer barn i barnets hjem"
+        >
+          Lønn og godtgjørelse til dagmamma eller praktikant som passer barn i barnets hjem
+        </option>
+        <option
+          value="Lønn og godtgjørelse til privatpersoner for arbeidsoppdrag i oppdragsgivers hjem"
+        >
+          Lønn og godtgjørelse til privatpersoner for arbeidsoppdrag i oppdragsgivers hjem
+        </option>
+        <option
+          value="Lønn og godtgjørelse utbetalt av veldedig eller allmennyttig institusjon eller organisasjon"
+        >
+          Lønn og godtgjørelse utbetalt av veldedig eller allmennyttig institusjon eller organisasjon
+        </option>
+        <option
+          value="Lønn til verge fra Fylkesmannen"
+        >
+          Lønn til verge fra Fylkesmannen
+        </option>
+        <option
+          value="Opsjoner"
+        >
+          Opsjoner
+        </option>
+        <option
+          value="Overtidsgodtgjørelse"
+        >
+          Overtidsgodtgjørelse
+        </option>
+        <option
+          value="Reise annet"
+        >
+          Reise annet
+        </option>
+        <option
+          value="Reise kost"
+        >
+          Reise kost
+        </option>
+        <option
+          value="Reise losji"
+        >
+          Reise losji
+        </option>
+        <option
+          value="Rentefordel lån"
+        >
+          Rentefordel lån
+        </option>
+        <option
+          value="Skattepliktig del av visse typer forsikringer"
+        >
+          Skattepliktig del av visse typer forsikringer
+        </option>
+        <option
+          value="Sluttvederlag"
+        >
+          Sluttvederlag
+        </option>
+        <option
+          value="Smusstillegg"
+        >
+          Smusstillegg
+        </option>
+        <option
+          value="Stipend"
+        >
+          Stipend
+        </option>
+        <option
+          value="Styrehonorar og godtgjørelse i forbindelse med verv"
+        >
+          Styrehonorar og godtgjørelse i forbindelse med verv
+        </option>
+        <option
+          value="Svangerskapspenger"
+        >
+          Svangerskapspenger
+        </option>
+        <option
+          value="Timelønn"
+        >
+          Timelønn
+        </option>
+        <option
+          value="Trekk i lønn for ferie"
+        >
+          Trekk i lønn for ferie
+        </option>
+        <option
+          value="Uregelmessige tillegg knyttet til arbeidet tid"
+        >
+          Uregelmessige tillegg knyttet til arbeidet tid
+        </option>
+        <option
+          value="Uregelmessige tillegg knyttet til ikke-arbeidet tid"
+        >
+          Uregelmessige tillegg knyttet til ikke-arbeidet tid
+        </option>
+        <option
+          value="Yrkebil tjenestligbehov kilometer"
+        >
+          Yrkebil tjenestligbehov kilometer
+        </option>
+        <option
+          value="Yrkebil tjenestligbehov listepris"
+        >
+          Yrkebil tjenestligbehov listepris
+        </option>
+        <option
+          value="Dagpenger ved arbeidsløshet"
+        >
+          Dagpenger ved arbeidsløshet
+        </option>
+        <option
+          value="Dagpenger til fisker"
+        >
+          Dagpenger til fisker
+        </option>
+        <option
+          value="Dagpenger til fisker som bare har hyre"
+        >
+          Dagpenger til fisker som bare har hyre
+        </option>
+        <option
+          value="Sykepenger til fisker"
+        >
+          Sykepenger til fisker
+        </option>
+        <option
+          value="Sykepenger til fisker som bare har hyre"
+        >
+          Sykepenger til fisker som bare har hyre
+        </option>
+        <option
+          value="Annen næringsinntekt"
+        >
+          Annen næringsinntekt
+        </option>
+        <option
+          value="Hyre - Annet"
+        >
+          Hyre - Annet
+        </option>
+        <option
+          value="Hyre - Bonus"
+        >
+          Hyre - Bonus
+        </option>
+        <option
+          value="Hyre - Faste tillegg"
+        >
+          Hyre - Faste tillegg
+        </option>
+        <option
+          value="Hyre - Fastlønn"
+        >
+          Hyre - Fastlønn
+        </option>
+        <option
+          value="Hyre - Feriepenger"
+        >
+          Hyre - Feriepenger
+        </option>
+        <option
+          value="Hyre - Helligdagstillegg"
+        >
+          Hyre - Helligdagstillegg
+        </option>
+        <option
+          value="Hyre - Overtidsgodtgjørelse"
+        >
+          Hyre - Overtidsgodtgjørelse
+        </option>
+        <option
+          value="Hyre - Sluttvederlag"
+        >
+          Hyre - Sluttvederlag
+        </option>
+        <option
+          value="Hyre - Timelønn"
+        >
+          Hyre - Timelønn
+        </option>
+        <option
+          value="Hyre - Uregelmessige tillegg knyttet til arbeidet tid"
+        >
+          Hyre - Uregelmessige tillegg knyttet til arbeidet tid
+        </option>
+        <option
+          value="Hyre - Uregelmessige tillegg knyttet til ikke-arbeidet tid"
+        >
+          Hyre - Uregelmessige tillegg knyttet til ikke-arbeidet tid
+        </option>
+        <option
+          value="Lott det skal beregnes trygdeavgift av"
+        >
+          Lott det skal beregnes trygdeavgift av
+        </option>
+        <option
+          value="Trekk i lønn for ferie - Hyre"
+        >
+          Trekk i lønn for ferie - Hyre
+        </option>
+        <option
+          value="Vederlag lott"
+        >
+          Vederlag lott
+        </option>
+        <option
+          value="Sykepenger fra folketrygden"
+        >
+          Sykepenger fra folketrygden
+        </option>
+        <option
+          value="Sykepenger fra næring"
+        >
+          Sykepenger fra næring
+        </option>
+        <option
+          value="Sykepenger til dagmamma"
+        >
+          Sykepenger til dagmamma
+        </option>
+        <option
+          value="Sykepenger til jord- og skogbrukere"
+        >
+          Sykepenger til jord- og skogbrukere
+        </option>
+        <option
+          value="Tiltak - Annet"
+        >
+          Tiltak - Annet
+        </option>
+        <option
+          value="Tiltak - Bonus"
+        >
+          Tiltak - Bonus
+        </option>
+        <option
+          value="Tiltak - Faste tillegg"
+        >
+          Tiltak - Faste tillegg
+        </option>
+        <option
+          value="Tiltak - Fastlønn"
+        >
+          Tiltak - Fastlønn
+        </option>
+        <option
+          value="Tiltak - Feriepenger"
+        >
+          Tiltak - Feriepenger
+        </option>
+        <option
+          value="Tiltak - Helligdagstillegg"
+        >
+          Tiltak - Helligdagstillegg
+        </option>
+        <option
+          value="Tiltak - Overtidsgodtgjørelse"
+        >
+          Tiltak - Overtidsgodtgjørelse
+        </option>
+        <option
+          value="Tiltak - Sluttvederlag"
+        >
+          Tiltak - Sluttvederlag
+        </option>
+        <option
+          value="Tiltak - Timelønn"
+        >
+          Tiltak - Timelønn
+        </option>
+        <option
+          value="Tiltak - Uregelmessige tillegg knyttet til arbeidet tid"
+        >
+          Tiltak - Uregelmessige tillegg knyttet til arbeidet tid
+        </option>
+        <option
+          value="Tiltak - Uregelmessige tillegg knyttet til ikke-arbeidet tid"
+        >
+          Tiltak - Uregelmessige tillegg knyttet til ikke-arbeidet tid
+        </option>
+        <option
+          value="Trekk i lønn for ferie - Tiltak"
+        >
+          Trekk i lønn for ferie - Tiltak
+        </option>
+      </select>
+    </div>
     <div
       aria-live="assertive"
       role="alert"
@@ -49,11 +501,13 @@ Array [
       </div>
     </label>
     <input
+      autoComplete="off"
       className="skjemaelement__input input--fullbredde"
       id="beloep"
       name="beloep"
       onBlur={[Function]}
       onChange={[Function]}
+      readOnly={false}
       type="number"
       value="0.00"
     />
@@ -63,121 +517,24 @@ Array [
     />
   </div>,
   <div
-    className=""
-    field={
-      Object {
-        "name": "nyInntektUtloeserArbeidsgiveravgift",
-        "onBlur": [Function],
-        "onChange": [Function],
-        "value": undefined,
-      }
-    }
-    form={
-      Object {
-        "dirty": false,
-        "errors": Object {},
-        "handleBlur": [Function],
-        "handleChange": [Function],
-        "handleReset": [Function],
-        "handleSubmit": [Function],
-        "initialValues": Object {
-          "beloep": "0.00",
-          "beskrivelse": "",
-        },
-        "isSubmitting": false,
-        "isValid": false,
-        "isValidating": false,
-        "registerField": [Function],
-        "resetForm": [Function],
-        "setError": [Function],
-        "setErrors": [Function],
-        "setFieldError": [Function],
-        "setFieldTouched": [Function],
-        "setFieldValue": [Function],
-        "setFormikState": [Function],
-        "setStatus": [Function],
-        "setSubmitting": [Function],
-        "setTouched": [Function],
-        "setValues": [Function],
-        "status": undefined,
-        "submitCount": 0,
-        "submitForm": [Function],
-        "touched": Object {},
-        "unregisterField": [Function],
-        "validateField": [Function],
-        "validateForm": [Function],
-        "validateOnBlur": true,
-        "validateOnChange": true,
-        "values": Object {
-          "beloep": "0.00",
-          "beskrivelse": "",
-        },
-      }
-    }
+    className="knapprad"
   >
-    <fieldset
-      className="skjema__fieldset"
+    <button
+      className="knapp knapp--hoved"
+      disabled={false}
+      onClick={[Function]}
+      type="submit"
     >
-      <legend
-        className="skjema__legend"
-      >
-        Utløser arbeidsgiveravgift?
-      </legend>
-      <div
-        className="skjemaelement skjemaelement--horisontal"
-      >
-        <input
-          className="skjemaelement__input radioknapp"
-          id="nyInntektJa"
-          name="nyInntektUtloeserArbeidsgiveravgift"
-          type="radio"
-          value={true}
-        />
-        <label
-          className="skjemaelement__label"
-          htmlFor="nyInntektJa"
-        >
-          Ja
-        </label>
-      </div>
-      <div
-        className="skjemaelement skjemaelement--horisontal"
-      >
-        <input
-          className="skjemaelement__input radioknapp"
-          id="nyInntektNei"
-          name="nyInntektUtloeserArbeidsgiveravgift"
-          type="radio"
-          value={false}
-        />
-        <label
-          className="skjemaelement__label"
-          htmlFor="nyInntektNei"
-        >
-          Nei
-        </label>
-      </div>
-    </fieldset>
-    <div
-      aria-live="assertive"
-      role="alert"
-    />
+      Legg til
+    </button>
+    <button
+      className="knapp knapp--standard"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Avbryt
+    </button>
   </div>,
-  <button
-    className="knapp knapp--hoved"
-    disabled={false}
-    onClick={[Function]}
-    type="button"
-  >
-    Legg til
-  </button>,
-  <button
-    className="knapp knapp--standard"
-    disabled={false}
-    onClick={[Function]}
-    type="button"
-  >
-    Avbryt
-  </button>,
 ]
 `;

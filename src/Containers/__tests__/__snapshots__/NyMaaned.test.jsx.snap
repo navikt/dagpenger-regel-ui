@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Skal vise ny skjema for ny måned 1`] = `
+Array [
+  <h2
+    className="typo-undertittel"
+  >
+    Legg til ny måned
+  </h2>,
+  <div
+    className="skjemaelement"
+  >
+    <label
+      className="skjemaelement__label"
+      htmlFor="aarMaaned"
+    >
+      <div
+        className="flex label"
+      >
+        Måned
+      </div>
+    </label>
+    <input
+      autoComplete="off"
+      className="skjemaelement__input input--fullbredde"
+      id="aarMaaned"
+      name="aarMaaned"
+      onBlur={[Function]}
+      onChange={[Function]}
+      readOnly={false}
+      type="month"
+      value="2018-01"
+    />
+    <div
+      aria-live="assertive"
+      role="alert"
+    />
+  </div>,
+  <div
+    className="knapprad"
+  >
+    <button
+      className="knapp knapp--hoved"
+      disabled={false}
+      onClick={[Function]}
+      type="submit"
+    >
+      Legg til
+    </button>
+    <button
+      className="knapp knapp--standard"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Avbryt
+    </button>
+  </div>,
+  <div
+    style={
+      Object {
+        "margin": "1rem 0",
+      }
+    }
+  >
+    <pre
+      style={
+        Object {
+          "background": "#f6f8fa",
+          "fontFamily": "monospace",
+          "fontSize": "0.85rem",
+          "padding": "0.5rem",
+        }
+      }
+    >
+      <strong>
+        props
+      </strong>
+       
+      =
+       
+      {
+  "aarMaaned": "2018-01",
+  "arrayHelpers": {}
+}
+    </pre>
+  </div>,
+]
+`;

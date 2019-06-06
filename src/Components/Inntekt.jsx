@@ -28,7 +28,7 @@ const inntektStyle = (rowId, columnId) => `
 
 // TODO lage egen komponent for innholdet i modal og egen for radio
 const Inntekt = ({
-  readOnly, inntekter, rowId, columnId, monthIndex, formProps,
+  readOnly, inntekter, rowId, columnId, monthIndex,
 }) => {
   const [editMode, setEditMode] = useState(true);
   const [isModalOpen, setModal] = useState(false);
@@ -51,7 +51,8 @@ const Inntekt = ({
                 {inntekter.length > 0 && inntekter
                   .map((inntekt, index) => (
                     inntekt.virksomhet.identifikator === rowId && (
-                    <div key={inntekt.beskrivelse} className="flex inntekt">
+                    // eslint-disable-next-line react/no-array-index-key
+                    <div key={`${inntekt.beskrivelse}${index}`} className="flex inntekt">
                       <div>
                         <SelectField
                           bredde="xl"
@@ -59,7 +60,7 @@ const Inntekt = ({
                           selectValues={mapTypeInntekter(inntektTyper)}
                           validate={[required]}
                           name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beskrivelse`}
-                          readOnly={editMode}
+                          readOnly={readOnly || editMode}
                         />
                         <InputField
                           label=""
@@ -67,11 +68,14 @@ const Inntekt = ({
                           type="number"
                           validate={[required]}
                           formater
-                          readOnly={editMode}
+                          readOnly={readOnly || editMode}
                         />
                       </div>
                       {editMode && (
                         <div className="flexend">
+                          {
+                            // TODO legge inn bekreftelse på sletting?
+                          }
                           <button type="button" className="ikon ikon--slett" onClick={() => arrayHelpers.remove(index)} title="Slett inntekt">
                             <svg
                               version="1.1"
@@ -99,6 +103,7 @@ const Inntekt = ({
                     </div>
                     )
                   ))}
+
                 <Knapp
                   htmlType="button"
                   mini
@@ -131,7 +136,7 @@ const Inntekt = ({
           <Knapp
             htmlType="button"
             mini
-            onClick={() => setEditMode(formProps.isValid && !editMode)}
+            onClick={() => setEditMode(!editMode)}
           >
             {editMode ? 'Rediger' : 'Oppdater'}
           </Knapp>
@@ -152,7 +157,6 @@ Inntekt.propTypes = {
   rowId: PropTypes.string.isRequired,
   columnId: PropTypes.string.isRequired,
   monthIndex: PropTypes.number.isRequired,
-  formProps: PropTypes.shape().isRequired, // TODO create a proptype for formik
 };
 
 export default Inntekt;
