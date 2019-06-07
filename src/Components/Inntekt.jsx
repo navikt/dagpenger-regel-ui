@@ -8,6 +8,8 @@ import SelectField from './SelectField';
 import InputField from './InputField';
 import { required } from '../Utils/validering';
 import { formatertPengesum } from '../Utils/currencyFormat';
+import { ReactComponent as SlettIkon } from '../images/slett.svg';
+
 
 // to lage en compontent for dette
 import { inntektTyper } from '../Kodeverk/verdikoder';
@@ -77,25 +79,7 @@ const Inntekt = ({
                             // TODO legge inn bekreftelse på sletting?
                           }
                           <button type="button" className="ikon ikon--slett" onClick={() => arrayHelpers.remove(index)} title="Slett inntekt">
-                            <svg
-                              version="1.1"
-                              id="Filled_Version"
-                              xmlns="http://www.w3.org/2000/svg"
-                              xmlnsXlink="http://www.w3.org/1999/xlink"
-                              x="0px"
-                              y="0px"
-                              width="18px"
-                              height="18px"
-                              viewBox="0 0 24 24"
-                              enableBackground="new 0 0 24 24"
-                              xmlSpace="preserve"
-                            >
-                              <path d="M13.414,12L23.707,1.707c0.391-0.391,0.391-1.023,0-1.414c-0.391-0.391-1.023-0.391-1.414,0L12,10.586L1.707,0.293
-	c-0.391-0.391-1.023-0.391-1.414,0c-0.391,0.391-0.391,1.023,0,1.414L10.586,12L0.293,22.293c-0.391,0.391-0.391,1.023,0,1.414
-	C0.488,23.902,0.744,24,1,24s0.512-0.098,0.707-0.293L12,13.414l10.293,10.293C22.488,23.902,22.744,24,23,24
-	c0.256,0,0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L13.414,12z"
-                              />
-                            </svg>
+                            <SlettIkon />
                           </button>
                         </div>
 
@@ -151,7 +135,10 @@ Inntekt.propTypes = {
   inntekter: PropTypes.arrayOf(PropTypes.shape({
     header: PropTypes.string,
     label: PropTypes.string,
-    beloep: PropTypes.string,
+    beloep: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   })).isRequired,
   readOnly: PropTypes.bool.isRequired,
   rowId: PropTypes.string.isRequired,

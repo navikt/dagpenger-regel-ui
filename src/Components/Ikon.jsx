@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import '../images/nav.svg';
+import '../images/slett.svg';
 
 
 const Ikon = ({ navn }) => (
@@ -8,5 +10,9 @@ const Ikon = ({ navn }) => (
     <use xlinkHref={`/#${navn}`} />
   </svg>
 );
+
+Ikon.propTypes = {
+  navn: PropTypes.string.isRequired,
+};
 
 export default Ikon;
