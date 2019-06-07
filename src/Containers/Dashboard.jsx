@@ -39,7 +39,7 @@ const Dashboard = ({ readOnly, location }) => {
       let result;
       if (process.env.NODE_ENV !== 'production') {
         result = await axios(
-          `${process.env.PUBLIC_URL}/mock/mock2.json`,
+          `${process.env.PUBLIC_URL}/mock/mock.json`,
         );
       } else {
         result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
