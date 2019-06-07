@@ -1,6 +1,5 @@
 [![CircleCI](https://circleci.com/gh/navikt/dagpenger-regel-ui.svg?style=svg)](https://circleci.com/gh/navikt/dagpenger-regel-ui)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dagpenger-regel-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=dagpenger-regel-ui)
-[![Known Vulnerabilities](https://snyk.io/test/github/navikt/fpsak-frontend/badge.svg)](https://snyk.io/test/github/navikt/dagpenger-regel-ui) 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ## dagpenger-regel-ui
