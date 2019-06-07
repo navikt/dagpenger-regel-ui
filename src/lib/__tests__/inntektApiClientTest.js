@@ -1,33 +1,31 @@
-import nock from 'nock'
-import {getInntekt, lagreInntekt} from "../inntektApiClient";
+import nock from 'nock';
+import { getInntekt, lagreInntekt } from '../inntektApiClient';
 
 
-it("Should handle 200 response", async () => {
-
+it('Should handle 200 response', async () => {
   const expectedReturn = 'data';
-  let inntektApiRequest = {
-    aktørId: "111",
+  const inntektApiRequest = {
+    aktørId: '111',
     vedtakId: 12345,
-    beregningsDato: '2019-05-01'
+    beregningsDato: '2019-05-01',
   };
   nock('http://localhost')
     .get('/api/v1/inntekt/uklassifisert/111/12345/2019-05-01')
     .reply(200, expectedReturn);
 
-  await getInntekt(inntektApiRequest).then(function (result) {
-    expect(result.data).toEqual(expectedReturn)
+  await getInntekt(inntektApiRequest).then((result) => {
+    expect(result.data).toEqual(expectedReturn);
   })
-    .catch(function (error) {
-      throw error
+    .catch((error) => {
+      throw error;
     });
 });
 
-it("Should handle 500 response", async () => {
-
-  let inntektApiRequest = {
-    aktørId: "111",
+it('Should handle 500 response', async () => {
+  const inntektApiRequest = {
+    aktørId: '111',
     vedtakId: 12345,
-    beregningsDato: '2019-05-01'
+    beregningsDato: '2019-05-01',
   };
   nock('http://localhost')
     .get('/api/v1/inntekt/uklassifisert/111/12345/2019-05-01')
@@ -38,25 +36,24 @@ it("Should handle 500 response", async () => {
   } catch (e) {
     expect(e.response.statusText).toMatch('Internal Server Error');
   }
-
 });
 
-it("Should save inntekt with 200", async () => {
-  let data = {field: "123"};
+it('Should save inntekt with 200', async () => {
+  const data = { field: '123' };
   nock('http://localhost')
     .post('/api/v1/inntekt/uklassifisert/update', data)
-    .reply(200, {success: true});
+    .reply(200, { success: true });
 
-  await lagreInntekt(data).then(function (result) {
-    expect(result.data).toEqual({success: true})
-  }).catch(function (error) {
-    throw error
+  await lagreInntekt(data).then((result) => {
+    expect(result.data).toEqual({ success: true });
+  }).catch((error) => {
+    throw error;
   });
 });
 
 
-it("Should fail to save inntekt", async () => {
-  let data = {field: "123"};
+it('Should fail to save inntekt', async () => {
+  const data = { field: '123' };
   nock('http://localhost')
     .post('/api/v1/inntekt/uklassifisert/update', data)
     .reply(500, {});

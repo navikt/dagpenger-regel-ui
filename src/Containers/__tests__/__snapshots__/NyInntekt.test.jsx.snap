@@ -1,13 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Skal vise ny inntektspost 1`] = `
-Array [
+<form
+  onSubmit={[Function]}
+>
   <h2
     className="typo-undertittel"
   >
     Legg til ny inntektspost for 9876543210 i 
     mai 2019
-  </h2>,
+  </h2>
   <div
     className="skjemaelement"
   >
@@ -486,7 +488,7 @@ Array [
       aria-live="assertive"
       role="alert"
     />
-  </div>,
+  </div>
   <div
     className="skjemaelement"
   >
@@ -515,7 +517,7 @@ Array [
       aria-live="assertive"
       role="alert"
     />
-  </div>,
+  </div>
   <div
     className="knapprad"
   >
@@ -535,6 +537,6 @@ Array [
     >
       Avbryt
     </button>
-  </div>,
-]
+  </div>
+</form>
 `;

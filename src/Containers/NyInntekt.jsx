@@ -16,68 +16,70 @@ const mapTypeInntekter = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
 
 // todo lukke modal onsubmit
-const NyInntekt = ({
-  arbeidsgiver, dato, closeModal, handleSubmit,
-}) => (
-  <React.Fragment key={`${arbeidsgiver} ${dato}`}>
-    <Undertittel>
-      {`Legg til ny inntektspost for ${arbeidsgiver} i `}
-      <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
-    </Undertittel>
+const NyInntekt = (props) => {
+  const {
+    handleSubmit,
+    isSubmitting,
+    closeModal,
+    arbeidsgiver,
+    dato,
+  } = props;
+  return (
+    <form onSubmit={handleSubmit}>
+      <Undertittel>
+        {`Legg til ny inntektspost for ${arbeidsgiver} i `}
+        <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
+      </Undertittel>
 
-    <SelectField
-      bredde="xl"
-      label="verdikode"
-      selectValues={mapTypeInntekter(inntektTyper)}
-      validate={[required]}
-      name="verdikode"
-      readOnly={false}
-    />
+      <SelectField
+        bredde="xl"
+        label="Beskrivelse"
+        selectValues={mapTypeInntekter(inntektTyper)}
+        validate={[required]}
+        name="verdikode"
+        readOnly={false}
+      />
 
-    <InputField
-      label="Beløp"
-      name="beloep"
-      validate={[required]}
-      type="number"
-      readOnly={false}
-    />
+      <InputField
+        label="Beløp"
+        name="beloep"
+        validate={[required]}
+        type="number"
+        readOnly={false}
+      />
 
-    <div className="knapprad">
-      <Hovedknapp
-        htmlType="submit"
-        onClick={() => handleSubmit()}
-
-      >
+      <div className="knapprad">
+        <Hovedknapp
+          htmlType="submit"
+          onClick={() => handleSubmit()}
+          disabled={isSubmitting}
+        >
       Legg til
-      </Hovedknapp>
-      <Knapp
-        htmlType="button"
-        onClick={closeModal}
-      >
+        </Hovedknapp>
+        <Knapp
+          htmlType="button"
+          onClick={closeModal}
+        >
       Avbryt
-      </Knapp>
-    </div>
+        </Knapp>
+      </div>
 
-  </React.Fragment>
-);
+    </form>
+  );
+};
 
 NyInntekt.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   arbeidsgiver: PropTypes.string.isRequired,
   dato: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
-  values: PropTypes.shape().isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
 };
 
 export default withFormik({
-  mapPropsToValues: ({
-    arrayHelpers, arbeidsgiver, closeModal,
-  }) => ({
+  mapPropsToValues: () => ({
     verdikode: '',
     beloep: '0.00',
-    closeModal,
-    arbeidsgiver,
-    arrayHelpers,
   }),
   // Custom sync validation
   validate: (values) => {
@@ -90,14 +92,14 @@ export default withFormik({
     return errors;
   },
 
-  handleSubmit: (values, { setSubmitting }) => {
-    const { arrayHelpers, closeModal } = values;
+  handleSubmit: (values, { setSubmitting, props }) => {
+    const { arbeidsgiver, closeModal, arrayHelpers } = props;
     arrayHelpers.insert(0, {
       verdikode: values.verdikode,
       beloep: values.beloep,
       virksomhet: {
         aktoerType: 'ORGANISASJON',
-        identifikator: values.arbeidsgiver,
+        identifikator: arbeidsgiver,
         navn: 'Enenenenen',
       },
     });
