@@ -7,7 +7,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
       Object {
         "__html": "
   .grid {
-    grid-template-areas: \\". maaned--2016-07 maaned--2016-09 maaned--2016-10 maaned--2016-11 maaned--2016-12 maaned--2017-08 maaned--2017-11 maaned--2017-12 maaned--2018-02 maaned--2018-03 maaned--2018-06 maaned--2018-07 maaned--2018-10 maaned--2018-12 maaned--2019-03 maaned--2019-06 \\" \\"arbeidsgiver--873152362 inntekter--873152362--2016-07  inntekter--873152362--2016-09  inntekter--873152362--2016-10  inntekter--873152362--2016-11  inntekter--873152362--2016-12  inntekter--873152362--2017-08  inntekter--873152362--2017-11  inntekter--873152362--2017-12  inntekter--873152362--2018-02  inntekter--873152362--2018-03  inntekter--873152362--2018-06  inntekter--873152362--2018-07  inntekter--873152362--2018-10  inntekter--873152362--2018-12  inntekter--873152362--2019-03  inntekter--873152362--2019-06 \\";
+    grid-template-areas: \\". maaned--2017-07 maaned--2017-08 maaned--2017-09 maaned--2017-10 maaned--2017-11 maaned--2017-12 \\" \\"arbeidsgiver--1111111 inntekter--1111111--2017-07  inntekter--1111111--2017-08  inntekter--1111111--2017-09  inntekter--1111111--2017-10  inntekter--1111111--2017-11  inntekter--1111111--2017-12 \\" \\"arbeidsgiver--222222 inntekter--222222--2017-07  inntekter--222222--2017-08  inntekter--222222--2017-09  inntekter--222222--2017-10  inntekter--222222--2017-11  inntekter--222222--2017-12 \\";
 ",
       }
     }
@@ -19,16 +19,21 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-.arbeidsgiver--873152362 {
-  grid-area: arbeidsgiver--873152362;
+.arbeidsgiver--1111111 {
+  grid-area: arbeidsgiver--1111111;
 }
 ",
         }
       }
     />
     <div
-      className="item arbeidsgiver arbeidsgiver--873152362"
+      className="item arbeidsgiver arbeidsgiver--1111111"
     >
+      <h2
+        className="typo-undertittel"
+      >
+        Enenenenen
+      </h2>
       <p
         className="typo-etikett-liten"
       >
@@ -37,38 +42,68 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
       <p
         className="typo-element"
       >
-        873152362
+        1111111
       </p>
     </div>
     <style
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-.maaned--2016-07 {
-  grid-area: maaned--2016-07;
+.arbeidsgiver--222222 {
+  grid-area: arbeidsgiver--222222;
 }
 ",
         }
       }
     />
     <div
-      className="item maaned maaned--2016-07"
+      className="item arbeidsgiver arbeidsgiver--222222"
     >
-      juli 2016
+      <h2
+        className="typo-undertittel"
+      >
+        Totototo
+      </h2>
+      <p
+        className="typo-etikett-liten"
+      >
+        Org nr
+      </p>
+      <p
+        className="typo-element"
+      >
+        222222
+      </p>
     </div>
     <style
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-.inntekter--873152362--2016-07 {
-  grid-area: inntekter--873152362--2016-07;
+.maaned--2017-07 {
+  grid-area: maaned--2017-07;
 }
 ",
         }
       }
     />
     <div
-      className="item inntekter inntekter--873152362--2016-07"
+      className="item maaned maaned--2017-07"
+    >
+      juli 2017
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+.inntekter--1111111--2017-07 {
+  grid-area: inntekter--1111111--2017-07;
+}
+",
+        }
+      }
+    />
+    <div
+      className="item inntekter inntekter--1111111--2017-07"
     >
       <div
         className="ekspanderbartPanel ekspanderbartPanel--lukket"
@@ -86,7 +121,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-element ekspanderbartPanel__heading"
             >
-              NOK 0.00
+              NOK 89,743.60
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -99,31 +134,15 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-.maaned--2016-09 {
-  grid-area: maaned--2016-09;
+.inntekter--222222--2017-07 {
+  grid-area: inntekter--222222--2017-07;
 }
 ",
         }
       }
     />
     <div
-      className="item maaned maaned--2016-09"
-    >
-      september 2016
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2016-09 {
-  grid-area: inntekter--873152362--2016-09;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2016-09"
+      className="item inntekter inntekter--222222--2017-07"
     >
       <div
         className="ekspanderbartPanel ekspanderbartPanel--lukket"
@@ -141,172 +160,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-element ekspanderbartPanel__heading"
             >
-              NOK 0.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2016-10 {
-  grid-area: maaned--2016-10;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2016-10"
-    >
-      oktober 2016
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2016-10 {
-  grid-area: inntekter--873152362--2016-10;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2016-10"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 0.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2016-11 {
-  grid-area: maaned--2016-11;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2016-11"
-    >
-      november 2016
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2016-11 {
-  grid-area: inntekter--873152362--2016-11;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2016-11"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 0.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2016-12 {
-  grid-area: maaned--2016-12;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2016-12"
-    >
-      desember 2016
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2016-12 {
-  grid-area: inntekter--873152362--2016-12;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2016-12"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 0.00
+              NOK 6,410.26
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -335,15 +189,15 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-.inntekter--873152362--2017-08 {
-  grid-area: inntekter--873152362--2017-08;
+.inntekter--1111111--2017-08 {
+  grid-area: inntekter--1111111--2017-08;
 }
 ",
         }
       }
     />
     <div
-      className="item inntekter inntekter--873152362--2017-08"
+      className="item inntekter inntekter--1111111--2017-08"
     >
       <div
         className="ekspanderbartPanel ekspanderbartPanel--lukket"
@@ -361,7 +215,234 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-element ekspanderbartPanel__heading"
             >
-              NOK 38,990.00
+              NOK 0.00
+            </span>
+            <span
+              className="ekspanderbartPanel__indikator"
+            />
+          </div>
+        </button>
+      </div>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+.inntekter--222222--2017-08 {
+  grid-area: inntekter--222222--2017-08;
+}
+",
+        }
+      }
+    />
+    <div
+      className="item inntekter inntekter--222222--2017-08"
+    >
+      <div
+        className="ekspanderbartPanel ekspanderbartPanel--lukket"
+      >
+        <button
+          aria-expanded={false}
+          className="ekspanderbartPanel__hode"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="ekspanderbartPanel__flex-wrapper"
+          >
+            <span
+              className="typo-element ekspanderbartPanel__heading"
+            >
+              NOK 0.00
+            </span>
+            <span
+              className="ekspanderbartPanel__indikator"
+            />
+          </div>
+        </button>
+      </div>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+.maaned--2017-09 {
+  grid-area: maaned--2017-09;
+}
+",
+        }
+      }
+    />
+    <div
+      className="item maaned maaned--2017-09"
+    >
+      september 2017
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+.inntekter--1111111--2017-09 {
+  grid-area: inntekter--1111111--2017-09;
+}
+",
+        }
+      }
+    />
+    <div
+      className="item inntekter inntekter--1111111--2017-09"
+    >
+      <div
+        className="ekspanderbartPanel ekspanderbartPanel--lukket"
+      >
+        <button
+          aria-expanded={false}
+          className="ekspanderbartPanel__hode"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="ekspanderbartPanel__flex-wrapper"
+          >
+            <span
+              className="typo-element ekspanderbartPanel__heading"
+            >
+              NOK 54,194.06
+            </span>
+            <span
+              className="ekspanderbartPanel__indikator"
+            />
+          </div>
+        </button>
+      </div>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+.inntekter--222222--2017-09 {
+  grid-area: inntekter--222222--2017-09;
+}
+",
+        }
+      }
+    />
+    <div
+      className="item inntekter inntekter--222222--2017-09"
+    >
+      <div
+        className="ekspanderbartPanel ekspanderbartPanel--lukket"
+      >
+        <button
+          aria-expanded={false}
+          className="ekspanderbartPanel__hode"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="ekspanderbartPanel__flex-wrapper"
+          >
+            <span
+              className="typo-element ekspanderbartPanel__heading"
+            >
+              NOK 54,194.06
+            </span>
+            <span
+              className="ekspanderbartPanel__indikator"
+            />
+          </div>
+        </button>
+      </div>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+.maaned--2017-10 {
+  grid-area: maaned--2017-10;
+}
+",
+        }
+      }
+    />
+    <div
+      className="item maaned maaned--2017-10"
+    >
+      oktober 2017
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+.inntekter--1111111--2017-10 {
+  grid-area: inntekter--1111111--2017-10;
+}
+",
+        }
+      }
+    />
+    <div
+      className="item inntekter inntekter--1111111--2017-10"
+    >
+      <div
+        className="ekspanderbartPanel ekspanderbartPanel--lukket"
+      >
+        <button
+          aria-expanded={false}
+          className="ekspanderbartPanel__hode"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="ekspanderbartPanel__flex-wrapper"
+          >
+            <span
+              className="typo-element ekspanderbartPanel__heading"
+            >
+              NOK 36,886.20
+            </span>
+            <span
+              className="ekspanderbartPanel__indikator"
+            />
+          </div>
+        </button>
+      </div>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+.inntekter--222222--2017-10 {
+  grid-area: inntekter--222222--2017-10;
+}
+",
+        }
+      }
+    />
+    <div
+      className="item inntekter inntekter--222222--2017-10"
+    >
+      <div
+        className="ekspanderbartPanel ekspanderbartPanel--lukket"
+      >
+        <button
+          aria-expanded={false}
+          className="ekspanderbartPanel__hode"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="ekspanderbartPanel__flex-wrapper"
+          >
+            <span
+              className="typo-element ekspanderbartPanel__heading"
+            >
+              NOK 36,886.20
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -390,15 +471,15 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-.inntekter--873152362--2017-11 {
-  grid-area: inntekter--873152362--2017-11;
+.inntekter--1111111--2017-11 {
+  grid-area: inntekter--1111111--2017-11;
 }
 ",
         }
       }
     />
     <div
-      className="item inntekter inntekter--873152362--2017-11"
+      className="item inntekter inntekter--1111111--2017-11"
     >
       <div
         className="ekspanderbartPanel ekspanderbartPanel--lukket"
@@ -416,7 +497,46 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-element ekspanderbartPanel__heading"
             >
-              NOK 100,000.00
+              NOK 79,879.40
+            </span>
+            <span
+              className="ekspanderbartPanel__indikator"
+            />
+          </div>
+        </button>
+      </div>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+.inntekter--222222--2017-11 {
+  grid-area: inntekter--222222--2017-11;
+}
+",
+        }
+      }
+    />
+    <div
+      className="item inntekter inntekter--222222--2017-11"
+    >
+      <div
+        className="ekspanderbartPanel ekspanderbartPanel--lukket"
+      >
+        <button
+          aria-expanded={false}
+          className="ekspanderbartPanel__hode"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="ekspanderbartPanel__flex-wrapper"
+          >
+            <span
+              className="typo-element ekspanderbartPanel__heading"
+            >
+              NOK 0.00
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -445,15 +565,15 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-.inntekter--873152362--2017-12 {
-  grid-area: inntekter--873152362--2017-12;
+.inntekter--1111111--2017-12 {
+  grid-area: inntekter--1111111--2017-12;
 }
 ",
         }
       }
     />
     <div
-      className="item inntekter inntekter--873152362--2017-12"
+      className="item inntekter inntekter--1111111--2017-12"
     >
       <div
         className="ekspanderbartPanel ekspanderbartPanel--lukket"
@@ -471,7 +591,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-element ekspanderbartPanel__heading"
             >
-              NOK 50,000.00
+              NOK 45,569.00
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -484,31 +604,15 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-.maaned--2018-02 {
-  grid-area: maaned--2018-02;
+.inntekter--222222--2017-12 {
+  grid-area: inntekter--222222--2017-12;
 }
 ",
         }
       }
     />
     <div
-      className="item maaned maaned--2018-02"
-    >
-      februar 2018
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2018-02 {
-  grid-area: inntekter--873152362--2018-02;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2018-02"
+      className="item inntekter inntekter--222222--2017-12"
     >
       <div
         className="ekspanderbartPanel ekspanderbartPanel--lukket"
@@ -526,392 +630,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-element ekspanderbartPanel__heading"
             >
-              NOK 50,000.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2018-03 {
-  grid-area: maaned--2018-03;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2018-03"
-    >
-      mars 2018
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2018-03 {
-  grid-area: inntekter--873152362--2018-03;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2018-03"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 50,000.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2018-06 {
-  grid-area: maaned--2018-06;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2018-06"
-    >
-      juni 2018
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2018-06 {
-  grid-area: inntekter--873152362--2018-06;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2018-06"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 50,000.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2018-07 {
-  grid-area: maaned--2018-07;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2018-07"
-    >
-      juli 2018
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2018-07 {
-  grid-area: inntekter--873152362--2018-07;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2018-07"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 25,325.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2018-10 {
-  grid-area: maaned--2018-10;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2018-10"
-    >
-      oktober 2018
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2018-10 {
-  grid-area: inntekter--873152362--2018-10;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2018-10"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 50,000.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2018-12 {
-  grid-area: maaned--2018-12;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2018-12"
-    >
-      desember 2018
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2018-12 {
-  grid-area: inntekter--873152362--2018-12;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2018-12"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 30,000.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2019-03 {
-  grid-area: maaned--2019-03;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2019-03"
-    >
-      mars 2019
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2019-03 {
-  grid-area: inntekter--873152362--2019-03;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2019-03"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 30,000.00
-            </span>
-            <span
-              className="ekspanderbartPanel__indikator"
-            />
-          </div>
-        </button>
-      </div>
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.maaned--2019-06 {
-  grid-area: maaned--2019-06;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item maaned maaned--2019-06"
-    >
-      juni 2019
-    </div>
-    <style
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "
-.inntekter--873152362--2019-06 {
-  grid-area: inntekter--873152362--2019-06;
-}
-",
-        }
-      }
-    />
-    <div
-      className="item inntekter inntekter--873152362--2019-06"
-    >
-      <div
-        className="ekspanderbartPanel ekspanderbartPanel--lukket"
-      >
-        <button
-          aria-expanded={false}
-          className="ekspanderbartPanel__hode"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="ekspanderbartPanel__flex-wrapper"
-          >
-            <span
-              className="typo-element ekspanderbartPanel__heading"
-            >
-              NOK 30,000.00
+              NOK 45,569.00
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -985,38 +704,101 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
        
       {
   "inntektId": {
-    "id": "01DCKYQG2RENWE3C0PNRSEQWWB"
+    "id": "01D8G6FS9QGRT3JKBTA5KEE64C"
   },
   "inntekt": {
     "arbeidsInntektMaaned": [
       {
-        "aarMaaned": "2016-07",
+        "aarMaaned": "2017-07",
         "arbeidsInntektInformasjon": {
-          "inntektListe": []
-        }
-      },
-      {
-        "aarMaaned": "2016-09",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": []
-        }
-      },
-      {
-        "aarMaaned": "2016-10",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": []
-        }
-      },
-      {
-        "aarMaaned": "2016-11",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": []
-        }
-      },
-      {
-        "aarMaaned": "2016-12",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": []
+          "inntektListe": [
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Total lønnsinntekt",
+              "beloep": "6410.26",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-09",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "222222",
+                "navn": "Totototo",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Total lønnsinntekt"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Kontaktytelse",
+              "beloep": "41666.67",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-09",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Fastlønn"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": "48076.93",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-09",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Trekk i lønn for ferie"
+            }
+          ]
         }
       },
       {
@@ -1024,31 +806,250 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
         "arbeidsInntektInformasjon": {
           "inntektListe": [
             {
-              "beloep": "38990",
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Total lønnsinntekt",
+              "beloep": "0.00",
               "fordel": "kontantytelse",
-              "beskrivelse": "loennForBarnepassIBarnetsHjem",
               "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
               "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2017-08",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2018-03",
               "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "222222",
+                "navn": "Totototo",
+                "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
               },
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Total lønnsinntekt"
+            }
+          ]
+        }
+      },
+      {
+        "aarMaaned": "2017-09",
+        "arbeidsInntektInformasjon": {
+          "inntektListe": [
+            {
               "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Lønn og godtgjørelse til dagmamma eller praktikant som passer barn i barnets hjem"
+              "header": "Total lønnsinntekt",
+              "beloep": "54194.06",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "222222",
+                "navn": "Totototo",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Total lønnsinntekt"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Kontaktytelse",
+              "beloep": "48076.26",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Fastlønn"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": "52.00",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Overtidsgodtgjørelse"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": "6065.80",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Timelønn"
+            }
+          ]
+        }
+      },
+      {
+        "aarMaaned": "2017-10",
+        "arbeidsInntektInformasjon": {
+          "inntektListe": [
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Total lønnsinntekt",
+              "beloep": "36886.20",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2018-04",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "222222",
+                "navn": "Totototo",
+                "aktoerType": "ORGANISASJON"
+              },
+              "tilleggsinformasjon": {
+                "kategori": "Nettoloennsordning"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Total lønnsinntekt"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Kontaktytelse",
+              "beloep": "312.00",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Overtidsgodtgjørelse"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": "36574.20",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Timelønn"
             }
           ]
         }
@@ -1058,31 +1059,90 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
         "arbeidsInntektInformasjon": {
           "inntektListe": [
             {
-              "beloep": "100000",
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Total lønnsinntekt",
+              "beloep": "39941.20",
               "fordel": "kontantytelse",
-              "beskrivelse": "loennForBarnepassIBarnetsHjem",
               "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
               "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2017-11",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2018-03",
               "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
               },
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Total lønnsinntekt"
+            },
+            {
               "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Lønn og godtgjørelse til dagmamma eller praktikant som passer barn i barnets hjem"
+              "header": "Kontantytelse",
+              "beloep": "182.00",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2018-03",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Overtidsgodtgjørelse"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": "39756.20",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2018-03",
+              "opplysningspliktig": {
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Timelønn"
             }
           ]
         }
@@ -1092,318 +1152,142 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
         "arbeidsInntektInformasjon": {
           "inntektListe": [
             {
-              "beloep": "50000",
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Total lønnsinntekt",
+              "beloep": "45569.00",
               "fordel": "kontantytelse",
-              "beskrivelse": "loennForBarnepassIBarnetsHjem",
               "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
               "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2017-12",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2018-04",
               "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "222222",
+                "navn": "Totototo",
+                "aktoerType": "ORGANISASJON"
+              },
+              "tilleggsinformasjon": {
+                "kategori": "Nettoloennsordning"
               },
               "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
               },
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
-              "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Lønn og godtgjørelse til dagmamma eller praktikant som passer barn i barnets hjem"
-            }
-          ]
-        }
-      },
-      {
-        "aarMaaned": "2018-02",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": [
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Total lønnsinntekt"
+            },
             {
-              "beloep": "50000",
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Kontaktytelse",
+              "beloep": "44665.00",
               "fordel": "kontantytelse",
-              "beskrivelse": "loennForBarnepassIBarnetsHjem",
               "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
               "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2018-02",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
               },
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
-              "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Lønn og godtgjørelse til dagmamma eller praktikant som passer barn i barnets hjem"
-            }
-          ]
-        }
-      },
-      {
-        "aarMaaned": "2018-03",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": [
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Fastlønn"
+            },
             {
-              "beloep": "50000",
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Naturalytelse",
+              "beloep": "366.00",
               "fordel": "kontantytelse",
-              "beskrivelse": "loennForBarnepassIBarnetsHjem",
               "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
               "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2018-03",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
               },
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
-              "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Lønn og godtgjørelse til dagmamma eller praktikant som passer barn i barnets hjem"
-            }
-          ]
-        }
-      },
-      {
-        "aarMaaned": "2018-06",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": [
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Elektronisk kommunikasjon"
+            },
             {
-              "beloep": "50000",
+              "inntektType": "LOENNSINNTEKT",
+              "beloep": "538.00",
               "fordel": "kontantytelse",
-              "beskrivelse": "loennForBarnepassIBarnetsHjem",
               "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
               "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2018-06",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
+                "identifikator": "1111111",
+                "navn": "Enenenenen",
+                "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
+                "identifikator": "99999999999",
+                "aktoerType": "NATURLIG_IDENT"
               },
               "inngaarIGrunnlagForTrekk": true,
               "utloeserArbeidsgiveravgift": true,
               "informasjonsstatus": "InngaarAlltid",
-              "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Lønn og godtgjørelse til dagmamma eller praktikant som passer barn i barnets hjem"
-            }
-          ]
-        }
-      },
-      {
-        "aarMaaned": "2018-07",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": [
-            {
-              "beloep": "25325",
-              "fordel": "kontantytelse",
-              "beskrivelse": "fastloenn",
-              "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
-              "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2018-07",
-              "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
-              },
-              "inngaarIGrunnlagForTrekk": true,
-              "utloeserArbeidsgiveravgift": true,
-              "informasjonsstatus": "InngaarAlltid",
-              "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Fastlønn"
-            }
-          ]
-        }
-      },
-      {
-        "aarMaaned": "2018-10",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": [
-            {
-              "beloep": "50000",
-              "fordel": "kontantytelse",
-              "beskrivelse": "fastloenn",
-              "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
-              "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2018-10",
-              "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
-              },
-              "inngaarIGrunnlagForTrekk": true,
-              "utloeserArbeidsgiveravgift": true,
-              "informasjonsstatus": "InngaarAlltid",
-              "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Fastlønn"
-            }
-          ]
-        }
-      },
-      {
-        "aarMaaned": "2018-12",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": [
-            {
-              "beloep": "30000",
-              "fordel": "kontantytelse",
-              "beskrivelse": "fastloenn",
-              "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
-              "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2018-12",
-              "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
-              },
-              "inngaarIGrunnlagForTrekk": true,
-              "utloeserArbeidsgiveravgift": true,
-              "informasjonsstatus": "InngaarAlltid",
-              "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Fastlønn"
-            }
-          ]
-        }
-      },
-      {
-        "aarMaaned": "2019-03",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": [
-            {
-              "beloep": "30000",
-              "fordel": "kontantytelse",
-              "beskrivelse": "fastloenn",
-              "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
-              "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2019-03",
-              "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
-              },
-              "inngaarIGrunnlagForTrekk": true,
-              "utloeserArbeidsgiveravgift": true,
-              "informasjonsstatus": "InngaarAlltid",
-              "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Fastlønn"
-            }
-          ]
-        }
-      },
-      {
-        "aarMaaned": "2019-06",
-        "arbeidsInntektInformasjon": {
-          "inntektListe": [
-            {
-              "beloep": "30000",
-              "fordel": "kontantytelse",
-              "beskrivelse": "fastloenn",
-              "inntektskilde": "A-ordningen",
-              "inntektsstatus": "LoependeInnrapportert",
-              "inntektsperiodetype": "Maaned",
-              "leveringstidspunkt": "2019-06",
-              "utbetaltIMaaned": "2019-06",
-              "opplysningspliktig": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "virksomhet": {
-                "aktoerType": "ORGANISASJON",
-                "identifikator": "873152362"
-              },
-              "inntektsmottaker": {
-                "aktoerType": "NATURLIG_IDENT",
-                "identifikator": "1000009228307"
-              },
-              "inngaarIGrunnlagForTrekk": true,
-              "utloeserArbeidsgiveravgift": true,
-              "informasjonsstatus": "InngaarAlltid",
-              "inntektType": "LOENNSINNTEKT",
-              "verdikode": "Fastlønn"
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Skattepliktig del av visse typer forsikring"
             }
           ]
         }
       }
     ],
     "ident": {
-      "aktoerType": "AKTOER_ID",
-      "identifikator": "1000009228307"
+      "identifikator": "99999999999",
+      "aktoerType": "NATURLIG_IDENT"
     }
   },
-  "manueltRedigert": false,
   "arbeidsgivere": [
     {
-      "aktoerType": "ORGANISASJON",
-      "identifikator": "873152362"
+      "identifikator": "1111111",
+      "navn": "Enenenenen",
+      "aktoerType": "ORGANISASJON"
+    },
+    {
+      "identifikator": "222222",
+      "navn": "Totototo",
+      "aktoerType": "ORGANISASJON"
     }
   ]
 }
