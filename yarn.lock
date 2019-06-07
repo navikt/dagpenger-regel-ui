@@ -7472,7 +7472,7 @@ nav-frontend-ekspanderbartpanel-style@^0.3.20:
 
 nav-frontend-ekspanderbartpanel@^1.0.28:
   version "1.0.28"
-  resolved "https://registry.npmjs.org/nav-frontend-ekspanderbartpanel/-/nav-frontend-ekspanderbartpanel-1.0.28.tgz#91fa5fc8cd9042faf74903c04e642a7c6b8ebf0b"
+  resolved "https://registry.yarnpkg.com/nav-frontend-ekspanderbartpanel/-/nav-frontend-ekspanderbartpanel-1.0.28.tgz#91fa5fc8cd9042faf74903c04e642a7c6b8ebf0b"
   integrity sha512-x1eQL+iwl65LkehEda28dotqze+WWW7ZdPIWgd1C2FKxh5IPoo+k65r8he9BYkfF0ty6pnYBsZwS32JcrLUucg==
 
 nav-frontend-ikoner-assets@^1.0.1:
