@@ -77,9 +77,10 @@ NyInntekt.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
+  mapPropsToValues: props => ({
     verdikode: '',
     beloep: '0.00',
+    dato: props.dato,
   }),
   // Custom sync validation
   validate: (values) => {
@@ -97,6 +98,9 @@ export default withFormik({
     arrayHelpers.insert(0, {
       verdikode: values.verdikode,
       beloep: values.beloep,
+      utbetaltIMaaned: values.dato,
+      inntektskilde: 'dagpenger-regel-ui',
+      inntektsperiodetype: 'Maaned',
       virksomhet: {
         aktoerType: 'ORGANISASJON',
         identifikator: arbeidsgiver,
