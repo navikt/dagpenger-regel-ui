@@ -52,14 +52,14 @@ const Inntekt = ({
                   .map((inntekt, index) => (
                     inntekt.virksomhet.identifikator === rowId && (
                     // eslint-disable-next-line react/no-array-index-key
-                    <div key={`${inntekt.beskrivelse}${index}`} className="flex inntekt">
+                    <div key={`${inntekt.verdikode}${index}`} className="flex inntekt">
                       <div>
                         <SelectField
                           bredde="xl"
                           label=""
                           selectValues={mapTypeInntekter(inntektTyper)}
                           validate={[required]}
-                          name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beskrivelse`}
+                          name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].verdikode`}
                           readOnly={readOnly || editMode}
                         />
                         <InputField
