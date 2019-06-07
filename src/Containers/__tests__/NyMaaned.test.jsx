@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
-import NyMaaned, { NyMaanedImpl } from '../NyMaaned';
+import NyMaaned from '../NyMaaned';
 
 const arrayHelpers = {};
 

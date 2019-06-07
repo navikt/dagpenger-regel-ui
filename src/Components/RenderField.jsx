@@ -4,7 +4,7 @@ import { haystack } from '../Utils/objectUtils';
 import Label, { labelPropType } from './Label';
 
 // todo fikse props fra de forksjellige typene da de er litt ulike for input og select
-const renderNavField = (WrappedNavFieldComponent) => {
+const renderField = (WrappedNavFieldComponent) => {
   const FieldComponent = ({
     field, label, form, readOnly, isEdited, readOnlyHideEmpty, ...otherProps
   }) => {
@@ -49,4 +49,4 @@ const renderNavField = (WrappedNavFieldComponent) => {
 };
 
 
-export default renderNavField;
+export default renderField;
