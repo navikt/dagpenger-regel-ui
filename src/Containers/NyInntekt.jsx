@@ -27,10 +27,10 @@ const NyInntekt = ({
 
     <SelectField
       bredde="xl"
-      label="Beskrivelse"
+      label="verdikode"
       selectValues={mapTypeInntekter(inntektTyper)}
       validate={[required]}
-      name="beskrivelse"
+      name="verdikode"
       readOnly={false}
     />
 
@@ -73,7 +73,7 @@ export default withFormik({
   mapPropsToValues: ({
     arrayHelpers, arbeidsgiver, closeModal,
   }) => ({
-    beskrivelse: '',
+    verdikode: '',
     beloep: '0.00',
     closeModal,
     arbeidsgiver,
@@ -83,8 +83,8 @@ export default withFormik({
   validate: (values) => {
     const errors = {};
 
-    if (!values.beskrivelse) {
-      errors.beskrivelse = 'Required';
+    if (!values.verdikode) {
+      errors.verdikode = 'Required';
     }
 
     return errors;
@@ -93,7 +93,7 @@ export default withFormik({
   handleSubmit: (values, { setSubmitting }) => {
     const { arrayHelpers, closeModal } = values;
     arrayHelpers.insert(0, {
-      beskrivelse: values.beskrivelse,
+      verdikode: values.verdikode,
       beloep: values.beloep,
       virksomhet: {
         aktoerType: 'ORGANISASJON',
