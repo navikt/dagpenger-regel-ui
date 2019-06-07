@@ -15,7 +15,7 @@ exports[`Skal vise ny inntektspost 1`] = `
   >
     <label
       className="skjemaelement__label"
-      htmlFor="beskrivelse"
+      htmlFor="verdikode"
     >
       <div
         className="flex label"
@@ -29,8 +29,8 @@ exports[`Skal vise ny inntektspost 1`] = `
       <select
         className="skjemaelement__input"
         disabled={false}
-        id="beskrivelse"
-        name="beskrivelse"
+        id="verdikode"
+        name="verdikode"
         onBlur={[Function]}
         onChange={[Function]}
         readOnly={false}
