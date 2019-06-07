@@ -64,9 +64,6 @@
     "npm-run-all": "^4.0.2",
     "react-test-renderer": "^16.8.6"
   },
-  "jest": {
-    "moduleFileExtensions": ["web.js", "js", "web.ts", "ts", "web.tsx", "tsx", "json", "web.jsx", "jsx", "node", "css"]
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
