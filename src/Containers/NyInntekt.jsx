@@ -9,7 +9,7 @@ import { required } from '../Utils/validering';
 import DatoLabel from '../Components/DatoLabel';
 import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
 
-// to lage en compontent for dette
+// todo lage en compontent for dette
 import { inntektTyper } from '../Kodeverk/verdikoder';
 
 const mapTypeInntekter = typer => typer
