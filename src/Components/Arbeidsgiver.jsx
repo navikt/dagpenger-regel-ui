@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Element, EtikettLiten, Undertittel } from 'nav-frontend-typografi';
 
 import ArbeidsgiverPropType from '../PropTypes/arbeidsgiverPropType';
@@ -25,7 +24,7 @@ const Arbeidsgiver = ({ arbeidsgiver }) => (
 );
 
 Arbeidsgiver.propTypes = {
-  arbeidsgiver: PropTypes.shape(ArbeidsgiverPropType).isRequired,
+  arbeidsgiver: ArbeidsgiverPropType.isRequired,
 };
 
 export default Arbeidsgiver;

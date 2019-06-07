@@ -1,12 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Skal vise ny skjema for ny måned 1`] = `
-Array [
+exports[`Ny måned Skal vise ny skjema for ny måned 1`] = `
+<form
+  onSubmit={[Function]}
+>
   <h2
     className="typo-undertittel"
   >
     Legg til ny måned
-  </h2>,
+  </h2>
   <div
     className="skjemaelement"
   >
@@ -35,7 +37,7 @@ Array [
       aria-live="assertive"
       role="alert"
     />
-  </div>,
+  </div>
   <div
     className="knapprad"
   >
@@ -55,35 +57,6 @@ Array [
     >
       Avbryt
     </button>
-  </div>,
-  <div
-    style={
-      Object {
-        "margin": "1rem 0",
-      }
-    }
-  >
-    <pre
-      style={
-        Object {
-          "background": "#f6f8fa",
-          "fontFamily": "monospace",
-          "fontSize": "0.85rem",
-          "padding": "0.5rem",
-        }
-      }
-    >
-      <strong>
-        props
-      </strong>
-       
-      =
-       
-      {
-  "aarMaaned": "2018-01",
-  "arrayHelpers": {}
-}
-    </pre>
-  </div>,
-]
+  </div>
+</form>
 `;

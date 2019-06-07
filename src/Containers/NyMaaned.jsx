@@ -5,18 +5,16 @@ import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import InputField from '../Components/InputField';
 import { required } from '../Utils/validering';
-import { DisplayFormikState } from '../Utils/formikUtils';
 
 // todo lukke modal onsubmit
-const NyMaaned = (props) => {
+export const NyMaanedImpl = (props) => {
   const {
-    values,
     handleSubmit,
     isSubmitting,
     closeModal,
   } = props;
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <Undertittel>
       Legg til ny måned
       </Undertittel>
@@ -32,37 +30,32 @@ const NyMaaned = (props) => {
         <Hovedknapp
           htmlType="submit"
           onClick={() => handleSubmit()}
+          disabled={isSubmitting}
         >
       Legg til
         </Hovedknapp>
         <Knapp
           htmlType="button"
           onClick={closeModal}
-          disabled={isSubmitting}
+
         >
       Avbryt
         </Knapp>
       </div>
 
-      <DisplayFormikState {...values} />
-
-    </>
+    </form>
   );
 };
 
-NyMaaned.propTypes = {
+NyMaanedImpl.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  values: PropTypes.shape().isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
 };
 
-export default withFormik({
-  mapPropsToValues: ({
-    arrayHelpers, closeModal,
-  }) => ({
+const NyMaaned = withFormik({
+  mapPropsToValues: () => ({
     aarMaaned: '2018-01',
-    closeModal,
-    arrayHelpers,
   }),
   // Custom sync validation
   validate: (values) => {
@@ -71,8 +64,8 @@ export default withFormik({
     return errors;
   },
 
-  handleSubmit: (values, { setSubmitting }) => {
-    const { arrayHelpers, closeModal } = values;
+  handleSubmit: (values, { setSubmitting, props }) => {
+    const { arrayHelpers, closeModal } = props;
     arrayHelpers.push({
       aarMaaned: values.aarMaaned,
       arbeidsInntektInformasjon: {
@@ -85,4 +78,6 @@ export default withFormik({
 
   displayName: 'nyMåned',
 
-})(NyMaaned);
+})(NyMaanedImpl);
+
+export default NyMaaned;

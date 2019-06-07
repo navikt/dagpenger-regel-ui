@@ -14,64 +14,69 @@ const mapTypeInntekter = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
 
 // todo lukke modal onsubmit
-const NyArbeidsgiver = ({
-  closeModal, values, handleSubmit,
-}) => (
-  <>
-    <Undertittel>
+const NyArbeidsgiver = (props) => {
+  const {
+    values,
+    handleSubmit,
+    isSubmitting,
+    closeModal,
+  } = props;
+  return (
+    <form onSubmit={handleSubmit}>
+      <Undertittel>
       Legg til ny arbeidsgiver
-    </Undertittel>
+      </Undertittel>
 
-    <InputField
-      label="Org.Nr"
-      name="identifikator"
-      validate={[required, hasValidOrgNumber]}
-      type="number"
-      readOnly={false}
-    />
+      <InputField
+        label="Org.Nr"
+        name="identifikator"
+        validate={[required, hasValidOrgNumber]}
+        type="number"
+        readOnly={false}
+      />
 
-    <SelectField
-      bredde="xl"
-      label="Aktørtype"
-      selectValues={mapTypeInntekter(aktoerType)}
-      validate={[required]}
-      name="aktoerType"
-      readOnly={false}
-    />
+      <SelectField
+        bredde="xl"
+        label="Aktørtype"
+        selectValues={mapTypeInntekter(aktoerType)}
+        validate={[required]}
+        name="aktoerType"
+        readOnly={false}
+      />
 
-    <DisplayFormikState {...values} />
+      <DisplayFormikState {...values} />
 
-    <div className="knapprad">
-      <Hovedknapp
-        htmlType="submit"
-        onClick={() => handleSubmit()}
-      >
+      <div className="knapprad">
+        <Hovedknapp
+          htmlType="submit"
+          onClick={() => handleSubmit()}
+          disabled={isSubmitting}
+        >
       Legg til
-      </Hovedknapp>
-      <Knapp
-        htmlType="button"
-        onClick={closeModal}
-      >
+        </Hovedknapp>
+        <Knapp
+          htmlType="button"
+          onClick={closeModal}
+        >
       Avbryt
-      </Knapp>
-    </div>
-  </>
-);
+        </Knapp>
+      </div>
+    </form>
+  );
+};
 
 NyArbeidsgiver.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   values: PropTypes.shape().isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
 };
 
 export default withFormik({
-  mapPropsToValues: ({ setArbeidsgivere, arbeidsgivere, closeModal }) => ({
+  mapPropsToValues: () => ({
     identifikator: null,
     navn: null,
     aktoerType: null,
-    setArbeidsgivere,
-    arbeidsgivere,
-    closeModal,
   }),
 
   // Custom sync validation
@@ -85,19 +90,18 @@ export default withFormik({
     return errors;
   },
 
-  handleSubmit: (values, { setSubmitting }) => {
-    values.setArbeidsgivere([
-      ...values.arbeidsgivere,
-      {
-        identifikator: values.identifikator,
-        navn: values.navn,
-        aktoerType: values.aktoerType,
-      },
-    ]);
+  handleSubmit: (values, { setSubmitting, props }) => {
+    const { arrayHelpers, closeModal } = props;
+    arrayHelpers.push({
+      identifikator: values.identifikator,
+      navn: values.navn,
+      aktoerType: values.aktoerType,
+    });
     setSubmitting(false);
-    values.closeModal();
+    closeModal();
   },
-  displayName: 'NyArbeidsgiver',
+
+  displayName: 'arbeidsgivere',
   enableReinitialize: true,
   isInitialValid: true,
 })(NyArbeidsgiver);
