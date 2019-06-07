@@ -5,10 +5,9 @@ import axios from 'axios';
 import { Knapp } from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Spinner from '../Components/Spinner';
-
+import { Inntektstabell } from './Inntektstabell';
 import { getInntekt, getUncachedInntekt, lagreInntekt } from '../lib/inntektApiClient';
 import './Dashboard.css';
-import { Inntektstabell } from './Inntektstabell';
 
 export const findArbeidsgivere = (inntekt) => {
   const map = new Map();
