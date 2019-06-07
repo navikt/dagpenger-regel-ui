@@ -7549,7 +7549,7 @@ nav-frontend-typografi-style@^1.0.13:
 
 nav-frontend-typografi@^2.0.12:
   version "2.0.12"
-  resolved "https://registry.npmjs.org/nav-frontend-typografi/-/nav-frontend-typografi-2.0.12.tgz#0a947e19f50c5a96552aef6944d0415f03039a16"
+  resolved "https://registry.yarnpkg.com/nav-frontend-typografi/-/nav-frontend-typografi-2.0.12.tgz#0a947e19f50c5a96552aef6944d0415f03039a16"
   integrity sha512-rj+K3JcDmIYb2uklMudwjXsMTPEX3xeFxWGy+itjbX9Ulr62S/V2q22afEfFZxD20IVAsSZToFG+SiufLYA1iA==
 
 nearley@^2.7.10:
