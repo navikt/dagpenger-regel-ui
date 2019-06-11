@@ -20,16 +20,15 @@ pipeline {
           npm install
         """
 
+        sh label: 'Build artifact', script: """
+          npm run build
+          cp ~/.npmrc .npmrc
+        """
         // Should run a set of tests like: unit, functional, component,
         // coverage, contract, lint, mutation.
          sh label: 'Test code', script: """
           CI=true npm test
          """
-
-        sh label: 'Build artifact', script: """
-          npm run build
-          cp ~/.npmrc .npmrc
-        """
 
         withDockerRegistry(
           credentialsId: 'repo.adeo.no',
