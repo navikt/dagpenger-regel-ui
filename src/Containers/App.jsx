@@ -13,9 +13,6 @@ const App = () => (
       <Router>
         <Route exact path="/inntekter/readonly" render={props => <Dashboard readOnly {...props} />} />
         <Route exact path="/inntekter" render={props => <Dashboard {...props} />} />
-
-
-        {process.env.NODE_ENV !== 'production' && <Route render={props => <Dashboard {...props} />} />}
       </Router>
     </div>
   </div>

@@ -86,6 +86,7 @@ export const Inntektstabell = (props) => {
           <Knapp
             htmlType="button"
             mini
+            disabled={readOnly}
             onClick={() => setArbeidsgiverModal(!isArbeidsgiverModalOpen)}
           >
         Legg til arbeidsgiver
@@ -114,6 +115,7 @@ export const Inntektstabell = (props) => {
           <Knapp
             htmlType="button"
             mini
+            disabled={readOnly}
             onClick={() => setMånedModal(!isMånedModalOpen)}
           >
 Legg til måned
