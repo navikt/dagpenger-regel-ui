@@ -15,19 +15,18 @@ import { inntektTyper } from '../Kodeverk/verdikoder';
 const mapTypeInntekter = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
 
-// todo lukke modal onsubmit
 const NyInntekt = (props) => {
   const {
     handleSubmit,
     isSubmitting,
     closeModal,
-    arbeidsgiver,
+    virksomhet,
     dato,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
       <Undertittel>
-        {`Legg til ny inntektspost for ${arbeidsgiver} i `}
+        {`Legg til ny inntektspost for ${virksomhet.identifikator} i `}
         <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
       </Undertittel>
 
@@ -70,7 +69,7 @@ const NyInntekt = (props) => {
 
 NyInntekt.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  arbeidsgiver: PropTypes.string.isRequired,
+  virksomhet: PropTypes.shape().isRequired,
   dato: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
@@ -81,7 +80,10 @@ export default withFormik({
     verdikode: '',
     beloep: '0.00',
     dato: props.dato,
+    virksomhet: props.virksomhet,
+    opplysningspliktig: props.opplysningspliktig,
   }),
+
   // Custom sync validation
   validate: (values) => {
     const errors = {};
@@ -94,18 +96,18 @@ export default withFormik({
   },
 
   handleSubmit: (values, { setSubmitting, props }) => {
-    const { arbeidsgiver, closeModal, arrayHelpers } = props;
+    const { closeModal, arrayHelpers } = props;
     arrayHelpers.insert(0, {
       verdikode: values.verdikode,
       beloep: values.beloep,
       utbetaltIMaaned: values.dato,
+      fordel: 'denne kommer',
       inntektskilde: 'dagpenger-regel-ui',
       inntektsperiodetype: 'Maaned',
-      virksomhet: {
-        aktoerType: 'ORGANISASJON',
-        identifikator: arbeidsgiver,
-        navn: 'Enenenenen',
-      },
+      virksomhet: values.virksomhet,
+      inntektsmottaker: arrayHelpers.form.values.inntekt.ident,
+      opplysningspliktig: values.virksomhet,
+
     });
     setSubmitting(false);
     closeModal();

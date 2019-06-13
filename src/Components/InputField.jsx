@@ -32,6 +32,7 @@ InputField.propTypes = {
   validate: PropTypes.arrayOf(PropTypes.func),
   readOnly: PropTypes.bool,
   isEdited: PropTypes.bool,
+  formater: PropTypes.bool,
 };
 
 InputField.defaultProps = {
@@ -40,6 +41,7 @@ InputField.defaultProps = {
   readOnly: false,
   label: '',
   isEdited: false,
+  formater: false,
 };
 
 export default InputField;

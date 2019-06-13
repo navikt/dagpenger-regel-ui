@@ -7,7 +7,7 @@ exports[`Skal vise ny inntektspost 1`] = `
   <h2
     className="typo-undertittel"
   >
-    Legg til ny inntektspost for 9876543210 i 
+    Legg til ny inntektspost for 1234567890 i 
     mai 2019
   </h2>
   <div
@@ -505,6 +505,7 @@ exports[`Skal vise ny inntektspost 1`] = `
     <input
       autoComplete="off"
       className="skjemaelement__input input--fullbredde"
+      formater={false}
       id="beloep"
       name="beloep"
       onBlur={[Function]}

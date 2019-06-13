@@ -6,13 +6,18 @@ const arrayHelpers = {
 
 };
 
+const virksomhet = {
+  identifikator: '1234567890',
+  aktoerType: 'ORGANISASJON',
+};
+
 const setModal = () => {
 
 };
 
 test('Skal vise ny inntektspost', () => {
   const component = renderer.create(
-    <NyInntekt arbeidsgiver="9876543210" dato="2019-05" arrayHelpers={arrayHelpers} closeModal={() => setModal(false)} />,
+    <NyInntekt virksomhet={virksomhet} dato="2019-05" arrayHelpers={arrayHelpers} closeModal={() => setModal(false)} />,
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();

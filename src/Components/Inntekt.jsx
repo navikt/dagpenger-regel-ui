@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Modal from 'nav-frontend-modal';
-import { Knapp } from 'nav-frontend-knapper';
+import { Knapp, Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
+import { Normaltekst } from 'nav-frontend-typografi';
 import { FieldArray } from 'formik';
 import SelectField from './SelectField';
 import InputField from './InputField';
 import { required } from '../Utils/validering';
 import { formatertPengesum } from '../Utils/currencyFormat';
 import { ReactComponent as SlettIkon } from '../images/slett.svg';
+import { ReactComponent as AdvarselIkon } from '../images/advarsel.svg';
 
 
 // to lage en compontent for dette
@@ -30,10 +32,12 @@ const inntektStyle = (rowId, columnId) => `
 
 // TODO lage egen komponent for innholdet i modal og egen for radio
 const Inntekt = ({
-  readOnly, inntekter, rowId, columnId, monthIndex,
+  readOnly, inntekter, virksomhet, columnId, monthIndex,
 }) => {
+  const rowId = virksomhet.identifikator;
   const [editMode, setEditMode] = useState(true);
-  const [isModalOpen, setModal] = useState(false);
+  const [isNyInntektModalOpen, setNyInntektModal] = useState(false);
+  const [isSlettInntektModalOpen, setSlettInntektModal] = useState(false);
   return (
     <>
       <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
@@ -44,7 +48,7 @@ const Inntekt = ({
         <Ekspanderbartpanel
           tittel={formatertPengesum(sumInntekter(inntekter
             .filter(inntekt => inntekt.virksomhet.identifikator === rowId)))}
-          tittelProps="element"
+          tittelProps="ingress"
         >
           <FieldArray
             name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe`}
@@ -52,7 +56,7 @@ const Inntekt = ({
               <>
                 {inntekter.length > 0 && inntekter
                   .map((inntekt, index) => (
-                    inntekt.virksomhet.identifikator === rowId && (
+                    inntekt.virksomhet.identifikator === virksomhet.identifikator && (
                     // eslint-disable-next-line react/no-array-index-key
                     <div key={`${inntekt.verdikode}${index}`} className="flex inntekt">
                       <div>
@@ -73,58 +77,99 @@ const Inntekt = ({
                           readOnly={readOnly || editMode}
                         />
                       </div>
-                      {editMode && (
+                      {!readOnly && !editMode && (
                         <div className="flexend">
-                          {
-                            // TODO legge inn bekreftelse på sletting?
-                          }
-                          <button type="button" className="ikon ikon--slett" onClick={() => arrayHelpers.remove(index)} title="Slett inntekt">
+                          <button
+                            type="button"
+                            className="ikon ikon--slett"
+                            onClick={() => setSlettInntektModal(!isSlettInntektModalOpen)}
+                            title="Slett inntekt"
+                          >
                             <SlettIkon />
                           </button>
+                          <Modal
+                            isOpen={isSlettInntektModalOpen}
+                            onRequestClose={() => setSlettInntektModal(false)}
+                            closeButton={false}
+                            contentLabel="Ny inntektspost"
+                            ariaHideApp={false}
+                          >
+                            <div className="">
+                              <div className="flex">
+                                <div className="flexcolumn">
+                                  <AdvarselIkon />
+                                </div>
+                                <div className="flexcolumn">
+                                  <Normaltekst>
+                                    {`Er du sikker på at du vil slette ${inntekt.verdikode} - ${formatertPengesum(inntekt.beloep)}`}
+                                  </Normaltekst>
+                                </div>
+                              </div>
+
+                              <div className="knapprad">
+                                <Knapp
+                                  htmlType="button"
+                                  mini
+                                  onClick={() => setSlettInntektModal(!isSlettInntektModalOpen)}
+                                >
+                                Avbryt
+                                </Knapp>
+                                <Hovedknapp
+                                  htmlType="button"
+                                  mini
+                                  onClick={() => arrayHelpers.remove(index)}
+                                >
+                                Bekreft
+                                </Hovedknapp>
+
+                              </div>
+                            </div>
+
+                          </Modal>
                         </div>
 
                       )}
                     </div>
                     )
                   ))}
+                {!readOnly && (
+                  <div className="knapprad midstill">
+                    <Flatknapp
+                      htmlType="button"
+                      mini
+                      onClick={() => setNyInntektModal(!isNyInntektModalOpen)}
+                    >
+                      Legg til inntekt
+                    </Flatknapp>
+                    <Modal
+                      isOpen={isNyInntektModalOpen}
+                      onRequestClose={() => setNyInntektModal(false)}
+                      closeButton={false}
+                      contentLabel="Ny inntektspost"
+                      ariaHideApp={false}
+                    >
+                      <NyInntekt
+                        virksomhet={virksomhet}
+                        dato={columnId}
+                        arrayHelpers={arrayHelpers}
+                        closeModal={() => setNyInntektModal(false)}
+                      />
 
-                <Knapp
-                  htmlType="button"
-                  mini
-                  onClick={() => setModal(!isModalOpen)}
-                >
-                  Legg til inntekt
-                </Knapp>
-                <Modal
-                  isOpen={isModalOpen}
-                  onRequestClose={() => setModal(false)}
-                  closeButton={false}
-                  contentLabel="Ny inntektspost"
-                  ariaHideApp={false}
-                >
-                  <NyInntekt
-                    arbeidsgiver={rowId}
-                    dato={columnId}
-                    arrayHelpers={arrayHelpers}
-                    closeModal={() => setModal(false)}
-                  />
+                    </Modal>
+                    <Flatknapp
+                      htmlType="button"
+                      mini
+                      onClick={() => setEditMode(!editMode)}
+                    >
+                      {editMode ? 'Rediger' : 'Oppdater'}
+                    </Flatknapp>
 
-                </Modal>
-
+                  </div>
+                )}
 
               </>
             )}
           />
-
-          {!readOnly && (
-          <Knapp
-            htmlType="button"
-            mini
-            onClick={() => setEditMode(!editMode)}
-          >
-            {editMode ? 'Rediger' : 'Oppdater'}
-          </Knapp>
-          )}
         </Ekspanderbartpanel>
       </div>
     </>
@@ -141,7 +186,7 @@ Inntekt.propTypes = {
     ]),
   })).isRequired,
   readOnly: PropTypes.bool.isRequired,
-  rowId: PropTypes.string.isRequired,
+  virksomhet: PropTypes.shape().isRequired,
   columnId: PropTypes.string.isRequired,
   monthIndex: PropTypes.number.isRequired,
 };
