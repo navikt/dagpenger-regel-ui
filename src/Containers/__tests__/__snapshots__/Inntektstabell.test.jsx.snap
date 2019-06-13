@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
+exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
 <form>
   <style
     dangerouslySetInnerHTML={

@@ -18,7 +18,7 @@ const formProps = {
 };
 
 describe('Inntektstabell', () => {
-  test('Skal vise ny Dashboard', () => {
+  test('Skal vise ny Inntektstabell', () => {
     const component = renderer.create(
       <Inntektstabell {...formProps} readOnly={false} />,
     );
