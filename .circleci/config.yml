@@ -5,6 +5,9 @@
 version: 2
 jobs:
   build:
+    environment:
+      LC_ALL: nb_NO.UTF-8
+      LANG: nb_NO.UTF-8
     docker:
       # specify the version you desire here
       - image: circleci/node:11.13
