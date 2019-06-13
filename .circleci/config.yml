@@ -24,7 +24,7 @@ jobs:
       - run:
            name: install locale
            command: |
-              sudo update-locale LANG=LANG=nb_NO.UTF-8 LANGUAGE
+              locale -a
 
       - checkout
 
