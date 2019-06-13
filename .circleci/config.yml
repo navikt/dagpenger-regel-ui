@@ -23,8 +23,8 @@ jobs:
            command: |
               sudo apt-get update
               sudo apt-get install --yes locales
-              sudo echo "nb_NO.UTF-8 UTF-8" >> /etc/locale.gen
-              locale-gen
+              sudo localectl set-locale LANG=nb_NO.UTF-8
+
 
       - checkout
 
