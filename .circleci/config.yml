@@ -10,8 +10,8 @@ jobs:
       - image: circleci/node:11.13
         environment:
           TZ: "Europe/Oslo"
-          LC_ALL: nb_NO.UTF-8
-          LANG: nb_NO.UTF-8
+          #LC_ALL: nb_NO.UTF-8
+          #LANG: nb_NO.UTF-8
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -21,8 +21,8 @@ jobs:
     working_directory: ~/repo
     environment:
       TZ: "Europe/Oslo"
-      LC_ALL: nb_NO.UTF-8
-      LANG: nb_NO.UTF-8
+      #LC_ALL: nb_NO.UTF-8
+      #LANG: nb_NO.UTF-8
 
     steps:
 
