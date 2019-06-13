@@ -24,7 +24,7 @@ jobs:
       - run:
            name: install locale
            command: |
-              apt-get install language-pack-no
+              sudo apt-get install language-pack-no
 
       - checkout
 
