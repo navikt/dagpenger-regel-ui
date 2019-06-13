@@ -3,4 +3,4 @@
 
 # Except build
 !build/*
-!k8s/*
+!nais/*

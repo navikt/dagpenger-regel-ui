@@ -1,5 +1,0 @@
-# Simple Proxy to backend
-location  /inntekter/v1 {
-    access_by_lua_file oidc_protected.lua;
-    # proxy_pass "http://dp-inntekt-api/inntekter/v1";
-}
