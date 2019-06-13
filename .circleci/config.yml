@@ -8,6 +8,10 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:11.13
+        environment:
+          TZ: "Europe/Oslo"
+          LC_ALL: nb_NO.UTF-8
+          LANG: nb_NO.UTF-8
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -15,15 +19,12 @@ jobs:
       # - image: circleci/mongo:3.4.4
 
     working_directory: ~/repo
+    environment:
+      TZ: "Europe/Oslo"
+      LC_ALL: nb_NO.UTF-8
+      LANG: nb_NO.UTF-8
 
     steps:
-
-      - run:
-           name: install locale
-           command: |
-              sudo locale-gen nb_NO.UTF-8
-              sudo update-locale LANG=nb_NO.UTF-8
-
 
       - checkout
 
