@@ -21,9 +21,8 @@ jobs:
       - run:
            name: install locale
            command: |
-              sudo apt-get update
-              sudo apt-get install --yes locales
-              sudo localectl set-locale LANG=nb_NO.UTF-8
+              sudo locale-gen nb_NO.UTF-8
+              sudo update-locale LANG=nb_NO.UTF-8
 
 
       - checkout
