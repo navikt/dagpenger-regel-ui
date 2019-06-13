@@ -24,7 +24,7 @@ jobs:
       - run:
            name: install locale
            command: |
-              sudo apt-get install language-pack-no
+              sudo update-locale LANG=LANG=nb_NO.UTF-8 LANGUAGE
 
       - checkout
 
