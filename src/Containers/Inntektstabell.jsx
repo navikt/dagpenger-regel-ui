@@ -66,7 +66,7 @@ export const Inntektstabell = (props) => {
               {arbeidsgivere.map(arbeidsgiver => (
                 <Inntekt
                   readOnly={readOnly}
-                  rowId={arbeidsgiver.identifikator}
+                  virksomhet={arbeidsgiver}
                   columnId={maaned.aarMaaned}
                   key={arbeidsgiver.identifikator}
                   inntekter={maaned.arbeidsInntektInformasjon.inntektListe}

@@ -6,7 +6,6 @@ import { Undertittel } from 'nav-frontend-typografi';
 import InputField from '../Components/InputField';
 import SelectField from '../Components/SelectField';
 import { required, hasValidOrgNumber } from '../Utils/validering';
-import { DisplayFormikState } from '../Utils/formikUtils';
 
 import { aktoerType } from '../Kodeverk/verdikoder';
 
@@ -16,7 +15,6 @@ const mapTypeInntekter = typer => typer
 // todo lukke modal onsubmit
 const NyArbeidsgiver = (props) => {
   const {
-    values,
     handleSubmit,
     isSubmitting,
     closeModal,
@@ -44,8 +42,6 @@ const NyArbeidsgiver = (props) => {
         readOnly={false}
       />
 
-      <DisplayFormikState {...values} />
-
       <div className="knapprad">
         <Hovedknapp
           htmlType="submit"
@@ -68,15 +64,14 @@ const NyArbeidsgiver = (props) => {
 NyArbeidsgiver.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  values: PropTypes.shape().isRequired,
   isSubmitting: PropTypes.bool.isRequired,
 };
 
 export default withFormik({
   mapPropsToValues: () => ({
-    identifikator: null,
-    navn: null,
-    aktoerType: null,
+    identifikator: undefined,
+    navn: undefined,
+    aktoerType: undefined,
   }),
 
   // Custom sync validation

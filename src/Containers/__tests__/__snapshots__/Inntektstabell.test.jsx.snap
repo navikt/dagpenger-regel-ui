@@ -121,7 +121,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 89,743.60
+              NOK 89 743,60
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -160,7 +160,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 6,410.26
+              NOK 6 410,26
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -215,7 +215,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 0.00
+              NOK 0,00
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -254,7 +254,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 0.00
+              NOK 0,00
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -309,7 +309,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 54,194.06
+              NOK 54 194,06
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -348,7 +348,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 54,194.06
+              NOK 54 194,06
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -403,7 +403,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 36,886.20
+              NOK 36 886,20
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -442,7 +442,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 36,886.20
+              NOK 36 886,20
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -497,7 +497,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 79,879.40
+              NOK 79 879,40
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -536,7 +536,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 0.00
+              NOK 0,00
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -591,7 +591,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 45,569.00
+              NOK 45 569,00
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -630,7 +630,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
             <span
               className="typo-ingress ekspanderbartPanel__heading"
             >
-              NOK 45,569.00
+              NOK 45 569,00
             </span>
             <span
               className="ekspanderbartPanel__indikator"
@@ -723,7 +723,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-09",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
@@ -816,7 +816,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2018-03",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
@@ -852,7 +852,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
@@ -973,7 +973,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2018-04",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
@@ -1162,7 +1162,7 @@ exports[`Inntektstabell Skal vise ny Dashboard 1`] = `
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2018-04",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {

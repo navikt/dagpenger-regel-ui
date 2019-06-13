@@ -55,7 +55,7 @@ const Dashboard = ({ readOnly, location }) => {
     setUncachedStatus('fetching');
     if (process.env.NODE_ENV !== 'production') {
       const result = await axios(
-        `${process.env.PUBLIC_URL}/mock/inntekter.json`,
+        `${process.env.PUBLIC_URL}/mock/mock1.json`,
       );
       setData({ ...result.data });
       setArbeidsgivere(findArbeidsgivere(result.data.inntekt));

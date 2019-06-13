@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Modal from 'nav-frontend-modal';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
+import { Knapp, Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FieldArray } from 'formik';
 import SelectField from './SelectField';
@@ -32,8 +32,9 @@ const inntektStyle = (rowId, columnId) => `
 
 // TODO lage egen komponent for innholdet i modal og egen for radio
 const Inntekt = ({
-  readOnly, inntekter, rowId, columnId, monthIndex,
+  readOnly, inntekter, virksomhet, columnId, monthIndex,
 }) => {
+  const rowId = virksomhet.identifikator;
   const [editMode, setEditMode] = useState(true);
   const [isNyInntektModalOpen, setNyInntektModal] = useState(false);
   const [isSlettInntektModalOpen, setSlettInntektModal] = useState(false);
@@ -55,7 +56,7 @@ const Inntekt = ({
               <>
                 {inntekter.length > 0 && inntekter
                   .map((inntekt, index) => (
-                    inntekt.virksomhet.identifikator === rowId && (
+                    inntekt.virksomhet.identifikator === virksomhet.identifikator && (
                     // eslint-disable-next-line react/no-array-index-key
                     <div key={`${inntekt.verdikode}${index}`} className="flex inntekt">
                       <div>
@@ -126,19 +127,20 @@ const Inntekt = ({
 
                           </Modal>
                         </div>
+
                       )}
                     </div>
                     )
                   ))}
                 {!readOnly && (
-                  <div className="knapprad">
-                    <Knapp
+                  <div className="knapprad midstill">
+                    <Flatknapp
                       htmlType="button"
                       mini
                       onClick={() => setNyInntektModal(!isNyInntektModalOpen)}
                     >
-                  Legg til inntekt
-                    </Knapp>
+                      Legg til inntekt
+                    </Flatknapp>
                     <Modal
                       isOpen={isNyInntektModalOpen}
                       onRequestClose={() => setNyInntektModal(false)}
@@ -147,21 +149,20 @@ const Inntekt = ({
                       ariaHideApp={false}
                     >
                       <NyInntekt
-                        arbeidsgiver={rowId}
+                        virksomhet={virksomhet}
                         dato={columnId}
                         arrayHelpers={arrayHelpers}
                         closeModal={() => setNyInntektModal(false)}
                       />
 
                     </Modal>
-
-                    <Knapp
+                    <Flatknapp
                       htmlType="button"
                       mini
                       onClick={() => setEditMode(!editMode)}
                     >
                       {editMode ? 'Rediger' : 'Oppdater'}
-                    </Knapp>
+                    </Flatknapp>
 
                   </div>
                 )}
@@ -185,7 +186,7 @@ Inntekt.propTypes = {
     ]),
   })).isRequired,
   readOnly: PropTypes.bool.isRequired,
-  rowId: PropTypes.string.isRequired,
+  virksomhet: PropTypes.shape().isRequired,
   columnId: PropTypes.string.isRequired,
   monthIndex: PropTypes.number.isRequired,
 };

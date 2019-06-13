@@ -25,6 +25,7 @@ exports[`Ny måned Skal vise ny skjema for ny måned 1`] = `
     <input
       autoComplete="off"
       className="skjemaelement__input input--fullbredde"
+      formater={false}
       id="aarMaaned"
       name="aarMaaned"
       onBlur={[Function]}
