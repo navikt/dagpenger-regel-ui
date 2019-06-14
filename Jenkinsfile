@@ -24,6 +24,11 @@ pipeline {
           npm run build
           cp ~/.npmrc .npmrc
         """
+        // Should run a set of tests like: unit, functional, component,
+        // coverage, contract, lint, mutation.
+         sh label: 'Test code', script: """
+          CI=true npm test
+         """
 
         withDockerRegistry(
           credentialsId: 'repo.adeo.no',
