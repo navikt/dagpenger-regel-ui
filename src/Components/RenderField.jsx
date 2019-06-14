@@ -9,7 +9,7 @@ const renderField = (WrappedNavFieldComponent) => {
     field, label, form, readOnly, isEdited, readOnlyHideEmpty, ...otherProps
   }) => {
     const formatError = (submitFailed, error) => {
-      if (submitFailed && error) {
+      if (error) {
         return { feilmelding: error };
       }
       return undefined;

@@ -18,3 +18,16 @@ export const lagreInntekt = async request => await axios({
   data: request,
 }).then(response => response)
   .catch(error => error);
+
+export const getVerdikoder = async request => await axios({
+  method: 'get',
+  url: '/api/v1/inntekt/verdikoder',
+}).then(response => response)
+  .catch(error => error);
+
+export const getName = async request => await axios({
+  method: 'post',
+  url: '/api/v1/aktoer/name',
+  data: request,
+}).then(response => response)
+  .catch(error => error);

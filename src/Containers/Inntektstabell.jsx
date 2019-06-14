@@ -6,7 +6,7 @@ import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
-import Inntekt from '../Components/Inntekt';
+import Inntekt from './Inntekt';
 import NyArbeidsgiver from './NyArbeidsgiver';
 import NyMaaned from './NyMaaned';
 import { DisplayFormikState } from '../Utils/formikUtils';
@@ -30,7 +30,7 @@ export const buildCSSGrid = (inntekt, arbeidsgivere) => {
 
 export const Inntektstabell = (props) => {
   const {
-    readOnly, status, isSubmitting, dirty, errors, values,
+    readOnly, status, isSubmitting, dirty, errors, values, hentInntektStatus,
   } = props;
 
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
@@ -68,7 +68,8 @@ export const Inntektstabell = (props) => {
                   readOnly={readOnly}
                   virksomhet={arbeidsgiver}
                   columnId={maaned.aarMaaned}
-                  key={arbeidsgiver.identifikator}
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={arbeidsgiver.identifikator + monthIndex}
                   inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
                   monthIndex={monthIndex}
                   formProps={props}
@@ -138,8 +139,8 @@ Legg til måned
         </div>
 
         <div className="flexend">
-          <Hovedknapp htmlType="submit" spinner={isSubmitting} autoDisableVedSpinner disabled={!dirty}>
-      Bekreft og lagre
+          <Hovedknapp htmlType="submit" spinner={isSubmitting} autoDisableVedSpinner disabled={!hentInntektStatus && !dirty}>
+      Bekreft
           </Hovedknapp>
         </div>
       </div>
@@ -157,6 +158,10 @@ Inntektstabell.propTypes = {
   dirty: PropTypes.bool.isRequired,
   errors: PropTypes.shape().isRequired,
   values: PropTypes.shape().isRequired,
+  hentInntektStatus: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]).isRequired,
 };
 
 Inntektstabell.defaultProps = {

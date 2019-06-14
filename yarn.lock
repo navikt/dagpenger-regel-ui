@@ -5698,6 +5698,11 @@ inquirer@^6.2.2:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
+install@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.12.2.tgz#ea10e9b2cbb5b0484f25080b24b5b34429d9f564"
+  integrity sha512-+7thTb4Rpvs9mnlhHKGZFJbGOO6kyMgy+gg0sgM5vFzIFK0wrCYXqdlaM71Bi289DTuPHf61puMFsaZBcwDIrg==
+
 internal-ip@^4.2.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/internal-ip/-/internal-ip-4.3.0.tgz#845452baad9d2ca3b69c635a137acb9a0dad0907"
@@ -7563,8 +7568,13 @@ nav-frontend-modal@^1.0.28:
 
 nav-frontend-paneler-style@^0.3.15:
   version "0.3.15"
-  resolved "https://registry.npmjs.org/nav-frontend-paneler-style/-/nav-frontend-paneler-style-0.3.15.tgz#b9dee564e601c1d149fa4e3ba19e97aa3f9454c4"
+  resolved "https://registry.yarnpkg.com/nav-frontend-paneler-style/-/nav-frontend-paneler-style-0.3.15.tgz#b9dee564e601c1d149fa4e3ba19e97aa3f9454c4"
   integrity sha512-NbslWxU2XHun7Xp0aR2G6rkrd69dNDTScQhOck6pKFA3rBAV/mdf/gbOAdIWQl+mq4M/V1ElYCZ7C/5F193Dtw==
+
+nav-frontend-paneler@^1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/nav-frontend-paneler/-/nav-frontend-paneler-1.0.17.tgz#7f3d4de752633428e13f5b1eec6ef761262e941a"
+  integrity sha512-1ASPwIraZIbsZa+iIx9Dafztu//8DXf6MBvy02tcitEhfaRRK00/Jf26HdFAbwbdvRHqjXFDGi8KiumFaHZb1g==
 
 nav-frontend-skjema-style@^1.0.40:
   version "1.0.40"
@@ -7585,6 +7595,16 @@ nav-frontend-spinner@^1.0.18:
   version "1.0.18"
   resolved "https://registry.npmjs.org/nav-frontend-spinner/-/nav-frontend-spinner-1.0.18.tgz#c393832e6d1d5d837301ef9560c6458f330d4e0f"
   integrity sha512-2ojDpOrnrNWGoCp51cVzdltxKWvq3M6LMIy+cfEpsxVJDx8KCOTHxt/mw8qadavQrAByvxnKVxRNFLjji10tZA==
+
+nav-frontend-toggle-style@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/nav-frontend-toggle-style/-/nav-frontend-toggle-style-0.0.22.tgz#913ca41826ea3f94ba5312c53e3c910f2809f9ac"
+  integrity sha512-bAX4kwnqA2fS5rbqaI+Log1QexwD3qyerCklJ+1uG4fD7MBQ4umGIvcALUnmgTUMh8+im6wjKHWOOr3c2azj0g==
+
+nav-frontend-toggle@^0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/nav-frontend-toggle/-/nav-frontend-toggle-0.0.23.tgz#99ff5a4bf8bd029b5929d6c7117921f303794f9c"
+  integrity sha512-OhBNSunzADhfnirsQbfh/IqF7AOY68q5avZW9182btfDvDFEfE3NiEHHcBeMM8CoCxI/9nrFOzrANJMVrp6+rQ==
 
 nav-frontend-typografi-style@^1.0.13:
   version "1.0.13"

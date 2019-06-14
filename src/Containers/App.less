@@ -34,6 +34,53 @@
   //
 }
 
+// Modal
+.okavbrytmodal {
+  width: 750px;
+
+  .okavbrytmodal--ikon {
+    border-right: 1px solid @navGra40;
+    padding: 8px 18px;
+
+    svg {
+      width: 32px;
+      height: 32px;;
+    }
+  }
+
+  .okavbrytmodal--text {
+    align-self: center;
+    padding: 8px 18px;
+    width: 100%;
+  }
+}
+
+// Spacer
+.spacer {
+  &.fourPx {
+    margin-bottom: 4px;
+  }
+
+  &.eightPx {
+    margin-bottom: 8px;
+  }
+
+  &.sixteenPx {
+    margin-bottom: 16px;
+  }
+
+  &.twentyPx {
+    margin-bottom: 20px;
+  }
+
+  &.dashed {
+    border-bottom: 3px dashed @navGra20;
+    margin-left: -10px;
+    margin-top: 13px;
+  }
+}
+
+// Ikoner
 .ikon {
   cursor: pointer;
   appearance: none;
@@ -55,6 +102,7 @@
   }
 }
 
+// Misc
 .hoyre {
   text-align: right;
 }
@@ -65,6 +113,11 @@
 
 .midstill {
   text-align: center;
+}
+
+// todo rydde opp i navn
+.paddingleft {
+  padding-left: 16px;
 }
 
 .knapprad {

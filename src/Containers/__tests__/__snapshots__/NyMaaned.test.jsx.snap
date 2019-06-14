@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Ny måned Skal vise ny skjema for ny måned 1`] = `
+exports[`NyMaaned Skal vise ny skjema for ny måned 1`] = `
 <form
   onSubmit={[Function]}
 >
@@ -43,8 +43,8 @@ exports[`Ny måned Skal vise ny skjema for ny måned 1`] = `
     className="knapprad"
   >
     <button
-      className="knapp knapp--hoved"
-      disabled={false}
+      className="knapp knapp--hoved knapp--disabled"
+      disabled={true}
       onClick={[Function]}
       type="submit"
     >

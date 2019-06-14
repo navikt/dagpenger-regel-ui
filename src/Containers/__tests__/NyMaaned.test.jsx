@@ -15,7 +15,7 @@ const formikPropsMock = {
   // handleSubmit: noop,
 };
 
-describe('Ny måned', () => {
+describe('NyMaaned', () => {
   xtest('submits the form', () => {
     const tree = mount(<NyMaaned closeModal={() => setMånedModal(false)} arrayHelpers={arrayHelpers} {...formikPropsMock} />);
     const button = tree.find(Hovedknapp);

@@ -32,7 +32,7 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
       <h2
         className="typo-undertittel"
       >
-        Enenenenen
+        test
       </h2>
       <p
         className="typo-etikett-liten"
@@ -62,7 +62,7 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
       <h2
         className="typo-undertittel"
       >
-        Totototo
+        test
       </h2>
       <p
         className="typo-etikett-liten"
@@ -675,7 +675,7 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
         disabled={true}
         type="submit"
       >
-        Bekreft og lagre
+        Bekreft
       </button>
     </div>
   </div>
@@ -728,7 +728,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -757,7 +756,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -785,7 +783,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -821,7 +818,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -857,7 +853,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -886,7 +881,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -914,7 +908,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -942,7 +935,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -978,7 +970,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "tilleggsinformasjon": {
@@ -1010,7 +1001,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -1038,7 +1028,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -1074,7 +1063,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -1103,7 +1091,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -1131,7 +1118,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -1167,7 +1153,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "tilleggsinformasjon": {
@@ -1199,7 +1184,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -1228,7 +1212,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -1256,7 +1239,6 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -1278,15 +1260,16 @@ exports[`Inntektstabell Skal vise ny Inntektstabell 1`] = `
       "aktoerType": "NATURLIG_IDENT"
     }
   },
+  "manueltRedigert": false,
   "arbeidsgivere": [
     {
+      "navn": "test",
       "identifikator": "1111111",
-      "navn": "Enenenenen",
       "aktoerType": "ORGANISASJON"
     },
     {
+      "navn": "test",
       "identifikator": "222222",
-      "navn": "Totototo",
       "aktoerType": "ORGANISASJON"
     }
   ]

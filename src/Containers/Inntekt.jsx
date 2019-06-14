@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Modal from 'nav-frontend-modal';
-import { Knapp, Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Flatknapp } from 'nav-frontend-knapper';
 import { FieldArray } from 'formik';
-import SelectField from './SelectField';
-import InputField from './InputField';
+import SelectField from '../Components/SelectField';
+import InputField from '../Components/InputField';
 import { required } from '../Utils/validering';
+import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import { formatertPengesum } from '../Utils/currencyFormat';
+import { VerdikoderContext } from '../Context/Verdikoder';
 import { ReactComponent as SlettIkon } from '../images/slett.svg';
-import { ReactComponent as AdvarselIkon } from '../images/advarsel.svg';
 
 
-// to lage en compontent for dette
-import { inntektTyper } from '../Kodeverk/verdikoder';
+import NyInntekt from './NyInntekt';
 
-import NyInntekt from '../Containers/NyInntekt';
 
-const mapTypeInntekter = typer => typer
+const mapVerdikoder = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
 
 // eslint-disable-next-line max-len
@@ -38,6 +36,7 @@ const Inntekt = ({
   const [editMode, setEditMode] = useState(true);
   const [isNyInntektModalOpen, setNyInntektModal] = useState(false);
   const [isSlettInntektModalOpen, setSlettInntektModal] = useState(false);
+  const verdikoder = useContext(VerdikoderContext);
   return (
     <>
       <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
@@ -63,8 +62,8 @@ const Inntekt = ({
                         <SelectField
                           bredde="xl"
                           label=""
-                          selectValues={mapTypeInntekter(inntektTyper)}
-                          validate={[required]}
+                          selectValues={mapVerdikoder(verdikoder)}
+                          validate={required}
                           name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].verdikode`}
                           readOnly={readOnly || editMode}
                         />
@@ -72,7 +71,7 @@ const Inntekt = ({
                           label=""
                           name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
                           type="number"
-                          validate={[required]}
+                          validate={required}
                           formater
                           readOnly={readOnly || editMode}
                         />
@@ -87,47 +86,17 @@ const Inntekt = ({
                           >
                             <SlettIkon />
                           </button>
-                          <Modal
+
+                          <OkAvbrytModal
                             isOpen={isSlettInntektModalOpen}
-                            onRequestClose={() => setSlettInntektModal(false)}
-                            closeButton={false}
-                            contentLabel="Ny inntektspost"
-                            ariaHideApp={false}
-                          >
-                            <div className="">
-                              <div className="flex">
-                                <div className="flexcolumn">
-                                  <AdvarselIkon />
-                                </div>
-                                <div className="flexcolumn">
-                                  <Normaltekst>
-                                    {`Er du sikker på at du vil slette ${inntekt.verdikode} - ${formatertPengesum(inntekt.beloep)}`}
-                                  </Normaltekst>
-                                </div>
-                              </div>
-
-                              <div className="knapprad">
-                                <Knapp
-                                  htmlType="button"
-                                  mini
-                                  onClick={() => setSlettInntektModal(!isSlettInntektModalOpen)}
-                                >
-                                Avbryt
-                                </Knapp>
-                                <Hovedknapp
-                                  htmlType="button"
-                                  mini
-                                  onClick={() => arrayHelpers.remove(index)}
-                                >
-                                Bekreft
-                                </Hovedknapp>
-
-                              </div>
-                            </div>
-
-                          </Modal>
+                            text={`Er du sikker på at du vil slette ${inntekt.verdikode} - ${formatertPengesum(inntekt.beloep)}`}
+                            avbrytCallback={() => setSlettInntektModal(false)}
+                            OkCallback={() => {
+                              arrayHelpers.remove(index);
+                              setSlettInntektModal(!isSlettInntektModalOpen);
+                            }}
+                          />
                         </div>
-
                       )}
                     </div>
                     )
@@ -137,32 +106,36 @@ const Inntekt = ({
                     <Flatknapp
                       htmlType="button"
                       mini
-                      onClick={() => setNyInntektModal(!isNyInntektModalOpen)}
-                    >
-                      Legg til inntekt
-                    </Flatknapp>
-                    <Modal
-                      isOpen={isNyInntektModalOpen}
-                      onRequestClose={() => setNyInntektModal(false)}
-                      closeButton={false}
-                      contentLabel="Ny inntektspost"
-                      ariaHideApp={false}
-                    >
-                      <NyInntekt
-                        virksomhet={virksomhet}
-                        dato={columnId}
-                        arrayHelpers={arrayHelpers}
-                        closeModal={() => setNyInntektModal(false)}
-                      />
-
-                    </Modal>
-                    <Flatknapp
-                      htmlType="button"
-                      mini
                       onClick={() => setEditMode(!editMode)}
                     >
-                      {editMode ? 'Rediger' : 'Oppdater'}
+                      Rediger
                     </Flatknapp>
+                    {editMode && (
+                      <>
+                        <Flatknapp
+                          htmlType="button"
+                          mini
+                          onClick={() => setNyInntektModal(!isNyInntektModalOpen)}
+                        >
+                      Legg til inntekt
+                        </Flatknapp>
+                        <Modal
+                          isOpen={isNyInntektModalOpen}
+                          onRequestClose={() => setNyInntektModal(false)}
+                          closeButton={false}
+                          contentLabel="Ny inntektspost"
+                          ariaHideApp={false}
+                        >
+                          <NyInntekt
+                            virksomhet={virksomhet}
+                            dato={columnId}
+                            arrayHelpers={arrayHelpers}
+                            closeModal={() => setNyInntektModal(false)}
+                          />
+
+                        </Modal>
+                      </>
+                    )}
 
                   </div>
                 )}
