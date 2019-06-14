@@ -7,10 +7,23 @@ import InputField from '../Components/InputField';
 import SelectField from '../Components/SelectField';
 import { required, hasValidOrgNumber } from '../Utils/validering';
 
-import { aktoerType } from '../Kodeverk/verdikoder';
+const aktoerType = [
+  {
+    navn: 'AktørId',
+    kode: 'AKTOER_ID',
+  },
+  {
+    navn: 'Naturlig ident',
+    kode: 'NATURLIG_IDENT',
+  },
+  {
+    navn: 'Organisasjon',
+    kode: 'ORGANISASJON',
+  },
+];
 
-const mapTypeInntekter = typer => typer
-  .map(navn => (<option value={navn} key={navn}>{navn}</option>));
+const mapAktørType = typer => typer
+  .map(({ navn, kode }) => (<option value={kode} key={kode}>{navn}</option>));
 
 // todo lukke modal onsubmit
 const NyArbeidsgiver = (props) => {
@@ -18,6 +31,7 @@ const NyArbeidsgiver = (props) => {
     handleSubmit,
     isSubmitting,
     closeModal,
+    isValid,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -28,25 +42,23 @@ const NyArbeidsgiver = (props) => {
       <InputField
         label="Org.Nr"
         name="identifikator"
-        validate={[required, hasValidOrgNumber]}
+        validate={hasValidOrgNumber}
         type="number"
-        readOnly={false}
       />
 
       <SelectField
         bredde="xl"
         label="Aktørtype"
-        selectValues={mapTypeInntekter(aktoerType)}
-        validate={[required]}
+        selectValues={mapAktørType(aktoerType)}
+        validate={required}
         name="aktoerType"
-        readOnly={false}
       />
 
       <div className="knapprad">
         <Hovedknapp
           htmlType="submit"
           onClick={() => handleSubmit()}
-          disabled={isSubmitting}
+          disabled={!isValid || isSubmitting}
         >
       Legg til
         </Hovedknapp>
@@ -65,6 +77,7 @@ NyArbeidsgiver.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool.isRequired,
 };
 
 export default withFormik({
@@ -73,17 +86,6 @@ export default withFormik({
     navn: undefined,
     aktoerType: undefined,
   }),
-
-  // Custom sync validation
-  validate: (values) => {
-    const errors = {};
-
-    if (!values.identifikator) {
-      errors.identifikator = 'Required';
-    }
-
-    return errors;
-  },
 
   handleSubmit: (values, { setSubmitting, props }) => {
     const { arrayHelpers, closeModal } = props;

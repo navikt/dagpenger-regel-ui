@@ -144,5 +144,6 @@
       "identifikator": "99999999999",
       "aktoerType": "NATURLIG_IDENT"
     }
-  }
+  },
+  "manueltRedigert": false
 }

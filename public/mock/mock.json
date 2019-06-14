@@ -24,7 +24,6 @@
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -60,7 +59,6 @@
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -89,7 +87,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -117,7 +114,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -154,7 +150,6 @@
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -183,7 +178,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -211,7 +205,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -239,7 +232,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -275,7 +267,6 @@
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "tilleggsinformasjon": {
@@ -307,7 +298,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -335,7 +325,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -371,7 +360,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -400,7 +388,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -428,7 +415,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -464,7 +450,6 @@
               },
               "virksomhet": {
                 "identifikator": "222222",
-                "navn": "Totototo",
                 "aktoerType": "ORGANISASJON"
               },
               "tilleggsinformasjon": {
@@ -496,7 +481,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -525,7 +509,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -553,7 +536,6 @@
               },
               "virksomhet": {
                 "identifikator": "1111111",
-                "navn": "Enenenenen",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -574,6 +556,7 @@
       "identifikator": "99999999999",
       "aktoerType": "NATURLIG_IDENT"
     }
-  }
+  },
+  "manueltRedigert": false
 }
 

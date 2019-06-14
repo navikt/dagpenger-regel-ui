@@ -12,6 +12,7 @@ export const NyMaanedImpl = (props) => {
     handleSubmit,
     isSubmitting,
     closeModal,
+    isValid,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -23,14 +24,14 @@ export const NyMaanedImpl = (props) => {
         name="aarMaaned"
         label="Måned"
         type="month"
-        validate={[required]}
+        validate={required}
       />
 
       <div className="knapprad">
         <Hovedknapp
           htmlType="submit"
           onClick={() => handleSubmit()}
-          disabled={isSubmitting}
+          disabled={!isValid || isSubmitting}
         >
       Legg til
         </Hovedknapp>
@@ -51,18 +52,13 @@ NyMaanedImpl.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool.isRequired,
 };
 
 const NyMaaned = withFormik({
   mapPropsToValues: () => ({
     aarMaaned: '2018-01',
   }),
-  // Custom sync validation
-  validate: (values) => {
-    const errors = {};
-
-    return errors;
-  },
 
   handleSubmit: (values, { setSubmitting, props }) => {
     const { arrayHelpers, closeModal } = props;

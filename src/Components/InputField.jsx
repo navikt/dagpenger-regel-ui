@@ -29,7 +29,7 @@ InputField.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
   label: labelPropType,
-  validate: PropTypes.arrayOf(PropTypes.func),
+  validate: PropTypes.func,
   readOnly: PropTypes.bool,
   isEdited: PropTypes.bool,
   formater: PropTypes.bool,

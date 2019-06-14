@@ -36,7 +36,7 @@ SelectField.propTypes = {
   name: PropTypes.string.isRequired,
   selectValues: PropTypes.arrayOf(PropTypes.object).isRequired,
   label: labelPropType.isRequired,
-  validate: PropTypes.arrayOf(PropTypes.func),
+  validate: PropTypes.func,
   readOnly: PropTypes.bool,
   placeholder: PropTypes.string,
   hideValueOnDisable: PropTypes.bool,

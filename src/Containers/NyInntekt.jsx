@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -8,11 +8,10 @@ import SelectField from '../Components/SelectField';
 import { required } from '../Utils/validering';
 import DatoLabel from '../Components/DatoLabel';
 import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
+import { VerdikoderContext } from '../Context/Verdikoder';
 
-// todo lage en compontent for dette
-import { inntektTyper } from '../Kodeverk/verdikoder';
 
-const mapTypeInntekter = typer => typer
+const mapVerdikoder = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
 
 const NyInntekt = (props) => {
@@ -21,8 +20,10 @@ const NyInntekt = (props) => {
     isSubmitting,
     closeModal,
     virksomhet,
+    isValid,
     dato,
   } = props;
+  const verdikoder = useContext(VerdikoderContext);
   return (
     <form onSubmit={handleSubmit}>
       <Undertittel>
@@ -33,8 +34,8 @@ const NyInntekt = (props) => {
       <SelectField
         bredde="xl"
         label="Beskrivelse"
-        selectValues={mapTypeInntekter(inntektTyper)}
-        validate={[required]}
+        selectValues={mapVerdikoder(verdikoder)}
+        validate={required}
         name="verdikode"
         readOnly={false}
       />
@@ -42,7 +43,7 @@ const NyInntekt = (props) => {
       <InputField
         label="Beløp"
         name="beloep"
-        validate={[required]}
+        validate={required}
         type="number"
         readOnly={false}
       />
@@ -51,13 +52,14 @@ const NyInntekt = (props) => {
         <Hovedknapp
           htmlType="submit"
           onClick={() => handleSubmit()}
-          disabled={isSubmitting}
+          disabled={!isValid || isSubmitting}
         >
       Legg til
         </Hovedknapp>
         <Knapp
-          htmlType="button"
+          htmlType="submit"
           onClick={closeModal}
+
         >
       Avbryt
         </Knapp>
@@ -73,6 +75,7 @@ NyInntekt.propTypes = {
   dato: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool.isRequired,
 };
 
 export default withFormik({
@@ -83,17 +86,6 @@ export default withFormik({
     virksomhet: props.virksomhet,
     opplysningspliktig: props.opplysningspliktig,
   }),
-
-  // Custom sync validation
-  validate: (values) => {
-    const errors = {};
-
-    if (!values.verdikode) {
-      errors.verdikode = 'Required';
-    }
-
-    return errors;
-  },
 
   handleSubmit: (values, { setSubmitting, props }) => {
     const { closeModal, arrayHelpers } = props;

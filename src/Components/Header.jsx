@@ -17,7 +17,7 @@ export const Header = () => {
     <header role="banner">
       <div className="dekorator flex">
         <NavLogo className="logo" />
-        <Systemtittel>Dagpenger</Systemtittel>
+        <Systemtittel>Dagpenger-inntektregistrering</Systemtittel>
         <div className="flexend">NAVansatt</div>
       </div>
       {errors.isError && <div className="feilmelding">{`${errors.status} ${errors.statusText}`}</div>}

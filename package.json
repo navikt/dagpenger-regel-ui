@@ -13,8 +13,8 @@
     "test": "react-scripts test --env=jsdom",
     "test:less": "stylelint \"src/**/*.less\"",
     "eject": "react-scripts eject",
-    "up": "docker-compose up -d --remove-orphans --build",
-    "down": "docker-compose down"
+    "up": "docker-compose -f docker-compose.yml up --build",
+    "down": "docker-compose -f docker-compose.yml down"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -23,6 +23,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "formik": "^1.5.7",
+    "install": "^0.12.2",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-alertstriper": "^3.0.2",
     "nav-frontend-alertstriper-style": "^2.0.2",
@@ -38,11 +39,14 @@
     "nav-frontend-lukknapp-style": "^0.2.19",
     "nav-frontend-modal": "^1.0.28",
     "nav-frontend-modal-style": "^0.3.29",
+    "nav-frontend-paneler": "^1.0.17",
     "nav-frontend-paneler-style": "^0.3.15",
     "nav-frontend-skjema": "^1.0.67",
     "nav-frontend-skjema-style": "^1.0.40",
     "nav-frontend-spinner": "^1.0.18",
     "nav-frontend-spinner-style": "^0.2.5",
+    "nav-frontend-toggle": "^0.0.23",
+    "nav-frontend-toggle-style": "^0.0.22",
     "nav-frontend-typografi": "^2.0.12",
     "nav-frontend-typografi-style": "^1.0.13",
     "prop-types": "^15.7.2",
