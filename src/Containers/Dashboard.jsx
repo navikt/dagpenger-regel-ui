@@ -10,11 +10,11 @@ import { ToggleKnapp } from 'nav-frontend-toggle';
 import Spinner from '../Components/Spinner';
 import Spacer from '../Components/Spacer';
 import { Inntektstabell } from './Inntektstabell';
+import { eachMonthOfInterval } from '../Utils/dateUtils';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import {
   getInntekt, getUncachedInntekt, lagreInntekt, getName,
 } from '../lib/inntektApiClient';
-import { ReactComponent as MannIkon } from '../images/mann.svg';
 
 import './Dashboard.css';
 
@@ -41,7 +41,16 @@ const inntektRequest = queryParams => ({
 });
 
 const Dashboard = ({ readOnly, location }) => {
-  const [inntektdata, setInntektdata] = useState({ inntektId: '', inntekt: { arbeidsInntektMaaned: [], ident: {}, manueltRedigert: false } });
+  const [inntektdata, setInntektdata] = useState({
+    fraDato: null,
+    tilDato: null,
+    inntektId: '',
+    inntekt: {
+      arbeidsInntektMaaned: [],
+      ident: {},
+      manueltRedigert: false,
+    },
+  });
   const [arbeidsgivere, setArbeidsgivere] = useState([]);
   const [hentInntektStatus, setHentInntekttatus] = useState(false);
   const [isHentInntektModalOpen, setHentInntektModal] = useState(false);
@@ -57,6 +66,27 @@ const Dashboard = ({ readOnly, location }) => {
       } else {
         result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
       }
+
+      // todo rydde opp denne funksjonen slik at den ikke trengs å skrives enn gang til
+      const { fraDato, tilDato } = result.data.inntekt;
+      const måneder = eachMonthOfInterval({
+        start: new Date(fraDato),
+        end: new Date(tilDato),
+      });
+
+      måneder.forEach((måned) => {
+        const isMånedEksisterer = result.data.inntekt.arbeidsInntektMaaned.some(inntekt => måned === inntekt.aarMaaned);
+
+        if (!isMånedEksisterer) {
+          result.data.inntekt.arbeidsInntektMaaned.push({
+            aarMaaned: måned,
+            arbeidsInntektInformasjon: {
+              inntektListe: [],
+            },
+          });
+        }
+      });
+
       setInntektdata({ ...result.data });
       setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
     };
@@ -66,25 +96,42 @@ const Dashboard = ({ readOnly, location }) => {
 
   const fetchUncachedInntekt = async () => {
     setHentInntekttatus('fetching');
+
+    let result;
     if (process.env.NODE_ENV !== 'production') {
-      const result = await axios(
+      result = await axios(
         `${process.env.PUBLIC_URL}/mock/mock1.json`,
       );
-      setInntektdata({ ...result.data });
-      setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
-      setHentInntekttatus(true);
     } else {
-      getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)))
-        .then((result) => {
-          setInntektdata({ ...result.data });
-          setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
-          setHentInntekttatus(true);
-        })
-        // eslint-disable-next-line no-unused-vars
-        .catch((error) => {
-          setHentInntekttatus('error');
-        });
+      try {
+        result = await getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)));
+      } catch (error) {
+        setHentInntekttatus('error');
+      }
     }
+
+    const { fraDato, tilDato } = result.data.inntekt;
+    const måneder = eachMonthOfInterval({
+      start: new Date(fraDato),
+      end: new Date(tilDato),
+    });
+
+    måneder.forEach((måned) => {
+      const isMånedEksisterer = result.data.inntekt.arbeidsInntektMaaned.some(inntekt => måned === inntekt.aarMaaned);
+
+      if (!isMånedEksisterer) {
+        result.data.inntekt.arbeidsInntektMaaned.push({
+          aarMaaned: måned,
+          arbeidsInntektInformasjon: {
+            inntektListe: [],
+          },
+        });
+      }
+    });
+
+    setInntektdata({ ...result.data });
+    setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+    setHentInntekttatus(true);
   };
 
   if (!arbeidsgivere.length || !inntektdata.inntekt.arbeidsInntektMaaned.length) {
@@ -95,14 +142,10 @@ const Dashboard = ({ readOnly, location }) => {
     <>
       <Panel border>
         <div className="flex">
-          <MannIkon />
-          <div className="paddingleft">
-            <Ingress>Ola Nordmann</Ingress>
-            <Normaltekst>{`AktørId: ${inntektdata.inntekt.ident.identifikator}`}</Normaltekst>
-          </div>
+          <Ingress>{`Fødselsnr: ${inntektdata.inntekt.ident.identifikator}`}</Ingress>
           <div className="flexend hoyre">
-            InntektId
-            <Normaltekst>{inntektdata.inntektId.id}</Normaltekst>
+            Sist oppdatert
+            <Normaltekst>02.02.2019 kl. 00:00</Normaltekst>
           </div>
         </div>
       </Panel>

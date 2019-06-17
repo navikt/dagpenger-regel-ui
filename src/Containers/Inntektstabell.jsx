@@ -8,7 +8,6 @@ import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
 import Inntekt from './Inntekt';
 import NyArbeidsgiver from './NyArbeidsgiver';
-import NyMaaned from './NyMaaned';
 import { DisplayFormikState } from '../Utils/formikUtils';
 
 
@@ -34,7 +33,6 @@ export const Inntektstabell = (props) => {
   } = props;
 
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
-  const [isMånedModalOpen, setMånedModal] = useState(false);
   const { arbeidsgivere, inntekt } = values;
 
   return (
@@ -111,31 +109,6 @@ export const Inntektstabell = (props) => {
             />
           </Modal>
 
-        </div>
-        <div className="leggtilmaaned">
-          <Knapp
-            htmlType="button"
-            mini
-            disabled={readOnly}
-            onClick={() => setMånedModal(!isMånedModalOpen)}
-          >
-Legg til måned
-
-          </Knapp>
-          <Modal
-            isOpen={isMånedModalOpen}
-            onRequestClose={() => setMånedModal(false)}
-            closeButton={false}
-            contentLabel="Ny arbeidsgiver"
-            ariaHideApp={false}
-          >
-            <FieldArray
-              name="inntekt.arbeidsInntektMaaned"
-              render={arrayHelpers => (
-                <NyMaaned closeModal={() => setMånedModal(false)} arrayHelpers={arrayHelpers} />
-              )}
-            />
-          </Modal>
         </div>
 
         <div className="flexend">

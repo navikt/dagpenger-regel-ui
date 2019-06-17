@@ -9,7 +9,7 @@ const renderField = (WrappedNavFieldComponent) => {
     field, label, form, readOnly, isEdited, readOnlyHideEmpty, ...otherProps
   }) => {
     const formatError = (submitFailed, error) => {
-      if (error) {
+      if (submitFailed && error) {
         return { feilmelding: error };
       }
       return undefined;
@@ -21,7 +21,7 @@ const renderField = (WrappedNavFieldComponent) => {
     }
     const fieldProps = {
       id: field.name,
-      feil: formatError(!form.isValid, haystack(form.errors, field.name)),
+      feil: formatError(form.isSubmitting, haystack(form.errors, field.name)),
       label: <Label label={label} readOnly={readOnly} />,
     };
 
