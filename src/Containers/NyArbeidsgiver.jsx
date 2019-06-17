@@ -4,34 +4,18 @@ import { withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import InputField from '../Components/InputField';
-import SelectField from '../Components/SelectField';
-import { required, hasValidOrgNumber } from '../Utils/validering';
+import { RadioGroupField } from '../Components/RadioGroupField';
+import { RadioOption } from '../Components/RadioOption';
+import { required, hasValidOrgNumber, hasValidFodselsnummer } from '../Utils/validering';
 
-const aktoerType = [
-  {
-    navn: 'AktørId',
-    kode: 'AKTOER_ID',
-  },
-  {
-    navn: 'Naturlig ident',
-    kode: 'NATURLIG_IDENT',
-  },
-  {
-    navn: 'Organisasjon',
-    kode: 'ORGANISASJON',
-  },
-];
-
-const mapAktørType = typer => typer
-  .map(({ navn, kode }) => (<option value={kode} key={kode}>{navn}</option>));
-
-// todo lukke modal onsubmit
+// todo fikse stringifyvalues
 const NyArbeidsgiver = (props) => {
   const {
     handleSubmit,
     isSubmitting,
     closeModal,
     isValid,
+    values,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -39,20 +23,30 @@ const NyArbeidsgiver = (props) => {
       Legg til ny arbeidsgiver
       </Undertittel>
 
+      <RadioGroupField
+        label="Type aktør?"
+        name="aktoerType"
+        validate={required}
+      >
+        <RadioOption value="virksomhet" label="Virksomhet" />
+        <RadioOption value="privatperson" label="Privatperson" />
+
+      </RadioGroupField>
+      {values.aktoerType === '"virksomhet"' && (
       <InputField
         label="Org.Nr"
         name="identifikator"
         validate={hasValidOrgNumber}
-        type="number"
       />
+      )}
 
-      <SelectField
-        bredde="xl"
-        label="Aktørtype"
-        selectValues={mapAktørType(aktoerType)}
-        validate={required}
-        name="aktoerType"
+      {values.aktoerType === '"privatperson"' && (
+      <InputField
+        label="Fødselsnummer"
+        name="identifikator"
+        validate={hasValidFodselsnummer}
       />
+      )}
 
       <div className="knapprad">
         <Hovedknapp
@@ -81,7 +75,7 @@ NyArbeidsgiver.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
+  mapPropsToValues: props => ({
     identifikator: undefined,
     navn: undefined,
     aktoerType: undefined,
@@ -99,6 +93,4 @@ export default withFormik({
   },
 
   displayName: 'arbeidsgivere',
-  enableReinitialize: true,
-  isInitialValid: true,
 })(NyArbeidsgiver);

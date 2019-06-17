@@ -23,7 +23,7 @@ export const RadioOption = ({
         component={Radio}
         name={name}
         label={<Label label={label} typographyElement={Normaltekst} />}
-        value={value}
+        value={stringifiedValue}
         checked={checked}
         onChange={onChange}
         disabled={disabled || groupDisabled}

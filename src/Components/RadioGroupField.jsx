@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'formik';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-
 import { RadioOption } from './RadioOption';
 import RenderField from './RenderField';
 
 // todo fikse proptypes
 const renderRadioGroupField = RenderField(({
   label,
-  columns,
   id,
   name,
   value,
@@ -19,9 +17,6 @@ const renderRadioGroupField = RenderField(({
   isEdited,
   feil,
   children,
-  spaceBetween,
-  rows,
-  direction,
 }) => {
   const optionProps = {
     name,
@@ -29,7 +24,6 @@ const renderRadioGroupField = RenderField(({
     actualValue: value,
     onChange,
   };
-
   return (
     <SkjemaGruppe feil={readOnly ? undefined : feil} className={`input--${bredde} radioGroup ${readOnly}`}>
       {label.props.label && <span className={`radioGroupLabel ${readOnly}`}>{label}</span>}
