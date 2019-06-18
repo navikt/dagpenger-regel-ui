@@ -8,3 +8,11 @@ spec:
   env:
     - name: APP_INNTEKT_BASEURL
       value: http://dp-inntekt-api/
+    - name: REDIS_HOST
+      value: dagpenger-redis.default.svc.nais.local
+    - name: REDIS_PORT
+      value: "6379"
+    - name: OIDC_HOST_URL
+      value: https://isso.adeo.no:443/isso/oauth2
+    - name: OIDC_AGENTNAME
+      value: dagpenger-regel-ui-p

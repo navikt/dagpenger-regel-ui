@@ -1,0 +1,22 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  labels:
+    team: teamdagpenger
+  name: dagpenger-redis
+  namespace: default
+spec:
+  image: redis:5-alpine # or a custom Redis-image
+  port: 6379
+  replicas:
+    min: 1
+    max: 1
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+  service:
+    port: 6379
