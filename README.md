@@ -28,8 +28,10 @@ opp lokalt vha Docker Compose(som følger med Docker Desktop)
 
 Legg til `127.0.0.1 host.docker.internal` til hostfilen, `/etc/hosts`. OpenID implementasjonen https://github.com/zmartzone/lua-resty-openidc bruker docker interne netverk som "discovery url"
 
-Starte dp-inntekt-api, Postgres og regel-ui (baseres på at dp-inntekt-api er bygget (`./gradlew build`) og regel-ui er bygget (`npm run build`))
+Starte dp-inntekt-api, Postgres og regel-ui (baseres på at dp-inntekt-api er bygget (`./gradlew build`) og regel-ui er bygget (`yarn run build`))
 ```bash
+yarn up
+eller
 docker-compose -f docker-compose.yml up --build
 
 ```
@@ -39,6 +41,8 @@ OpenId provideren har et sett predifinerte brukernavn og passord, se disse bruke
 
 Stopp ved å kjøre: 
 ```bash
+yarn down
+eller
 docker-compose -f docker-compose.yml down
 
 ```
