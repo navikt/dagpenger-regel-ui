@@ -165,6 +165,7 @@ const Dashboard = ({ readOnly, location }) => {
         <Knapp
           onClick={() => setHentInntektModal(true)}
           autoDisableVedSpinner
+          disabled={readOnly}
           spinner={hentInntektStatus === 'fetching'}
         >
 
