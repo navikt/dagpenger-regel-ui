@@ -6,6 +6,8 @@ import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import Arbeidsgiver from '../Components/Arbeidsgiver';
 import Maaned from '../Components/Maaned';
+import TotalMaaned from '../Components/TotalMaaned';
+import TotalInntekt from '../Components/TotalInntekt';
 import Inntekt from './Inntekt';
 import NyArbeidsgiver from './NyArbeidsgiver';
 import { DisplayFormikState } from '../Utils/formikUtils';
@@ -15,9 +17,19 @@ import { DisplayFormikState } from '../Utils/formikUtils';
 export const buildCSSGrid = (inntekt, arbeidsgivere) => {
   const { arbeidsInntektMaaned } = inntekt;
 
-  const maaneder = arbeidsInntektMaaned.sort((a, b) => a.aarMaaned.localeCompare(b.aarMaaned)).map(maaned => `maaned--${maaned.aarMaaned}`);
+  const maaneder = arbeidsInntektMaaned.sort((a, b) => a.aarMaaned.localeCompare(b.aarMaaned)).map((måned, index) => {
+    if ((index + 1) % 12 === 0) {
+      return `maaned--${måned.aarMaaned} maaned--total--${index}`;
+    }
+    return `maaned--${måned.aarMaaned}`;
+  });
   const arbeidsgivereMedInntekter = arbeidsgivere.map((arbeidsgiver) => {
-    const inntekter = arbeidsInntektMaaned.map(maaned => `inntekter--${arbeidsgiver.identifikator}--${maaned.aarMaaned} `);
+    const inntekter = arbeidsInntektMaaned.map((måned, index) => {
+      if ((index + 1) % 12 === 0) {
+        return `inntekter--${arbeidsgiver.identifikator}--${måned.aarMaaned} inntekter--${arbeidsgiver.identifikator}--total--${index}`;
+      }
+      return `inntekter--${arbeidsgiver.identifikator}--${måned.aarMaaned} `;
+    });
     return `"arbeidsgiver--${arbeidsgiver.identifikator} ${inntekter.join(' ')}"`;
   });
 
@@ -59,21 +71,37 @@ export const Inntektstabell = (props) => {
 
         {inntekt.arbeidsInntektMaaned.map((maaned, monthIndex) => (
           <React.Fragment key={maaned.aarMaaned}>
+
+
             <Maaned maaned={maaned.aarMaaned} />
+            {(monthIndex + 1) % 12 === 0 && (
+            <TotalMaaned index={monthIndex} />
+            )}
             <>
-              {arbeidsgivere.map(arbeidsgiver => (
-                <Inntekt
-                  readOnly={readOnly}
-                  virksomhet={arbeidsgiver}
-                  columnId={maaned.aarMaaned}
+              {arbeidsgivere.map((arbeidsgiver) => {
+                // todo use useMemo for this calculation
+                let total = 0;
+                total += maaned.arbeidsInntektInformasjon.inntektListe.map(i => i.beleop);
+                return (
+                  <>
+                    <Inntekt
+                      readOnly={readOnly}
+                      virksomhet={arbeidsgiver}
+                      columnId={maaned.aarMaaned}
                   // eslint-disable-next-line react/no-array-index-key
-                  key={arbeidsgiver.identifikator + monthIndex}
-                  inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
-                  monthIndex={monthIndex}
-                  formProps={props}
-                />
-              ))}
+                      key={arbeidsgiver.identifikator + monthIndex}
+                      inntekter={maaned.arbeidsInntektInformasjon.inntektListe}
+                      monthIndex={monthIndex}
+                      formProps={props}
+                    />
+                    {(monthIndex + 1) % 12 === 0 && (
+                    <TotalInntekt index={monthIndex} identifikator={arbeidsgiver.identifikator} total={total} />
+                    )}
+                  </>
+                );
+              })}
             </>
+
           </React.Fragment>
 
         ))}

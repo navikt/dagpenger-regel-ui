@@ -55,37 +55,50 @@ const Dashboard = ({ readOnly, location }) => {
   const [hentInntektStatus, setHentInntekttatus] = useState(false);
   const [isHentInntektModalOpen, setHentInntektModal] = useState(false);
 
+  const getAlleMåneder = (fraDato, tilDato) => {
+    const måneder = eachMonthOfInterval({
+      start: new Date(fraDato),
+      end: new Date(tilDato),
+    });
+
+    return måneder;
+  };
 
   useEffect(() => {
     const getInntektFromApi = async () => {
       let result;
       if (process.env.NODE_ENV !== 'production') {
-        result = await axios(
-          `${process.env.PUBLIC_URL}/mock/mock.json`,
-        );
+        try {
+          result = await axios(`${process.env.PUBLIC_URL}/mock/mock.json`);
+        } catch (error) {
+          throw new Error(error);
+        }
       } else {
-        result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
+        try {
+          result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
+        } catch (error) {
+          throw new Error(error);
+        }
       }
 
       // todo rydde opp denne funksjonen slik at den ikke trengs å skrives enn gang til
       const { fraDato, tilDato } = result.data.inntekt;
-      const måneder = eachMonthOfInterval({
-        start: new Date(fraDato),
-        end: new Date(tilDato),
-      });
+      if (fraDato && tilDato) {
+        const måneder = getAlleMåneder(fraDato, tilDato);
 
-      måneder.forEach((måned) => {
-        const isMånedEksisterer = result.data.inntekt.arbeidsInntektMaaned.some(inntekt => måned === inntekt.aarMaaned);
+        måneder.forEach((måned) => {
+          const isMånedEksisterer = result.data.inntekt.arbeidsInntektMaaned.some(inntekt => måned === inntekt.aarMaaned);
 
-        if (!isMånedEksisterer) {
-          result.data.inntekt.arbeidsInntektMaaned.push({
-            aarMaaned: måned,
-            arbeidsInntektInformasjon: {
-              inntektListe: [],
-            },
-          });
-        }
-      });
+          if (!isMånedEksisterer) {
+            result.data.inntekt.arbeidsInntektMaaned.push({
+              aarMaaned: måned,
+              arbeidsInntektInformasjon: {
+                inntektListe: [],
+              },
+            });
+          }
+        });
+      }
 
       setInntektdata({ ...result.data });
       setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
@@ -111,10 +124,7 @@ const Dashboard = ({ readOnly, location }) => {
     }
 
     const { fraDato, tilDato } = result.data.inntekt;
-    const måneder = eachMonthOfInterval({
-      start: new Date(fraDato),
-      end: new Date(tilDato),
-    });
+    const måneder = getAlleMåneder(fraDato, tilDato);
 
     måneder.forEach((måned) => {
       const isMånedEksisterer = result.data.inntekt.arbeidsInntektMaaned.some(inntekt => måned === inntekt.aarMaaned);
