@@ -9,11 +9,11 @@ export const ReadOnlyField = ({
   label, formater, field, form, ...otherProps
 }) => {
   const isEdited = !haystack(form.touched, field.name);
-
+  const formaterSum = value => (formater ? formatertPengesum(value) : value);
   return (
     <div>
       <Label label={label} isEdited={isEdited} />
-      <Element className="inntektbeloep">{formater ? formatertPengesum(field.value) : field.value}</Element>
+      <Element className="inntektbeloep">{formaterSum(field.value)}</Element>
     </div>
   );
 };
