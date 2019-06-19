@@ -6,10 +6,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { ReactComponent as AdvarselIkon } from '../images/advarsel.svg';
 
 export const OkAvbrytModal = ({
-  isOpen,
-  text,
-  avbrytCallback,
-  OkCallback,
+  isOpen, text, avbrytCallback, OkCallback,
 }) => (
   <Modal
     isOpen={isOpen}
@@ -17,6 +14,7 @@ export const OkAvbrytModal = ({
     closeButton={false}
     contentLabel={text}
     ariaHideApp={false}
+    shouldFocusAfterRender
   >
     <div className="okavbrytmodal">
       <div className="flex">
@@ -26,28 +24,17 @@ export const OkAvbrytModal = ({
           </div>
         </div>
         <div className="flexcolumn okavbrytmodal--text">
-          <Normaltekst>
-            {text}
-          </Normaltekst>
+          <Normaltekst>{text}</Normaltekst>
         </div>
       </div>
 
       <div className="knapprad hoyre">
-        <Knapp
-          htmlType="button"
-          mini
-          onClick={avbrytCallback}
-        >
-            Avbryt
+        <Knapp htmlType="button" mini onClick={avbrytCallback}>
+          Avbryt
         </Knapp>
-        <Hovedknapp
-          htmlType="button"
-          mini
-          onClick={OkCallback}
-        >
-            Bekreft
+        <Hovedknapp htmlType="button" mini onClick={OkCallback}>
+          Bekreft
         </Hovedknapp>
-
       </div>
     </div>
   </Modal>
