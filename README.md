@@ -31,9 +31,10 @@ Legg til `127.0.0.1 host.docker.internal` til hostfilen, `/etc/hosts`. OpenID im
 Starte dp-inntekt-api, Postgres og regel-ui (baseres på at dp-inntekt-api er bygget (`./gradlew build`) og regel-ui er bygget (`yarn run build`))
 ```bash
 yarn up
+```
 eller
+```bash
 docker-compose -f docker-compose.yml up --build
-
 ```
 
 OpenId provideren har et sett predifinerte brukernavn og passord, se disse brukerene nederst på denne siden https://hub.docker.com/r/qlik/simple-oidc-provider/ 
@@ -42,9 +43,10 @@ OpenId provideren har et sett predifinerte brukernavn og passord, se disse bruke
 Stopp ved å kjøre: 
 ```bash
 yarn down
+```
 eller
+```bash
 docker-compose -f docker-compose.yml down
-
 ```
 
 
