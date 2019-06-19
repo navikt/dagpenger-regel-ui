@@ -56,39 +56,39 @@ const Inntekt = ({
                 {inntekter.length > 0 && inntekter
                   .map((inntekt, index) => (
                     inntekt.virksomhet.identifikator === virksomhet.identifikator && (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <div key={`${inntekt.verdikode}${index}`} className="flex inntekt">
-                      <div>
-                        <SelectField
-                          bredde="xl"
-                          label=""
-                          selectValues={mapVerdikoder(verdikoder)}
-                          validate={required}
-                          name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].verdikode`}
-                          readOnly={readOnly || editMode}
-                        />
-                        <InputField
-                          label=""
-                          name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
-                          type="number"
-                          validate={required}
-                          formater
-                          readOnly={readOnly || editMode}
-                        />
-                      </div>
-                      {!readOnly && !editMode && (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <div key={`${inntekt.verdikode}${index}`} className="flex inntekt">
+                        <div>
+                          <SelectField
+                            bredde="xl"
+                            label=""
+                            selectValues={mapVerdikoder(verdikoder)}
+                            validate={required}
+                            name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].verdikode`}
+                            readOnly={readOnly || editMode}
+                          />
+                          <InputField
+                            label=""
+                            name={`inntekt.arbeidsInntektMaaned[${monthIndex}].arbeidsInntektInformasjon.inntektListe[${index}].beloep`}
+                            type="number"
+                            validate={required}
+                            formater
+                            readOnly={readOnly || editMode}
+                          />
+                        </div>
+                        {!readOnly && !editMode && (
                         <div className="flexend">
                           <button
                             type="button"
                             className="ikon ikon--slett"
-                            onClick={() => setSlettInntektModal(!isSlettInntektModalOpen)}
+                            onClick={() => setSlettInntektModal(index)}
                             title="Slett inntekt"
                           >
                             <SlettIkon />
                           </button>
 
                           <OkAvbrytModal
-                            isOpen={isSlettInntektModalOpen}
+                            isOpen={isSlettInntektModalOpen === index}
                             text={`Er du sikker på at du vil slette ${inntekt.verdikode} - ${formatertPengesum(inntekt.beloep)}`}
                             avbrytCallback={() => setSlettInntektModal(false)}
                             OkCallback={() => {
@@ -97,8 +97,8 @@ const Inntekt = ({
                             }}
                           />
                         </div>
-                      )}
-                    </div>
+                        )}
+                      </div>
                     )
                   ))}
                 {!readOnly && (
@@ -141,7 +141,8 @@ const Inntekt = ({
                 )}
 
               </>
-            )}
+            )
+        }
           />
         </Ekspanderbartpanel>
       </div>

@@ -89,7 +89,7 @@ export default withFormik({
 
   handleSubmit: (values, { setSubmitting, props }) => {
     const { closeModal, arrayHelpers } = props;
-    arrayHelpers.insert(0, {
+    arrayHelpers.push({
       verdikode: values.verdikode,
       beloep: values.beloep,
       utbetaltIMaaned: values.dato,
