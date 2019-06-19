@@ -7,7 +7,7 @@ export const getInntekt = async (request) => {
       url: `/api/v1/inntekt/uklassifisert/${request.aktørId}/${request.vedtakId}/${request.beregningsDato}`,
     });
   } catch (error) {
-    throw new Error(error);
+    return error;
   }
 };
 
@@ -18,7 +18,7 @@ export const getUncachedInntekt = async (request) => {
       url: `/api/v1/inntekt/uklassifisert/uncached/${request.aktørId}/${request.vedtakId}/${request.beregningsDato}`,
     });
   } catch (error) {
-    throw new Error(error);
+    return error;
   }
 };
 
@@ -30,7 +30,7 @@ export const lagreInntekt = async (request) => {
       data: request,
     });
   } catch (error) {
-    throw new Error(error);
+    return error;
   }
 };
 
@@ -41,7 +41,7 @@ export const getVerdikoder = async () => {
       url: '/api/v1/inntekt/verdikoder',
     });
   } catch (error) {
-    throw new Error(error);
+    return error;
   }
 };
 
@@ -53,6 +53,6 @@ export const getName = async (request) => {
       data: request,
     });
   } catch (error) {
-    throw new Error(error);
+    return error;
   }
 };
