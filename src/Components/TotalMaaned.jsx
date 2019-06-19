@@ -15,13 +15,13 @@ const TotalMaaned = ({ index }) => (
     }}
     />
     <div className={`item maaned total maaned--total--${index}`}>
-      Total
+      Totalt
     </div>
   </>
 );
 
 TotalMaaned.propTypes = {
-  index: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default TotalMaaned;

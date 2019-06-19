@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatDato } from '../Utils/dateUtils';
+import { formatDato } from '../Utils/datoUtils';
 
 const DatoLabel = ({ dato, datoFormat }) => (
   <>{formatDato(new Date(dato), datoFormat)}</>

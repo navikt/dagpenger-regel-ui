@@ -28,7 +28,7 @@ describe('Inntektstabell', () => {
   });
 
 
-  test('Skal bygge cssgrid', () => {
+  xtest('Skal bygge cssgrid', () => {
     const { inntekt } = values;
     const grid = buildCSSGrid(inntekt, arbeidsgivere);
     const template = `.grid {

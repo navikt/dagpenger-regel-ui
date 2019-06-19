@@ -6,11 +6,11 @@ import { Knapp } from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
-import { ToggleKnapp } from 'nav-frontend-toggle';
+import { subMonths } from 'date-fns';
 import Spinner from '../Components/Spinner';
 import Spacer from '../Components/Spacer';
 import { Inntektstabell } from './Inntektstabell';
-import { eachMonthOfInterval } from '../Utils/dateUtils';
+import { eachMonthOfInterval } from '../Utils/datoUtils';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import {
   getInntekt, getUncachedInntekt, lagreInntekt, getName,
@@ -18,13 +18,15 @@ import {
 
 import './Dashboard.css';
 
+const getOrgNavn = (id, aktørType) => getName({ id, aktørType });
+
 export const findArbeidsgivere = (inntekt) => {
   const map = new Map();
   inntekt.arbeidsInntektMaaned
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
         // TODO fikse denne, bør flyttes til backend ved et senere tidspunkt
-        const navn = 'test'; // getName(JSON.stringify({ id: arbeidsgiver.virksomhet.identifikator, aktørType: arbeidsgiver.virksomhet.aktoerType }));
+        const navn = 'test'; // getOrgNavn(arbeidsgiver.virksomhet.identifikator, arbeidsgiver.virksomhet.aktoerType);
 
         map.set(arbeidsgiver.virksomhet.identifikator, { navn, ...arbeidsgiver.virksomhet });
       }));
@@ -55,14 +57,19 @@ const Dashboard = ({ readOnly, location }) => {
   const [hentInntektStatus, setHentInntekttatus] = useState(false);
   const [isHentInntektModalOpen, setHentInntektModal] = useState(false);
 
+  // todo fra 2016-05 - 2019-05 skal eksludere eller ta(37 måneder) med 2019-05?
   const getAlleMåneder = (fraDato, tilDato) => {
     const måneder = eachMonthOfInterval({
       start: new Date(fraDato),
-      end: new Date(tilDato),
+      end: subMonths(new Date(tilDato), 1),
     });
 
     return måneder;
   };
+
+
+  // todo endre struktur fra backend slik at vi slipper å bruke til å hacke ting på plass
+  // DOM order matches the visual order, improving navigation for assistive technology. Learn more.
 
   useEffect(() => {
     const getInntektFromApi = async () => {
@@ -86,7 +93,7 @@ const Dashboard = ({ readOnly, location }) => {
       if (fraDato && tilDato) {
         const måneder = getAlleMåneder(fraDato, tilDato);
 
-        måneder.forEach((måned) => {
+        måneder.forEach((måned, index) => {
           const isMånedEksisterer = result.data.inntekt.arbeidsInntektMaaned.some(inntekt => måned === inntekt.aarMaaned);
 
           if (!isMånedEksisterer) {
@@ -191,9 +198,6 @@ const Dashboard = ({ readOnly, location }) => {
             setHentInntektModal(false);
           }}
         />
-        <div className="flexend">
-          <ToggleKnapp>Vis alle</ToggleKnapp>
-        </div>
 
       </div>
 

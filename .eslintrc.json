@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "react-app",
+    "airbnb"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "ecmaVersion": 8,
+      "jsx": true,
+      "impliedStrict": true
+    }
+  },
+
+  "rules": {
+    "linebreak-style": 0,
+    "import/no-named-as-default": 0,
+    "max-len": [2, 160],
+    "react/require-default-props": 0,
+    "react/jsx-filename-extension": 0,
+    "no-undef": 2
+  }
+}
+

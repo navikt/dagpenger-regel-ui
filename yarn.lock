@@ -5698,11 +5698,6 @@ inquirer@^6.2.2:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
-install@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/install/-/install-0.12.2.tgz#ea10e9b2cbb5b0484f25080b24b5b34429d9f564"
-  integrity sha512-+7thTb4Rpvs9mnlhHKGZFJbGOO6kyMgy+gg0sgM5vFzIFK0wrCYXqdlaM71Bi289DTuPHf61puMFsaZBcwDIrg==
-
 internal-ip@^4.2.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/internal-ip/-/internal-ip-4.3.0.tgz#845452baad9d2ca3b69c635a137acb9a0dad0907"
@@ -7537,14 +7532,14 @@ nav-frontend-js-utils@^1.0.7:
   integrity sha512-/XzbrFCfIou61E+fpeuyiKG5SVFd2EYUk96B9SfP8BZLwfRMjNdFieWpu0WP//5KbR9sMhpbqc2evzTnzXyrfQ==
 
 nav-frontend-knapper-style@^0.3.25:
-  version "0.3.25"
-  resolved "https://registry.npmjs.org/nav-frontend-knapper-style/-/nav-frontend-knapper-style-0.3.25.tgz#3738632f8df929b78cdf9edf4dfa1df8bc0ac775"
-  integrity sha512-AzX3eIbDAuHe3BQPcNDiOaXs/dDwAYUNjbFHKt/9ijJ17RxT9oenom0JJS1tNRUz2Jc04DN8LOBbv4WQQ+hiYg==
+  version "0.3.26"
+  resolved "https://registry.yarnpkg.com/nav-frontend-knapper-style/-/nav-frontend-knapper-style-0.3.26.tgz#734f97052812af2f1c8460f334b4dd63fd414f0b"
+  integrity sha512-a0syl4T0LUI9Bq29Af9hYM/jazpSSoy2hp6SLMAS5H2Va+8j+/dpSFFqJ0Jc5hBclVOCMBNajMx6PxhK9LYDMw==
 
 nav-frontend-knapper@^1.0.29:
-  version "1.0.29"
-  resolved "https://registry.npmjs.org/nav-frontend-knapper/-/nav-frontend-knapper-1.0.29.tgz#f8e609470325f47db6a5fbf4c9dc43ce45c38863"
-  integrity sha512-Oq0JIppG84QXBtiyZb2RGIgB4GhN5faogNMRK4q8v0sjYeLO4dEoqLzV20bLSrMHuVW+VVA68KgjMrPiqi7fBQ==
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/nav-frontend-knapper/-/nav-frontend-knapper-1.0.30.tgz#aef99f5120fc1f2388ad5c98bc6d23ab62241c3d"
+  integrity sha512-d5ttmI/BjdX1FbhnAwWa1pZuV10xVtp1y5AZwMt0PXfxA/hPd0x9owcMXkGpnO4NXpUHwQqxWuS9t2XUwQ6seQ==
 
 nav-frontend-lukknapp-style@^0.2.19:
   version "0.2.19"
