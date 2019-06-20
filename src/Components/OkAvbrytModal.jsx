@@ -14,7 +14,6 @@ export const OkAvbrytModal = ({
     closeButton={false}
     contentLabel={text}
     ariaHideApp={false}
-    shouldFocusAfterRender
   >
     <div className="okavbrytmodal">
       <div className="flex">

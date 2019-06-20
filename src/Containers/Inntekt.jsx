@@ -110,32 +110,28 @@ const Inntekt = ({
                     >
                       Rediger
                     </Flatknapp>
-                    {editMode && (
-                      <>
-                        <Flatknapp
-                          htmlType="button"
-                          mini
-                          onClick={() => setNyInntektModal(!isNyInntektModalOpen)}
-                        >
+                    <Flatknapp
+                      htmlType="button"
+                      mini
+                      onClick={() => setNyInntektModal(!isNyInntektModalOpen)}
+                    >
                       Legg til inntekt
-                        </Flatknapp>
-                        <Modal
-                          isOpen={isNyInntektModalOpen}
-                          onRequestClose={() => setNyInntektModal(false)}
-                          closeButton={false}
-                          contentLabel="Ny inntektspost"
-                          ariaHideApp={false}
-                        >
-                          <NyInntekt
-                            virksomhet={virksomhet}
-                            dato={columnId}
-                            arrayHelpers={arrayHelpers}
-                            closeModal={() => setNyInntektModal(false)}
-                          />
+                    </Flatknapp>
+                    <Modal
+                      isOpen={isNyInntektModalOpen}
+                      onRequestClose={() => setNyInntektModal(false)}
+                      closeButton={false}
+                      contentLabel="Ny inntektspost"
+                      ariaHideApp={false}
+                    >
+                      <NyInntekt
+                        virksomhet={virksomhet}
+                        dato={columnId}
+                        arrayHelpers={arrayHelpers}
+                        closeModal={() => setNyInntektModal(false)}
+                      />
 
-                        </Modal>
-                      </>
-                    )}
+                    </Modal>
 
                   </div>
                 )}
