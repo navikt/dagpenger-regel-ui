@@ -16,14 +16,15 @@ export const RadioOption = ({
   children,
 }) => {
   const stringifiedValue = JSON.stringify(value);
-  const checked = stringifiedValue === actualValue;
+  const actualStringifiedValue = JSON.stringify(actualValue);
+  const checked = stringifiedValue === actualStringifiedValue;
   return (
     <>
       <Radio
         component={Radio}
         name={name}
         label={<Label label={label} typographyElement={Normaltekst} />}
-        value={stringifiedValue}
+        value={value}
         checked={checked}
         onChange={onChange}
         disabled={disabled || groupDisabled}
