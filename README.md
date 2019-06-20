@@ -24,7 +24,7 @@ For å kjøre enkelte av testene kreves det at Docker kjører.
 ### Starte applikasjonen lokalt
 
 Applikasjonen har avhengigheter til dp-inntekt-api, Postgres og OpenId provider som kan kjøres
-opp lokalt vha Docker Compose(som følger med Docker Desktop) 
+opp lokalt vha Docker Compose(som følger med Docker Desktop)
 
 Legg til `127.0.0.1 host.docker.internal` til hostfilen, `/etc/hosts`. OpenID implementasjonen https://github.com/zmartzone/lua-resty-openidc bruker docker interne netverk som "discovery url"
 
@@ -37,10 +37,10 @@ eller
 docker-compose -f docker-compose.yml up --build
 ```
 
-OpenId provideren har et sett predifinerte brukernavn og passord, se disse brukerene nederst på denne siden https://hub.docker.com/r/qlik/simple-oidc-provider/ 
+OpenId provideren har et sett predifinerte brukernavn og passord, se disse brukerene nederst på denne siden https://hub.docker.com/r/qlik/simple-oidc-provider/
 
 
-Stopp ved å kjøre: 
+Stopp ved å kjøre:
 ```bash
 yarn down
 ```
@@ -49,6 +49,9 @@ eller
 docker-compose -f docker-compose.yml down
 ```
 
+## Testpersoner
+
+Tilgjengelig testdata er definert i [testdata i dp-inntekt-api](https://github.com/navikt/dp-inntekt-api/tree/master/src/main/resources/db/testdata).
 
 # OpenId (OpenAM) konfigurasjon i NAV
 
