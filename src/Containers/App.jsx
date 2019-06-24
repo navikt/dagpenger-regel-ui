@@ -15,7 +15,7 @@ const App = () => {
   // apply interceptor on response
   axios.interceptors.response.use(
     response => response,
-    error => setError({ hasError: true, ...error.response }),
+    error => setError({ hasError: true, ...error }),
   );
   return (
     <Verdikoder>

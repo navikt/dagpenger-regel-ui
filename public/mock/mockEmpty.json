@@ -1,0 +1,18 @@
+{
+  "inntektId": {
+    "id": "01D8G6FS9QGRT3JKBTA5KEE64C"
+  },
+  "inntekt": {
+    "arbeidsInntektMaaned": [
+    ],
+    "ident": {
+      "identifikator": "99999999999",
+      "aktoerType": "NATURLIG_IDENT"
+    },
+    "fraDato": "2016-05",
+    "tilDato": "2019-05"
+  },
+  "manueltRedigert": false,
+  "timestamp": "2019-06-24T11:03:56.907821"
+}
+
