@@ -47,7 +47,11 @@ const inntektRequest = queryParams => ({
 const gåTilForrige12 = () => {
   const elem = document.getElementById('grid');
   if (elem && (elem.scrollLeft / 3) > 1250) {
-    elem.scrollLeft -= 3250;
+    elem.scrollTo({
+      top: 0,
+      left: elem.scrollLeft - 3250,
+      behavior: 'smooth',
+    });
   }
 };
 
@@ -55,7 +59,11 @@ const gåTilForrige12 = () => {
 const gåTilNeste12 = () => {
   const elem = document.getElementById('grid');
   if (elem && elem.scrollLeft <= 6500) {
-    elem.scrollLeft += 3250;
+    elem.scrollTo({
+      top: 0,
+      left: elem.scrollLeft + 3250,
+      behavior: 'smooth',
+    });
   }
 };
 
