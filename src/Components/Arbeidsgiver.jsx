@@ -3,6 +3,9 @@ import { Element, EtikettLiten, Undertittel } from 'nav-frontend-typografi';
 
 import ArbeidsgiverPropType from '../PropTypes/arbeidsgiverPropType';
 
+
+const getAktoerType = aktoerType => (aktoerType === 'ORGANISASJON' ? 'Org. nr' : 'FNR');
+
 const arbeidsgiverStyle = identifikator => `
 .arbeidsgiver--${identifikator} {
   grid-area: arbeidsgiver--${identifikator};
@@ -17,7 +20,7 @@ const Arbeidsgiver = ({ arbeidsgiver }) => (
     />
     <div className={`item arbeidsgiver arbeidsgiver--${arbeidsgiver.identifikator}`}>
       {arbeidsgiver.navn && <Undertittel>{arbeidsgiver.navn}</Undertittel>}
-      <EtikettLiten>Org nr</EtikettLiten>
+      <EtikettLiten>{getAktoerType(arbeidsgiver.aktoerType)}</EtikettLiten>
       <Element>{arbeidsgiver.identifikator}</Element>
     </div>
   </>

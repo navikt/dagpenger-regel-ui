@@ -2,23 +2,24 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import axios from 'axios';
-import { Knapp } from 'nav-frontend-knapper';
+import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
-import { subMonths } from 'date-fns';
+import { subMonths, formatDistance } from 'date-fns';
+import { nb } from 'date-fns/locale';
 import Spinner from '../Components/Spinner';
 import Spacer from '../Components/Spacer';
 import { Inntektstabell } from './Inntektstabell';
-import { eachMonthOfInterval } from '../Utils/datoUtils';
+import { DDMMYYYYHHMM_FORMAT } from '../Utils/datoFormat';
+import { formatDato, eachMonthOfInterval } from '../Utils/datoUtils';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import {
-  getInntekt, getUncachedInntekt, lagreInntekt, getName,
+  getInntekt, getUncachedInntekt, lagreInntekt,
 } from '../lib/inntektApiClient';
 
 import './Dashboard.css';
 
-const getOrgNavn = (id, aktørType) => getName({ id, aktørType });
 
 export const findArbeidsgivere = (inntekt) => {
   const map = new Map();
@@ -26,7 +27,7 @@ export const findArbeidsgivere = (inntekt) => {
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
         // TODO fikse denne, bør flyttes til backend ved et senere tidspunkt
-        const navn = 'test'; // getOrgNavn(arbeidsgiver.virksomhet.identifikator, arbeidsgiver.virksomhet.aktoerType);
+        const navn = 'NAVN';
 
         map.set(arbeidsgiver.virksomhet.identifikator, { navn, ...arbeidsgiver.virksomhet });
       }));
@@ -42,10 +43,27 @@ const inntektRequest = queryParams => ({
   beregningsDato: queryParams.get('beregningdato'),
 });
 
+// TODO hente bredde dynamisk tilfelle
+const gåTilForrige12 = () => {
+  const elem = document.getElementById('grid');
+  if (elem && (elem.scrollLeft / 3) > 1250) {
+    elem.scrollLeft -= 3250;
+  }
+};
+
+// TODO hente bredde dynamisk tilfelle
+const gåTilNeste12 = () => {
+  const elem = document.getElementById('grid');
+  if (elem && elem.scrollLeft <= 6500) {
+    elem.scrollLeft += 3250;
+  }
+};
+
 const Dashboard = ({ readOnly, location }) => {
   const [inntektdata, setInntektdata] = useState({
     fraDato: null,
     tilDato: null,
+    timestamp: null,
     inntektId: '',
     inntekt: {
       arbeidsInntektMaaned: [],
@@ -78,22 +96,25 @@ const Dashboard = ({ readOnly, location }) => {
         try {
           result = await axios(`${process.env.PUBLIC_URL}/mock/mock.json`);
         } catch (error) {
-          throw new Error(error);
+          throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
         }
       } else {
         try {
           result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
         } catch (error) {
-          throw new Error(error);
+          throw new Error({
+            name: 'NetworkError',
+            message: `En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`,
+          });
         }
       }
 
       // todo rydde opp denne funksjonen slik at den ikke trengs å skrives enn gang til
-      const { fraDato, tilDato } = result.data.inntekt;
+      const { fraDato, tilDato } = (result.data || []).inntekt;
       if (fraDato && tilDato) {
         const måneder = getAlleMåneder(fraDato, tilDato);
 
-        måneder.forEach((måned, index) => {
+        måneder.forEach((måned) => {
           const isMånedEksisterer = result.data.inntekt.arbeidsInntektMaaned.some(inntekt => måned === inntekt.aarMaaned);
 
           if (!isMånedEksisterer) {
@@ -126,11 +147,11 @@ const Dashboard = ({ readOnly, location }) => {
       try {
         result = await getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)));
       } catch (error) {
-        setHentInntekttatus('error');
+        throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
       }
     }
 
-    const { fraDato, tilDato } = result.data.inntekt;
+    const { fraDato, tilDato } = (result.data || []).inntekt;
     const måneder = getAlleMåneder(fraDato, tilDato);
 
     måneder.forEach((måned) => {
@@ -151,7 +172,7 @@ const Dashboard = ({ readOnly, location }) => {
     setHentInntekttatus(true);
   };
 
-  if (!arbeidsgivere.length || !inntektdata.inntekt.arbeidsInntektMaaned.length) {
+  if (!inntektdata.inntekt.arbeidsInntektMaaned.length) {
     return <Spinner type="XL" />;
   }
 
@@ -160,21 +181,15 @@ const Dashboard = ({ readOnly, location }) => {
       <Panel border>
         <div className="flex">
           <Ingress>{`Fødselsnr: ${inntektdata.inntekt.ident.identifikator}`}</Ingress>
-          <div className="flexend hoyre">
-            Sist oppdatert
-            <Normaltekst>02.02.2019 kl. 00:00</Normaltekst>
-          </div>
         </div>
       </Panel>
 
       <Spacer sixteenPx />
 
-      {hentInntektStatus
-      && <div aria-live="polite"><AlertStripe type="info">Ny inntekt hentet</AlertStripe></div>}
-      {hentInntektStatus === 'error'
-      && (
+      {hentInntektStatus && (
         <div aria-live="polite">
-          <AlertStripe type="feil">En feil skjedde under henting av frisk inntekt</AlertStripe>
+          <AlertStripe type="info">Inntekt innhentet. Trykk bekreft for å lagre.</AlertStripe>
+          <Spacer sixteenPx />
         </div>
       )}
 
@@ -188,10 +203,25 @@ const Dashboard = ({ readOnly, location }) => {
 
         Hent inntekter på nytt
         </Knapp>
+        <div className="marginvenstre16">
+            Opplysninger hentet:
+          <Normaltekst>
+            {formatDato(new Date(inntektdata.timestamp), DDMMYYYYHHMM_FORMAT)}
+            {', '}
+            <b>
+              {formatDistance(new Date(inntektdata.timestamp), new Date(), { locale: nb, addSuffix: true })}
+            </b>
+          </Normaltekst>
+        </div>
+
+        <div className="flexend">
+          <Flatknapp mini htmlType="button" onClick={() => gåTilForrige12()}>{'< 12 mnd'}</Flatknapp>
+          <Flatknapp mini htmlType="button" onClick={() => gåTilNeste12()}>{'12 mnd >'}</Flatknapp>
+        </div>
 
         <OkAvbrytModal
           isOpen={isHentInntektModalOpen}
-          text="Når du henter inn nyeste inntekt fra skatt så vil alle endringene dine gå tapt."
+          text="Når du henter inn nyeste inntekt fra skatt så vil alle tidligere endringene gå tapt."
           avbrytCallback={() => setHentInntektModal(false)}
           OkCallback={() => {
             fetchUncachedInntekt();

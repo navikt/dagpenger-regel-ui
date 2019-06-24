@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import AlertStripe from 'nav-frontend-alertstriper';
+import { Undertekst, Element } from 'nav-frontend-typografi';
 import { Form, FieldArray } from 'formik';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -9,15 +12,15 @@ import Maaned from '../Components/Maaned';
 import TotalMaaned from '../Components/TotalMaaned';
 import TotalInntekt from '../Components/TotalInntekt';
 import Inntekt from './Inntekt';
+import Spacer from '../Components/Spacer';
 import NyArbeidsgiver from './NyArbeidsgiver';
 import { DisplayFormikState } from '../Utils/formikUtils';
-
 
 // TODO fikse slik at vi ikke trenger å traverese dataen på nytt
 export const buildCSSGrid = (inntekt, arbeidsgivere) => {
   const { arbeidsInntektMaaned } = inntekt;
 
-  const maaneder = arbeidsInntektMaaned.sort((a, b) => b.aarMaaned.localeCompare(a.aarMaaned)).map((måned, index) => {
+  const maaneder = arbeidsInntektMaaned.sort((a, b) => a.aarMaaned.localeCompare(b.aarMaaned)).map((måned, index) => {
     if ((index + 1) % 12 === 0) {
       return `maaned--${måned.aarMaaned} maaned--total--${index}`;
     }
@@ -47,10 +50,26 @@ export const Inntektstabell = (props) => {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
   const { arbeidsgivere, inntekt } = values;
 
+
+  window.setTimeout(() => {
+    const elem = document.getElementById('grid');
+    if (elem) {
+      elem.scrollLeft = elem.scrollWidth;
+    }
+  }, 1);
+
   return (
     <Form>
       {status && status.success
-  && <div aria-live="polite"><AlertStripe type="suksess">Inntekt er lagret</AlertStripe></div>}
+  && (
+  <div aria-live="polite">
+    <AlertStripe type="suksess">
+      <Element>Inntekt er lagret.</Element>
+  Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene.
+    </AlertStripe>
+    <Spacer sixteenPx />
+  </div>
+  )}
       {status && status.failure
   && (
   <div aria-live="polite">
@@ -63,7 +82,7 @@ export const Inntektstabell = (props) => {
       }}
       />
 
-      <div className="grid">
+      <div className="grid" id="grid">
         {arbeidsgivere.length > 0 && arbeidsgivere.map(arbeidsgiver => (
           <Arbeidsgiver key={arbeidsgiver.identifikator} arbeidsgiver={arbeidsgiver} />
         ))}
@@ -80,9 +99,12 @@ export const Inntektstabell = (props) => {
                 total: Number(liste.beloep),
               })));
           }
+
           return (
             <React.Fragment key={måned.aarMaaned}>
-              <Maaned maaned={måned.aarMaaned} />
+              <Maaned
+                maaned={måned.aarMaaned}
+              />
               {(index + 1) % 12 === 0 && (
               <TotalMaaned index={index} />
               )}
@@ -144,7 +166,8 @@ export const Inntektstabell = (props) => {
 
         </div>
 
-        <div className="flexend">
+        <div className="flexend flex">
+          <div className="w200 marginvhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes</Undertekst></div>
           <Hovedknapp htmlType="submit" spinner={isSubmitting} autoDisableVedSpinner disabled={!hentInntektStatus && !dirty}>
       Bekreft
           </Hovedknapp>
