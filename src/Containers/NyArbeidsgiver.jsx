@@ -16,9 +16,11 @@ const NyArbeidsgiver = (props) => {
     closeModal,
     isValid,
     values,
+    errors,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
+      {JSON.stringify(errors)}
       <Undertittel>
       Legg til ny arbeidsgiver
       </Undertittel>
@@ -81,6 +83,14 @@ export default withFormik({
     aktoerType: undefined,
   }),
 
+  validate: (values, props) => {
+    const errors = {};
+    if (props.arbeidsgivere.some(arbeidsgiver => arbeidsgiver.identifikator === values.identifikator)) {
+      errors.identifikator = 'Arbeidsgiver eksisterer allerede';
+    }
+    return errors;
+  },
+
   handleSubmit: (values, { setSubmitting, props }) => {
     const { arrayHelpers, closeModal } = props;
     arrayHelpers.push({
@@ -92,5 +102,5 @@ export default withFormik({
     closeModal();
   },
 
-  displayName: 'arbeidsgivere',
+  displayName: 'NyArbeidsgiverForm',
 })(NyArbeidsgiver);
