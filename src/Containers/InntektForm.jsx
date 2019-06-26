@@ -11,6 +11,7 @@ import { Inntektstabell } from './Inntektstabell';
 import { lagreInntekt } from '../lib/inntektApiClient';
 import NyArbeidsgiver from './NyArbeidsgiver';
 
+
 const InntektForm = (props) => {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
   // const [isBekreftModalOpen, setBekreftModal] = useState(false);
@@ -19,7 +20,7 @@ const InntektForm = (props) => {
     hentInntektStatus, values, dirty, readOnly, handleSubmit, status, errors, isSubmitting,
   } = props;
 
-  const { arbeidsgivere } = values;
+  const { arbeidsgivere, manueltRedigert } = values;
   return (
     <>
       {status && status.success && (
@@ -71,8 +72,12 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
           </div>
 
           <div className="flexend flex">
-            <div className="w200 marginvhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes</Undertekst></div>
-
+            <div className="w200 marginhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes</Undertekst></div>
+            {hentInntektStatus && manueltRedigert && (
+            <>
+                    dfd
+            </>
+            )}
             <Hovedknapp
               htmlType="submit"
               onClick={handleSubmit}
