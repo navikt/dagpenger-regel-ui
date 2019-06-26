@@ -8,6 +8,8 @@ import { RadioGroupField } from '../Components/RadioGroupField';
 import { RadioOption } from '../Components/RadioOption';
 import { required, hasValidOrgNumber, hasValidFodselsnummer } from '../Utils/validering';
 
+// totalen kan ikke være mindre enn 0
+
 // todo fikse stringifyvalues
 const NyArbeidsgiver = (props) => {
   const {
@@ -16,11 +18,9 @@ const NyArbeidsgiver = (props) => {
     closeModal,
     isValid,
     values,
-    errors,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
-      {JSON.stringify(errors)}
       <Undertittel>
       Legg til ny arbeidsgiver
       </Undertittel>
@@ -74,6 +74,7 @@ NyArbeidsgiver.propTypes = {
   closeModal: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   isValid: PropTypes.bool.isRequired,
+  values: PropTypes.shape().isRequired,
 };
 
 export default withFormik({

@@ -11,7 +11,6 @@ const maanedStyle = (index, identifikator) => `
 `;
 
 const TotalInntekt = ({ index, identifikator, total }) => {
-  // console.log(total);
   const t = total.filter(r => identifikator === r.identifikator)
     .reduce((arr, curr) => Number(arr) + Number(curr.total), Number(0));
 

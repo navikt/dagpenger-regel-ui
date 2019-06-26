@@ -31,13 +31,13 @@ class ErrorBoundary extends React.Component {
 
 
   static getDerivedStateFromError(error) {
-    console.log(error);
+    // console.log(error);
     // Update state so the next render will show the fallback UI.
     return { hasError: true, errors: error };
   }
 
   componentDidCatch(error, info) {
-    console.log(error, info);
+    // console.log(error, info);
     // You can also log the error to an error reporting service
     // logErrorToMyService(error, info);
   }
@@ -51,7 +51,10 @@ class ErrorBoundary extends React.Component {
 
       switch (error.status) {
         case 404:
-          feilmelding = 'En feil har oppstått i forbindelse med tjenestekallet til inntekt';
+          if (error.statusText === 'Not Found') {
+            feilmelding = 'En feil har oppstått i forbindelse med tjenestekallet til inntekt';
+          }
+          feilmelding = error.title;
           break;
         case 418:
           feilmelding = '';
@@ -69,14 +72,14 @@ class ErrorBoundary extends React.Component {
 
       return (
         <div className="feilmelding">
-          {`Feil: ${error.status} ${feilmelding}`}
+          {`Feilmelding: ${error.status} ${feilmelding}`}
         </div>
       );
     }
     if (hasError) {
       return (
         <div className="feilmelding">
-          {`Feil: ${errors}`}
+          {`Feilmelding: ${errors}`}
         </div>
       );
     }

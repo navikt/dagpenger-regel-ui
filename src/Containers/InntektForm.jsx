@@ -10,17 +10,16 @@ import Spacer from '../Components/Spacer';
 import { Inntektstabell } from './Inntektstabell';
 import { lagreInntekt } from '../lib/inntektApiClient';
 import NyArbeidsgiver from './NyArbeidsgiver';
-import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 
 const InntektForm = (props) => {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
-  const [isBekreftModalOpen, setBekreftModal] = useState(false);
+  // const [isBekreftModalOpen, setBekreftModal] = useState(false);
 
   const {
     hentInntektStatus, values, dirty, readOnly, handleSubmit, status, errors, isSubmitting,
   } = props;
 
-  const { arbeidsgivere, manueltRedigert } = values;
+  const { arbeidsgivere } = values;
   return (
     <>
       {status && status.success && (
@@ -30,11 +29,6 @@ const InntektForm = (props) => {
 Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene.
         </AlertStripe>
         <Spacer sixteenPx />
-      </div>
-      )}
-      {status && status.failure && (
-      <div aria-live="polite">
-        <AlertStripe type="feil">Uff da. Noe feil skjedde under lagring av inntekt</AlertStripe>
       </div>
       )}
       <form onSubmit={handleSubmit}>
@@ -81,22 +75,13 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
             {}
 
             <Hovedknapp
-              htmlType="button"
+              htmlType="submit"
               spinner={isSubmitting}
               autoDisableVedSpinner
-              onClick={hentInntektStatus && manueltRedigert ? () => setBekreftModal(!isBekreftModalOpen) : handleSubmit}
               disabled={!hentInntektStatus && !dirty}
             >
               Bekreft
             </Hovedknapp>
-
-
-            <OkAvbrytModal
-              isOpen={isBekreftModalOpen}
-              text="Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene."
-              avbrytCallback={() => setBekreftModal(false)}
-              OkCallback={handleSubmit}
-            />
 
           </div>
         </div>
