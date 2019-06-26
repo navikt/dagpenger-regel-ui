@@ -56,3 +56,4 @@ Tilgjengelig testdata er definert i [testdata i dp-inntekt-api](https://github.c
 # OpenId (OpenAM) konfigurasjon i NAV
 
 Er definert i [dagpenger-iac](https://github.com/navikt/dagpenger-iac/tree/master/openid) prosjektet.
+
