@@ -7,7 +7,7 @@
     ],
     "ident": {
       "identifikator": "99999999999",
-      "aktoerType": "NATURLIG_IDENT"
+      "aktoerType": "AKTOER_ID"
     },
     "fraDato": "2016-05",
     "tilDato": "2019-05"
