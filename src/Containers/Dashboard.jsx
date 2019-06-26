@@ -14,12 +14,23 @@ import { DDMMYYYYHHMM_FORMAT } from '../Utils/datoFormat';
 import { formatDato, eachMonthOfInterval } from '../Utils/datoUtils';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import EditedIkon from '../Components/EditedIkon';
+import { ReactComponent as MannIkon } from '../images/mann.svg';
+import { ReactComponent as KvinneIkon } from '../images/kvinne.svg';
+import { ReactComponent as UkjentIkon } from '../images/ukjent.svg';
 import {
   getInntekt, getUncachedInntekt,
 } from '../lib/inntektApiClient';
 
 import './Dashboard.css';
 
+
+const getKjønn = (fødselsnr = '') => {
+  if (Number(fødselsnr.charAt(8)) % 2 === 0) {
+    return <KvinneIkon />;
+  }
+
+  return <MannIkon />;
+};
 
 export const findArbeidsgivere = (inntekt) => {
   const map = new Map();
@@ -187,7 +198,11 @@ const Dashboard = ({ readOnly, location }) => {
     <>
       <Panel border>
         <div className="flex">
-          <Ingress>{`Fødselsnr: ${inntektdata.naturligIdent}`}</Ingress>
+          <div className="marginhoyre16">{getKjønn(inntektdata.naturligIdent)}</div>
+          <div>
+            <Normaltekst>Fødselsnr:</Normaltekst>
+            <Ingress>{inntektdata.naturligIdent}</Ingress>
+          </div>
           {inntektdata.manueltRedigert && (
             <div className="flexend flex ">
               <EditedIkon />

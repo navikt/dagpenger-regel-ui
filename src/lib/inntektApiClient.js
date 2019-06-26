@@ -35,7 +35,7 @@ export const lagreInntekt = async (request, isUncached, uri) => {
       method: 'post',
       url: isUncached
         ? `${apiUncachedUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`
-        : `${apiUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`,
+        : `${apiUklassifisertUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`,
       data: request,
     });
   } catch (error) {
