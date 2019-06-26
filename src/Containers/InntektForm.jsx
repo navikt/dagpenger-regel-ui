@@ -132,12 +132,11 @@ export default withFormik({
           // setInntektdata({ ...result.data });
           // setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
           formProps.setStatus({ success: true });
+          formProps.setSubmitting(false);
         })
-        // eslint-disable-next-line no-unused-vars
         .catch((error) => {
           formProps.setStatus({ failure: true });
-        }).finally(() => {
-          formProps.setSubmitting(false);
+          formProps.setError(error);
         });
     }, 1000);
   },

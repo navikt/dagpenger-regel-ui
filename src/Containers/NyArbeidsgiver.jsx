@@ -31,7 +31,7 @@ const NyArbeidsgiver = (props) => {
         validate={required}
       >
         <RadioOption value="ORGANISASJON" label="Virksomhet" />
-        <RadioOption value="NATURLIG_IDENT" label="Privatperson" />
+        <RadioOption value="AKTOER_ID" label="Privatperson" />
 
       </RadioGroupField>
       {values.aktoerType === 'ORGANISASJON' && (
@@ -42,7 +42,7 @@ const NyArbeidsgiver = (props) => {
       />
       )}
 
-      {values.aktoerType === 'NATURLIG_IDENT' && (
+      {values.aktoerType === 'AKTOER_ID' && (
       <InputField
         label="Fødselsnummer"
         name="identifikator"
