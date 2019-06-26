@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
+import { Form, withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import InputField from '../Components/InputField';
@@ -20,7 +20,7 @@ const NyArbeidsgiver = (props) => {
     values,
   } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Undertittel>
       Legg til ny arbeidsgiver
       </Undertittel>
@@ -53,7 +53,7 @@ const NyArbeidsgiver = (props) => {
       <div className="knapprad">
         <Hovedknapp
           htmlType="submit"
-          onClick={() => handleSubmit()}
+          onClick={handleSubmit}
           disabled={!isValid || isSubmitting}
         >
       Legg til
@@ -65,7 +65,7 @@ const NyArbeidsgiver = (props) => {
       Avbryt
         </Knapp>
       </div>
-    </form>
+    </Form>
   );
 };
 

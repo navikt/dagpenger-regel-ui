@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withFormik, FieldArray } from 'formik';
+import { Form, withFormik, FieldArray } from 'formik';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { shallowEqual } from 'recompose';
 import { Element, Undertekst } from 'nav-frontend-typografi';
@@ -31,7 +31,7 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
         <Spacer sixteenPx />
       </div>
       )}
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Inntektstabell
           {...props}
           readOnly={readOnly}
@@ -72,10 +72,10 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
 
           <div className="flexend flex">
             <div className="w200 marginvhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes</Undertekst></div>
-            {}
 
             <Hovedknapp
               htmlType="submit"
+              onClick={handleSubmit}
               spinner={isSubmitting}
               autoDisableVedSpinner
               disabled={!hentInntektStatus && !dirty}
@@ -86,7 +86,7 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
           </div>
         </div>
 
-      </form>
+      </Form>
 
     </>
   );

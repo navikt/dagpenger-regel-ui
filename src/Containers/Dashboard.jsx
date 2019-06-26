@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Normaltekst, Ingress } from 'nav-frontend-typografi';
+import { Normaltekst, Ingress, Element } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
 import { addMonths, formatDistance } from 'date-fns';
 import { nb } from 'date-fns/locale';
@@ -13,6 +13,7 @@ import InntektForm from './InntektForm';
 import { DDMMYYYYHHMM_FORMAT } from '../Utils/datoFormat';
 import { formatDato, eachMonthOfInterval } from '../Utils/datoUtils';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
+import EditedIkon from '../Components/EditedIkon';
 import {
   getInntekt, getUncachedInntekt,
 } from '../lib/inntektApiClient';
@@ -187,6 +188,12 @@ const Dashboard = ({ readOnly, location }) => {
       <Panel border>
         <div className="flex">
           <Ingress>{`Fødselsnr: ${inntektdata.inntekt.ident.identifikator}`}</Ingress>
+          {inntektdata.manueltRedigert && (
+            <div className="flexend flex ">
+              <EditedIkon />
+              <Element>Manuelt redigert</Element>
+            </div>
+          )}
         </div>
       </Panel>
 

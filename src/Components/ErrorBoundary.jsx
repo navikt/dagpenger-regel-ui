@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { captureException, withScope, configureScope } from '@sentry/browser';
+import { captureException, withScope } from '@sentry/browser';
 
 // todo 3 forskjellige måter å få feil på som må merges og vises på en god måte
 
