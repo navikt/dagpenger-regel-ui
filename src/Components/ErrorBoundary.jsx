@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { captureException, withScope, configureScope } from '@sentry/browser';
 
 // todo 3 forskjellige måter å få feil på som må merges og vises på en god måte
 
@@ -37,9 +38,21 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, info) {
-    // console.log(error, info);
-    // You can also log the error to an error reporting service
-    // logErrorToMyService(error, info);
+    withScope((scope) => {
+      Object.keys(info).forEach((key) => {
+        scope.setExtra(key, info[key]);
+        captureException(error);
+      });
+    });
+    /*
+    showCrashMsg([
+      error.toString(),
+      info.componentStack
+        .split('\n')
+        .map(line => line.trim())
+        .find(line => !!line),
+    ].join(' '));
+    */
   }
 
   render() {
