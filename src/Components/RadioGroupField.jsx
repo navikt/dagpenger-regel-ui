@@ -25,7 +25,7 @@ const renderRadioGroupField = RenderField(({
     onChange,
   };
   return (
-    <SkjemaGruppe feil={readOnly ? undefined : feil} className={`input--${bredde} radioGroup ${readOnly}`}>
+    <SkjemaGruppe feil={readOnly ? undefined : feil} className={`input--${bredde} radioGroup`}>
       {label.props.label && <span className={`radioGroupLabel ${readOnly}`}>{label}</span>}
       { children
         .map(radioOption => React.cloneElement(radioOption, {
