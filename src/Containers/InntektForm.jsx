@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, withFormik, FieldArray } from 'formik';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { shallowEqual } from 'recompose';
+import isEqual from 'lodash.isequal';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -20,7 +20,7 @@ const InntektForm = (props) => {
     hentInntektStatus, values, dirty, readOnly, handleSubmit, status, errors, isSubmitting,
   } = props;
 
-  const { arbeidsgivere, manueltRedigert } = values;
+  const { arbeidsgivere } = values;
   return (
     <>
       {status && status.success && (
@@ -121,7 +121,8 @@ export default withFormik({
 
 
   handleSubmit: (values, formProps) => {
-    const dirty = !shallowEqual(formProps.props.initialValues, values);
+    const dirty = !isEqual(formProps.props.initialValues, values);
+
     setTimeout(() => {
       lagreInntekt(
         { ...values, redigertAvSaksbehandler: dirty || values.manueltRedigert },
