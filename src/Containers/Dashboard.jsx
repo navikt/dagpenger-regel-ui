@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
 import axios from 'axios';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Normaltekst, Ingress } from 'nav-frontend-typografi';
+import { Normaltekst, Ingress, Element } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
-import { subMonths, formatDistance } from 'date-fns';
+import { addMonths, formatDistance } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import Spinner from '../Components/Spinner';
 import Spacer from '../Components/Spacer';
-import { Inntektstabell } from './Inntektstabell';
+import InntektForm from './InntektForm';
 import { DDMMYYYYHHMM_FORMAT } from '../Utils/datoFormat';
 import { formatDato, eachMonthOfInterval } from '../Utils/datoUtils';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
+import EditedIkon from '../Components/EditedIkon';
 import {
-  getInntekt, getUncachedInntekt, lagreInntekt,
+  getInntekt, getUncachedInntekt,
 } from '../lib/inntektApiClient';
 
 import './Dashboard.css';
@@ -67,6 +67,16 @@ const gåTilNeste12 = () => {
   }
 };
 
+// todo fra 2016-05 - 2019-05 skal eksludere eller ta(37 måneder) med 2019-05?
+const getAlleMåneder = (fraDato, tilDato) => {
+  const måneder = eachMonthOfInterval({
+    start: addMonths(new Date(fraDato), 1),
+    end: new Date(tilDato),
+  });
+
+  return måneder;
+};
+
 const Dashboard = ({ readOnly, location }) => {
   const [inntektdata, setInntektdata] = useState({
     fraDato: null,
@@ -82,17 +92,6 @@ const Dashboard = ({ readOnly, location }) => {
   const [arbeidsgivere, setArbeidsgivere] = useState([]);
   const [hentInntektStatus, setHentInntekttatus] = useState(false);
   const [isHentInntektModalOpen, setHentInntektModal] = useState(false);
-
-  // todo fra 2016-05 - 2019-05 skal eksludere eller ta(37 måneder) med 2019-05?
-  const getAlleMåneder = (fraDato, tilDato) => {
-    const måneder = eachMonthOfInterval({
-      start: new Date(fraDato),
-      end: subMonths(new Date(tilDato), 1),
-    });
-
-    return måneder;
-  };
-
 
   // todo endre struktur fra backend slik at vi slipper å bruke til å hacke ting på plass
   // DOM order matches the visual order, improving navigation for assistive technology. Learn more.
@@ -189,6 +188,12 @@ const Dashboard = ({ readOnly, location }) => {
       <Panel border>
         <div className="flex">
           <Ingress>{`Fødselsnr: ${inntektdata.inntekt.ident.identifikator}`}</Ingress>
+          {inntektdata.manueltRedigert && (
+            <div className="flexend flex ">
+              <EditedIkon />
+              <Element>Manuelt redigert</Element>
+            </div>
+          )}
         </div>
       </Panel>
 
@@ -238,42 +243,18 @@ const Dashboard = ({ readOnly, location }) => {
         />
 
       </div>
-
-
       <Spacer sixteenPx />
-
-      <Formik
-        validate
-        enableReinitialize
+      <InntektForm
+        readOnly={readOnly}
+        hentInntektStatus={hentInntektStatus}
+        inntektdata={inntektdata}
+        locationData={inntektRequest(new URLSearchParams(location.search))}
         initialValues={{
           ...inntektdata,
           arbeidsgivere: [
             ...arbeidsgivere,
           ],
         }}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            lagreInntekt(values)
-              .then((result) => {
-                setInntektdata({ ...result.data });
-                setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
-                actions.setStatus({ success: true });
-              })
-              // eslint-disable-next-line no-unused-vars
-              .catch((error) => {
-                actions.setStatus({ failure: true });
-              }).finally(() => {
-                actions.setSubmitting(false);
-              });
-          }, 1000);
-        }}
-        render={formProps => (
-          <Inntektstabell
-            {...formProps}
-            readOnly={readOnly}
-            hentInntektStatus={hentInntektStatus}
-          />
-        )}
       />
 
     </>

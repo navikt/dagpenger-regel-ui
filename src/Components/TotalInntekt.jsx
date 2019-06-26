@@ -11,8 +11,7 @@ const maanedStyle = (index, identifikator) => `
 `;
 
 const TotalInntekt = ({ index, identifikator, total }) => {
-  // console.log(total);
-  const t = total.filter(r => identifikator === r.identifikator)
+  const totalInntekt = total.filter(r => identifikator === r.identifikator)
     .reduce((arr, curr) => Number(arr) + Number(curr.total), Number(0));
 
   return (
@@ -22,7 +21,7 @@ const TotalInntekt = ({ index, identifikator, total }) => {
       }}
       />
       <div className={`item inntekter total inntekter--${identifikator}--total--${index}`}>
-        <Ingress>{formatertPengesum(t)}</Ingress>
+        <Ingress>{formatertPengesum(totalInntekt)}</Ingress>
       </div>
     </>
   );

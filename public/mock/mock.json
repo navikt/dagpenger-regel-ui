@@ -19,11 +19,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2018-03",
               "opplysningspliktig": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -54,11 +54,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-09",
               "opplysningspliktig": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -82,11 +82,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-09",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -109,11 +109,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-09",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -145,11 +145,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -173,11 +173,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -200,11 +200,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -227,11 +227,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -262,11 +262,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2018-04",
               "opplysningspliktig": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "tilleggsinformasjon": {
@@ -293,11 +293,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -320,11 +320,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -355,11 +355,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2018-03",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -383,11 +383,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2018-03",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -410,11 +410,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2018-03",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -445,11 +445,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2018-04",
               "opplysningspliktig": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "222222",
+                "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
               "tilleggsinformasjon": {
@@ -476,11 +476,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -504,11 +504,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -531,11 +531,11 @@
               "leveringstidspunkt": "2019-02",
               "utbetaltIMaaned": "2017-08",
               "opplysningspliktig": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "virksomhet": {
-                "identifikator": "1111111",
+                "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
               "inntektsmottaker": {
@@ -559,7 +559,7 @@
     "fraDato": "2016-05",
     "tilDato": "2019-05"
   },
-  "manueltRedigert": false,
+  "manueltRedigert": true,
   "timestamp": "2019-06-24T11:03:56.907821"
 }
 

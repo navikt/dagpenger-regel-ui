@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
+import { Form, withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import InputField from '../Components/InputField';
 import { RadioGroupField } from '../Components/RadioGroupField';
 import { RadioOption } from '../Components/RadioOption';
 import { required, hasValidOrgNumber, hasValidFodselsnummer } from '../Utils/validering';
+
+// totalen kan ikke være mindre enn 0
 
 // todo fikse stringifyvalues
 const NyArbeidsgiver = (props) => {
@@ -18,7 +20,7 @@ const NyArbeidsgiver = (props) => {
     values,
   } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Undertittel>
       Legg til ny arbeidsgiver
       </Undertittel>
@@ -51,7 +53,7 @@ const NyArbeidsgiver = (props) => {
       <div className="knapprad">
         <Hovedknapp
           htmlType="submit"
-          onClick={() => handleSubmit()}
+          onClick={handleSubmit}
           disabled={!isValid || isSubmitting}
         >
       Legg til
@@ -63,7 +65,7 @@ const NyArbeidsgiver = (props) => {
       Avbryt
         </Knapp>
       </div>
-    </form>
+    </Form>
   );
 };
 
@@ -72,6 +74,7 @@ NyArbeidsgiver.propTypes = {
   closeModal: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   isValid: PropTypes.bool.isRequired,
+  values: PropTypes.shape().isRequired,
 };
 
 export default withFormik({
@@ -80,6 +83,14 @@ export default withFormik({
     navn: undefined,
     aktoerType: undefined,
   }),
+
+  validate: (values, props) => {
+    const errors = {};
+    if (props.arbeidsgivere.some(arbeidsgiver => arbeidsgiver.identifikator === values.identifikator)) {
+      errors.identifikator = 'Arbeidsgiver eksisterer allerede';
+    }
+    return errors;
+  },
 
   handleSubmit: (values, { setSubmitting, props }) => {
     const { arrayHelpers, closeModal } = props;
@@ -92,5 +103,5 @@ export default withFormik({
     closeModal();
   },
 
-  displayName: 'arbeidsgivere',
+  displayName: 'NyArbeidsgiverForm',
 })(NyArbeidsgiver);

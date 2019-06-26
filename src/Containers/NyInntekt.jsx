@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
+import { Form, withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import InputField from '../Components/InputField';
@@ -25,7 +25,7 @@ const NyInntekt = (props) => {
   } = props;
   const verdikoder = useContext(VerdikoderContext);
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Undertittel>
         {`Legg til ny inntektspost for ${virksomhet.identifikator} i `}
         <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
@@ -51,13 +51,13 @@ const NyInntekt = (props) => {
       <div className="knapprad">
         <Hovedknapp
           htmlType="submit"
-          onClick={() => handleSubmit()}
+          onClick={handleSubmit}
           disabled={!isValid || isSubmitting}
         >
       Legg til
         </Hovedknapp>
         <Knapp
-          htmlType="submit"
+          htmlType="button"
           onClick={closeModal}
 
         >
@@ -65,7 +65,7 @@ const NyInntekt = (props) => {
         </Knapp>
       </div>
 
-    </form>
+    </Form>
   );
 };
 

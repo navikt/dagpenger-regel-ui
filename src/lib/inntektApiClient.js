@@ -1,32 +1,41 @@
 import axios from 'axios';
 
-export const getInntekt = async (request) => {
+const apiUri = '/api/v1/inntekt';
+const apiUklassifisertUri = `${apiUri}/uklassifisert`;
+const apiUncachedUri = `${apiUklassifisertUri}/uncached`;
+
+export const getInntekt = async (uri) => {
   try {
     return await axios({
       method: 'get',
-      url: `/api/v1/inntekt/uklassifisert/${request.aktørId}/${request.vedtakId}/${request.beregningsDato}`,
+      url: `${apiUklassifisertUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`,
     });
   } catch (error) {
     return error;
   }
 };
 
-export const getUncachedInntekt = async (request) => {
+
+export const getUncachedInntekt = async (uri) => {
   try {
     return await axios({
       method: 'get',
-      url: `/api/v1/inntekt/uklassifisert/uncached/${request.aktørId}/${request.vedtakId}/${request.beregningsDato}`,
+      url: `${apiUncachedUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`,
     });
   } catch (error) {
     return error;
   }
 };
 
-export const lagreInntekt = async (request) => {
+// todo post til uncached hvis henter nye opplysninger
+// todo legge til ${request.aktørId}/${request.vedtakId}/${request.beregningsDato}`,
+export const lagreInntekt = async (request, isUncached, uri) => {
   try {
     return await axios({
       method: 'post',
-      url: '/api/v1/inntekt/uklassifisert/update',
+      url: isUncached
+        ? `${apiUncachedUri}/update/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`
+        : `${apiUri}/update/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`,
       data: request,
     });
   } catch (error) {
@@ -38,7 +47,7 @@ export const getVerdikoder = async () => {
   try {
     return await axios({
       method: 'get',
-      url: '/api/v1/inntekt/verdikoder',
+      url: `${apiUri}/verdikoder/`,
     });
   } catch (error) {
     return error;
@@ -49,7 +58,7 @@ export const getName = async (request) => {
   try {
     return await axios({
       method: 'post',
-      url: '/api/v1/aktoer/name',
+      url: `${apiUri}/aktoer/name/`,
       data: request,
     });
   } catch (error) {

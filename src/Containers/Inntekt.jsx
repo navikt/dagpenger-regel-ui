@@ -11,10 +11,7 @@ import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import { formatertPengesum } from '../Utils/currencyFormat';
 import { VerdikoderContext } from '../Context/Verdikoder';
 import { ReactComponent as SlettIkon } from '../images/slett.svg';
-
-
 import NyInntekt from './NyInntekt';
-
 
 const mapVerdikoder = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
@@ -28,7 +25,6 @@ const inntektStyle = (rowId, columnId) => `
 }
 `;
 
-// TODO lage egen komponent for innholdet i modal og egen for radio
 const Inntekt = ({
   readOnly, inntekter, virksomhet, columnId, monthIndex,
 }) => {
