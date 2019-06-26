@@ -53,9 +53,9 @@ class ErrorBoundary extends React.Component {
         case 404:
           if (error.title) {
             feilmelding = error.title;
+          } else {
+            feilmelding = 'En feil har oppstått i forbindelse med tjenestekallet til inntekt';
           }
-          feilmelding = 'En feil har oppstått i forbindelse med tjenestekallet til inntekt';
-
           break;
         case 418:
           feilmelding = 'I´M A TEAPOT';
