@@ -73,11 +73,6 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
 
           <div className="flexend flex">
             <div className="w200 marginhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes</Undertekst></div>
-            {hentInntektStatus && manueltRedigert && (
-            <>
-                    dfd
-            </>
-            )}
             <Hovedknapp
               htmlType="submit"
               onClick={handleSubmit}
