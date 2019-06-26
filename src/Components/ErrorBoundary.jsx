@@ -51,19 +51,23 @@ class ErrorBoundary extends React.Component {
 
       switch (error.status) {
         case 404:
-          if (error.statusText === 'Not Found') {
-            feilmelding = 'En feil har oppstått i forbindelse med tjenestekallet til inntekt';
+          if (error.title) {
+            feilmelding = error.title;
           }
-          feilmelding = error.title;
+          feilmelding = 'En feil har oppstått i forbindelse med tjenestekallet til inntekt';
+
           break;
         case 418:
-          feilmelding = '';
+          feilmelding = 'I´M A TEAPOT';
           break;
         case 403:
-          feilmelding = '';
+          feilmelding = 'Du er ikke autorisert';
           break;
         case 401:
-          feilmelding = '';
+          feilmelding = 'Du er ikke autorisert';
+          break;
+        case 500:
+          feilmelding = error.title;
           break;
         default:
           feilmelding = 'Uhåndert feil';
