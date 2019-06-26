@@ -45,7 +45,7 @@ it('Should handle 500 response', async () => {
 it('Should save inntekt with 200', async () => {
   const data = { field: '123' };
   nock(baseURL)
-    .post(`${apiUncachedUri}/update/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`, data)
+    .post(`${apiUncachedUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`, data)
     .reply(200, { success: true });
 
   await lagreInntekt(data, isUncached, uri).then((result) => {
@@ -59,7 +59,7 @@ it('Should save inntekt with 200', async () => {
 it('Should fail to save inntekt', async () => {
   const data = { field: '123' };
   nock(baseURL)
-    .post(`${apiUncachedUri}/update/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`, data)
+    .post(`${apiUncachedUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`, data)
     .reply(500, {});
 
   try {
