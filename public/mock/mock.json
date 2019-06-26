@@ -2,7 +2,6 @@
   "inntektId": {
     "id": "01D8G6FS9QGRT3JKBTA5KEE64C"
   },
-  "naturligIdent": "***REMOVED***",
   "inntekt": {
     "arbeidsInntektMaaned": [
       {
@@ -560,6 +559,7 @@
     "fraDato": "2016-05",
     "tilDato": "2019-05"
   },
+  "naturligIdent": "12345678910",
   "manueltRedigert": true,
   "timestamp": "2019-06-24T11:03:56.907821"
 }
