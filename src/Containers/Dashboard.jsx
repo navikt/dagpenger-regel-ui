@@ -187,7 +187,7 @@ const Dashboard = ({ readOnly, location }) => {
     <>
       <Panel border>
         <div className="flex">
-          <Ingress>{`Fødselsnr: ${inntektdata.inntekt.ident.identifikator}`}</Ingress>
+          <Ingress>{`Fødselsnr: ${inntektdata.naturligIdent}`}</Ingress>
           {inntektdata.manueltRedigert && (
             <div className="flexend flex ">
               <EditedIkon />
