@@ -16,10 +16,7 @@ import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import EditedIkon from '../Components/EditedIkon';
 import { ReactComponent as MannIkon } from '../images/mann.svg';
 import { ReactComponent as KvinneIkon } from '../images/kvinne.svg';
-import { ReactComponent as UkjentIkon } from '../images/ukjent.svg';
-import {
-  getInntekt, getUncachedInntekt,
-} from '../lib/inntektApiClient';
+import { getInntekt, getUncachedInntekt } from '../lib/inntektApiClient';
 
 import './Dashboard.css';
 
