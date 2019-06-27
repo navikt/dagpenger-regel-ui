@@ -199,7 +199,7 @@ const Dashboard = ({ readOnly, location }) => {
             <Ingress>{inntektdata.naturligIdent}</Ingress>
           </div>
           {inntektdata.manueltRedigert && (
-            <div className="flexend flex ">
+            <div className="flexend flex marginhoyre16">
               <EditedIkon />
               <Element>Manuelt redigert</Element>
             </div>
@@ -221,7 +221,7 @@ const Dashboard = ({ readOnly, location }) => {
               successMessage: 'Takk for tilbakemeldingen',
             })}
           >
-  Send tilbakemeld
+  Send tilbakemelding
           </Knapp>
         </div>
       </Panel>
