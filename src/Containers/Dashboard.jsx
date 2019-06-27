@@ -32,7 +32,7 @@ const sendTilbakemelding = () => {
   const eventId = captureException('test');
   showReportDialog({
     eventId,
-    title: 'Gi oss tilbakemledinger',
+    title: 'Gi oss en tilbakemelding.',
     subtitle: 'Hjelp oss å gjøre løsningen bedre.',
     subtitle2: '',
     labelName: 'Navn',
@@ -40,7 +40,7 @@ const sendTilbakemelding = () => {
     labelComments: 'Tilbakemelding',
     labelClose: 'Lukk',
     labelSubmit: 'Send',
-    successMessage: 'Takk for tilbakemeldingen',
+    successMessage: 'Takk for tilbakemeldingen.',
   });
 };
 
