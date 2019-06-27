@@ -127,7 +127,7 @@ const Dashboard = ({ readOnly, location }) => {
         const måneder = getAlleMåneder(fraDato, tilDato);
 
         måneder.forEach((måned) => {
-          const isMånedEksisterer = result.data.inntekt.arbeidsInntektMaaned.some(inntekt => måned === inntekt.aarMaaned);
+          const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
 
           if (!isMånedEksisterer) {
             result.data.inntekt.arbeidsInntektMaaned.push({
@@ -167,7 +167,7 @@ const Dashboard = ({ readOnly, location }) => {
     const måneder = getAlleMåneder(fraDato, tilDato);
 
     måneder.forEach((måned) => {
-      const isMånedEksisterer = result.data.inntekt.arbeidsInntektMaaned.some(inntekt => måned === inntekt.aarMaaned);
+      const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
 
       if (!isMånedEksisterer) {
         result.data.inntekt.arbeidsInntektMaaned.push({
