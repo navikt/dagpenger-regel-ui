@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import InntektForm from '../InntektForm';
+import InntektsForm from '../InntektsForm';
 import { findArbeidsgivere } from '../Dashboard';
 import inntektMock from '../../../public/mock/mock';
 
@@ -12,10 +12,10 @@ const locationData = {
   beregningsDato: '2019-06',
 };
 
-describe('InntektForm', () => {
-  xtest('Skal vise ny InntektForm', () => {
+describe('InntektsForm', () => {
+  xtest('Skal vise ny InntektsForm', () => {
     const component = renderer.create(
-      <InntektForm
+      <InntektsForm
         readOnly={false}
         hentInntektStatus={false}
         inntektdata={inntektMock}

@@ -9,7 +9,7 @@ import { addMonths, formatDistance } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import Spinner from '../Components/Spinner';
 import Spacer from '../Components/Spacer';
-import InntektForm from './InntektForm';
+import InntektsForm from './InntektsForm';
 import { DDMMYYYYHHMM_FORMAT } from '../Utils/datoFormat';
 import { formatDato, eachMonthOfInterval } from '../Utils/datoUtils';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
@@ -32,7 +32,7 @@ export const findArbeidsgivere = (inntekt) => {
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
         // TODO fikse denne, bør flyttes til backend ved et senere tidspunkt
-        const navn = 'NAVN';
+        const navn = '';
 
         map.set(arbeidsgiver.virksomhet.identifikator, { navn, ...arbeidsgiver.virksomhet });
       }));
@@ -253,7 +253,7 @@ const Dashboard = ({ readOnly, location }) => {
 
       </div>
       <Spacer sixteenPx />
-      <InntektForm
+      <InntektsForm
         readOnly={readOnly}
         hentInntektStatus={hentInntektStatus}
         inntektdata={inntektdata}

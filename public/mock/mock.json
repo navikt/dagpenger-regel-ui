@@ -560,6 +560,7 @@
     "tilDato": "2019-05"
   },
   "naturligIdent": "12345678910",
+  "redigertAvSaksbehandler": true,
   "manueltRedigert": true,
   "timestamp": "2019-06-24T11:03:56.907821"
 }
