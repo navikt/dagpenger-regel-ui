@@ -10,11 +10,12 @@ import Spacer from '../Components/Spacer';
 import { Inntektstabell } from './Inntektstabell';
 import { lagreInntekt } from '../lib/inntektApiClient';
 import NyArbeidsgiver from './NyArbeidsgiver';
+import OkAvbrytModal from '../Components/OkAvbrytModal';
 
 
-const InntektForm = (props) => {
+const InntektsForm = (props) => {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
-  // const [isBekreftModalOpen, setBekreftModal] = useState(false);
+  const [isBekreftModalOpen, setBekreftModal] = useState(false);
 
   const {
     hentInntektStatus, values, dirty, readOnly, handleSubmit, status, errors, isSubmitting,
@@ -73,6 +74,18 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
 
           <div className="flexend flex">
             <div className="w200 marginhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes</Undertekst></div>
+            {values.redigertAvSaksbehandler && (
+            <Hovedknapp
+              htmlType="button"
+              onClick={() => setBekreftModal(true)}
+              spinner={isSubmitting}
+              autoDisableVedSpinner
+              disabled={!hentInntektStatus && !dirty}
+            >
+              Bekreft
+            </Hovedknapp>
+            )}
+            {!values.redigertAvSaksbehandler && (
             <Hovedknapp
               htmlType="submit"
               onClick={handleSubmit}
@@ -82,6 +95,16 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
             >
               Bekreft
             </Hovedknapp>
+            )}
+            <OkAvbrytModal
+              isOpen={isBekreftModalOpen}
+              text="Når du bekrefter ny inntekt så vil alle tidligere endringene overskrives."
+              avbrytCallback={() => setBekreftModal(false)}
+              OkCallback={() => {
+                handleSubmit();
+                setBekreftModal(false);
+              }}
+            />
 
           </div>
         </div>
@@ -92,7 +115,7 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
   );
 };
 
-InntektForm.propTypes = {
+InntektsForm.propTypes = {
   readOnly: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
@@ -107,7 +130,7 @@ InntektForm.propTypes = {
   status: PropTypes.shape(),
 };
 
-InntektForm.defaultProps = {
+InntektsForm.defaultProps = {
   status: undefined,
 };
 
@@ -143,7 +166,7 @@ export default withFormik({
   },
 
   validate: true,
-  displayName: 'InntektForm',
+  displayName: 'InntektsForm',
   enableReinitialize: true,
 
-})(InntektForm);
+})(InntektsForm);

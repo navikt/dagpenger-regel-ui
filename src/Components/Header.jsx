@@ -6,7 +6,7 @@ export const Header = () => (
   <header role="banner">
     <div className="dekorator flex">
       <NavLogo className="logo" />
-      <Systemtittel>Dagpenger-inntektregistrering</Systemtittel>
+      <Systemtittel>Dagpenger-inntektsregistrering</Systemtittel>
       <div className="flexend">NAVansatt</div>
     </div>
   </header>
