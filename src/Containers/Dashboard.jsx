@@ -211,8 +211,8 @@ const Dashboard = ({ readOnly, location }) => {
             onClick={() => showReportDialog({
               eventId: 'd80c72bfc7254b75b3e9cd56cbd408de',
               title: 'Gi oss tilbakemledinger',
-              subtitle: 'Vårt team har mottatt tilbakemledingen.',
-              subtitle2: 'Hjelp med å gjøre løsningen bedre.',
+              subtitle: 'Hjelp med å gjøre løsningen bedre.',
+              subtitle2: '',
               labelName: 'Navn',
               labelEmail: 'E-post',
               labelComments: 'Tilbakemelding',
