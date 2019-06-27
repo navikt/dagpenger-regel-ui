@@ -5,7 +5,7 @@ import EditedIkon from './EditedIkon';
 
 
 export const OptionGrid = ({
-  id, columns, rows, options, spaceBetween, isEdited, direction,
+  id, columns, rows, options, isEdited, direction,
 }) => {
   if (direction === 'vertical') {
     const numRows = rows || options.length;
@@ -41,7 +41,6 @@ OptionGrid.propTypes = {
   id: PropTypes.string,
   columns: PropTypes.number,
   options: PropTypes.arrayOf(PropTypes.element).isRequired,
-  spaceBetween: PropTypes.bool,
   isEdited: PropTypes.bool,
   direction: PropTypes.string,
   rows: PropTypes.number,
@@ -51,7 +50,6 @@ OptionGrid.defaultProps = {
   id: undefined,
   columns: 0,
   rows: 0,
-  spaceBetween: false,
   isEdited: false,
   direction: 'horizontal',
 };

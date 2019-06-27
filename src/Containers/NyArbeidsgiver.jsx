@@ -4,6 +4,7 @@ import { Form, withFormik } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import InputField from '../Components/InputField';
+import aktørTyper from '../Kodeverk/aktoerTyper';
 import { RadioGroupField } from '../Components/RadioGroupField';
 import { RadioOption } from '../Components/RadioOption';
 import { required, hasValidOrgNumber, hasValidFodselsnummer } from '../Utils/validering';
@@ -30,11 +31,11 @@ const NyArbeidsgiver = (props) => {
         name="aktoerType"
         validate={required}
       >
-        <RadioOption value="ORGANISASJON" label="Virksomhet" />
-        <RadioOption value="AKTOER_ID" label="Privatperson" />
+        <RadioOption value={aktørTyper.ORGANISASJON} label="Virksomhet" />
+        <RadioOption value={aktørTyper.AKTOER_ID} label="Privatperson" />
 
       </RadioGroupField>
-      {values.aktoerType === 'ORGANISASJON' && (
+      {values.aktoerType === aktørTyper.ORGANISASJON && (
       <InputField
         label="Org.Nr"
         name="identifikator"
@@ -42,7 +43,7 @@ const NyArbeidsgiver = (props) => {
       />
       )}
 
-      {values.aktoerType === 'AKTOER_ID' && (
+      {values.aktoerType === aktørTyper.AKTOER_ID && (
       <InputField
         label="Fødselsnummer"
         name="identifikator"

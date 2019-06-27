@@ -1,5 +1,7 @@
 @import '~nav-frontend-core/less/_variabler';
 
+@width: 250px;
+
 .app {
   margin: 0 auto;
   // HEADER
@@ -41,6 +43,57 @@
   }
 
   //
+}
+
+// grid
+.grid {
+  display: grid;
+  overflow-x: auto;
+  width: 100%;
+  margin-bottom: 24px;
+  position: relative;
+  border-bottom: 1px solid @navGra20;
+  transition: all 0.3s ease-in-out;
+
+  .item {
+    padding: 16px;
+    border-right: 1px solid @navGra20;
+    border-top: 1px solid @navGra20;
+
+    &.arbeidsgiver {
+      background-color: @navLysGra;
+      border-left: 1px solid @navGra20;
+      border-right: 4px solid @navGra40;
+      position: sticky;
+      left: 0;
+      min-width: @width;
+      z-index: 2;
+      // box-shadow: 6px 0 20px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    &.maaned {
+      min-width: @width;
+      background: @navMorkGra;
+      color: white;
+      text-transform: capitalize;
+
+      &.total {
+        // background: @navLilla;
+      }
+    }
+
+    &.inntekter {
+      .inntekt {
+        margin-bottom: 18px;
+      }
+
+      &.total {
+        background: @navMorkGra;
+        color: white;
+        padding: 32px;
+      }
+    }
+  }
 }
 
 // Modal

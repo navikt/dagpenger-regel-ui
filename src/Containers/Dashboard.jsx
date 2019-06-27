@@ -18,9 +18,6 @@ import { ReactComponent as MannIkon } from '../images/mann.svg';
 import { ReactComponent as KvinneIkon } from '../images/kvinne.svg';
 import { getInntekt, getUncachedInntekt } from '../lib/inntektApiClient';
 
-import './Dashboard.css';
-
-
 const getKjønn = (fødselsnr = '') => {
   if (Number(fødselsnr.charAt(8)) % 2 === 0) {
     return <KvinneIkon />;
@@ -125,7 +122,7 @@ const Dashboard = ({ readOnly, location }) => {
       }
 
       // todo rydde opp denne funksjonen slik at den ikke trengs å skrives enn gang til
-      const { fraDato, tilDato } = (result.data || []).inntekt;
+      const { fraDato, tilDato } = (result || []).data.inntekt;
       if (fraDato && tilDato) {
         const måneder = getAlleMåneder(fraDato, tilDato);
 
@@ -166,7 +163,7 @@ const Dashboard = ({ readOnly, location }) => {
       }
     }
 
-    const { fraDato, tilDato } = (result.data || []).inntekt;
+    const { fraDato, tilDato } = (result || []).data.inntekt;
     const måneder = getAlleMåneder(fraDato, tilDato);
 
     måneder.forEach((måned) => {
