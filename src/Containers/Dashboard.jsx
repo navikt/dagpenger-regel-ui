@@ -7,7 +7,7 @@ import { Normaltekst, Ingress, Element } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
 import { addMonths, formatDistance } from 'date-fns';
 import { nb } from 'date-fns/locale';
-import { showReportDialog } from '@sentry/browser';
+import { showReportDialog, captureException } from '@sentry/browser';
 import Spinner from '../Components/Spinner';
 import Spacer from '../Components/Spacer';
 import InntektsForm from './InntektsForm';
@@ -25,6 +25,23 @@ const getKjønn = (fødselsnr = '') => {
   }
 
   return <MannIkon />;
+};
+
+
+const sendTilbakemelding = () => {
+  const eventId = captureException('test');
+  showReportDialog({
+    eventId,
+    title: 'Gi oss tilbakemledinger',
+    subtitle: 'Hjelp oss å gjøre løsningen bedre.',
+    subtitle2: '',
+    labelName: 'Navn',
+    labelEmail: 'E-post',
+    labelComments: 'Tilbakemelding',
+    labelClose: 'Lukk',
+    labelSubmit: 'Send',
+    successMessage: 'Takk for tilbakemeldingen',
+  });
 };
 
 export const findArbeidsgivere = (inntekt) => {
@@ -208,18 +225,7 @@ const Dashboard = ({ readOnly, location }) => {
             htmlType="button"
             mini
             disabled={readOnly}
-            onClick={() => showReportDialog({
-              eventId: 'd80c72bfc7254b75b3e9cd56cbd408de',
-              title: 'Gi oss tilbakemledinger',
-              subtitle: 'Hjelp med å gjøre løsningen bedre.',
-              subtitle2: '',
-              labelName: 'Navn',
-              labelEmail: 'E-post',
-              labelComments: 'Tilbakemelding',
-              labelClose: 'Lukk',
-              labelSubmit: 'Send',
-              successMessage: 'Takk for tilbakemeldingen',
-            })}
+            onClick={() => sendTilbakemelding()}
           >
   Send tilbakemelding
           </Knapp>
