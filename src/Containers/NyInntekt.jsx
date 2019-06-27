@@ -59,7 +59,6 @@ const NyInntekt = (props) => {
         <Knapp
           htmlType="button"
           onClick={closeModal}
-
         >
       Avbryt
         </Knapp>

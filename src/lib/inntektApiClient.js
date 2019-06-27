@@ -47,7 +47,7 @@ export const getVerdikoder = async () => {
   try {
     return await axios({
       method: 'get',
-      url: `${apiUri}/verdikoder/`,
+      url: `${apiUri}/verdikoder`,
     });
   } catch (error) {
     return error;
@@ -58,7 +58,7 @@ export const getName = async (request) => {
   try {
     return await axios({
       method: 'post',
-      url: `${apiUri}/aktoer/name/`,
+      url: `${apiUri}/aktoer/name`,
       data: request,
     });
   } catch (error) {

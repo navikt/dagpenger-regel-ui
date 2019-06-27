@@ -1,10 +1,10 @@
 import React from 'react';
 import { Element, EtikettLiten, Undertittel } from 'nav-frontend-typografi';
-
+import aktørTyper from '../Kodeverk/aktoerTyper';
 import ArbeidsgiverPropType from '../PropTypes/arbeidsgiverPropType';
 
 
-const getAktoerType = aktoerType => (aktoerType === 'ORGANISASJON' ? 'Org. nr' : 'FNR');
+const getAktoerType = aktoerType => (aktoerType === aktørTyper.ORGANISASJON ? 'Org. nr' : 'FNR');
 
 const arbeidsgiverStyle = identifikator => `
 .arbeidsgiver--${identifikator} {
