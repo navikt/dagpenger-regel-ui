@@ -7,6 +7,7 @@ import { Normaltekst, Ingress, Element } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
 import { addMonths, formatDistance } from 'date-fns';
 import { nb } from 'date-fns/locale';
+import { showReportDialog } from '@sentry/browser';
 import Spinner from '../Components/Spinner';
 import Spacer from '../Components/Spacer';
 import InntektsForm from './InntektsForm';
@@ -203,6 +204,25 @@ const Dashboard = ({ readOnly, location }) => {
               <Element>Manuelt redigert</Element>
             </div>
           )}
+          <Knapp
+            htmlType="button"
+            mini
+            disabled={readOnly}
+            onClick={() => showReportDialog({
+              eventId: new Date(),
+              title: 'Gi oss tilbakemledinger',
+              subtitle: 'Vårt team har mottatt tilbakemledingen.',
+              subtitle2: 'Hjelp med å gjøre løsningen bedre.',
+              labelName: 'Navn',
+              labelEmail: 'E-post',
+              labelComments: 'Tilbakemelding',
+              labelClose: 'Lukk',
+              labelSubmit: 'Send',
+              successMessage: 'Takk for tilbakemeldingen',
+            })}
+          >
+  Send tilbakemeld
+          </Knapp>
         </div>
       </Panel>
 
