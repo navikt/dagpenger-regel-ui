@@ -32,9 +32,9 @@ const sendTilbakemelding = () => {
   const eventId = captureException('test');
   showReportDialog({
     eventId,
-    title: 'Gi oss en tilbakemelding.',
-    subtitle: 'Hjelp oss å gjøre løsningen bedre.',
-    subtitle2: '',
+    title: 'Hvordan opplever du løsningen?',
+    subtitle: 'Hjelp  oss å gjøre løsningen bedre. Gi oss tilbakemelding.',
+    subtitle2: 'Feil meldes på vanlig måte via Porten',
     labelName: 'Navn',
     labelEmail: 'E-post',
     labelComments: 'Tilbakemelding',
@@ -215,20 +215,22 @@ const Dashboard = ({ readOnly, location }) => {
             <Normaltekst>Fødselsnr:</Normaltekst>
             <Ingress>{inntektdata.naturligIdent}</Ingress>
           </div>
-          {inntektdata.manueltRedigert && (
-            <div className="flexend flex marginhoyre16">
+          <div className="flexend flex">
+            {inntektdata.manueltRedigert && (
+            <div className="marginhoyre16 flex">
               <EditedIkon />
               <Element>Manuelt redigert</Element>
             </div>
-          )}
-          <Knapp
-            htmlType="button"
-            mini
-            disabled={readOnly}
-            onClick={() => sendTilbakemelding()}
-          >
-  Send tilbakemelding
-          </Knapp>
+            )}
+            <Knapp
+              htmlType="button"
+              mini
+              disabled={readOnly}
+              onClick={() => sendTilbakemelding()}
+            >
+  Hvordan opplever du løsningen?
+            </Knapp>
+          </div>
         </div>
       </Panel>
 
