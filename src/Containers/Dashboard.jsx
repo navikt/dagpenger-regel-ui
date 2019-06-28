@@ -34,7 +34,7 @@ const sendTilbakemelding = () => {
     eventId,
     title: 'Hvordan opplever du løsningen?',
     subtitle: 'Hjelp  oss å gjøre løsningen bedre. Gi oss tilbakemelding.',
-    subtitle2: 'Feil meldes på vanlig måte via Porten',
+    subtitle2: '\nFeil melder du på vanlig måte via Porten.',
     labelName: 'Navn',
     labelEmail: 'E-post',
     labelComments: 'Tilbakemelding',
