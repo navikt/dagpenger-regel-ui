@@ -17,7 +17,7 @@ const formatError = (error) => {
   return {
     data: response ? getErrorData(response) : undefined,
     type: response && response.data ? response.data.type : undefined,
-    status: response && response.data ? response.data.status : response.status,
+    status: response && response.data ? response.data.status : undefined,
     title: response && response.data ? response.data.title : undefined,
     detail: response && response.data ? response.data.detail : undefined,
     instance: response && response.data ? response.data.instance : undefined,
