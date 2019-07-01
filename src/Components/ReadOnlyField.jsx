@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'nav-frontend-typografi';
-import { formatertPengesum } from '../Utils/currencyFormat';
-import { haystack } from '../Utils/objectUtils';
+import { formatertPengesum } from '../Utils/currencyUtils';
+import { haystack } from '../Utils/arrayUtils';
 import Label from './Label';
 
 export const ReadOnlyField = ({

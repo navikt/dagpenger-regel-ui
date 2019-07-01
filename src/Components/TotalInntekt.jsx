@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Ingress } from 'nav-frontend-typografi';
-import { formatertPengesum } from '../Utils/currencyFormat';
+import { formatertPengesum } from '../Utils/currencyUtils';
 
 
 const maanedStyle = (index, identifikator) => `

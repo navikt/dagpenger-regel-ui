@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { haystack } from '../Utils/objectUtils';
+import { haystack } from '../Utils/arrayUtils';
 import Label, { labelPropType } from './Label';
 
 // todo fikse props fra de forksjellige typene da de er litt ulike for input og select
