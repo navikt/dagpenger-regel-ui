@@ -5,7 +5,7 @@ import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Normaltekst, Ingress, Element } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
-import { addMonths, formatDistance } from 'date-fns';
+import { formatDistance } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { showReportDialog, captureException } from '@sentry/browser';
 import Spinner from '../Components/Spinner';

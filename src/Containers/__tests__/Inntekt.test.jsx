@@ -8,7 +8,7 @@ test('Something', () => {
 });
 
 // TODO: Figure out how to get local and numberformat pass in CI
-xtest('No inntekt', () => {
+xtest('Ingen inntekt', () => {
   const component = renderer.create(
     <Inntekt inntekter={[]} readOnly={false} columnId="1" rowId="1" monthIndex={1} formProps={{}} />,
   );
@@ -17,7 +17,7 @@ xtest('No inntekt', () => {
 });
 
 
-xtest('Sum inntekt correctly', () => {
+xtest('Summer inntekter riktig', () => {
   const inntekt = {}; // JSON.parse(fs.readFileSync(path.resolve(__dirname, 'inntektliste.json'), 'utf8'));
   const component = renderer.create(
     <Inntekt

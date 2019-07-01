@@ -8,7 +8,7 @@ import SelectField from '../Components/SelectField';
 import InputField from '../Components/InputField';
 import { required } from '../Utils/validering';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
-import { formatertPengesum } from '../Utils/currencyFormat';
+import { formatertPengesum } from '../Utils/currencyUtils';
 import { VerdikoderContext } from '../Context/Verdikoder';
 import { ReactComponent as SlettIkon } from '../images/slett.svg';
 import NyInntekt from './NyInntekt';
