@@ -144,6 +144,10 @@ const Dashboard = ({ readOnly, location }) => {
         if (fraDato && tilDato) {
           const måneder = getAlleMåneder(fraDato, tilDato);
 
+          if (result.data.inntekt.arbeidsInntektMaaned === undefined) {
+            result.data.inntekt.arbeidsInntektMaaned = [];
+          }
+
           måneder.forEach((måned) => {
             const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
 
@@ -185,6 +189,11 @@ const Dashboard = ({ readOnly, location }) => {
     if (result && result.data) {
       const { fraDato, tilDato } = (result.data || []).inntekt;
       const måneder = getAlleMåneder(fraDato, tilDato);
+
+      // if ingen arbeidsInntektMaaned, opprett ny og legg til måender
+      if (result.data.inntekt.arbeidsInntektMaaned === undefined) {
+        result.data.inntekt.arbeidsInntektMaaned = [];
+      }
 
       måneder.forEach((måned) => {
         const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
