@@ -3,11 +3,11 @@ import { isValidFodselsnummer } from '../validering';
 const validFodselsnummer = '07078518434';
 
 describe('Fødselsnummer-utils', () => {
-  it('skal godkjenne gyldig fødselsnummer', () => {
+  test('skal godkjenne gyldig fødselsnummer', () => {
     expect(isValidFodselsnummer(validFodselsnummer)).toBe(true);
   });
 
-  it('skal underkjenne ugyldig fødselsnummer', () => {
+  test('skal underkjenne ugyldig fødselsnummer', () => {
     let invalidFodselsnummer = '31048518434';
     expect(isValidFodselsnummer(invalidFodselsnummer)).toBe(false);
     invalidFodselsnummer = '9999999999';
