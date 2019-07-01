@@ -93,7 +93,7 @@ const gåTilNeste12 = () => {
 // todo fra 2016-05 - 2019-05 skal eksludere eller ta(37 måneder) med 2019-05?
 const getAlleMåneder = (fraDato, tilDato) => {
   const måneder = eachMonthOfInterval({
-    start: addMonths(new Date(fraDato), 1),
+    start: new Date(fraDato),
     end: new Date(tilDato),
   });
 
@@ -138,28 +138,29 @@ const Dashboard = ({ readOnly, location }) => {
           });
         }
       }
-
+      if (result && result.data) {
       // todo rydde opp denne funksjonen slik at den ikke trengs å skrives enn gang til
-      const { fraDato, tilDato } = (result || []).data.inntekt;
-      if (fraDato && tilDato) {
-        const måneder = getAlleMåneder(fraDato, tilDato);
+        const { fraDato, tilDato } = (result.data || []).inntekt;
+        if (fraDato && tilDato) {
+          const måneder = getAlleMåneder(fraDato, tilDato);
 
-        måneder.forEach((måned) => {
-          const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
+          måneder.forEach((måned) => {
+            const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
 
-          if (!isMånedEksisterer) {
-            result.data.inntekt.arbeidsInntektMaaned.push({
-              aarMaaned: måned,
-              arbeidsInntektInformasjon: {
-                inntektListe: [],
-              },
-            });
-          }
-        });
+            if (!isMånedEksisterer) {
+              result.data.inntekt.arbeidsInntektMaaned.push({
+                aarMaaned: måned,
+                arbeidsInntektInformasjon: {
+                  inntektListe: [],
+                },
+              });
+            }
+          });
+        }
+
+        setInntektdata({ ...result.data });
+        setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
       }
-
-      setInntektdata({ ...result.data });
-      setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
     };
 
     getInntektFromApi();
@@ -181,24 +182,26 @@ const Dashboard = ({ readOnly, location }) => {
       }
     }
 
-    const { fraDato, tilDato } = (result || []).data.inntekt;
-    const måneder = getAlleMåneder(fraDato, tilDato);
+    if (result && result.data) {
+      const { fraDato, tilDato } = (result.data || []).inntekt;
+      const måneder = getAlleMåneder(fraDato, tilDato);
 
-    måneder.forEach((måned) => {
-      const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
+      måneder.forEach((måned) => {
+        const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
 
-      if (!isMånedEksisterer) {
-        result.data.inntekt.arbeidsInntektMaaned.push({
-          aarMaaned: måned,
-          arbeidsInntektInformasjon: {
-            inntektListe: [],
-          },
-        });
-      }
-    });
+        if (!isMånedEksisterer) {
+          result.data.inntekt.arbeidsInntektMaaned.push({
+            aarMaaned: måned,
+            arbeidsInntektInformasjon: {
+              inntektListe: [],
+            },
+          });
+        }
+      });
 
-    setInntektdata({ ...result.data });
-    setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+      setInntektdata({ ...result.data });
+      setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+    }
     setHentInntekttatus(true);
   };
 
