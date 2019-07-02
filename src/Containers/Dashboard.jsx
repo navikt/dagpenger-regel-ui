@@ -227,7 +227,7 @@ const Dashboard = ({ readOnly, location }) => {
             <Normaltekst>Fødselsnr:</Normaltekst>
             <Ingress>{inntektdata.naturligIdent}</Ingress>
           </div>
-          <div className="flexend flex">
+          <div className="flexend flex noprint">
             {inntektdata.manueltRedigert && (
             <div className="marginhoyre16 flex">
               <EditedIkon />
@@ -255,7 +255,7 @@ const Dashboard = ({ readOnly, location }) => {
         </div>
       )}
 
-      <div className="flex">
+      <div className="flex hentinntekter">
         <Knapp
           onClick={() => setHentInntektModal(true)}
           autoDisableVedSpinner
