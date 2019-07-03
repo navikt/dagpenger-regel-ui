@@ -227,6 +227,11 @@
 }
 
 @media print {
+  @page {
+    size: auto;   /* auto is the initial value */
+    margin: 0;  /* this affects the margin in the printer settings */
+  }
+
   body {
     //transform: rotate(90deg);
     position: static;
@@ -243,11 +248,6 @@
 
       &.arbeidsgiver {
         display: none;
-      }
-
-      &.maaned {
-        background-color: @navMorkGra !important; // stylelint-disable-line declaration-no-important
-        color: white !important; // stylelint-disable-line declaration-no-important
       }
 
       &.inntekter {
