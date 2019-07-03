@@ -40,6 +40,9 @@ const Inntekt = ({
       }}
       />
       <div className={`item inntekter inntekter--${rowId}--${columnId}`}>
+        <div className="bareprint">
+          {virksomhet.identifikator}
+        </div>
         <Ekspanderbartpanel
           tittel={formatertPengesum(sumInntekter(inntekter
             .filter(inntekt => inntekt.virksomhet.identifikator === rowId)))}

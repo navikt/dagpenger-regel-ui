@@ -221,3 +221,51 @@
     text-align: right;
   }
 }
+
+.bareprint {
+  display: none;
+}
+
+@media print {
+  body {
+    //transform: rotate(90deg);
+    position: static;
+    overflow: initial;
+  }
+
+  .grid {
+    display: inline;
+    overflow-y: visible;
+    position: static;
+
+    .item {
+      border-right: 0;
+
+      &.arbeidsgiver {
+        display: none;
+      }
+
+      &.maaned {
+        background-color: @navMorkGra !important; // stylelint-disable-line declaration-no-important
+        color: white !important; // stylelint-disable-line declaration-no-important
+      }
+
+      &.inntekter {
+        .ekspanderbartPanel__hode {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .toolbar,
+  .hentinntekter,
+  .total,
+  .noprint {
+    display: none;
+  }
+
+  .bareprint {
+    display: block;
+  }
+}
