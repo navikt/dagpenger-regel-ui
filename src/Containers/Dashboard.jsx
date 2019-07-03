@@ -220,7 +220,7 @@ const Dashboard = ({ readOnly, location }) => {
             {inntektdata.manueltRedigert && (
             <div className="marginhoyre16 flex">
               <EditedIkon />
-              <Element>Manuelt redigert</Element>
+              <Element>{locale.manueltRedigert}</Element>
             </div>
             )}
             <Knapp
@@ -272,7 +272,7 @@ const Dashboard = ({ readOnly, location }) => {
 
         <OkAvbrytModal
           isOpen={isHentInntektModalOpen}
-          text="Når du henter inn nyeste inntekt fra skatt så vil alle tidligere endringene gå tapt."
+          text={locale.hentNyInntektModal}
           avbrytCallback={() => setHentInntektModal(false)}
           OkCallback={() => {
             fetchUncachedInntekt();

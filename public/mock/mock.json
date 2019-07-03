@@ -26,6 +26,7 @@
                 "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Rema 1000",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -61,6 +62,7 @@
                 "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Rema 1000",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -89,6 +91,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -116,6 +119,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -152,6 +156,7 @@
                 "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Rema 1000",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -180,6 +185,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -207,6 +213,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -234,6 +241,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -269,6 +277,7 @@
                 "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Rema 1000",
               "tilleggsinformasjon": {
                 "kategori": "Nettoloennsordning"
               },
@@ -300,6 +309,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -327,6 +337,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -362,6 +373,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -390,6 +402,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -417,6 +430,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -452,6 +466,7 @@
                 "identifikator": "222222222",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Rema 1000",
               "tilleggsinformasjon": {
                 "kategori": "Nettoloennsordning"
               },
@@ -483,6 +498,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -511,6 +527,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
@@ -538,6 +555,7 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
+              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "AKTOER_ID"
