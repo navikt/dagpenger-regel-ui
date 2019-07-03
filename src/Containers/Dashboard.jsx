@@ -198,7 +198,7 @@ const Dashboard = ({ readOnly, location }) => {
       const data = set36Måneder(result.data);
 
       setInntektdata({ ...data });
-      setArbeidsgivere(findArbeidsgivere(data.inntekt));
+      setArbeidsgivere(await findArbeidsgivere(data.inntekt));
     }
     setHentInntekttatus(true);
   };
@@ -213,14 +213,14 @@ const Dashboard = ({ readOnly, location }) => {
         <div className="flex">
           <div className="marginhoyre16">{getKjønn(inntektdata.naturligIdent)}</div>
           <div>
-            <Normaltekst>{locale.fødselsnummer}</Normaltekst>
+            <Normaltekst>Fødselsnummer</Normaltekst>
             <Ingress>{inntektdata.naturligIdent}</Ingress>
           </div>
           <div className="flexend flex noprint">
             {inntektdata.manueltRedigert && (
             <div className="marginhoyre16 flex">
               <EditedIkon />
-              <Element>{locale.manueltRedigert}</Element>
+              <Element>Manuelt redigert</Element>
             </div>
             )}
             <Knapp
@@ -229,7 +229,7 @@ const Dashboard = ({ readOnly, location }) => {
               disabled={readOnly}
               onClick={() => sendTilbakemelding()}
             >
-              {locale.hvordanOppleverDuLøsningen}
+              Hvordan opplever du løsningen?
             </Knapp>
           </div>
         </div>
@@ -251,8 +251,7 @@ const Dashboard = ({ readOnly, location }) => {
           disabled={readOnly}
           spinner={hentInntektStatus === 'fetching'}
         >
-
-          {locale.hentInntekterPåNytt}
+          Hent inntekter på nytt
         </Knapp>
         <div className="marginvenstre16">
           {locale.opplysngerHentet}
@@ -273,7 +272,7 @@ const Dashboard = ({ readOnly, location }) => {
 
         <OkAvbrytModal
           isOpen={isHentInntektModalOpen}
-          text={locale.hentNyInntektModal}
+          text="Når du henter inn nyeste inntekt fra skatt så vil alle tidligere endringene gå tapt."
           avbrytCallback={() => setHentInntektModal(false)}
           OkCallback={() => {
             fetchUncachedInntekt();

@@ -50,13 +50,13 @@ const InntektsForm = (props) => {
               disabled={readOnly}
               onClick={() => setArbeidsgiverModal(!isArbeidsgiverModalOpen)}
             >
-              {locale.leggTilArbeidsgiver}
+              Legg til arbeidsgiver
             </Knapp>
             <Modal
               isOpen={isArbeidsgiverModalOpen}
               onRequestClose={() => setArbeidsgiverModal(false)}
               closeButton={false}
-              contentLabel={locale.leggTilArbeidsgiver}
+              contentLabel="Legg til arbeidsgiver"
               ariaHideApp={false}
             >
               <FieldArray
@@ -74,7 +74,7 @@ const InntektsForm = (props) => {
           </div>
 
           <div className="flexend flex">
-            <div className="w200 marginhoyre16"><Undertekst>{locale.MåBekrefteNyeOpplysngerSkalBenyttes}</Undertekst></div>
+            <div className="w200 marginhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes.</Undertekst></div>
             {values.redigertAvSaksbehandler && (
             <Hovedknapp
               htmlType="button"
@@ -83,7 +83,7 @@ const InntektsForm = (props) => {
               autoDisableVedSpinner
               disabled={!hentInntektStatus && !dirty}
             >
-              {locale.bekreft}
+              Bekreft
             </Hovedknapp>
             )}
             {!values.redigertAvSaksbehandler && (
@@ -94,12 +94,12 @@ const InntektsForm = (props) => {
               autoDisableVedSpinner
               disabled={!hentInntektStatus && !dirty}
             >
-              {locale.bekreft}
+              Bekreft
             </Hovedknapp>
             )}
             <OkAvbrytModal
               isOpen={isBekreftModalOpen}
-              text={locale.bekreftNyInntektEndringeneOverskrives}
+              text="Når du bekrefter ny inntekt så vil alle tidligere endringene overskrives."
               avbrytCallback={() => setBekreftModal(false)}
               OkCallback={() => {
                 handleSubmit();
