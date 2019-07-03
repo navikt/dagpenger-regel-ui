@@ -83,7 +83,7 @@ const InntektsForm = (props) => {
               autoDisableVedSpinner
               disabled={!hentInntektStatus && !dirty}
             >
-              {locale.bekreft}
+              Bekreft
             </Hovedknapp>
             )}
             {!values.redigertAvSaksbehandler && (
@@ -94,12 +94,12 @@ const InntektsForm = (props) => {
               autoDisableVedSpinner
               disabled={!hentInntektStatus && !dirty}
             >
-              {locale.bekreft}
+              Bekreft
             </Hovedknapp>
             )}
             <OkAvbrytModal
               isOpen={isBekreftModalOpen}
-              text={locale.bekreftNyInntektEndringeneOverskrives}
+              text="Når du bekrefter ny inntekt så vil alle tidligere endringene overskrives."
               avbrytCallback={() => setBekreftModal(false)}
               OkCallback={() => {
                 handleSubmit();
