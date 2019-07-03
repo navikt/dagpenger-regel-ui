@@ -45,13 +45,18 @@ const sendTilbakemelding = () => {
   });
 };
 
-export const findArbeidsgivere = (inntekt) => {
+export const findArbeidsgivere = async (inntekt) => {
+  const resultat = await axios(`${process.env.PUBLIC_URL}/mock/mockOrg.json`);
+
+  const virksomheterMap = resultat.data || [];
+
   const map = new Map();
   inntekt.arbeidsInntektMaaned
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
         const { identifikator } = arbeidsgiver.virksomhet;
-        const navn = arbeidsgiver.virksomhetNavn;
+        const navn = virksomheterMap[identifikator];
+
         map.set(identifikator, { navn, ...arbeidsgiver.virksomhet });
       }));
 
@@ -166,7 +171,7 @@ const Dashboard = ({ readOnly, location }) => {
         const data = set36Måneder(result.data);
 
         setInntektdata({ ...data });
-        setArbeidsgivere(findArbeidsgivere(data.inntekt));
+        setArbeidsgivere(await findArbeidsgivere(data.inntekt));
       }
     };
 
