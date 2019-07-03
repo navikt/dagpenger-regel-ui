@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Form, withFormik, FieldArray } from 'formik';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -11,11 +11,12 @@ import { Inntektstabell } from './Inntektstabell';
 import { lagreInntekt } from '../lib/inntektApiClient';
 import NyArbeidsgiver from './NyArbeidsgiver';
 import OkAvbrytModal from '../Components/OkAvbrytModal';
-
+import { LocaleContext } from '../Context/Locale';
 
 const InntektsForm = (props) => {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
   const [isBekreftModalOpen, setBekreftModal] = useState(false);
+  const locale = useContext(LocaleContext);
 
   const {
     hentInntektStatus, values, dirty, readOnly, handleSubmit, status, errors, isSubmitting,
@@ -27,8 +28,8 @@ const InntektsForm = (props) => {
       {status && status.success && (
       <div aria-live="polite">
         <AlertStripe type="suksess">
-          <Element>Inntekt er lagret.</Element>
-Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene.
+          <Element>{locale.inntektLagret}</Element>
+          {locale.inntektLagretHuskÅBeregneIArena}
         </AlertStripe>
         <Spacer sixteenPx />
       </div>
@@ -49,13 +50,13 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
               disabled={readOnly}
               onClick={() => setArbeidsgiverModal(!isArbeidsgiverModalOpen)}
             >
-  Legg til arbeidsgiver
+              {locale.leggTilArbeidsgiver}
             </Knapp>
             <Modal
               isOpen={isArbeidsgiverModalOpen}
               onRequestClose={() => setArbeidsgiverModal(false)}
               closeButton={false}
-              contentLabel="Ny arbeidsgiver"
+              contentLabel={locale.leggTilArbeidsgiver}
               ariaHideApp={false}
             >
               <FieldArray
@@ -73,7 +74,7 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
           </div>
 
           <div className="flexend flex">
-            <div className="w200 marginhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes</Undertekst></div>
+            <div className="w200 marginhoyre16"><Undertekst>{locale.MåBekrefteNyeOpplysngerSkalBenyttes}</Undertekst></div>
             {values.redigertAvSaksbehandler && (
             <Hovedknapp
               htmlType="button"
@@ -82,7 +83,7 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
               autoDisableVedSpinner
               disabled={!hentInntektStatus && !dirty}
             >
-              Bekreft
+              {locale.bekreft}
             </Hovedknapp>
             )}
             {!values.redigertAvSaksbehandler && (
@@ -93,12 +94,12 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
               autoDisableVedSpinner
               disabled={!hentInntektStatus && !dirty}
             >
-              Bekreft
+              {locale.bekreft}
             </Hovedknapp>
             )}
             <OkAvbrytModal
               isOpen={isBekreftModalOpen}
-              text="Når du bekrefter ny inntekt så vil alle tidligere endringene overskrives."
+              text={locale.bekreftNyInntektEndringeneOverskrives}
               avbrytCallback={() => setBekreftModal(false)}
               OkCallback={() => {
                 handleSubmit();

@@ -54,14 +54,14 @@
     "react": "^16.8.6",
     "react-collapse": "^4.0.3",
     "react-dom": "^16.8.6",
-    "react-modal": "^3.8.1",
+    "react-modal": "^3.8.2",
     "react-motion": "^0.5.2",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "stylelint": "^10.1.0"
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb": "^17.1.1",
     "less": "^3.5.2",
     "less-plugin-npm-import": "^2.1.0",
     "less-watch-compiler": "^1.13.0",

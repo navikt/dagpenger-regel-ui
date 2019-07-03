@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
@@ -18,6 +18,7 @@ import EditedIkon from '../Components/EditedIkon';
 import { ReactComponent as MannIkon } from '../images/mann.svg';
 import { ReactComponent as KvinneIkon } from '../images/kvinne.svg';
 import { getInntekt, getUncachedInntekt } from '../lib/inntektApiClient';
+import { LocaleContext } from '../Context/Locale';
 
 const getKjønn = (fødselsnr = '') => {
   if (Number(fødselsnr.charAt(8)) % 2 === 0) {
@@ -34,7 +35,7 @@ const sendTilbakemelding = () => {
     eventId,
     title: 'Hvordan opplever du løsningen?',
     subtitle: 'Hjelp  oss å gjøre løsningen bedre. Gi oss tilbakemelding.',
-    subtitle2: '\nFeil melder du på vanlig måte via Porten.',
+    subtitle2: 'Feil melder du på vanlig måte via Porten.',
     labelName: 'Navn',
     labelEmail: 'E-post',
     labelComments: 'Tilbakemelding',
@@ -49,16 +50,14 @@ export const findArbeidsgivere = (inntekt) => {
   inntekt.arbeidsInntektMaaned
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
-        // TODO fikse denne, bør flyttes til backend ved et senere tidspunkt
-        const navn = '';
-
-        map.set(arbeidsgiver.virksomhet.identifikator, { navn, ...arbeidsgiver.virksomhet });
+        const { identifikator } = arbeidsgiver.virksomhet;
+        const navn = arbeidsgiver.virksomhetNavn;
+        map.set(identifikator, { navn, ...arbeidsgiver.virksomhet });
       }));
 
   return Array.from(map.values())
     .sort((a, b) => b.identifikator - a.identifikator);
 };
-
 
 const inntektRequest = queryParams => ({
   aktørId: queryParams.get('aktorId'),
@@ -66,7 +65,7 @@ const inntektRequest = queryParams => ({
   beregningsDato: queryParams.get('beregningdato'),
 });
 
-// TODO hente bredde dynamisk tilfelle
+// TODO hente bredde dynamisk tilfelle, bruke useRef
 const gåTilForrige12 = () => {
   const elem = document.getElementById('grid');
   if (elem && (elem.scrollLeft / 3) > 1250) {
@@ -78,7 +77,7 @@ const gåTilForrige12 = () => {
   }
 };
 
-// TODO hente bredde dynamisk tilfelle
+// TODO hente bredde dynamisk tilfelle, bruke useRef
 const gåTilNeste12 = () => {
   const elem = document.getElementById('grid');
   if (elem && elem.scrollLeft <= 6500) {
@@ -100,12 +99,39 @@ const getAlleMåneder = (fraDato, tilDato) => {
   return måneder;
 };
 
+const set36Måneder = (data) => {
+  const { fraDato, tilDato } = (data || []).inntekt;
+  if (fraDato && tilDato) {
+    const måneder = getAlleMåneder(fraDato, tilDato);
+
+    if (data.inntekt.arbeidsInntektMaaned === undefined) {
+      // eslint-disable-next-line no-param-reassign
+      data.inntekt.arbeidsInntektMaaned = [];
+    }
+
+    måneder.forEach((måned) => {
+      const isMånedEksisterer = (data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
+
+      if (!isMånedEksisterer) {
+        data.inntekt.arbeidsInntektMaaned.push({
+          aarMaaned: måned,
+          arbeidsInntektInformasjon: {
+            inntektListe: [],
+          },
+        });
+      }
+    });
+  }
+
+  return data;
+};
+
 const Dashboard = ({ readOnly, location }) => {
   const [inntektdata, setInntektdata] = useState({
     fraDato: null,
     tilDato: null,
     timestamp: null,
-    inntektId: '',
+    inntektId: null,
     inntekt: {
       arbeidsInntektMaaned: [],
       ident: {},
@@ -115,6 +141,7 @@ const Dashboard = ({ readOnly, location }) => {
   const [arbeidsgivere, setArbeidsgivere] = useState([]);
   const [hentInntektStatus, setHentInntekttatus] = useState(false);
   const [isHentInntektModalOpen, setHentInntektModal] = useState(false);
+  const locale = useContext(LocaleContext);
 
   // todo endre struktur fra backend slik at vi slipper å bruke til å hacke ting på plass
   // DOM order matches the visual order, improving navigation for assistive technology. Learn more.
@@ -126,49 +153,25 @@ const Dashboard = ({ readOnly, location }) => {
         try {
           result = await axios(`${process.env.PUBLIC_URL}/mock/mock.json`);
         } catch (error) {
-          throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
+          throw new Error(`${locale.axiosFeilmelding} ${error}`);
         }
       } else {
         try {
           result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
         } catch (error) {
-          throw new Error({
-            name: 'NetworkError',
-            message: `En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`,
-          });
+          throw new Error(`${locale.axiosFeilmelding} ${error}`);
         }
       }
       if (result && result.data) {
-      // todo rydde opp denne funksjonen slik at den ikke trengs å skrives enn gang til
-        const { fraDato, tilDato } = (result.data || []).inntekt;
-        if (fraDato && tilDato) {
-          const måneder = getAlleMåneder(fraDato, tilDato);
+        const data = set36Måneder(result.data);
 
-          if (result.data.inntekt.arbeidsInntektMaaned === undefined) {
-            result.data.inntekt.arbeidsInntektMaaned = [];
-          }
-
-          måneder.forEach((måned) => {
-            const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
-
-            if (!isMånedEksisterer) {
-              result.data.inntekt.arbeidsInntektMaaned.push({
-                aarMaaned: måned,
-                arbeidsInntektInformasjon: {
-                  inntektListe: [],
-                },
-              });
-            }
-          });
-        }
-
-        setInntektdata({ ...result.data });
-        setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+        setInntektdata({ ...data });
+        setArbeidsgivere(findArbeidsgivere(data.inntekt));
       }
     };
 
     getInntektFromApi();
-  }, [location.search]);
+  }, [locale.axiosFeilmelding, location.search]);
 
   const fetchUncachedInntekt = async () => {
     setHentInntekttatus('fetching');
@@ -182,39 +185,20 @@ const Dashboard = ({ readOnly, location }) => {
       try {
         result = await getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)));
       } catch (error) {
-        throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
+        throw new Error(`${locale.axiosFeilmelding} ${error}`);
       }
     }
 
     if (result && result.data) {
-      const { fraDato, tilDato } = (result.data || []).inntekt;
-      const måneder = getAlleMåneder(fraDato, tilDato);
+      const data = set36Måneder(result.data);
 
-      // if ingen arbeidsInntektMaaned, opprett ny og legg til måender
-      if (result.data.inntekt.arbeidsInntektMaaned === undefined) {
-        result.data.inntekt.arbeidsInntektMaaned = [];
-      }
-
-      måneder.forEach((måned) => {
-        const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
-
-        if (!isMånedEksisterer) {
-          result.data.inntekt.arbeidsInntektMaaned.push({
-            aarMaaned: måned,
-            arbeidsInntektInformasjon: {
-              inntektListe: [],
-            },
-          });
-        }
-      });
-
-      setInntektdata({ ...result.data });
-      setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+      setInntektdata({ ...data });
+      setArbeidsgivere(findArbeidsgivere(data.inntekt));
     }
     setHentInntekttatus(true);
   };
 
-  if (!inntektdata.inntekt.arbeidsInntektMaaned.length) {
+  if (!inntektdata.inntektId && !inntektdata.inntekt.arbeidsInntektMaaned.length) {
     return <Spinner type="XL" />;
   }
 
@@ -224,14 +208,14 @@ const Dashboard = ({ readOnly, location }) => {
         <div className="flex">
           <div className="marginhoyre16">{getKjønn(inntektdata.naturligIdent)}</div>
           <div>
-            <Normaltekst>Fødselsnr:</Normaltekst>
+            <Normaltekst>{locale.fødselsnummer}</Normaltekst>
             <Ingress>{inntektdata.naturligIdent}</Ingress>
           </div>
           <div className="flexend flex noprint">
             {inntektdata.manueltRedigert && (
             <div className="marginhoyre16 flex">
               <EditedIkon />
-              <Element>Manuelt redigert</Element>
+              <Element>{locale.manueltRedigert}</Element>
             </div>
             )}
             <Knapp
@@ -240,7 +224,7 @@ const Dashboard = ({ readOnly, location }) => {
               disabled={readOnly}
               onClick={() => sendTilbakemelding()}
             >
-  Hvordan opplever du løsningen?
+              {locale.hvordanOppleverDuLøsningen}
             </Knapp>
           </div>
         </div>
@@ -250,7 +234,7 @@ const Dashboard = ({ readOnly, location }) => {
 
       {hentInntektStatus && (
         <div aria-live="polite">
-          <AlertStripe type="info">Inntekt innhentet. Trykk bekreft for å lagre.</AlertStripe>
+          <AlertStripe type="info">{locale.hentNyInntektSuksess}</AlertStripe>
           <Spacer sixteenPx />
         </div>
       )}
@@ -263,10 +247,11 @@ const Dashboard = ({ readOnly, location }) => {
           spinner={hentInntektStatus === 'fetching'}
         >
 
-        Hent inntekter på nytt
+          {locale.hentInntekterPåNytt}
         </Knapp>
         <div className="marginvenstre16">
-            Opplysninger hentet:
+          {locale.opplysngerHentet}
+:
           <Normaltekst>
             {formatDato(new Date(inntektdata.timestamp), DDMMYYYYHHMM_FORMAT)}
             {', '}
@@ -283,7 +268,7 @@ const Dashboard = ({ readOnly, location }) => {
 
         <OkAvbrytModal
           isOpen={isHentInntektModalOpen}
-          text="Når du henter inn nyeste inntekt fra skatt så vil alle tidligere endringene gå tapt."
+          text={locale.hentNyInntektModal}
           avbrytCallback={() => setHentInntektModal(false)}
           OkCallback={() => {
             fetchUncachedInntekt();
@@ -305,7 +290,6 @@ const Dashboard = ({ readOnly, location }) => {
           ],
         }}
       />
-
     </>
   );
 };
