@@ -47,9 +47,13 @@ const sendTilbakemelding = () => {
 
 // slippe denne når vi lager v2 av api dto
 export const findArbeidsgivere = async (inntekt) => {
-  const resultat = await axios(`${process.env.PUBLIC_URL}/mock/mockOrg.json`);
-
-  const virksomheterMap = resultat.data || [];
+  let resultat;
+  try {
+    resultat = await axios(`${process.env.PUBLIC_URL}/mock/mockOrg.json`);
+  } catch (error) {
+    throw new Error(`${error}`);
+  }
+  const virksomheterMap = (resultat || {}).data || [];
 
   const map = new Map();
   inntekt.arbeidsInntektMaaned
