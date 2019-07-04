@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from 'nav-frontend-modal';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
+import Spacer from './Spacer';
 import { ReactComponent as AdvarselIkon } from '../images/advarsel.svg';
 
 export const OkAvbrytModal = ({
@@ -26,12 +27,12 @@ export const OkAvbrytModal = ({
           <Normaltekst>{text}</Normaltekst>
         </div>
       </div>
-
+      <Spacer sixteenPx />
       <div className="knapprad hoyre">
-        <Knapp htmlType="button" mini onClick={avbrytCallback}>
+        <Knapp htmlType="button" onClick={avbrytCallback}>
           Avbryt
         </Knapp>
-        <Hovedknapp htmlType="button" mini onClick={OkCallback}>
+        <Hovedknapp htmlType="button" onClick={OkCallback}>
           Bekreft
         </Hovedknapp>
       </div>

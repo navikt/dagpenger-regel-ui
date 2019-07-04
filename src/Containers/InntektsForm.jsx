@@ -46,7 +46,6 @@ const InntektsForm = (props) => {
           <div className="leggtilarbeidsgiver">
             <Knapp
               htmlType="button"
-              mini
               disabled={readOnly}
               onClick={() => setArbeidsgiverModal(!isArbeidsgiverModalOpen)}
             >
@@ -143,7 +142,7 @@ export default withFormik({
     return (initialValues);
   },
 
-
+  // todo bare endre til async fra promise
   handleSubmit: (values, formProps) => {
     const dirty = !isEqual(formProps.props.initialValues, values);
 
@@ -154,6 +153,7 @@ export default withFormik({
         formProps.props.locationData,
       )
         .then((result) => {
+          // trenger jo ikke sette dataene på nytt
           // setInntektdata({ ...result.data });
           // setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
           formProps.setStatus({ success: true });

@@ -45,6 +45,7 @@ const sendTilbakemelding = () => {
   });
 };
 
+// slippe denne når vi lager v2 av api dto
 export const findArbeidsgivere = async (inntekt) => {
   const resultat = await axios(`${process.env.PUBLIC_URL}/mock/mockOrg.json`);
 
@@ -55,7 +56,7 @@ export const findArbeidsgivere = async (inntekt) => {
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
         const { identifikator } = arbeidsgiver.virksomhet;
-        const navn = virksomheterMap[identifikator];
+        const navn = virksomheterMap[identifikator] || '';
 
         map.set(identifikator, { navn, ...arbeidsgiver.virksomhet });
       }));
@@ -94,7 +95,6 @@ const gåTilNeste12 = () => {
   }
 };
 
-// todo fra 2016-05 - 2019-05 skal eksludere eller ta(37 måneder) med 2019-05?
 const getAlleMåneder = (fraDato, tilDato) => {
   const måneder = eachMonthOfInterval({
     start: new Date(fraDato),

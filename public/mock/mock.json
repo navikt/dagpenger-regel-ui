@@ -495,6 +495,62 @@
             },
             {
               "inntektType": "LOENNSINNTEKT",
+              "header": "Kontaktytelse",
+              "beloep": "44665.00",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
+              "opplysningspliktig": {
+                "identifikator": "333333333",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "333333333",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "AKTOER_ID"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Fastlønn"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
+              "header": "Kontaktytelse",
+              "beloep": "44665.00",
+              "fordel": "kontantytelse",
+              "inntektskilde": "A-ordningen",
+              "inntektsperiodetype": "Maaned",
+              "inntektsstatus": "LoependeInnrapportert",
+              "leveringstidspunkt": "2019-02",
+              "utbetaltIMaaned": "2017-08",
+              "opplysningspliktig": {
+                "identifikator": "444444444",
+                "aktoerType": "ORGANISASJON"
+              },
+              "virksomhet": {
+                "identifikator": "444444444",
+                "aktoerType": "ORGANISASJON"
+              },
+              "inntektsmottaker": {
+                "identifikator": "99999999999",
+                "aktoerType": "AKTOER_ID"
+              },
+              "inngaarIGrunnlagForTrekk": true,
+              "utloeserArbeidsgiveravgift": true,
+              "informasjonsstatus": "InngaarAlltid",
+              "verdikode": "Fastlønn",
+              "beskrivelse": "Fastlønn"
+            },
+            {
+              "inntektType": "LOENNSINNTEKT",
               "header": "Naturalytelse",
               "beloep": "366.00",
               "fordel": "kontantytelse",
