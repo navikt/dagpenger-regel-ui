@@ -2,9 +2,8 @@ import axios from 'axios';
 
 const apiUri = '/oppslag/api';
 
-export const  getOrganisasjonsNavn = async (orgNr) => {
+export const getOrganisasjonsNavn = async (orgNr) => {
   try {
-    console.log(`${orgNr}`)
     return await axios({
       method: 'get',
       url: `${apiUri}/organisasjon/${orgNr}`,
@@ -15,11 +14,11 @@ export const  getOrganisasjonsNavn = async (orgNr) => {
 };
 
 
-export const getName = async (request) => {
+export const getPersonNavn = async (request) => {
   try {
     return await axios({
       method: 'post',
-      url: `${apiUri}/person/name"`,
+      url: `${apiUri}/person/name`,
       data: request,
     });
   } catch (error) {
