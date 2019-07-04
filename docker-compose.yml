@@ -20,6 +20,20 @@ services:
       - postgres
     external_links:
       - dp-inntekt-api
+  dagpenger-oppslag:
+    build: ./../dagpenger-oppslag
+    hostname: dagpenger-oppslag
+    ports:
+      - "8080:8080"
+    environment:
+      SRVDAGPENGER_OPPSLAG_USERNAME: foo
+      SRVDAGPENGER_OPPSLAG_PASSWORD: bar
+      JWKS_URL: "http://host.docker.internal:4352/certs"
+      JWT_ISSUER: "http://simple-oidc-provider"
+      JOURNALFOERINNGAAENDE_V1_URL: "http://localhost"
+      VIRKSOMHET_PERSON_V3_ENDPOINTURL: "http://localhost"
+      SECURITYTOKENSERVICE_URL: "http://localhost"
+      AKTOR_URL: "http://localhost"
   dp-regel-ui:
     build: .
     ports:
@@ -27,6 +41,7 @@ services:
     environment:
       APP_PORT: 3000
       APP_INNTEKT_BASEURL: "http://dp-inntekt-api:8099/"
+      APP_OPPSLAG_BASEURL: "http://dagpenger-oppslag:8080/"
       OIDC_HOST_URL: "http://host.docker.internal:4352"
       OIDC_REDIRECT_URI: "http://localhost:3000/inntekter/oidc/callback"
       OIDC_AGENTNAME: "foo"
