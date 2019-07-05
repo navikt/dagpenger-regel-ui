@@ -54,14 +54,3 @@ export const getVerdikoder = async () => {
   }
 };
 
-export const getName = async (request) => {
-  try {
-    return await axios({
-      method: 'post',
-      url: `${apiUri}/aktoer/name`,
-      data: request,
-    });
-  } catch (error) {
-    return error;
-  }
-};

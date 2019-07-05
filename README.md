@@ -40,6 +40,21 @@ docker-compose -f docker-compose.yml up --build
 OpenId provideren har et sett predifinerte brukernavn og passord, se disse brukerene nederst på denne siden https://hub.docker.com/r/qlik/simple-oidc-provider/
 
 
+feks:
+
+```json
+{
+    id: 'SIMPLE_OIDC_USER_HARLEY',
+    email: 'harley@qlik.example',
+    email_verified: true,
+    name: 'Harley Kiffe',
+    nickname: 'harley',
+    password: 'Password1!',
+    groups: ['Everyone', 'Sales']
+  },
+
+```
+
 Stopp ved å kjøre:
 ```bash
 yarn down
