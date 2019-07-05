@@ -25,7 +25,6 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
-              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "NATURLIG_IDENT"
@@ -59,7 +58,6 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
-              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "NATURLIG_IDENT"
@@ -93,7 +91,6 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
-              "virksomhetNavn": "Sopra Steria",
               "tilleggsinformasjon": {
                 "kategori": "Nettoloennsordning"
               },
@@ -130,7 +127,6 @@
                 "identifikator": "111111111",
                 "aktoerType": "ORGANISASJON"
               },
-              "virksomhetNavn": "Sopra Steria",
               "inntektsmottaker": {
                 "identifikator": "99999999999",
                 "aktoerType": "NATURLIG_IDENT"
