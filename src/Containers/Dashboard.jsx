@@ -185,7 +185,7 @@ const Dashboard = ({ readOnly, location }) => {
       if (resultat && resultat.data) {
         const data = await set36Måneder(resultat.data);
 
-        setInntektdata({ ...data });
+        setInntektdata(await { ...data });
         setArbeidsgivere(await findArbeidsgivere(data.inntekt));
       }
     };
