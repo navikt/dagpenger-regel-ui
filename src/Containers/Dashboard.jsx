@@ -62,9 +62,14 @@ export const findArbeidsgivere = async (inntekt) => {
     if (process.env.NODE_ENV !== 'production') {
       try {
         // eslint-disable-next-line no-await-in-loop
-        resultat = await axios(`${process.env.PUBLIC_URL}/mock/mockOrg.json`);
+        resultat = await axios(`${process.env.PUBLIC_URL}/mock/mockOrg.json`, {
+          validateStatus(status) {
+            return status < 500; // Reject only if the status code is greater than or equal to 500
+          },
+        });
       } catch (error) {
-        throw new Error(error);
+        return null;
+        // throw new Error(error);
       }
     } else {
       try {
