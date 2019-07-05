@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, withFormik, FieldArray } from 'formik';
 import AlertStripe from 'nav-frontend-alertstriper';
