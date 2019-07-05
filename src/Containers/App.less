@@ -41,8 +41,6 @@
     padding: 16px 0;
     border-top: 1px solid @navGra40;
   }
-
-  //
 }
 
 // grid
@@ -68,7 +66,6 @@
       left: 0;
       min-width: @width;
       z-index: 2;
-      // box-shadow: 6px 0 20px 5px rgba(0, 0, 0, 0.2);
     }
 
     &.maaned {
@@ -78,7 +75,7 @@
       text-transform: capitalize;
 
       &.total {
-        // background: @navLilla;
+        background: @navMorkGra;
       }
     }
 
@@ -96,9 +93,25 @@
   }
 }
 
+// form
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.radioGroupLabel {
+  padding-bottom: 16px;
+  display: block;
+}
+
 // Modal
 .okavbrytmodal {
-  width: 750px;
+  width: 500px;
 
   .okavbrytmodal--ikon {
     border-right: 1px solid @navGra40;
@@ -174,6 +187,10 @@
   width: 200px;
 }
 
+.w400 {
+  width: 400px;
+}
+
 .marginvenstre16 {
   margin-left: 16px;
 }
@@ -211,6 +228,10 @@
   align-content: center;
   align-items: center;
   justify-content: flex-start;
+
+  &.center {
+    justify-content: center;
+  }
 
   &.flexend {
     justify-content: flex-end;

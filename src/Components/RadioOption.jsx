@@ -21,7 +21,6 @@ export const RadioOption = ({
   return (
     <>
       <Radio
-        component={Radio}
         name={name}
         label={<Label label={label} typographyElement={Normaltekst} />}
         value={value}
@@ -37,8 +36,16 @@ export const RadioOption = ({
 RadioOption.propTypes = {
   name: PropTypes.string,
   label: labelPropType,
-  value: PropTypes.any.isRequired,
-  actualValue: PropTypes.any,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
+  actualValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
   disabled: PropTypes.bool,
   groupDisabled: PropTypes.bool,
   onChange: PropTypes.func,

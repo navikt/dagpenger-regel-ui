@@ -7,7 +7,9 @@ import InputField from '../Components/InputField';
 import aktørTyper from '../Kodeverk/aktoerTyper';
 import { RadioGroupField } from '../Components/RadioGroupField';
 import { RadioOption } from '../Components/RadioOption';
+import Spacer from '../Components/Spacer';
 import { required, hasValidOrgNumber, hasValidFodselsnummer } from '../Utils/validering';
+import { ReactComponent as GodkjentIkon } from '../images/innvilget_valgt.svg';
 
 // totalen kan ikke være mindre enn 0
 
@@ -22,49 +24,61 @@ const NyArbeidsgiver = (props) => {
   } = props;
   return (
     <Form onSubmit={handleSubmit}>
-      <Undertittel>
-      Legg til ny arbeidsgiver
-      </Undertittel>
+      <div className="okavbrytmodal">
+        <div className="flex">
+          <div className="flexcolumn">
+            <div className="okavbrytmodal--ikon">
+              <GodkjentIkon />
+            </div>
+          </div>
+          <div className="flexcolumn okavbrytmodal--text">
+            <Undertittel>Legg til ny arbeidsgiver</Undertittel>
+          </div>
+        </div>
+        <Spacer sixteenPx />
 
-      <RadioGroupField
-        label="Type aktør?"
-        name="aktoerType"
-        validate={required}
-      >
-        <RadioOption value={aktørTyper.ORGANISASJON} label="Virksomhet" />
-        <RadioOption value={aktørTyper.AKTOER_ID} label="Privatperson" />
+        <div className="w400">
+          <RadioGroupField
+            label="Type aktør?"
+            name="aktoerType"
+            validate={required}
+          >
+            <RadioOption value={aktørTyper.ORGANISASJON} label="Virksomhet" />
+            <RadioOption value={aktørTyper.AKTOER_ID} label="Privatperson" />
 
-      </RadioGroupField>
-      {values.aktoerType === aktørTyper.ORGANISASJON && (
-      <InputField
-        label="Org.Nr"
-        name="identifikator"
-        validate={hasValidOrgNumber}
-      />
-      )}
+          </RadioGroupField>
+          {values.aktoerType === aktørTyper.ORGANISASJON && (
+          <InputField
+            label="Org.Nr"
+            name="identifikator"
+            validate={hasValidOrgNumber}
+          />
+          )}
 
-      {values.aktoerType === aktørTyper.AKTOER_ID && (
-      <InputField
-        label="Fødselsnummer"
-        name="identifikator"
-        validate={hasValidFodselsnummer}
-      />
-      )}
-
-      <div className="knapprad">
-        <Hovedknapp
-          htmlType="submit"
-          onClick={handleSubmit}
-          disabled={!isValid || isSubmitting}
-        >
+          {values.aktoerType === aktørTyper.AKTOER_ID && (
+          <InputField
+            label="Fødselsnummer"
+            name="identifikator"
+            validate={hasValidFodselsnummer}
+          />
+          )}
+        </div>
+        <Spacer sixteenPx />
+        <div className="flex knapprad flexend">
+          <Hovedknapp
+            htmlType="submit"
+            onClick={handleSubmit}
+            disabled={!isValid || isSubmitting}
+          >
       Legg til
-        </Hovedknapp>
-        <Knapp
-          htmlType="button"
-          onClick={closeModal}
-        >
+          </Hovedknapp>
+          <Knapp
+            htmlType="button"
+            onClick={closeModal}
+          >
       Avbryt
-        </Knapp>
+          </Knapp>
+        </div>
       </div>
     </Form>
   );

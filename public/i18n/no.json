@@ -1,0 +1,17 @@
+{
+  "test": "bacon",
+  "bekreft": "Bekreft",
+  "axiosFeilmelding": "En feil har oppstått i forbindelse med tjenestekallet til inntekt.",
+  "manueltRedigert": "Manuelt redigert",
+  "fødselsnummer": "Fødselsnummer",
+  "hvordanOppleverDuLøsningen": "Hvordan opplever du løsningen?",
+  "hentInntekterPåNytt": "Hent inntekter på nytt",
+  "opplysngerHentet": "Opplysninger hentet",
+  "hentNyInntektSuksess": "Inntekt innhentet. Trykk bekreft for å lagre.",
+  "hentNyInntektModal": "Når du henter inn nyeste inntekt fra skatt så vil alle tidligere endringene gå tapt.",
+  "inntektLagret": "Inntekt er lagret.",
+  "inntektLagretHuskÅBeregneIArena": "Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene.",
+  "leggTilArbeidsgiver": "Legg til arbeidsgiver",
+  "bekreftNyInntektEndringeneOverskrives": "Når du bekrefter ny inntekt så vil alle tidligere endringene overskrives.",
+  "MåBekrefteNyeOpplysngerSkalBenyttes": "Du må bekrefte at de nye opplysningene skal benyttes"
+}

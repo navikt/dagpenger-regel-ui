@@ -41,7 +41,7 @@ const Inntekt = ({
       />
       <div className={`item inntekter inntekter--${rowId}--${columnId}`}>
         <div className="bareprint">
-          {virksomhet.identifikator}
+          {`${virksomhet.navn} (${virksomhet.identifikator})`}
         </div>
         <Ekspanderbartpanel
           tittel={formatertPengesum(sumInntekter(inntekter
