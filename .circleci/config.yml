@@ -2,7 +2,11 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
+
+orbs:
+  nais: navikt/nais-deployment@1.1.1
+
 jobs:
   build:
     docker:
@@ -38,3 +42,49 @@ jobs:
       # run tests!
       - run: yarn test
       - run: yarn test:less
+      # Build artifact for docker
+      - run: yarn build
+      - nais/docker-deploy:
+          image: navikt/dagpenger-regel-ui
+
+
+workflows:
+  version: 2
+  dagpenger-regel-ui:
+    jobs:
+      - build:
+          context: NAIS deployment
+      - nais/deploy:
+          name: dev_deploy
+          context: NAIS deployment
+          build-and-push-docker-image: false
+          repo: navikt/dagpenger-regel-ui
+          image: navikt/dagpenger-regel-ui
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
+          github-app-id: 21626
+          nais-template: nais/nais-dev.yaml
+          team: teamdagpenger
+          environment: dev-fss
+
+      - nais/deploy:
+          name: prod_deploy
+          context: NAIS deployment
+          build-and-push-docker-image: false
+          repo: navikt/dagpenger-regel-ui
+          image: navikt/dagpenger-regel-ui
+          filters:
+            branches:
+              only: master
+          requires:
+            - dev_deploy
+          github-app-id: 21626
+          nais-template: nais/nais-dev.yaml
+          team: teamdagpenger
+          environment: prod-fss
+
+
+
