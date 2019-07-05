@@ -11,12 +11,10 @@ import { Inntektstabell } from './Inntektstabell';
 import { lagreInntekt } from '../lib/inntektApiClient';
 import NyArbeidsgiver from './NyArbeidsgiver';
 import OkAvbrytModal from '../Components/OkAvbrytModal';
-import { LocaleContext } from '../Context/Locale';
 
 const InntektsForm = (props) => {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
   const [isBekreftModalOpen, setBekreftModal] = useState(false);
-  const locale = useContext(LocaleContext);
 
   const {
     hentInntektStatus, values, dirty, readOnly, handleSubmit, status, errors, isSubmitting,
@@ -28,8 +26,8 @@ const InntektsForm = (props) => {
       {status && status.success && (
       <div aria-live="polite">
         <AlertStripe type="suksess">
-          <Element>{locale.inntektLagret}</Element>
-          {locale.inntektLagretHuskÅBeregneIArena}
+          <Element>Inntekt er lagret.</Element>
+          Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene.
         </AlertStripe>
         <Spacer sixteenPx />
       </div>

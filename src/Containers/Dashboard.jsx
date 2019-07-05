@@ -18,7 +18,7 @@ import EditedIkon from '../Components/EditedIkon';
 import { ReactComponent as MannIkon } from '../images/mann.svg';
 import { ReactComponent as KvinneIkon } from '../images/kvinne.svg';
 import { getInntekt, getUncachedInntekt } from '../lib/inntektApiClient';
-import { LocaleContext } from '../Context/Locale';
+import { getOrganisasjonsNavn } from '../lib/oppslagApiClient';
 
 const getKjønn = (fødselsnr = '') => {
   if (Number(fødselsnr.charAt(8)) % 2 === 0) {
@@ -47,23 +47,35 @@ const sendTilbakemelding = () => {
 
 // slippe denne når vi lager v2 av api dto
 export const findArbeidsgivere = async (inntekt) => {
-  let resultat;
-  try {
-    resultat = await axios(`${process.env.PUBLIC_URL}/mock/mockOrg.json`);
-  } catch (error) {
-    throw new Error(`${error}`);
-  }
-  const virksomheterMap = (resultat || {}).data || [];
-
   const map = new Map();
   inntekt.arbeidsInntektMaaned
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
         const { identifikator } = arbeidsgiver.virksomhet;
-        const navn = virksomheterMap[identifikator] || '';
 
-        map.set(identifikator, { navn, ...arbeidsgiver.virksomhet });
+        map.set(identifikator, arbeidsgiver.virksomhet);
       }));
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [key, value] of map.entries()) {
+    let resultat;
+    if (process.env.NODE_ENV !== 'production') {
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        resultat = await axios(`${process.env.PUBLIC_URL}/mock/mockOrg.json`);
+      } catch (error) {
+        throw new Error(error);
+      }
+    } else {
+      try {
+        resultat = getOrganisasjonsNavn(key);
+      } catch (error) {
+        throw new Error(error);
+      }
+    }
+    const { navn } = ((resultat || {}).data || {});
+    map.set(key, { navn, ...value });
+  }
 
   return Array.from(map.values())
     .sort((a, b) => b.identifikator - a.identifikator);
@@ -150,29 +162,28 @@ const Dashboard = ({ readOnly, location }) => {
   const [arbeidsgivere, setArbeidsgivere] = useState([]);
   const [hentInntektStatus, setHentInntekttatus] = useState(false);
   const [isHentInntektModalOpen, setHentInntektModal] = useState(false);
-  const locale = useContext(LocaleContext);
 
   // todo endre struktur fra backend slik at vi slipper å bruke til å hacke ting på plass
   // DOM order matches the visual order, improving navigation for assistive technology. Learn more.
 
   useEffect(() => {
     const getInntektFromApi = async () => {
-      let result;
+      let resultat;
       if (process.env.NODE_ENV !== 'production') {
         try {
-          result = await axios(`${process.env.PUBLIC_URL}/mock/mock.json`);
+          resultat = await axios(`${process.env.PUBLIC_URL}/mock/mock.json`);
         } catch (error) {
-          throw new Error(`${locale.axiosFeilmelding} ${error}`);
+          throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
         }
       } else {
         try {
-          result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
+          resultat = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
         } catch (error) {
-          throw new Error(`${locale.axiosFeilmelding} ${error}`);
+          throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
         }
       }
-      if (result && result.data) {
-        const data = set36Måneder(result.data);
+      if (resultat && resultat.data) {
+        const data = await set36Måneder(resultat.data);
 
         setInntektdata({ ...data });
         setArbeidsgivere(await findArbeidsgivere(data.inntekt));
@@ -180,26 +191,26 @@ const Dashboard = ({ readOnly, location }) => {
     };
 
     getInntektFromApi();
-  }, [locale.axiosFeilmelding, location.search]);
+  }, [location.search]);
 
   const fetchUncachedInntekt = async () => {
     setHentInntekttatus('fetching');
 
-    let result;
+    let resultat;
     if (process.env.NODE_ENV !== 'production') {
-      result = await axios(
+      resultat = await axios(
         `${process.env.PUBLIC_URL}/mock/mock1.json`,
       );
     } else {
       try {
-        result = await getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)));
+        resultat = await getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)));
       } catch (error) {
-        throw new Error(`${locale.axiosFeilmelding} ${error}`);
+        throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
       }
     }
 
-    if (result && result.data) {
-      const data = set36Måneder(result.data);
+    if (resultat && resultat.data) {
+      const data = set36Måneder(resultat.data);
 
       setInntektdata({ ...data });
       setArbeidsgivere(await findArbeidsgivere(data.inntekt));
@@ -243,7 +254,7 @@ const Dashboard = ({ readOnly, location }) => {
 
       {hentInntektStatus && (
         <div aria-live="polite">
-          <AlertStripe type="info">{locale.hentNyInntektSuksess}</AlertStripe>
+          <AlertStripe type="info">Inntekt innhentet. Trykk bekreft for å lagre.</AlertStripe>
           <Spacer sixteenPx />
         </div>
       )}
@@ -258,7 +269,7 @@ const Dashboard = ({ readOnly, location }) => {
           Hent inntekter på nytt
         </Knapp>
         <div className="marginvenstre16">
-          {locale.opplysngerHentet}
+        Opplysninger hentet
 :
           <Normaltekst>
             {formatDato(new Date(inntektdata.timestamp), DDMMYYYYHHMM_FORMAT)}

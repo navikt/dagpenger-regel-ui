@@ -3,7 +3,6 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { init } from '@sentry/browser';
 import { Verdikoder } from '../Context/Verdikoder';
-import { Locale } from '../Context/Locale';
 import Dashboard from './Dashboard';
 import { Header } from '../Components/Header';
 import ErrorBoundary from '../Components/ErrorBoundary';
@@ -25,21 +24,19 @@ const App = () => {
     error => setError({ hasError: true, ...error }),
   );
   return (
-    <Locale>
-      <Verdikoder>
-        <div className="app">
-          <Header />
-          <ErrorBoundary apiErrors={errors}>
-            <div role="main" className="main">
-              <Router>
-                <Route exact path="/inntekter/readonly" render={props => <Dashboard readOnly {...props} />} />
-                <Route exact path="/inntekter" render={props => <Dashboard {...props} />} />
-              </Router>
-            </div>
-          </ErrorBoundary>
-        </div>
-      </Verdikoder>
-    </Locale>
+    <Verdikoder>
+      <div className="app">
+        <Header />
+        <ErrorBoundary apiErrors={errors}>
+          <div role="main" className="main">
+            <Router>
+              <Route exact path="/inntekter/readonly" render={props => <Dashboard readOnly {...props} />} />
+              <Route exact path="/inntekter" render={props => <Dashboard {...props} />} />
+            </Router>
+          </div>
+        </ErrorBoundary>
+      </div>
+    </Verdikoder>
   );
 };
 
