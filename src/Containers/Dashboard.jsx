@@ -73,7 +73,7 @@ export const findArbeidsgivere = async (inntekt) => {
       }
     } else {
       try {
-        resultat = getOrganisasjonsNavn(key);
+        resultat = await getOrganisasjonsNavn(key);
       } catch (error) {
         throw new Error(error);
       }
