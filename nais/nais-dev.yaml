@@ -1,0 +1,50 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: dagpenger-regel-ui
+  namespace: default
+  labels:
+    team: {{team}}
+spec:
+  ingresses:
+    - "https://dagpenger-regel-ui.nais.preprod.local/"
+  env:
+    - name: APP_INNTEKT_BASEURL
+      value: http://dp-inntekt-api/
+    - name: APP_OPPSLAG_BASEURL
+      value: http://dagpenger-oppslag/
+    - name: REDIS_HOST
+      value: dagpenger-redis.default.svc.nais.local
+    - name: REDIS_PORT
+      value: "6379"
+    - name: OIDC_HOST_URL
+      value: https://isso-q.adeo.no:443/isso/oauth2
+    - name: OIDC_AGENTNAME
+      value: dagpenger-regel-ui-q1
+  image: {{version}}
+  port: 443
+  sessionAffinity: ClientIP # Sticky Session for ingress controller to prevent 404 on rollout
+  liveness:
+    path: /inntekter/health/is-alive
+    initialDelay: 20
+    timeout: 1
+    periodSeconds: 5     # How often (in seconds) to perform the probe. Default to 10 seconds
+    failureThreshold: 10 # when a Pod starts and the probe fails,
+  readiness:
+    path: /inntekter/health/is-alive
+    initialDelay: 20
+    timeout: 1
+  prometheus:
+    enabled: false
+  vault:
+    enabled: true
+  replicas:
+    min: 2
+    max: 4
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 384Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
