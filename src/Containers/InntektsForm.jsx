@@ -12,7 +12,6 @@ import { lagreInntekt } from '../lib/inntektApiClient';
 import NyArbeidsgiver from './NyArbeidsgiver';
 import OkAvbrytModal from '../Components/OkAvbrytModal';
 
-
 const InntektsForm = (props) => {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
   const [isBekreftModalOpen, setBekreftModal] = useState(false);
@@ -28,7 +27,7 @@ const InntektsForm = (props) => {
       <div aria-live="polite">
         <AlertStripe type="suksess">
           <Element>Inntekt er lagret.</Element>
-Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene.
+          Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene.
         </AlertStripe>
         <Spacer sixteenPx />
       </div>
@@ -45,17 +44,16 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
           <div className="leggtilarbeidsgiver">
             <Knapp
               htmlType="button"
-              mini
               disabled={readOnly}
               onClick={() => setArbeidsgiverModal(!isArbeidsgiverModalOpen)}
             >
-  Legg til arbeidsgiver
+              Legg til arbeidsgiver
             </Knapp>
             <Modal
               isOpen={isArbeidsgiverModalOpen}
               onRequestClose={() => setArbeidsgiverModal(false)}
               closeButton={false}
-              contentLabel="Ny arbeidsgiver"
+              contentLabel="Legg til arbeidsgiver"
               ariaHideApp={false}
             >
               <FieldArray
@@ -73,7 +71,7 @@ Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir
           </div>
 
           <div className="flexend flex">
-            <div className="w200 marginhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes</Undertekst></div>
+            <div className="w200 marginhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes.</Undertekst></div>
             {values.redigertAvSaksbehandler && (
             <Hovedknapp
               htmlType="button"
@@ -142,7 +140,7 @@ export default withFormik({
     return (initialValues);
   },
 
-
+  // todo bare endre til async fra promise
   handleSubmit: (values, formProps) => {
     const dirty = !isEqual(formProps.props.initialValues, values);
 
@@ -153,6 +151,7 @@ export default withFormik({
         formProps.props.locationData,
       )
         .then((result) => {
+          // trenger jo ikke sette dataene på nytt
           // setInntektdata({ ...result.data });
           // setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
           formProps.setStatus({ success: true });

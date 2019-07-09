@@ -18,6 +18,7 @@ import EditedIkon from '../Components/EditedIkon';
 import { ReactComponent as MannIkon } from '../images/mann.svg';
 import { ReactComponent as KvinneIkon } from '../images/kvinne.svg';
 import { getInntekt, getUncachedInntekt } from '../lib/inntektApiClient';
+import { getOrganisasjonsNavn } from '../lib/oppslagApiClient';
 
 const getKjønn = (fødselsnr = '') => {
   if (Number(fødselsnr.charAt(8)) % 2 === 0) {
@@ -34,7 +35,7 @@ const sendTilbakemelding = () => {
     eventId,
     title: 'Hvordan opplever du løsningen?',
     subtitle: 'Hjelp  oss å gjøre løsningen bedre. Gi oss tilbakemelding.',
-    subtitle2: '\nFeil melder du på vanlig måte via Porten.',
+    subtitle2: 'Feil melder du på vanlig måte via Porten.',
     labelName: 'Navn',
     labelEmail: 'E-post',
     labelComments: 'Tilbakemelding',
@@ -44,21 +45,46 @@ const sendTilbakemelding = () => {
   });
 };
 
-export const findArbeidsgivere = (inntekt) => {
+// slippe denne når vi lager v2 av api dto
+export const findArbeidsgivere = async (inntekt) => {
   const map = new Map();
   inntekt.arbeidsInntektMaaned
     .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
       .forEach((arbeidsgiver) => {
-        // TODO fikse denne, bør flyttes til backend ved et senere tidspunkt
-        const navn = '';
+        const { identifikator } = arbeidsgiver.virksomhet;
 
-        map.set(arbeidsgiver.virksomhet.identifikator, { navn, ...arbeidsgiver.virksomhet });
+        map.set(identifikator, arbeidsgiver.virksomhet);
       }));
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [key, value] of map.entries()) {
+    let resultat;
+    if (process.env.NODE_ENV !== 'production') {
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        resultat = await axios(`${process.env.PUBLIC_URL}/mock/mockOrg.json`, {
+          validateStatus(status) {
+            return status < 500; // Reject only if the status code is greater than or equal to 500
+          },
+        });
+      } catch (error) {
+        return null;
+        // throw new Error(error);
+      }
+    } else {
+      try {
+        resultat = await getOrganisasjonsNavn(key);
+      } catch (error) {
+        throw new Error(error);
+      }
+    }
+    const { navn } = ((resultat || {}).data || {});
+    map.set(key, { navn, ...value });
+  }
 
   return Array.from(map.values())
     .sort((a, b) => b.identifikator - a.identifikator);
 };
-
 
 const inntektRequest = queryParams => ({
   aktørId: queryParams.get('aktorId'),
@@ -66,7 +92,7 @@ const inntektRequest = queryParams => ({
   beregningsDato: queryParams.get('beregningdato'),
 });
 
-// TODO hente bredde dynamisk tilfelle
+// TODO hente bredde dynamisk tilfelle, bruke useRef
 const gåTilForrige12 = () => {
   const elem = document.getElementById('grid');
   if (elem && (elem.scrollLeft / 3) > 1250) {
@@ -78,7 +104,7 @@ const gåTilForrige12 = () => {
   }
 };
 
-// TODO hente bredde dynamisk tilfelle
+// TODO hente bredde dynamisk tilfelle, bruke useRef
 const gåTilNeste12 = () => {
   const elem = document.getElementById('grid');
   if (elem && elem.scrollLeft <= 6500) {
@@ -90,7 +116,6 @@ const gåTilNeste12 = () => {
   }
 };
 
-// todo fra 2016-05 - 2019-05 skal eksludere eller ta(37 måneder) med 2019-05?
 const getAlleMåneder = (fraDato, tilDato) => {
   const måneder = eachMonthOfInterval({
     start: new Date(fraDato),
@@ -100,12 +125,39 @@ const getAlleMåneder = (fraDato, tilDato) => {
   return måneder;
 };
 
+const set36Måneder = (data) => {
+  const { fraDato, tilDato } = (data || []).inntekt;
+  if (fraDato && tilDato) {
+    const måneder = getAlleMåneder(fraDato, tilDato);
+
+    if (data.inntekt.arbeidsInntektMaaned === undefined) {
+      // eslint-disable-next-line no-param-reassign
+      data.inntekt.arbeidsInntektMaaned = [];
+    }
+
+    måneder.forEach((måned) => {
+      const isMånedEksisterer = (data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
+
+      if (!isMånedEksisterer) {
+        data.inntekt.arbeidsInntektMaaned.push({
+          aarMaaned: måned,
+          arbeidsInntektInformasjon: {
+            inntektListe: [],
+          },
+        });
+      }
+    });
+  }
+
+  return data;
+};
+
 const Dashboard = ({ readOnly, location }) => {
   const [inntektdata, setInntektdata] = useState({
     fraDato: null,
     tilDato: null,
     timestamp: null,
-    inntektId: '',
+    inntektId: null,
     inntekt: {
       arbeidsInntektMaaned: [],
       ident: {},
@@ -121,49 +173,25 @@ const Dashboard = ({ readOnly, location }) => {
 
   useEffect(() => {
     const getInntektFromApi = async () => {
-      let result;
+      let resultat;
       if (process.env.NODE_ENV !== 'production') {
         try {
-          result = await axios(`${process.env.PUBLIC_URL}/mock/mock.json`);
+          resultat = await axios(`${process.env.PUBLIC_URL}/mock/mock.json`);
         } catch (error) {
           throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
         }
       } else {
         try {
-          result = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
+          resultat = await getInntekt(inntektRequest(new URLSearchParams(location.search)));
         } catch (error) {
-          throw new Error({
-            name: 'NetworkError',
-            message: `En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`,
-          });
+          throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
         }
       }
-      if (result && result.data) {
-      // todo rydde opp denne funksjonen slik at den ikke trengs å skrives enn gang til
-        const { fraDato, tilDato } = (result.data || []).inntekt;
-        if (fraDato && tilDato) {
-          const måneder = getAlleMåneder(fraDato, tilDato);
+      if (resultat && resultat.data) {
+        const data = await set36Måneder(resultat.data);
 
-          if (result.data.inntekt.arbeidsInntektMaaned === undefined) {
-            result.data.inntekt.arbeidsInntektMaaned = [];
-          }
-
-          måneder.forEach((måned) => {
-            const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
-
-            if (!isMånedEksisterer) {
-              result.data.inntekt.arbeidsInntektMaaned.push({
-                aarMaaned: måned,
-                arbeidsInntektInformasjon: {
-                  inntektListe: [],
-                },
-              });
-            }
-          });
-        }
-
-        setInntektdata({ ...result.data });
-        setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+        setInntektdata(await { ...data });
+        setArbeidsgivere(await findArbeidsgivere(data.inntekt));
       }
     };
 
@@ -173,48 +201,29 @@ const Dashboard = ({ readOnly, location }) => {
   const fetchUncachedInntekt = async () => {
     setHentInntekttatus('fetching');
 
-    let result;
+    let resultat;
     if (process.env.NODE_ENV !== 'production') {
-      result = await axios(
+      resultat = await axios(
         `${process.env.PUBLIC_URL}/mock/mock1.json`,
       );
     } else {
       try {
-        result = await getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)));
+        resultat = await getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)));
       } catch (error) {
         throw new Error(`En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`);
       }
     }
 
-    if (result && result.data) {
-      const { fraDato, tilDato } = (result.data || []).inntekt;
-      const måneder = getAlleMåneder(fraDato, tilDato);
+    if (resultat && resultat.data) {
+      const data = set36Måneder(resultat.data);
 
-      // if ingen arbeidsInntektMaaned, opprett ny og legg til måender
-      if (result.data.inntekt.arbeidsInntektMaaned === undefined) {
-        result.data.inntekt.arbeidsInntektMaaned = [];
-      }
-
-      måneder.forEach((måned) => {
-        const isMånedEksisterer = (result.data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
-
-        if (!isMånedEksisterer) {
-          result.data.inntekt.arbeidsInntektMaaned.push({
-            aarMaaned: måned,
-            arbeidsInntektInformasjon: {
-              inntektListe: [],
-            },
-          });
-        }
-      });
-
-      setInntektdata({ ...result.data });
-      setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
+      setInntektdata({ ...data });
+      setArbeidsgivere(await findArbeidsgivere(data.inntekt));
     }
     setHentInntekttatus(true);
   };
 
-  if (!inntektdata.inntekt.arbeidsInntektMaaned.length) {
+  if (!inntektdata.inntektId && !inntektdata.inntekt.arbeidsInntektMaaned.length) {
     return <Spinner type="XL" />;
   }
 
@@ -224,7 +233,7 @@ const Dashboard = ({ readOnly, location }) => {
         <div className="flex">
           <div className="marginhoyre16">{getKjønn(inntektdata.naturligIdent)}</div>
           <div>
-            <Normaltekst>Fødselsnr:</Normaltekst>
+            <Normaltekst>Fødselsnummer</Normaltekst>
             <Ingress>{inntektdata.naturligIdent}</Ingress>
           </div>
           <div className="flexend flex noprint">
@@ -240,7 +249,7 @@ const Dashboard = ({ readOnly, location }) => {
               disabled={readOnly}
               onClick={() => sendTilbakemelding()}
             >
-  Hvordan opplever du løsningen?
+              Hvordan opplever du løsningen?
             </Knapp>
           </div>
         </div>
@@ -262,11 +271,11 @@ const Dashboard = ({ readOnly, location }) => {
           disabled={readOnly}
           spinner={hentInntektStatus === 'fetching'}
         >
-
-        Hent inntekter på nytt
+          Hent inntekter på nytt
         </Knapp>
         <div className="marginvenstre16">
-            Opplysninger hentet:
+        Opplysninger hentet
+:
           <Normaltekst>
             {formatDato(new Date(inntektdata.timestamp), DDMMYYYYHHMM_FORMAT)}
             {', '}
@@ -305,7 +314,6 @@ const Dashboard = ({ readOnly, location }) => {
           ],
         }}
       />
-
     </>
   );
 };

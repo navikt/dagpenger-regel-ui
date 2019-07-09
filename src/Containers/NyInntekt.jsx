@@ -9,10 +9,17 @@ import { required } from '../Utils/validering';
 import DatoLabel from '../Components/DatoLabel';
 import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
 import { VerdikoderContext } from '../Context/Verdikoder';
+import { ReactComponent as GodkjentIkon } from '../images/innvilget_valgt.svg';
+import Spacer from '../Components/Spacer';
 
 
 const mapVerdikoder = typer => typer
   .map(navn => (<option value={navn} key={navn}>{navn}</option>));
+
+const visNavnOgIdentifikator = (virksomhet) => {
+  const { navn, identifikator } = virksomhet;
+  return `${navn} (${identifikator})`;
+};
 
 const NyInntekt = (props) => {
   const {
@@ -26,44 +33,57 @@ const NyInntekt = (props) => {
   const verdikoder = useContext(VerdikoderContext);
   return (
     <Form onSubmit={handleSubmit}>
-      <Undertittel>
-        {`Legg til ny inntektspost for ${virksomhet.identifikator} i `}
-        <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
-      </Undertittel>
+      <div className="okavbrytmodal">
+        <div className="flex">
+          <div className="flexcolumn">
+            <div className="okavbrytmodal--ikon">
+              <GodkjentIkon />
+            </div>
+          </div>
+          <div className="flexcolumn okavbrytmodal--text">
+            <Undertittel>
+              {`Legg til ny inntektspost for ${visNavnOgIdentifikator(virksomhet)} i `}
+              <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
+            </Undertittel>
+          </div>
+        </div>
+        <Spacer sixteenPx />
+        <div className="w400">
+          <SelectField
+            bredde="xl"
+            label="Beskrivelse"
+            selectValues={mapVerdikoder(verdikoder)}
+            validate={required}
+            name="verdikode"
+            readOnly={false}
+          />
 
-      <SelectField
-        bredde="xl"
-        label="Beskrivelse"
-        selectValues={mapVerdikoder(verdikoder)}
-        validate={required}
-        name="verdikode"
-        readOnly={false}
-      />
+          <InputField
+            label="Beløp"
+            name="beloep"
+            validate={required}
+            type="number"
+            readOnly={false}
+          />
+        </div>
+        <Spacer sixteenPx />
 
-      <InputField
-        label="Beløp"
-        name="beloep"
-        validate={required}
-        type="number"
-        readOnly={false}
-      />
-
-      <div className="knapprad">
-        <Hovedknapp
-          htmlType="submit"
-          onClick={handleSubmit}
-          disabled={!isValid || isSubmitting}
-        >
+        <div className="flex knapprad flexend">
+          <Hovedknapp
+            htmlType="submit"
+            onClick={handleSubmit}
+            disabled={!isValid || isSubmitting}
+          >
       Legg til
-        </Hovedknapp>
-        <Knapp
-          htmlType="button"
-          onClick={closeModal}
-        >
+          </Hovedknapp>
+          <Knapp
+            htmlType="button"
+            onClick={closeModal}
+          >
       Avbryt
-        </Knapp>
+          </Knapp>
+        </div>
       </div>
-
     </Form>
   );
 };

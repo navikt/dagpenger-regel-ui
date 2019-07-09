@@ -12,19 +12,22 @@ const arbeidsgiverStyle = identifikator => `
 }
 `;
 
-const Arbeidsgiver = ({ arbeidsgiver }) => (
-  <>
-    <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
-      __html: arbeidsgiverStyle(arbeidsgiver.identifikator),
-    }}
-    />
-    <div className={`item arbeidsgiver arbeidsgiver--${arbeidsgiver.identifikator}`}>
-      {arbeidsgiver.navn && <Undertittel>{arbeidsgiver.navn}</Undertittel>}
-      <EtikettLiten>{getAktoerType(arbeidsgiver.aktoerType)}</EtikettLiten>
-      <Element>{arbeidsgiver.identifikator}</Element>
-    </div>
-  </>
-);
+const Arbeidsgiver = ({ arbeidsgiver }) => {
+  const { navn, identifikator, aktoerType } = arbeidsgiver;
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
+        __html: arbeidsgiverStyle(identifikator),
+      }}
+      />
+      <div className={`item arbeidsgiver arbeidsgiver--${identifikator}`}>
+        {navn && <Undertittel>{navn}</Undertittel>}
+        <EtikettLiten>{getAktoerType(aktoerType)}</EtikettLiten>
+        <Element>{identifikator}</Element>
+      </div>
+    </>
+  );
+};
 
 Arbeidsgiver.propTypes = {
   arbeidsgiver: ArbeidsgiverPropType.isRequired,

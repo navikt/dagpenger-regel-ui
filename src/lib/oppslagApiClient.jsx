@@ -7,6 +7,9 @@ export const getOrganisasjonsNavn = async (orgNr) => {
     return await axios({
       method: 'get',
       url: `${apiUri}/organisasjon/${orgNr}`,
+      validateStatus(status) {
+        return status < 500; // Reject only if the status code is greater than or equal to 500
+      },
     });
   } catch (error) {
     return error;

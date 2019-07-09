@@ -18,7 +18,6 @@ init({
 
 const App = () => {
   const [errors, setError] = useState({ hasError: false, status: null, statusText: null });
-
   // apply interceptor on response
   axios.interceptors.response.use(
     response => response,

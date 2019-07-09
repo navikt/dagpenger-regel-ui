@@ -42,7 +42,7 @@ exports[`Dashboard Skal vise ny Dashboard 1`] = `
 
 exports[`Dashboard Skal vise ny Dashboard med loader 1`] = `
 <div
-  className="flex"
+  className="flex center"
 >
   <svg
     aria-label="Laster innhold"
