@@ -149,6 +149,10 @@
   },
   "manueltRedigert": false,
   "redigertAvSaksbehandler": true,
-  "naturligIdent": "12345678910",
+  "inntektsmottaker" : {
+    "pnr" :	12345678910,
+    "navn" : "Navn Navnesen"
+  },
+
   "timestamp": "2019-06-24T13:03:56.907821"
 }

@@ -231,11 +231,13 @@ const Dashboard = ({ readOnly, location }) => {
     <>
       <Panel border>
         <div className="flex">
-          <div className="marginhoyre16">{getKjønn(inntektdata.naturligIdent)}</div>
+          {inntektdata.inntektsmottaker.pnr && <div className="marginhoyre16">{getKjønn(inntektdata.inntektsmottaker.pnr)}</div> }
           <div>
-            <Normaltekst>Fødselsnummer</Normaltekst>
-            <Ingress>{inntektdata.naturligIdent}</Ingress>
+            {inntektdata.inntektsmottaker.navn && <Ingress>{inntektdata.inntektsmottaker.navn}</Ingress>}
+            {inntektdata.inntektsmottaker.pnr &&  <Normaltekst>Fødselsnummer</Normaltekst> }
+            {inntektdata.inntektsmottaker.pnr &&  <Ingress>{inntektdata.inntektsmottaker.pnr}</Ingress> }
           </div>
+
           <div className="flexend flex noprint">
             {inntektdata.manueltRedigert && (
             <div className="marginhoyre16 flex">
