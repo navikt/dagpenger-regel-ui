@@ -615,7 +615,10 @@
     "fraDato": "2016-06",
     "tilDato": "2019-05"
   },
-  "naturligIdent": "12345678910",
+  "inntektsmottaker" : {
+    "pnr" :	"12345678910",
+    "navn" : "Navn Navnesen"
+  },
   "redigertAvSaksbehandler": true,
   "manueltRedigert": true,
   "timestamp": "2019-06-24T11:03:56.907821"
