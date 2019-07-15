@@ -82,7 +82,7 @@ workflows:
           requires:
             - dev_deploy
           github-app-id: 21626
-          nais-template: nais/nais-dev.yaml
+          nais-template: nais/nais-prod.yaml
           team: teamdagpenger
           environment: prod-fss
 
