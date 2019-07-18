@@ -14,14 +14,7 @@ import { ReactComponent as GodkjentIkon } from '../images/innvilget_valgt.svg';
 // totalen kan ikke være mindre enn 0
 
 // todo fikse stringifyvalues
-const NyArbeidsgiver = (props) => {
-  const {
-    handleSubmit,
-    isSubmitting,
-    closeModal,
-    isValid,
-    values,
-  } = props;
+const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, values }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <div className="okavbrytmodal">
@@ -38,45 +31,21 @@ const NyArbeidsgiver = (props) => {
         <Spacer sixteenPx />
 
         <div className="w400">
-          <RadioGroupField
-            label="Type aktør?"
-            name="aktoerType"
-            validate={required}
-          >
+          <RadioGroupField label="Type aktør?" name="aktoerType" validate={required}>
             <RadioOption value={aktørTyper.ORGANISASJON} label="Virksomhet" />
             <RadioOption value={aktørTyper.AKTOER_ID} label="Privatperson" />
-
           </RadioGroupField>
-          {values.aktoerType === aktørTyper.ORGANISASJON && (
-          <InputField
-            label="Org.Nr"
-            name="identifikator"
-            validate={hasValidOrgNumber}
-          />
-          )}
+          {values.aktoerType === aktørTyper.ORGANISASJON && <InputField label="Org.Nr" name="identifikator" validate={hasValidOrgNumber} />}
 
-          {values.aktoerType === aktørTyper.AKTOER_ID && (
-          <InputField
-            label="Fødselsnummer"
-            name="identifikator"
-            validate={hasValidFodselsnummer}
-          />
-          )}
+          {values.aktoerType === aktørTyper.AKTOER_ID && <InputField label="Fødselsnummer" name="identifikator" validate={hasValidFodselsnummer} />}
         </div>
         <Spacer sixteenPx />
         <div className="flex knapprad flexend">
-          <Hovedknapp
-            htmlType="submit"
-            onClick={handleSubmit}
-            disabled={!isValid || isSubmitting}
-          >
-      Legg til
+          <Hovedknapp htmlType="submit" onClick={handleSubmit} disabled={!isValid || isSubmitting}>
+            Legg til
           </Hovedknapp>
-          <Knapp
-            htmlType="button"
-            onClick={closeModal}
-          >
-      Avbryt
+          <Knapp htmlType="button" onClick={closeModal}>
+            Avbryt
           </Knapp>
         </div>
       </div>
@@ -93,7 +62,7 @@ NyArbeidsgiver.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: props => ({
+  mapPropsToValues: () => ({
     identifikator: undefined,
     navn: undefined,
     aktoerType: undefined,
