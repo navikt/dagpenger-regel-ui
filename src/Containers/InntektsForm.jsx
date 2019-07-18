@@ -12,41 +12,41 @@ import { lagreInntekt } from '../lib/inntektApiClient';
 import NyArbeidsgiver from './NyArbeidsgiver';
 import OkAvbrytModal from '../Components/OkAvbrytModal';
 
-const InntektsForm = (props) => {
+const InntektsForm = props => {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
   const [isBekreftModalOpen, setBekreftModal] = useState(false);
 
-  const {
-    hentInntektStatus, values, dirty, readOnly, handleSubmit, status, errors, isSubmitting,
-  } = props;
+  const { hentInntektStatus, values, isValid, dirty, readOnly, handleSubmit, status, errors, isSubmitting } = props;
 
   const { arbeidsgivere } = values;
+
+  const bekreftManuellEndring = () => {
+    if (values.redigertAvSaksbehandler) {
+      return setBekreftModal(true);
+    }
+
+    handleSubmit();
+  };
+
+  console.log('isValid', isValid);
   return (
     <>
       {status && status.success && (
-      <div aria-live="polite">
-        <AlertStripe type="suksess">
-          <Element>Inntekt er lagret.</Element>
-          Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene.
-        </AlertStripe>
-        <Spacer sixteenPx />
-      </div>
+        <div aria-live="polite">
+          <AlertStripe type="suksess">
+            <Element>Inntekt er lagret.</Element>
+            Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i beregningene.
+          </AlertStripe>
+          <Spacer sixteenPx />
+        </div>
       )}
       <Form onSubmit={handleSubmit}>
-        <Inntektstabell
-          {...props}
-          readOnly={readOnly}
-          hentInntektStatus={hentInntektStatus}
-        />
+        <Inntektstabell {...props} readOnly={readOnly} hentInntektStatus={hentInntektStatus} />
         {errors.name && <div className="error">{errors.name}</div>}
 
         <div className="toolbar flex knapprad">
           <div className="leggtilarbeidsgiver">
-            <Knapp
-              htmlType="button"
-              disabled={readOnly}
-              onClick={() => setArbeidsgiverModal(!isArbeidsgiverModalOpen)}
-            >
+            <Knapp htmlType="button" disabled={readOnly} onClick={() => setArbeidsgiverModal(!isArbeidsgiverModalOpen)}>
               Legg til arbeidsgiver
             </Knapp>
             <Modal
@@ -59,41 +59,25 @@ const InntektsForm = (props) => {
               <FieldArray
                 name="arbeidsgivere"
                 render={arrayHelpers => (
-                  <NyArbeidsgiver
-                    arbeidsgivere={arbeidsgivere}
-                    arrayHelpers={arrayHelpers}
-                    closeModal={() => setArbeidsgiverModal(false)}
-                  />
+                  <NyArbeidsgiver arbeidsgivere={arbeidsgivere} arrayHelpers={arrayHelpers} closeModal={() => setArbeidsgiverModal(false)} />
                 )}
               />
             </Modal>
-
           </div>
 
           <div className="flexend flex">
-            <div className="w200 marginhoyre16"><Undertekst>Du må bekrefte at de nye opplysningene skal benyttes.</Undertekst></div>
-            {values.redigertAvSaksbehandler && (
+            <div className="w200 marginhoyre16">
+              <Undertekst>Du må bekrefte at de nye opplysningene skal benyttes.</Undertekst>
+            </div>
             <Hovedknapp
               htmlType="button"
-              onClick={() => setBekreftModal(true)}
+              onClick={bekreftManuellEndring}
               spinner={isSubmitting}
               autoDisableVedSpinner
-              disabled={!hentInntektStatus && !dirty}
+              disabled={(!hentInntektStatus && !dirty) || !isValid}
             >
               Bekreft
             </Hovedknapp>
-            )}
-            {!values.redigertAvSaksbehandler && (
-            <Hovedknapp
-              htmlType="submit"
-              onClick={handleSubmit}
-              spinner={isSubmitting}
-              autoDisableVedSpinner
-              disabled={!hentInntektStatus && !dirty}
-            >
-              Bekreft
-            </Hovedknapp>
-            )}
             <OkAvbrytModal
               isOpen={isBekreftModalOpen}
               text="Når du bekrefter ny inntekt så vil alle tidligere endringene overskrives."
@@ -103,12 +87,9 @@ const InntektsForm = (props) => {
                 setBekreftModal(false);
               }}
             />
-
           </div>
         </div>
-
       </Form>
-
     </>
   );
 };
@@ -119,12 +100,10 @@ InntektsForm.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   errors: PropTypes.shape().isRequired,
   locationData: PropTypes.shape().isRequired,
+  isValid: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
   values: PropTypes.shape().isRequired,
-  hentInntektStatus: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]).isRequired,
+  hentInntektStatus: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   status: PropTypes.shape(),
 };
 
@@ -133,11 +112,9 @@ InntektsForm.defaultProps = {
 };
 
 export default withFormik({
-  mapPropsToValues: (props) => {
-    const {
-      initialValues,
-    } = props;
-    return (initialValues);
+  mapPropsToValues: props => {
+    const { initialValues } = props;
+    return initialValues;
   },
 
   // todo bare endre til async fra promise
@@ -145,27 +122,21 @@ export default withFormik({
     const dirty = !isEqual(formProps.props.initialValues, values);
 
     setTimeout(() => {
-      lagreInntekt(
-        { ...values, redigertAvSaksbehandler: dirty || values.manueltRedigert },
-        formProps.props.hentInntektStatus,
-        formProps.props.locationData,
-      )
-        .then((result) => {
+      lagreInntekt({ ...values, redigertAvSaksbehandler: dirty || values.manueltRedigert }, formProps.props.hentInntektStatus, formProps.props.locationData)
+        .then(result => {
           // trenger jo ikke sette dataene på nytt
           // setInntektdata({ ...result.data });
           // setArbeidsgivere(findArbeidsgivere(result.data.inntekt));
           formProps.setStatus({ success: true });
           formProps.setSubmitting(false);
         })
-        .catch((error) => {
+        .catch(error => {
           formProps.setStatus({ failure: true });
           formProps.setError(error);
         });
     }, 1000);
   },
 
-  validate: true,
   displayName: 'InntektsForm',
   enableReinitialize: true,
-
 })(InntektsForm);

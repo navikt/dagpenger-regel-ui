@@ -28,7 +28,6 @@ const getKjønn = (fødselsnr = '') => {
   return <MannIkon />;
 };
 
-
 const sendTilbakemelding = () => {
   const eventId = captureException('test');
   showReportDialog({
@@ -46,15 +45,15 @@ const sendTilbakemelding = () => {
 };
 
 // slippe denne når vi lager v2 av api dto
-export const findArbeidsgivere = async (inntekt) => {
+export const findArbeidsgivere = async inntekt => {
   const map = new Map();
-  inntekt.arbeidsInntektMaaned
-    .forEach(mnd => mnd.arbeidsInntektInformasjon.inntektListe
-      .forEach((arbeidsgiver) => {
-        const { identifikator } = arbeidsgiver.virksomhet;
+  inntekt.arbeidsInntektMaaned.forEach(mnd =>
+    mnd.arbeidsInntektInformasjon.inntektListe.forEach(arbeidsgiver => {
+      const { identifikator } = arbeidsgiver.virksomhet;
 
-        map.set(identifikator, arbeidsgiver.virksomhet);
-      }));
+      map.set(identifikator, arbeidsgiver.virksomhet);
+    }),
+  );
 
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of map.entries()) {
@@ -78,12 +77,11 @@ export const findArbeidsgivere = async (inntekt) => {
         throw new Error(error);
       }
     }
-    const { navn } = ((resultat || {}).data || {});
+    const { navn } = (resultat || {}).data || {};
     map.set(key, { navn, ...value });
   }
 
-  return Array.from(map.values())
-    .sort((a, b) => b.identifikator - a.identifikator);
+  return Array.from(map.values()).sort((a, b) => b.identifikator - a.identifikator);
 };
 
 const inntektRequest = queryParams => ({
@@ -95,7 +93,7 @@ const inntektRequest = queryParams => ({
 // TODO hente bredde dynamisk tilfelle, bruke useRef
 const gåTilForrige12 = () => {
   const elem = document.getElementById('grid');
-  if (elem && (elem.scrollLeft / 3) > 1250) {
+  if (elem && elem.scrollLeft / 3 > 1250) {
     elem.scrollTo({
       top: 0,
       left: elem.scrollLeft - 3250,
@@ -125,7 +123,7 @@ const getAlleMåneder = (fraDato, tilDato) => {
   return måneder;
 };
 
-const set36Måneder = (data) => {
+const set36Måneder = data => {
   const { fraDato, tilDato } = (data || []).inntekt;
   if (fraDato && tilDato) {
     const måneder = getAlleMåneder(fraDato, tilDato);
@@ -135,7 +133,7 @@ const set36Måneder = (data) => {
       data.inntekt.arbeidsInntektMaaned = [];
     }
 
-    måneder.forEach((måned) => {
+    måneder.forEach(måned => {
       const isMånedEksisterer = (data.inntekt.arbeidsInntektMaaned || []).some(inntekt => måned === inntekt.aarMaaned);
 
       if (!isMånedEksisterer) {
@@ -203,9 +201,7 @@ const Dashboard = ({ readOnly, location }) => {
 
     let resultat;
     if (process.env.NODE_ENV !== 'production') {
-      resultat = await axios(
-        `${process.env.PUBLIC_URL}/mock/mock1.json`,
-      );
+      resultat = await axios(`${process.env.PUBLIC_URL}/mock/mock1.json`);
     } else {
       try {
         resultat = await getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)));
@@ -231,26 +227,21 @@ const Dashboard = ({ readOnly, location }) => {
     <>
       <Panel border>
         <div className="flex">
-          {inntektdata.inntektsmottaker.pnr && <div className="marginhoyre16">{getKjønn(inntektdata.inntektsmottaker.pnr)}</div> }
+          {inntektdata.inntektsmottaker.pnr && <div className="marginhoyre16">{getKjønn(inntektdata.inntektsmottaker.pnr)}</div>}
           <div>
             {inntektdata.inntektsmottaker.navn && <Ingress>{inntektdata.inntektsmottaker.navn}</Ingress>}
-            {inntektdata.inntektsmottaker.pnr &&  <Normaltekst>Fødselsnummer</Normaltekst> }
-            {inntektdata.inntektsmottaker.pnr &&  <Ingress>{inntektdata.inntektsmottaker.pnr}</Ingress> }
+            {inntektdata.inntektsmottaker.pnr && <Normaltekst>Fødselsnummer</Normaltekst>}
+            {inntektdata.inntektsmottaker.pnr && <Ingress>{inntektdata.inntektsmottaker.pnr}</Ingress>}
           </div>
 
           <div className="flexend flex noprint">
             {inntektdata.manueltRedigert && (
-            <div className="marginhoyre16 flex">
-              <EditedIkon />
-              <Element>Manuelt redigert</Element>
-            </div>
+              <div className="marginhoyre16 flex">
+                <EditedIkon />
+                <Element>Manuelt redigert</Element>
+              </div>
             )}
-            <Knapp
-              htmlType="button"
-              mini
-              disabled={readOnly}
-              onClick={() => sendTilbakemelding()}
-            >
+            <Knapp htmlType="button" mini disabled={readOnly} onClick={() => sendTilbakemelding()}>
               Hvordan opplever du løsningen?
             </Knapp>
           </div>
@@ -267,29 +258,25 @@ const Dashboard = ({ readOnly, location }) => {
       )}
 
       <div className="flex hentinntekter">
-        <Knapp
-          onClick={() => setHentInntektModal(true)}
-          autoDisableVedSpinner
-          disabled={readOnly}
-          spinner={hentInntektStatus === 'fetching'}
-        >
+        <Knapp onClick={() => setHentInntektModal(true)} autoDisableVedSpinner disabled={readOnly} spinner={hentInntektStatus === 'fetching'}>
           Hent inntekter på nytt
         </Knapp>
         <div className="marginvenstre16">
-        Opplysninger hentet
-:
+          Opplysninger hentet :
           <Normaltekst>
             {formatDato(new Date(inntektdata.timestamp), DDMMYYYYHHMM_FORMAT)}
             {', '}
-            <b>
-              {formatDistance(new Date(inntektdata.timestamp), new Date(), { locale: nb, addSuffix: true })}
-            </b>
+            <b>{formatDistance(new Date(inntektdata.timestamp), new Date(), { locale: nb, addSuffix: true })}</b>
           </Normaltekst>
         </div>
 
         <div className="flexend">
-          <Flatknapp mini htmlType="button" onClick={() => gåTilForrige12()}>{'< 12 mnd'}</Flatknapp>
-          <Flatknapp mini htmlType="button" onClick={() => gåTilNeste12()}>{'12 mnd >'}</Flatknapp>
+          <Flatknapp mini htmlType="button" onClick={() => gåTilForrige12()}>
+            {'< 12 mnd'}
+          </Flatknapp>
+          <Flatknapp mini htmlType="button" onClick={() => gåTilNeste12()}>
+            {'12 mnd >'}
+          </Flatknapp>
         </div>
 
         <OkAvbrytModal
@@ -301,19 +288,15 @@ const Dashboard = ({ readOnly, location }) => {
             setHentInntektModal(false);
           }}
         />
-
       </div>
       <Spacer sixteenPx />
       <InntektsForm
         readOnly={readOnly}
         hentInntektStatus={hentInntektStatus}
-        inntektdata={inntektdata}
         locationData={inntektRequest(new URLSearchParams(location.search))}
         initialValues={{
           ...inntektdata,
-          arbeidsgivere: [
-            ...arbeidsgivere,
-          ],
+          arbeidsgivere: [...arbeidsgivere],
         }}
       />
     </>

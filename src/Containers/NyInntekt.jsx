@@ -12,25 +12,22 @@ import { VerdikoderContext } from '../Context/Verdikoder';
 import { ReactComponent as GodkjentIkon } from '../images/innvilget_valgt.svg';
 import Spacer from '../Components/Spacer';
 
+const mapVerdikoder = typer =>
+  typer.map(navn => (
+    <option value={navn} key={navn}>
+      {navn}
+    </option>
+  ));
 
-const mapVerdikoder = typer => typer
-  .map(navn => (<option value={navn} key={navn}>{navn}</option>));
-
-const visNavnOgIdentifikator = (virksomhet) => {
+const visNavnOgIdentifikator = virksomhet => {
   const { navn, identifikator } = virksomhet;
   return `${navn} (${identifikator})`;
 };
 
-const NyInntekt = (props) => {
-  const {
-    handleSubmit,
-    isSubmitting,
-    closeModal,
-    virksomhet,
-    isValid,
-    dato,
-  } = props;
+const NyInntekt = props => {
+  const { handleSubmit, isSubmitting, closeModal, virksomhet, isValid, dato } = props;
   const verdikoder = useContext(VerdikoderContext);
+
   return (
     <Form onSubmit={handleSubmit}>
       <div className="okavbrytmodal">
@@ -49,38 +46,18 @@ const NyInntekt = (props) => {
         </div>
         <Spacer sixteenPx />
         <div className="w400">
-          <SelectField
-            bredde="xl"
-            label="Beskrivelse"
-            selectValues={mapVerdikoder(verdikoder)}
-            validate={required}
-            name="verdikode"
-            readOnly={false}
-          />
+          <SelectField bredde="xl" label="Beskrivelse" selectValues={mapVerdikoder(verdikoder)} validate={required} name="verdikode" readOnly={false} />
 
-          <InputField
-            label="Beløp"
-            name="beloep"
-            validate={required}
-            type="number"
-            readOnly={false}
-          />
+          <InputField label="Beløp" name="beloep" validate={required} type="number" readOnly={false} />
         </div>
         <Spacer sixteenPx />
 
         <div className="flex knapprad flexend">
-          <Hovedknapp
-            htmlType="submit"
-            onClick={handleSubmit}
-            disabled={!isValid || isSubmitting}
-          >
-      Legg til
+          <Hovedknapp htmlType="submit" onClick={handleSubmit} disabled={!isValid || isSubmitting}>
+            Legg til
           </Hovedknapp>
-          <Knapp
-            htmlType="button"
-            onClick={closeModal}
-          >
-      Avbryt
+          <Knapp htmlType="button" onClick={closeModal}>
+            Avbryt
           </Knapp>
         </div>
       </div>
@@ -118,12 +95,10 @@ export default withFormik({
       virksomhet: values.virksomhet,
       inntektsmottaker: arrayHelpers.form.values.inntekt.ident,
       opplysningspliktig: values.virksomhet,
-
     });
     setSubmitting(false);
     closeModal();
   },
 
   displayName: 'nyInntekt',
-
 })(NyInntekt);
