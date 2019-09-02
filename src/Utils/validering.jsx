@@ -34,10 +34,7 @@ const hasValidNumber = text => (isEmpty(text) || numberRegex.test(text) ? null :
 const hasValidInt = text => (isEmpty(text) || integerRegex.test(text) ? null : 'Tallet kan ikke ha desimaler');
 const hasValidDecimal = text => (isEmpty(text) || decimalRegex.test(text) ? null : 'Tallet kan ikke inneholde mer enn to desimaler');
 
-export const required = value => {
-  console.log('reuired', value, isEmpty(value));
-  return isEmpty(value) ? 'Feltet må fylles ut' : undefined;
-};
+export const required = value => (isEmpty(value) ? 'Feltet må fylles ut' : undefined);
 export const minLength = length => text => (isEmpty(text) || text.toString().trim().length >= length ? null : `Du må skrive minst ${length} tegn`);
 export const maxLength = length => text => (isEmpty(text) || text.toString().trim().length <= length ? null : `Du kan skrive maksimalt ${length} tegn`);
 export const minValue = length => number => (number >= length ? null : `Feltet må være større eller lik ${length}`);

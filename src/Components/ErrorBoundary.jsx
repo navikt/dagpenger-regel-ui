@@ -12,7 +12,7 @@ import { captureException, withScope } from '@sentry/browser';
 
 const getErrorData = response => (response.data ? response.data : response.statusText);
 
-const formatError = (error) => {
+const formatError = error => {
   const response = error && error.response ? error.response : undefined;
   return {
     data: response ? getErrorData(response) : undefined,
@@ -33,7 +33,6 @@ class ErrorBoundary extends React.Component {
     };
   }
 
-
   static getDerivedStateFromError(error) {
     // console.log(error);
     // Update state so the next render will show the fallback UI.
@@ -41,8 +40,8 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, info) {
-    withScope((scope) => {
-      Object.keys(info).forEach((key) => {
+    withScope(scope => {
+      Object.keys(info).forEach(key => {
         scope.setExtra(key, info[key]);
         captureException(error);
       });
@@ -90,18 +89,10 @@ class ErrorBoundary extends React.Component {
           break;
       }
 
-      return (
-        <div className="feilmelding">
-          {`Feilmelding: ${error.status} ${feilmelding}`}
-        </div>
-      );
+      return <div className="feilmelding">{`Feilmelding: ${error.status} ${feilmelding}`}</div>;
     }
     if (hasError) {
-      return (
-        <div className="feilmelding">
-          {`Feilmelding: ${errors}`}
-        </div>
-      );
+      return <div className="feilmelding">{`Feilmelding: ${errors}`}</div>;
     }
 
     return children;
@@ -109,10 +100,7 @@ class ErrorBoundary extends React.Component {
 }
 
 ErrorBoundary.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   apiErrors: PropTypes.shape().isRequired,
 };
 

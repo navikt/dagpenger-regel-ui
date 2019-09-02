@@ -2,12 +2,35 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { init } from '@sentry/browser';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
+
+import { HttpLink } from 'apollo-link-http';
+import { ApolloProvider } from 'react-apollo';
+import introspectionQueryResultData from '../fragmentTypes.json';
+
 import { Verdikoder } from '../Context/Verdikoder';
 import Dashboard from './Dashboard';
 import { Header } from '../Components/Header';
 import ErrorBoundary from '../Components/ErrorBoundary';
 
 import './App.css';
+
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData,
+});
+
+const cache = new InMemoryCache({ fragmentMatcher });
+
+const link = new HttpLink({
+  uri: '/graphql',
+  credentials: 'same-origin',
+});
+
+const client = new ApolloClient({
+  link,
+  cache,
+});
 
 const environment = window.location.hostname;
 
@@ -19,26 +42,24 @@ init({
 const App = () => {
   const [errors, setError] = useState({ hasError: false, status: null, statusText: null });
   // apply interceptor on response
-  axios.interceptors.response.use(
-    response => response,
-    error => setError({ hasError: true, ...error }),
-  );
+  axios.interceptors.response.use(response => response, error => setError({ hasError: true, ...error }));
   return (
-    <Verdikoder>
-      <div className="app">
-        <Header />
-        <ErrorBoundary apiErrors={errors}>
-          <div role="main" className="main">
-            <Router>
-              <Route exact path="/inntekter/readonly" render={props => <Dashboard readOnly {...props} />} />
-              <Route exact path="/inntekter" render={props => <Dashboard {...props} />} />
-            </Router>
-          </div>
-        </ErrorBoundary>
-      </div>
-    </Verdikoder>
+    <ApolloProvider client={client}>
+      <Verdikoder>
+        <div className="app">
+          <Header />
+          <ErrorBoundary apiErrors={errors}>
+            <div role="main" className="main">
+              <Router>
+                <Route exact path="/inntekter/readonly" render={props => <Dashboard readOnly {...props} />} />
+                <Route exact path="/inntekter" render={props => <Dashboard {...props} />} />
+              </Router>
+            </div>
+          </ErrorBoundary>
+        </div>
+      </Verdikoder>
+    </ApolloProvider>
   );
 };
-
 
 export default App;

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Arbeidsgiver Skal vise arbeidsgiver 1`] = `
+<td
+  className="item arbeidsgiver"
+>
+  <h2
+    className="typo-undertittel"
+  >
+    Sopra Steria
+  </h2>
+  <p
+    className="typo-etikett-liten"
+  >
+    Org. nr
+  </p>
+  <p
+    className="typo-element"
+  />
+</td>
+`;

@@ -1,0 +1,1 @@
+{"__schema":{"types":[{"kind":"UNION","name":"Aktor","possibleTypes":[{"name":"Organisasjon"},{"name":"Person"}]}]}}

@@ -43,51 +43,74 @@
   }
 }
 
-// grid
-.grid {
-  display: grid;
-  overflow-x: auto;
+// inntektstabell
+.ss {
   width: 100%;
+  overflow-x: auto;
   margin-bottom: 24px;
-  position: relative;
-  border-bottom: 1px solid @navGra20;
-  transition: all 0.3s ease-in-out;
 
-  .item {
-    padding: 16px;
-    border-right: 1px solid @navGra20;
-    border-top: 1px solid @navGra20;
+  .inntektstabell {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid @navGra20;
+    transition: all 0.3s ease-in-out;
 
-    &.arbeidsgiver {
-      background-color: @navLysGra;
-      border-left: 1px solid @navGra20;
-      border-right: 4px solid @navGra40;
-      position: sticky;
-      left: 0;
-      min-width: @width;
-      z-index: 2;
+    thead {
+      display: table-header-group;
     }
 
-    &.maaned {
-      min-width: @width;
-      background: @navMorkGra;
-      color: white;
-      text-transform: capitalize;
+    tbody {
+      tr {
+        &:first-child th,
+        &:first-child td {
+          border-top: 1px solid @navGra40;
+          border-top-width: 2px;
+        }
 
-      &.total {
-        background: @navMorkGra;
+        &:hover {
+          // background-color: @navLysGra;
+        }
       }
     }
 
-    &.inntekter {
-      .inntekt {
-        margin-bottom: 18px;
+    .item {
+      padding: 16px;
+      border-right: 1px solid @navGra20;
+      border-top: 1px solid @navGra20;
+
+      &.arbeidsgiver {
+        background-color: @navLysGra;
+        border-left: 1px solid @navGra20;
+        border-right: 4px solid @navGra40;
+        position: sticky;
+        left: 0;
+        min-width: @width;
+        z-index: 2;
       }
 
-      &.total {
+      &.maaned {
+        min-width: @width;
         background: @navMorkGra;
         color: white;
-        padding: 32px;
+        text-transform: capitalize;
+
+        &.total {
+          background: @navMorkGra;
+        }
+      }
+
+      &.inntekter {
+        .inntekt {
+          margin-bottom: 18px;
+        }
+
+        &.total {
+          background: @navMorkGra;
+          color: white;
+          padding: 32px;
+        }
       }
     }
   }

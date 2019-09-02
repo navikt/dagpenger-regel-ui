@@ -1,6 +1,6 @@
 export const aktørTyper = {
-  ORGANISASJON: 'ORGANISASJON',
-  AKTOER_ID: 'NATURLIG_IDENT',
+  ORGANISASJON: 'Organisasjon',
+  AKTOER_ID: 'Person',
 };
 
 export default aktørTyper;

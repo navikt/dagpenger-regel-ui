@@ -21,17 +21,12 @@ const LocationData = ({ children, location }) => {
     getLocationParams();
   }, [location.search]);
 
-  return (
-    <LocationContext.Provider value={getLocation}>
-      {children}
-    </LocationContext.Provider>
-  );
+  return <LocationContext.Provider value={getLocation}>{children}</LocationContext.Provider>;
 };
 
 LocationData.propTypes = {
   children: PropTypes.element.isRequired,
   location: PropTypes.shape().isRequired,
 };
-
 
 export { LocationData, LocationContext };

@@ -8,17 +8,13 @@ const location = {
 
 describe('Dashboard', () => {
   test('Skal vise ny Dashboard med loader', () => {
-    const component = renderer.create(
-      <Dashboard location={location} />,
-    );
+    const component = renderer.create(<Dashboard location={location} />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   xtest('Skal vise ny Dashboard', () => {
-    const component = renderer.create(
-      <Dashboard location={location} />,
-    );
+    const component = renderer.create(<Dashboard location={location} />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
