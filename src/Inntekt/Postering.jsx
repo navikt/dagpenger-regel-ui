@@ -78,9 +78,11 @@ const Postering = ({ arbeidsgiver, arbeidsgiverIndex, dato, readOnly }) => {
               ))}
             {!readOnly && (
               <div className="knapprad midstill">
-                <Flatknapp htmlType="button" mini onClick={() => setEditMode(!editMode)}>
-                  Rediger
-                </Flatknapp>
+                {posteringer[dato].length > 0 && (
+                  <Flatknapp htmlType="button" mini onClick={() => setEditMode(!editMode)}>
+                    Rediger
+                  </Flatknapp>
+                )}
                 <Flatknapp htmlType="button" mini onClick={() => setNyInntektModal(!isNyInntektModalOpen)}>
                   Legg til inntekt
                 </Flatknapp>

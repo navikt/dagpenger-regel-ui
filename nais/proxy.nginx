@@ -8,3 +8,8 @@ location /oppslag/ {
   access_by_lua_file oidc_protected.lua;
   proxy_pass "${APP_OPPSLAG_BASEURL}";
 }
+
+location /graphql {
+  access_by_lua_file oidc_protected.lua;
+  proxy_pass "${APP_GRAPHQL_BASEURL}";
+}

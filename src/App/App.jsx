@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { init } from '@sentry/browser';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
-
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from 'react-apollo';
 import introspectionQueryResultData from '../fragmentTypes.json';
@@ -24,7 +23,7 @@ const cache = new InMemoryCache({ fragmentMatcher });
 
 const link = new HttpLink({
   uri: '/graphql',
-  credentials: 'same-origin',
+  credentials: 'include',
 });
 
 const client = new ApolloClient({

@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import Panel from 'nav-frontend-paneler';
 import { nb } from 'date-fns/locale';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { formatDistance } from 'date-fns';
 import { Normaltekst, Ingress, Element } from 'nav-frontend-typografi';
+import { loader } from 'graphql.macro';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import { ReactComponent as MannIkon } from '../images/mann.svg';
 import { ReactComponent as KvinneIkon } from '../images/kvinne.svg';
@@ -16,62 +16,12 @@ import EditedIkon from '../Components/EditedIkon';
 import Spinner from '../Components/Spinner';
 import Spacer from '../Components/Spacer';
 import { DDMMYYYYHHMM_FORMAT } from '../Utils/datoFormat';
-
 import { formatDato, eachMonthOfInterval } from '../Utils/datoUtils';
 
-const GET_INNTEKT = gql`
-  query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
-    person(id: $personId) {
-      navn
-      fornavn
-      aktorId
-      identifikator
-      vedtak(id: $vedtakId, beregningsdato: $beregningsdato) {
-        id
-        aktorId
-        beregningsdato
-        inntekt(forceRefresh: true) {
-          id
-          timestamp
-          manueltRedigert
-          redigertAvSaksbehandler
-          posteringer {
-            id
-            beloep
-            fordel
-            periode {
-              year
-              month
-            }
-            virksomhet {
-              ... on Person {
-                navn
-                identifikator
-              }
-              ... on Organisasjon {
-                identifikator
-                navn
-              }
-            }
-            inntektsmottaker {
-              ... on Person {
-                navn
-                identifikator
-              }
-              ... on Organisasjon {
-                identifikator
-                navn
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+const GET_INNTEKT = loader('./GET_INNTEKT.gql');
 
-const getKjønn = (fødselsnr = '') => {
-  if (Number(fødselsnr.charAt(8)) % 2 === 0) {
+const getKjønn = kjoenn => {
+  if (kjoenn === 'Kvinne') {
     return <KvinneIkon />;
   }
 
@@ -159,30 +109,33 @@ const Dashboard = ({ readOnly, location }) => {
     setHentInntekttatus(true);
   };
 
-  if (error) {
-    return <>error</>;
-  }
   if (loading) {
     return <Spinner type="XL" />;
+  }
+
+  if (error || !data.person) {
+    return <>error</>;
   }
 
   const måneder = getAlleMåneder('2016-07', '2019-06');
 
   const { person } = data;
 
-  const inntekter = !loading && set36Måneder(groupBy(person.vedtak.inntekt.posteringer, postering => postering.virksomhet.identifikator));
-
+  const inntekter =
+    !loading &&
+    set36Måneder(groupBy(person.vedtak.inntekt.posteringer, postering => postering.virksomhet.organisasjonsnummer || postering.virksomhet.naturligIdent));
+  console.log('data', data, inntekter);
   return (
     <>
       <Panel border>
         <div className="flex">
-          {person.identifikator && (
+          {person.naturligIdent && (
             <>
-              <div className="marginhoyre16">{getKjønn(person.identifikator)}</div>
+              <div className="marginhoyre16">{getKjønn(person.kjoenn)}</div>
               <div>
                 <Ingress>{person.navn}</Ingress>
                 <Normaltekst>Fødselsnummer</Normaltekst>
-                <Ingress>{person.identifikator}</Ingress>
+                <Ingress>{person.naturligIdent}</Ingress>
               </div>
             </>
           )}

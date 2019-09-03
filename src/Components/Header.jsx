@@ -7,7 +7,7 @@ export const Header = () => (
     <div className="dekorator flex">
       <NavLogo className="logo" />
       <Systemtittel>Dagpenger-inntektsregistrering</Systemtittel>
-      <div className="flexend noprint">NAVansatt</div>
+      <div className="flexend noprint" />
     </div>
   </header>
 );

@@ -1,0 +1,49 @@
+query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
+    person(id: $personId) {
+      navn
+      fornavn
+      aktoerId
+      naturligIdent
+      vedtak(id: $vedtakId, beregningsdato: $beregningsdato) {
+        id
+        aktoerId
+        beregningsdato
+        inntekt(forceRefresh: true) {
+          id
+          timestamp
+          manueltRedigert
+          redigertAvSaksbehandler
+          posteringer {
+            id
+            beloep
+            fordel
+            periode {
+              year
+              month
+            }
+            virksomhet {
+              __typename
+              ... on Person {
+                navn
+                naturligIdent
+              }
+              ... on Organisasjon {
+                organisasjonsnummer
+                navn
+              }
+            }
+            inntektsmottaker {
+              ... on Person {
+                navn
+                naturligIdent
+              }
+              ... on Organisasjon {
+                organisasjonsnummer
+                navn
+              }
+            }
+          }
+        }
+      }
+    }
+  }

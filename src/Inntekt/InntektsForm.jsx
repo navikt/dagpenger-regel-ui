@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withFormik, FieldArray } from 'formik';
 import isEqual from 'lodash.isequal';
 // import { useMutation } from '@apollo/react-hooks';
-// import gql from 'graphql-tag';
+// import { loader } from 'graphql.macro';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
@@ -26,30 +26,9 @@ const scrollToRef = ref => {
 };
 
 /*
-const ADD_INNTEKT = gql`
-  mutation($periode: YearMonthInput, $beloep: Float, $fordel: String, $dato: String, $beskrivelse: String) {
-    addPostering(periode: $periode, beloep: $beloep, fordel: $fordel, dato: $dato, beskrivelse: $beskrivelse) {
-      id
-    }
-  }
-`;
-
-
-const DELETE_INNTEKT = gql`
-  mutation($id: ID!) {
-    deletePostering(id: $id) {
-      id
-    }
-  }
-`;
-
-const UPDATE_INNTEKT = gql`
-  mutation($beloep: Float, $fordel: String) {
-    updatePostering(beloep: $beloep, fordel: $fordel) {
-      id
-    }
-  }
-`;
+const ADD_INNTEKT = loader('./ADD_INNTEKT.gql');
+const DELETE_INNTEKT = loader('./DELETE_INNTEKT.gql');
+const UPDATE_INNTEKT = loader('./UPDATE_INNTEKT.gql');
 */
 
 const InntektsForm = props => {
@@ -132,12 +111,15 @@ const InntektsForm = props => {
               </thead>
               <tbody>
                 {person.vedtak.inntekt.posteringer &&
-                  person.vedtak.inntekt.posteringer.map((arbeidsgiver, arbeidsgiverIndex) => (
-                    <tr key={arbeidsgiver.identifikator}>
-                      <Arbeidsgiver readOnly={readOnly} arbeidsgiver={arbeidsgiver} />
-                      <Inntekt readOnly={readOnly} arbeidsgiver={arbeidsgiver} arbeidsgiverIndex={arbeidsgiverIndex} />
-                    </tr>
-                  ))}
+                  person.vedtak.inntekt.posteringer.map((arbeidsgiver, arbeidsgiverIndex) => {
+                    const key = arbeidsgiver.organisasjonsnummer || arbeidsgiver.naturligIdent;
+                    return (
+                      <tr key={key}>
+                        <Arbeidsgiver readOnly={readOnly} arbeidsgiver={arbeidsgiver} />
+                        <Inntekt readOnly={readOnly} arbeidsgiver={arbeidsgiver} arbeidsgiverIndex={arbeidsgiverIndex} />
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>

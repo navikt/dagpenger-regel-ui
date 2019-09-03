@@ -1,18 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, withFormik } from 'formik';
+import { useQuery } from '@apollo/react-hooks';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
+import { loader } from 'graphql.macro';
 import aktørTyper from '../Kodeverk/aktoerTyper';
 import { InputField, RadioGroupField, RadioOption } from '../Form';
 import Spacer from '../Components/Spacer';
+
 import { required, hasValidOrgNumber, hasValidFodselsnummer } from '../Utils/validering';
 import { ReactComponent as GodkjentIkon } from '../images/innvilget_valgt.svg';
 
-// totalen kan ikke være mindre enn 0
+const GET_AKTOER = loader('./GET_AKTOER.gql');
 
 // todo fikse stringifyvalues
 const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, values }) => {
+  const { data } = useQuery(GET_AKTOER, {
+    skip: !isValid,
+    variables: {
+      aktoerId: values.identifikator,
+      aktoerType: values.aktoerType ? values.aktoerType.toUpperCase() : null,
+    },
+  });
+
   return (
     <Form onSubmit={handleSubmit}>
       <div className="okavbrytmodal">
@@ -36,6 +47,7 @@ const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, value
           {values.aktoerType === aktørTyper.ORGANISASJON && <InputField label="Org.Nr" name="identifikator" validate={hasValidOrgNumber} />}
 
           {values.aktoerType === aktørTyper.AKTOER_ID && <InputField label="Fødselsnummer" name="identifikator" validate={hasValidFodselsnummer} />}
+          {data && data.aktoer && data.aktoer.navn && <InputField label="" name="navn" readOnly value={data.aktoer.navn} />}
         </div>
         <Spacer sixteenPx />
         <div className="flex knapprad flexend">
@@ -62,13 +74,15 @@ NyArbeidsgiver.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     identifikator: undefined,
-    navn: undefined,
     aktoerType: undefined,
+    navn: undefined,
   }),
 
   validate: (values, props) => {
     const errors = {};
-    if (props.arbeidsgivere.some(arbeidsgiver => arbeidsgiver.identifikator === values.identifikator)) {
+
+    // todo sikre at det ikke blir NP
+    if (props.person.vedtak.inntekt.posteringer.some(arbeidsgiver => arbeidsgiver.identifikator === values.identifikator)) {
       errors.identifikator = 'Arbeidsgiver eksisterer allerede';
     }
     return errors;
@@ -76,9 +90,12 @@ export default withFormik({
 
   handleSubmit: (values, { setSubmitting, props }) => {
     const { arrayHelpers, closeModal } = props;
+    console.log(values);
     arrayHelpers.push({
-      identifikator: values.identifikator,
       navn: values.navn,
+      organisasjonsnummer: values.identifikator,
+      naturligIdent: values.identifikator,
+      identifikator: values.identifikator,
       __typename: values.aktoerType,
       posteringer: {},
     });
