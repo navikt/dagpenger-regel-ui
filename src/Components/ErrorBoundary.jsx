@@ -10,31 +10,17 @@ import { captureException, withScope } from '@sentry/browser';
 // title: "Kunne ikke finne inntekt i databasen"
 // type: "urn:dp:error:inntekt"
 
-const getErrorData = response => (response.data ? response.data : response.statusText);
-
-const formatError = error => {
-  const response = error && error.response ? error.response : undefined;
-  return {
-    data: response ? getErrorData(response) : undefined,
-    type: response && response.data ? response.data.type : undefined,
-    status: response && response.data ? response.data.status : undefined,
-    title: response && response.data ? response.data.title : undefined,
-    detail: response && response.data ? response.data.detail : undefined,
-    instance: response && response.data ? response.data.instance : undefined,
-  };
-};
-
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hasError: false,
-      errors: null,
+      error: {},
     };
   }
 
   static getDerivedStateFromError(error) {
-    // console.log(error);
+    console.log(error);
     // Update state so the next render will show the fallback UI.
     return { hasError: true, errors: error };
   }
@@ -58,19 +44,15 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
-    const { hasError, errors } = this.state;
-    const { children, apiErrors } = this.props;
-    if (apiErrors.hasError) {
-      const error = formatError(apiErrors);
+    const { hasError, error } = this.state;
+    const { children } = this.props;
+
+    if (hasError) {
       let feilmelding;
 
       switch (error.status) {
         case 404:
-          if (error.title) {
-            feilmelding = error.title;
-          } else {
-            feilmelding = 'En feil har oppstått i forbindelse med tjenestekallet til inntekt';
-          }
+          feilmelding = 'En feil har oppstått i forbindelse med tjenestekallet til inntekt';
           break;
         case 418:
           feilmelding = 'I´M A TEAPOT';
@@ -82,17 +64,14 @@ class ErrorBoundary extends React.Component {
           feilmelding = 'Du er ikke autorisert';
           break;
         case 500:
-          feilmelding = error.title;
+          feilmelding = '500';
           break;
         default:
           feilmelding = 'Uhåndert feil';
           break;
       }
 
-      return <div className="feilmelding">{`Feilmelding: ${error.status} ${feilmelding}`}</div>;
-    }
-    if (hasError) {
-      return <div className="feilmelding">{`Feilmelding: ${errors}`}</div>;
+      return <div className="feilmelding">{`Feilmelding: ${feilmelding}`}</div>;
     }
 
     return children;
@@ -101,7 +80,6 @@ class ErrorBoundary extends React.Component {
 
 ErrorBoundary.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  apiErrors: PropTypes.shape().isRequired,
 };
 
 export default ErrorBoundary;

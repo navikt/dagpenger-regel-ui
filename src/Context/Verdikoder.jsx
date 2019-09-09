@@ -9,18 +9,19 @@ const GET_VERDIKODER = loader('./GET_VERDIKODER.gql');
 const VerdikoderContext = createContext({});
 
 const Verdikoder = ({ children }) => {
-  const { data, loading, error } = useQuery(GET_VERDIKODER);
+  const { data, loading } = useQuery(GET_VERDIKODER);
 
   if (loading) {
     return <Spinner type="XL" />;
   }
 
-  if (error || !data.verdikoder) {
-    return <div>error</div>;
+  let verdikoderArray = [];
+  if (data && data.verdikoder) {
+    const { verdikoder } = data;
+    verdikoderArray = verdikoder;
   }
 
-  const { verdikoder } = data;
-  return <VerdikoderContext.Provider value={verdikoder}>{children}</VerdikoderContext.Provider>;
+  return <VerdikoderContext.Provider value={verdikoderArray}>{children}</VerdikoderContext.Provider>;
 };
 
 Verdikoder.propTypes = {

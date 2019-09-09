@@ -82,17 +82,17 @@ const groupBy = (list, keyGetter) => {
 };
 
 const Dashboard = ({ readOnly, location }) => {
-  const { data, error, loading } = useQuery(GET_INNTEKT, {
-    variables: { ...inntektRequest(new URLSearchParams(location.search)) },
-  });
-
   const [hentInntektStatus, setHentInntekttatus] = useState(false);
   const [isHentInntektModalOpen, setHentInntektModal] = useState(false);
 
-  const fetchUncachedInntekt = async () => {
-    setHentInntekttatus('fetching');
+  const { data, error, loading, refetch } = useQuery(GET_INNTEKT, {
+    variables: { ...inntektRequest(new URLSearchParams(location.search)), forceRefresh: hentInntektStatus },
+  });
 
-    setHentInntekttatus(true);
+  const fetchUncachedInntekt = async () => {
+    await setHentInntekttatus(true);
+    // hent ferske inntekter
+    refetch();
   };
 
   if (loading) {
@@ -113,7 +113,7 @@ const Dashboard = ({ readOnly, location }) => {
       groupBy(person.vedtak.inntekt.posteringer, postering => postering.virksomhet.organisasjonsnummer || postering.virksomhet.naturligIdent),
       beregningsmåneder,
     );
-  console.log('data', data, inntekter);
+
   return (
     <>
       <Panel border>

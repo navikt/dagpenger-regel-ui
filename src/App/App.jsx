@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { init } from '@sentry/browser';
 import { ApolloClient } from 'apollo-client';
@@ -7,7 +6,6 @@ import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemo
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from 'react-apollo';
 import introspectionQueryResultData from '../fragmentTypes.json';
-
 import { Verdikoder } from '../Context/Verdikoder';
 import Dashboard from './Dashboard';
 import { Header } from '../Components/Header';
@@ -39,25 +37,23 @@ init({
 });
 
 const App = () => {
-  const [errors, setError] = useState({ hasError: false, status: null, statusText: null });
-  // apply interceptor on response
-  axios.interceptors.response.use(response => response, error => setError({ hasError: true, ...error }));
   return (
-    <ApolloProvider client={client}>
-      <Verdikoder>
-        <div className="app">
-          <Header />
-          <ErrorBoundary apiErrors={errors}>
+    <ErrorBoundary>
+      <ApolloProvider client={client}>
+        <Verdikoder>
+          <div className="app">
+            <Header />
+
             <div role="main" className="main">
               <Router>
                 <Route exact path="/inntekter/readonly" render={props => <Dashboard readOnly {...props} />} />
                 <Route exact path="/inntekter" render={props => <Dashboard {...props} />} />
               </Router>
             </div>
-          </ErrorBoundary>
-        </div>
-      </Verdikoder>
-    </ApolloProvider>
+          </div>
+        </Verdikoder>
+      </ApolloProvider>
+    </ErrorBoundary>
   );
 };
 

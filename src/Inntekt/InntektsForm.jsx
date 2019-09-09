@@ -22,7 +22,7 @@ const scrollToRef = ref => {
   const elem = document.getElementById('grid');
   elem.scrollTo({
     top: 0,
-    left: ref.current.offsetLeft - 250,
+    left: ref.current.offsetLeft - 250, // 250 is the width of 1 cell
     behavior: 'smooth',
   });
 };
@@ -65,9 +65,13 @@ const InntektsForm = props => {
   // Bare kjør onLoad
   if (!dirty) {
     window.setTimeout(() => {
-      scrollToRef(tdRefs[35]);
+      const elem = document.getElementById('grid');
+      if (elem) {
+        elem.scrollLeft = elem.scrollWidth;
+      }
     }, 1);
   }
+
   return (
     <>
       {errors.name && <div className="error">{errors.name}</div>}
@@ -213,6 +217,7 @@ export default withFormik({
       Object.keys(virksomhet.posteringer).flatMap(dato => virksomhet.posteringer[dato]),
     );
 
+    // todo fiks navn
     const groupBy = list => {
       const c = new Map();
       list.forEach(a => {
