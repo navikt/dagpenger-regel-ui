@@ -1,0 +1,7 @@
+query {
+    verdikoder {
+      ... on Verdikode {
+        navn
+      }
+    }
+  }

@@ -23,7 +23,7 @@ const cache = new InMemoryCache({ fragmentMatcher });
 
 const link = new HttpLink({
   uri: '/graphql',
-  credentials: 'include',
+  credentials: 'same-origin',
 });
 
 const client = new ApolloClient({

@@ -16,6 +16,8 @@ exports[`Arbeidsgiver Skal vise arbeidsgiver 1`] = `
   </p>
   <p
     className="typo-element"
-  />
+  >
+    123456789
+  </p>
 </td>
 `;

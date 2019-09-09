@@ -16,7 +16,7 @@ import EditedIkon from '../Components/EditedIkon';
 import Spinner from '../Components/Spinner';
 import Spacer from '../Components/Spacer';
 import { DDMMYYYYHHMM_FORMAT } from '../Utils/datoFormat';
-import { formatDato, eachMonthOfInterval } from '../Utils/datoUtils';
+import { formatDato, getAlleMåneder } from '../Utils/datoUtils';
 
 const GET_INNTEKT = loader('./GET_INNTEKT.gql');
 
@@ -28,34 +28,26 @@ const getKjønn = kjoenn => {
   return <MannIkon />;
 };
 
-const getAlleMåneder = (fraDato, tilDato) => {
-  const måneder = eachMonthOfInterval({
-    start: new Date(fraDato),
-    end: new Date(tilDato),
-  });
+const inntektRequest = queryParams => ({
+  personId: queryParams.get('aktorId'),
+  vedtakId: queryParams.get('vedtakId'),
+  beregningsdato: queryParams.get('beregningdato'),
+});
 
-  return måneder;
-};
-
-const set36Måneder = data => {
-  const { fraDato, tilDato } = {
-    fraDato: '2016-07',
-    tilDato: '2019-06',
-  };
-  if (fraDato && tilDato) {
-    const måneder = getAlleMåneder(fraDato, tilDato);
-
-    data.map(a => {
-      if (a.posteringer === undefined) {
-        Object.assign(a, {
+// todo flytte til datoutils
+export const set36Måneder = (data, beregningsmåneder) => {
+  if (beregningsmåneder) {
+    data.map(virksomhet => {
+      if (virksomhet.posteringer === undefined) {
+        Object.assign(virksomhet, {
           posteringer: {},
         });
       }
 
-      måneder.forEach(måned => {
-        if (!a.posteringer[måned]) {
+      beregningsmåneder.forEach(måned => {
+        if (!virksomhet.posteringer[måned]) {
           // console.log('if');
-          Object.assign(a.posteringer, {
+          Object.assign(virksomhet.posteringer, {
             [måned]: [],
           });
         }
@@ -72,7 +64,7 @@ const groupBy = (list, keyGetter) => {
   list.forEach(item => {
     const key = keyGetter(item);
     const collection = map.get(key);
-    const dato = `${item.periode.year}-${item.periode.month}`;
+    const dato = `${item.aarMaaned}`;
     if (!collection) {
       map.set(key, {
         ...item.virksomhet,
@@ -90,14 +82,8 @@ const groupBy = (list, keyGetter) => {
 };
 
 const Dashboard = ({ readOnly, location }) => {
-  const inntektRequest = new URLSearchParams(location.search);
-
   const { data, error, loading } = useQuery(GET_INNTEKT, {
-    variables: {
-      personId: inntektRequest.get('aktorId'),
-      vedtakId: inntektRequest.get('vedtakId'),
-      beregningsdato: inntektRequest.get('beregningdato'),
-    },
+    variables: { ...inntektRequest(new URLSearchParams(location.search)) },
   });
 
   const [hentInntektStatus, setHentInntekttatus] = useState(false);
@@ -114,16 +100,19 @@ const Dashboard = ({ readOnly, location }) => {
   }
 
   if (error || !data.person) {
-    return <>error</>;
+    return <div>error</div>;
   }
-
-  const måneder = getAlleMåneder('2016-07', '2019-06');
 
   const { person } = data;
 
+  const beregningsmåneder = getAlleMåneder(person.vedtak.inntekt.fraDato, person.vedtak.inntekt.tilDato);
+
   const inntekter =
     !loading &&
-    set36Måneder(groupBy(person.vedtak.inntekt.posteringer, postering => postering.virksomhet.organisasjonsnummer || postering.virksomhet.naturligIdent));
+    set36Måneder(
+      groupBy(person.vedtak.inntekt.posteringer, postering => postering.virksomhet.organisasjonsnummer || postering.virksomhet.naturligIdent),
+      beregningsmåneder,
+    );
   console.log('data', data, inntekter);
   return (
     <>
@@ -196,7 +185,7 @@ const Dashboard = ({ readOnly, location }) => {
           },
         }}
         hentInntektStatus={hentInntektStatus}
-        måneder={måneder}
+        måneder={beregningsmåneder}
         readOnly={readOnly}
       />
     </>

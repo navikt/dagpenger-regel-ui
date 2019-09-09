@@ -13,14 +13,13 @@ query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
           timestamp
           manueltRedigert
           redigertAvSaksbehandler
+          fraDato
+          tilDato
           posteringer {
             id
             beloep
             fordel
-            periode {
-              year
-              month
-            }
+            aarMaaned
             virksomhet {
               __typename
               ... on Person {

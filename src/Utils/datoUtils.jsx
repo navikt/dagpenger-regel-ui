@@ -32,3 +32,12 @@ export const eachMonthOfInterval = (dirtyInterval, dirtyOptions) => {
 
   return dates;
 };
+
+export const getAlleMåneder = (fraDato, tilDato) => {
+  const måneder = eachMonthOfInterval({
+    start: new Date(fraDato),
+    end: new Date(tilDato),
+  });
+
+  return måneder;
+};

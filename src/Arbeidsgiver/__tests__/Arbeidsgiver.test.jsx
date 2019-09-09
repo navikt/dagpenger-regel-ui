@@ -7,7 +7,7 @@ import Arbeidsgiver from '../Arbeidsgiver';
 
 const arbeidsgiver = {
   navn: 'Sopra Steria',
-  identifikator: '123456789',
+  organisasjonsnummer: '123456789',
   __typename: aktørTyper.ORGANISASJON,
 };
 

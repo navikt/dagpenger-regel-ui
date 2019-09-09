@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, withFormik } from 'formik';
+import { withFormik } from 'formik';
 import { useQuery } from '@apollo/react-hooks';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -15,17 +15,23 @@ import { ReactComponent as GodkjentIkon } from '../images/innvilget_valgt.svg';
 const GET_AKTOER = loader('./GET_AKTOER.gql');
 
 // todo fikse stringifyvalues
-const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, values }) => {
+const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, values, setFieldValue }) => {
   const { data } = useQuery(GET_AKTOER, {
-    skip: !isValid,
+    skip: !isValid && values.identifikator && values.aktoerType,
     variables: {
       aktoerId: values.identifikator,
       aktoerType: values.aktoerType ? values.aktoerType.toUpperCase() : null,
     },
   });
 
+  const setNavn = () => {
+    if (data && data.aktoer && data.aktoer.navn) {
+      setFieldValue('navn', data.aktoer.navn);
+    }
+  };
+
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="okavbrytmodal">
         <div className="flex">
           <div className="flexcolumn">
@@ -44,10 +50,12 @@ const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, value
             <RadioOption value={aktørTyper.ORGANISASJON} label="Virksomhet" />
             <RadioOption value={aktørTyper.AKTOER_ID} label="Privatperson" />
           </RadioGroupField>
-          {values.aktoerType === aktørTyper.ORGANISASJON && <InputField label="Org.Nr" name="identifikator" validate={hasValidOrgNumber} />}
+          {values.aktoerType === aktørTyper.ORGANISASJON && (
+            <InputField label="Org.Nr" name="identifikator" validate={hasValidOrgNumber} onBlur={() => setNavn()} />
+          )}
 
           {values.aktoerType === aktørTyper.AKTOER_ID && <InputField label="Fødselsnummer" name="identifikator" validate={hasValidFodselsnummer} />}
-          {data && data.aktoer && data.aktoer.navn && <InputField label="" name="navn" readOnly value={data.aktoer.navn} />}
+          <InputField label="Navn" name="navn" disabled />
         </div>
         <Spacer sixteenPx />
         <div className="flex knapprad flexend">
@@ -59,7 +67,7 @@ const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, value
           </Knapp>
         </div>
       </div>
-    </Form>
+    </form>
   );
 };
 
@@ -69,14 +77,17 @@ NyArbeidsgiver.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   isValid: PropTypes.bool.isRequired,
   values: PropTypes.shape().isRequired,
+  setFieldValue: PropTypes.func.isRequired,
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    identifikator: undefined,
-    aktoerType: undefined,
-    navn: undefined,
-  }),
+  mapPropsToValues: () => {
+    return {
+      identifikator: undefined,
+      aktoerType: undefined,
+      navn: '',
+    };
+  },
 
   validate: (values, props) => {
     const errors = {};
@@ -90,18 +101,24 @@ export default withFormik({
 
   handleSubmit: (values, { setSubmitting, props }) => {
     const { arrayHelpers, closeModal } = props;
-    console.log(values);
+    const datoer = {};
+    // todo bytte ut denne med
+    props.måneder.forEach(element => {
+      Object.assign(datoer, { [element]: [] });
+    });
+
     arrayHelpers.push({
       navn: values.navn,
       organisasjonsnummer: values.identifikator,
       naturligIdent: values.identifikator,
       identifikator: values.identifikator,
       __typename: values.aktoerType,
-      posteringer: {},
+      // todo legg til 36 måneder
+      posteringer: datoer,
     });
     setSubmitting(false);
     closeModal();
   },
-
+  enableReinitialize: true,
   displayName: 'NyArbeidsgiverForm',
 })(NyArbeidsgiver);

@@ -8,6 +8,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp, Flatknapp } from 'nav-frontend-knapper';
+import DisplayFormikState from '../Utils/formikUtils';
 import Spacer from '../Components/Spacer';
 import Inntekt from './Inntekt';
 import Arbeidsgiver from '../Arbeidsgiver/Arbeidsgiver';
@@ -15,6 +16,7 @@ import NyArbeidsgiver from '../Arbeidsgiver/NyArbeidsgiver';
 import OkAvbrytModal from '../Components/OkAvbrytModal';
 import DatoLabel from '../Components/DatoLabel';
 import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
+import { lagreInntekt } from '../lib/inntektApi';
 
 const scrollToRef = ref => {
   const elem = document.getElementById('grid');
@@ -60,6 +62,12 @@ const InntektsForm = props => {
   const tdRefs = {};
   const executeScroll = index => scrollToRef(tdRefs[index]);
 
+  // Bare kjør onLoad
+  if (!dirty) {
+    window.setTimeout(() => {
+      scrollToRef(tdRefs[35]);
+    }, 1);
+  }
   return (
     <>
       {errors.name && <div className="error">{errors.name}</div>}
@@ -137,7 +145,10 @@ const InntektsForm = props => {
               >
                 <FieldArray
                   name="person.vedtak.inntekt.posteringer"
-                  render={arrayHelpers => <NyArbeidsgiver person={person} arrayHelpers={arrayHelpers} closeModal={() => setArbeidsgiverModal(false)} />}
+                  initialValues={{}}
+                  render={arrayHelpers => (
+                    <NyArbeidsgiver person={person} måneder={måneder} arrayHelpers={arrayHelpers} closeModal={() => setArbeidsgiverModal(false)} />
+                  )}
                 />
               </Modal>
             </div>
@@ -166,6 +177,7 @@ const InntektsForm = props => {
             </div>
           </div>
         </div>
+        <DisplayFormikState {...values} />
       </form>
     </>
   );
@@ -192,15 +204,63 @@ export default withFormik({
     const { initialValues } = props;
     return initialValues;
   },
-  // endre til mutation
   handleSubmit: (values, formProps) => {
     // console.log(values, formProps);
     const dirty = !isEqual(formProps.props.initialValues, values);
+
+    // TODO ønsker å bruke mutation, men backend har ikke støtte for dette ennå. Så må sende inn som inntekt
+    const posteringer = values.person.vedtak.inntekt.posteringer.flatMap(virksomhet =>
+      Object.keys(virksomhet.posteringer).flatMap(dato => virksomhet.posteringer[dato]),
+    );
+
+    const groupBy = list => {
+      const c = new Map();
+      list.forEach(a => {
+        const samme = list.filter(b => a.aarMaaned === b.aarMaaned);
+        c.set(a.aarMaaned, {
+          aarMaaned: a.aarMaaned,
+          arbeidsInntektInformasjon: {
+            inntektListe: [...samme],
+          },
+        });
+      });
+      return Array.from(c.values());
+    };
+
+    const g = groupBy(posteringer);
 
     if (dirty) {
       // mutate posteringer, slettet, nye og endrede
       return true;
     }
+    try {
+      // transform values, brukt GET values
+      const inntekt = {
+        inntektId: {
+          id: formProps.props.initialValue.person.vedtak.inntekt.id,
+        },
+        inntekt: {
+          arbeidsInntektMaaned: [...g],
+        },
+        inntektsmottaker: {
+          pnr: formProps.props.initialValue.person.naturligIdent,
+          navn: formProps.props.initialValue.person.navn,
+        },
+        redigertAvSaksbehandler: formProps.props.initialValue.person.vedtak.inntekt.redigertAvSaksbehandler,
+        manueltRedigert: formProps.props.initialValue.person.vedtak.inntekt.manueltRedigert,
+        timestamp: formProps.props.initialValue.person.vedtak.inntekt.timestamp,
+      };
+
+      lagreInntekt({ ...inntekt, redigertAvSaksbehandler: dirty || values.manueltRedigert }, formProps.props.hentInntektStatus, formProps.props.locationData);
+
+      formProps.setStatus({ success: true });
+      formProps.setSubmitting(false);
+    } catch (error) {
+      formProps.setStatus({ failure: true });
+      formProps.setError(error);
+      throw new Error(error);
+    }
+
     return false;
 
     // console.log(dirty);
