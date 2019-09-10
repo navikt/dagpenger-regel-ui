@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Arbeidsgiver Skal vise arbeidsgiver 1`] = `
-<td
+<div
   className="item arbeidsgiver"
 >
   <h2
@@ -19,5 +19,5 @@ exports[`Arbeidsgiver Skal vise arbeidsgiver 1`] = `
   >
     123456789
   </p>
-</td>
+</div>
 `;
