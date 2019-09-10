@@ -98,42 +98,38 @@ const InntektsForm = props => {
 
       <form onSubmit={handleSubmit}>
         <div>
-          <div className="ss" id="grid">
-            <table className="inntektstabell">
-              <thead>
-                <tr>
-                  <td />
-                  {måneder &&
-                    måneder.map((måned, index) => {
-                      tdRefs[index] = React.createRef();
-                      return (
-                        <React.Fragment key={måned}>
-                          <td className="item maaned" ref={tdRefs[index]}>
-                            <DatoLabel dato={måned} datoFormat={MMMM_YYYY_FORMAT} />
-                          </td>
-                          {(index + 1) % 12 === 0 && (
-                            <td className="item maaned" ref={tdRefs[index]}>
-                              Totalt
-                            </td>
-                          )}
-                        </React.Fragment>
-                      );
-                    })}
-                </tr>
-              </thead>
-              <tbody>
-                {person.vedtak.inntekt.posteringer &&
-                  person.vedtak.inntekt.posteringer.map((arbeidsgiver, arbeidsgiverIndex) => {
-                    const key = arbeidsgiver.organisasjonsnummer || arbeidsgiver.naturligIdent;
+          <div className="grid" id="grid">
+            <div className="table inntektstabell">
+              <div className="row">
+                <div className="cell" />
+                {måneder &&
+                  måneder.map((måned, index) => {
+                    tdRefs[index] = React.createRef();
                     return (
-                      <tr key={key}>
-                        <Arbeidsgiver readOnly={readOnly} arbeidsgiver={arbeidsgiver} />
-                        <Inntekt readOnly={readOnly} arbeidsgiver={arbeidsgiver} arbeidsgiverIndex={arbeidsgiverIndex} />
-                      </tr>
+                      <React.Fragment key={måned}>
+                        <div className="cell item maaned" ref={tdRefs[index]}>
+                          <DatoLabel dato={måned} datoFormat={MMMM_YYYY_FORMAT} />
+                        </div>
+                        {(index + 1) % 12 === 0 && (
+                          <div className="cell item maaned" ref={tdRefs[index]}>
+                            Totalt
+                          </div>
+                        )}
+                      </React.Fragment>
                     );
                   })}
-              </tbody>
-            </table>
+              </div>
+              {person.vedtak.inntekt.posteringer &&
+                person.vedtak.inntekt.posteringer.map((arbeidsgiver, arbeidsgiverIndex) => {
+                  const key = arbeidsgiver.organisasjonsnummer || arbeidsgiver.naturligIdent;
+                  return (
+                    <div className="row" key={key}>
+                      <Arbeidsgiver readOnly={readOnly} arbeidsgiver={arbeidsgiver} />
+                      <Inntekt readOnly={readOnly} arbeidsgiver={arbeidsgiver} arbeidsgiverIndex={arbeidsgiverIndex} />
+                    </div>
+                  );
+                })}
+            </div>
           </div>
           <div className="toolbar flex knapprad">
             <div className="leggtilarbeidsgiver">
@@ -181,7 +177,9 @@ const InntektsForm = props => {
             </div>
           </div>
         </div>
-        <DisplayFormikState {...values} />
+        <div className="noprint">
+          <DisplayFormikState {...values} />
+        </div>
       </form>
     </>
   );

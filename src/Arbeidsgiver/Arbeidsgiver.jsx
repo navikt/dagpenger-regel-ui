@@ -9,11 +9,11 @@ const getAktoerIdent = (aktoerType, arbeidsgiver) => (aktoerType === aktørTyper
 const Arbeidsgiver = ({ arbeidsgiver }) => {
   const { navn, __typename } = arbeidsgiver;
   return (
-    <td className="item arbeidsgiver">
+    <div className="cell item arbeidsgiver">
       {navn && <Undertittel>{navn}</Undertittel>}
       <EtikettLiten>{getAktoerType(__typename)}</EtikettLiten>
       <Element>{getAktoerIdent(__typename, arbeidsgiver)}</Element>
-    </td>
+    </div>
   );
 };
 

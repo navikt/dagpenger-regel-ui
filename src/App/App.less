@@ -44,12 +44,13 @@
 }
 
 // inntektstabell
-.ss {
+.grid {
   width: 100%;
   overflow-x: auto;
   margin-bottom: 24px;
 
   .inntektstabell {
+    display: table;
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
@@ -57,28 +58,16 @@
     border-bottom: 1px solid @navGra20;
     transition: all 0.3s ease-in-out;
 
-    thead {
-      display: table-header-group;
-    }
-
-    tbody {
-      tr {
-        &:first-child th,
-        &:first-child td {
-          border-top: 1px solid @navGra40;
-          border-top-width: 2px;
-        }
-
-        &:hover {
-          // background-color: @navLysGra;
-        }
-      }
+    .row {
+      display: table-row;
     }
 
     .item {
       padding: 16px;
       border-right: 1px solid @navGra20;
       border-bottom: 1px solid @navGra20;
+      min-width: @width;
+      display: table-cell;
 
       &.arbeidsgiver {
         background-color: @navLysGra;
@@ -86,12 +75,10 @@
         border-right: 4px solid @navGra40;
         position: sticky;
         left: 0;
-        min-width: @width;
         z-index: 2;
       }
 
       &.maaned {
-        min-width: @width;
         background: @navMorkGra;
         color: white;
         text-transform: capitalize;
@@ -272,31 +259,70 @@ input::-webkit-inner-spin-button {
 
 @media print {
   @page {
-    size: auto;   /* auto is the initial value */
-    margin: 0;  /* this affects the margin in the printer settings */
+    margin: 0;
   }
 
   body {
-    //transform: rotate(90deg);
-    position: static;
-    overflow: initial;
+    height: 100%;
+    width: 100%;
+    font-size: 10px !important;
   }
 
   .grid {
     display: inline;
     overflow-y: visible;
-    position: static;
+    position: relative;
 
-    .item {
-      border-right: 0;
+    .inntektstabell {
+      transform: translate(20%, -100%) rotate(90deg);
+      transform-origin: bottom left;
+      display: block;
+      position: absolute;
 
-      &.arbeidsgiver {
-        display: none;
-      }
 
-      &.inntekter {
-        .ekspanderbartPanel__hode {
-          padding: 0;
+      .row {
+        display: block;
+        border-color: black;
+        white-space: nowrap;
+
+
+        .item {
+          display: inline-block;
+          padding: 2px;
+          border-color: black;
+
+          &.arbeidsgiver {
+            h2,
+            p {
+              display: inline-block;
+            }
+
+            .typo-etikett-liten {
+              display: none;
+            }
+
+            .typo-element {
+              &:before {
+                content: "(";
+              }
+
+              &:after {
+                content: ")";
+              }
+            }
+          }
+
+          &.inntekter {
+            .ekspanderbartPanel__hode {
+              padding: 0;
+            }
+
+            &.total {
+
+
+              padding: 2px;
+            }
+          }
         }
       }
     }
