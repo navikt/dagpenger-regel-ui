@@ -99,19 +99,19 @@ const InntektsForm = props => {
       <form onSubmit={handleSubmit}>
         <div>
           <div className="grid" id="grid">
-            <div className="table inntektstabell">
+            <div className="inntektstabell">
               <div className="row">
-                <div className="cell" />
+                <div className="item" />
                 {måneder &&
                   måneder.map((måned, index) => {
                     tdRefs[index] = React.createRef();
                     return (
                       <React.Fragment key={måned}>
-                        <div className="cell item maaned" ref={tdRefs[index]}>
+                        <div className="item maaned" ref={tdRefs[index]}>
                           <DatoLabel dato={måned} datoFormat={MMMM_YYYY_FORMAT} />
                         </div>
                         {(index + 1) % 12 === 0 && (
-                          <div className="cell item maaned" ref={tdRefs[index]}>
+                          <div className="item maaned" ref={tdRefs[index]}>
                             Totalt
                           </div>
                         )}

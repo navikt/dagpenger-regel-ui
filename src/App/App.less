@@ -265,7 +265,6 @@ input::-webkit-inner-spin-button {
   body {
     height: 100%;
     width: 100%;
-    font-size: 10px !important;
   }
 
   .grid {
@@ -279,12 +278,10 @@ input::-webkit-inner-spin-button {
       display: block;
       position: absolute;
 
-
       .row {
         display: block;
         border-color: black;
         white-space: nowrap;
-
 
         .item {
           display: inline-block;
@@ -292,6 +289,13 @@ input::-webkit-inner-spin-button {
           border-color: black;
 
           &.arbeidsgiver {
+            h2 {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              max-width: 120px;
+              margin-right: 2px;
+            }
+
             h2,
             p {
               display: inline-block;
@@ -318,8 +322,6 @@ input::-webkit-inner-spin-button {
             }
 
             &.total {
-
-
               padding: 2px;
             }
           }

@@ -14,11 +14,11 @@ const Inntekt = ({ arbeidsgiver, arbeidsgiverIndex, readOnly }) => {
     .map((dato, index) => {
       return (
         <React.Fragment key={`${arbeidsgiver}${dato}`}>
-          <div className="cell item inntekter">
+          <div className="item inntekter">
             <Postering readOnly={readOnly} arbeidsgiver={arbeidsgiver} dato={dato} arbeidsgiverIndex={arbeidsgiverIndex} />
           </div>
           {(index + 1) % 12 === 0 && (
-            <div className="cell item inntekter total">
+            <div className="item inntekter total">
               <TotalInntekt total={sumInntekter(Object.values(arbeidsgiver.posteringer).slice(index - 12, index))} />
             </div>
           )}
