@@ -1,0 +1,13 @@
+query($aktoerId: String!, $aktoerType: String!) {
+    aktoer(aktoerId: $aktoerId, aktoerType: $aktoerType) {
+      __typename
+      ... on Person {
+        navn
+        naturligIdent
+      }
+      ... on Organisasjon {
+        organisasjonsnummer
+        navn
+      }
+    }
+  }

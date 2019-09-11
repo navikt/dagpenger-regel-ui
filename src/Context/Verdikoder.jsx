@@ -1,40 +1,31 @@
-import React, { useEffect, useState, createContext } from 'react';
-import axios from 'axios';
+import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
-import { getVerdikoder } from '../lib/inntektApiClient';
+import { useQuery } from '@apollo/react-hooks';
+import { loader } from 'graphql.macro';
+import Spinner from '../Components/Spinner';
+
+const GET_VERDIKODER = loader('./GET_VERDIKODER.gql');
 
 const VerdikoderContext = createContext({});
 
 const Verdikoder = ({ children }) => {
-  const [verdikoder, setVerdikoder] = useState([]);
+  const { data, loading } = useQuery(GET_VERDIKODER);
 
-  useEffect(() => {
-    const getVerdikoderFromApi = async () => {
-      let result;
-      if (process.env.NODE_ENV !== 'production') {
-        result = await axios(
-          `${process.env.PUBLIC_URL}/mock/verdikoder.json`,
-        );
-      } else {
-        result = await getVerdikoder();
-      }
-      setVerdikoder(result.data);
-    };
+  if (loading) {
+    return <Spinner type="XL" />;
+  }
 
+  let verdikoderArray = [];
+  if (data && data.verdikoder) {
+    const { verdikoder } = data;
+    verdikoderArray = verdikoder;
+  }
 
-    getVerdikoderFromApi();
-  }, []);
-
-  return (
-    <VerdikoderContext.Provider value={verdikoder}>
-      {children}
-    </VerdikoderContext.Provider>
-  );
+  return <VerdikoderContext.Provider value={verdikoderArray}>{children}</VerdikoderContext.Provider>;
 };
 
 Verdikoder.propTypes = {
   children: PropTypes.element.isRequired,
 };
-
 
 export { Verdikoder, VerdikoderContext };

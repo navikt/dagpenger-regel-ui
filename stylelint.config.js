@@ -112,6 +112,7 @@ module.exports = {
     'value-list-max-empty-lines': 0,
     'unit-whitelist': [
       'em',
+      'cm',
       'ex',
       'rem', // Font-relative lengths
       'pt',

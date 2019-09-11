@@ -42,6 +42,7 @@ services:
       APP_PORT: 3000
       APP_INNTEKT_BASEURL: "http://dp-inntekt-api:8099/"
       APP_OPPSLAG_BASEURL: "http://dagpenger-oppslag:8080/"
+      APP_GRAPHQL_BASEURL: "http://host.docker.internal:4000"
       OIDC_HOST_URL: "http://host.docker.internal:4352"
       OIDC_REDIRECT_URI: "http://localhost:3000/inntekter/oidc/callback"
       OIDC_AGENTNAME: "foo"

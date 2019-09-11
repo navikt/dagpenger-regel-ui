@@ -1,0 +1,5 @@
+mutation($beloep: Float, $fordel: String) {
+    updatePostering(beloep: $beloep, fordel: $fordel) {
+      id
+    }
+  }

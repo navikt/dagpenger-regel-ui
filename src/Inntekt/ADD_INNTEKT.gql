@@ -1,0 +1,5 @@
+mutation($periode: YearMonthInput, $beloep: Float, $fordel: String, $dato: String, $beskrivelse: String) {
+    addPostering(periode: $periode, beloep: $beloep, fordel: $fordel, dato: $dato, beskrivelse: $beskrivelse) {
+      id
+    }
+  }
