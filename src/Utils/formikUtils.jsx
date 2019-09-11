@@ -10,7 +10,7 @@ export const DisplayFormikState = props => (
         fontFamily: 'monospace',
       }}
     >
-      {`<strong>props</strong> =${JSON.stringify(props, null, 2)}`}
+      {`props = ${JSON.stringify(props, null, 2)}`}
     </pre>
   </div>
 );

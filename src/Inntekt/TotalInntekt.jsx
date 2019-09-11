@@ -4,7 +4,6 @@ import { Ingress } from 'nav-frontend-typografi';
 import { formatertPengesum } from '../Utils/currencyUtils';
 
 const TotalInntekt = ({ total }) => {
-  console.log('total', total);
   return <Ingress>{formatertPengesum(total)}</Ingress>;
 };
 
