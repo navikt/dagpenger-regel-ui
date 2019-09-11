@@ -12,7 +12,7 @@ import './App.css';
 const environment = window.location.hostname;
 
 init({
-  dsn: 'https://27d38c9082cc45248d48e24e2cc7f2fb@sentry.nais.adeo.no/10',
+  dsn: 'https://27d38c9082cc45248d48e24e2cc7f2fb@sentry.nav.no/10',
   environment,
 });
 
