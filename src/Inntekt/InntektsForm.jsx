@@ -100,7 +100,7 @@ const InntektsForm = props => {
         <div>
           <div className="grid" id="grid">
             <div className="inntektstabell">
-              <div className="row">
+              <div className="row noprint">
                 <div className="item" />
                 {måneder &&
                   måneder.map((måned, index) => {

@@ -254,7 +254,7 @@ input::-webkit-inner-spin-button {
 }
 
 .bareprint {
-  display: none;
+  display: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
 @media print {
@@ -273,57 +273,13 @@ input::-webkit-inner-spin-button {
     position: relative;
 
     .inntektstabell {
-      transform: translate(20%, -100%) rotate(90deg);
-      transform-origin: bottom left;
-      display: block;
-      position: absolute;
-
       .row {
-        display: block;
-        border-color: black;
-        white-space: nowrap;
-
         .item {
-          display: inline-block;
+          display: block;
           padding: 2px;
-          border-color: black;
 
-          &.arbeidsgiver {
-            h2 {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              max-width: 120px;
-              margin-right: 2px;
-            }
-
-            h2,
-            p {
-              display: inline-block;
-            }
-
-            .typo-etikett-liten {
-              display: none;
-            }
-
-            .typo-element {
-              &:before {
-                content: "(";
-              }
-
-              &:after {
-                content: ")";
-              }
-            }
-          }
-
-          &.inntekter {
-            .ekspanderbartPanel__hode {
-              padding: 0;
-            }
-
-            &.total {
-              padding: 2px;
-            }
+          .ekspanderbartPanel__hode {
+            padding: 2px;
           }
         }
       }
@@ -334,10 +290,10 @@ input::-webkit-inner-spin-button {
   .hentinntekter,
   .total,
   .noprint {
-    display: none;
+    display: none !important; /* stylelint-disable-line declaration-no-important */
   }
 
   .bareprint {
-    display: block;
+    display: block !important; /* stylelint-disable-line declaration-no-important */;
   }
 }
