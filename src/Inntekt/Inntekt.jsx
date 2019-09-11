@@ -12,7 +12,7 @@ const sortObject = obj => {
     if (obj.hasOwnProperty(prop)) {
       arr.push({
         key: prop,
-        value: obj[prop].reduce((acc, val) => Number(acc) + Number(val.beloep), 0),
+        totalForDato: obj[prop].reduce((acc, val) => Number(acc) + Number(val.beloep), 0),
       });
     } else {
       arr.push({});
@@ -23,10 +23,9 @@ const sortObject = obj => {
 };
 
 const sumInntekter = (inntekter, index) => {
-  const c = sortObject(inntekter);
+  const sortedInntekter = sortObject(inntekter);
   // først sortere inntekter så hente ut verdier
-  const b = c.slice(index - 11, index + 1);
-  return b.reduce((acc, val) => Number(acc) + Number(val.value), 0);
+  return sortedInntekter.slice(index - 11, index + 1).reduce((acc, val) => Number(acc) + Number(val.totalForDato), 0);
 };
 
 const Inntekt = ({ arbeidsgiver, arbeidsgiverIndex, readOnly }) => {
