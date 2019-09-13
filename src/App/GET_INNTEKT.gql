@@ -5,6 +5,7 @@ query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
       aktoerId
       naturligIdent
       kjoenn
+      alder
       vedtak(id: $vedtakId, beregningsdato: $beregningsdato) {
         id
         aktoerId

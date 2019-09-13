@@ -6,7 +6,7 @@ import Panel from 'nav-frontend-paneler';
 import { nb } from 'date-fns/locale';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { formatDistance } from 'date-fns';
-import { Normaltekst, Ingress, Element } from 'nav-frontend-typografi';
+import { Normaltekst, Element, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { loader } from 'graphql.macro';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import { ReactComponent as MannIkon } from '../images/mann.svg';
@@ -121,14 +121,13 @@ const Dashboard = ({ readOnly, location }) => {
             <>
               <div className="marginhoyre16">{getKjønn(person.kjoenn)}</div>
               <div>
-                <Ingress>{person.navn}</Ingress>
-                <Normaltekst>Fødselsnummer</Normaltekst>
-                <Ingress>{person.naturligIdent}</Ingress>
+                <Undertittel>{`${person.navn} (${person.alder} år)`}</Undertittel>
+                <Undertekst>{person.naturligIdent}</Undertekst>
               </div>
             </>
           )}
           <div className="flexend flex noprint">
-            {person.manueltRedigert && (
+            {person.vedtak.inntekt.manueltRedigert && (
               <div className="marginhoyre16 flex">
                 <EditedIkon />
                 <Element>Manuelt redigert</Element>

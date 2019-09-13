@@ -34,6 +34,7 @@ const UPDATE_INNTEKT = loader('./UPDATE_INNTEKT.gql');
 */
 
 const InntektsForm = props => {
+  console.log(props);
   // const [inntektMutation] = useMutation(ADD_INNTEKT);
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
   const [isBekreftModalOpen, setBekreftModal] = useState(false);
@@ -62,7 +63,7 @@ const InntektsForm = props => {
   const tdRefs = {};
   const executeScroll = index => scrollToRef(tdRefs[index]);
 
-  // Bare kjør onLoad
+  // Bare kjør en gang
   if (!dirty) {
     window.setTimeout(() => {
       const elem = document.getElementById('grid');
