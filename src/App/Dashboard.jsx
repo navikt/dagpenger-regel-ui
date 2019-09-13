@@ -46,7 +46,6 @@ export const set36Måneder = (data, beregningsmåneder) => {
 
       beregningsmåneder.forEach(måned => {
         if (!virksomhet.posteringer[måned]) {
-          // console.log('if');
           Object.assign(virksomhet.posteringer, {
             [måned]: [],
           });

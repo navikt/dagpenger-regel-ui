@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withFormik } from 'formik';
+import { withFormik, Field } from 'formik';
 import { useQuery } from '@apollo/react-hooks';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
 import { loader } from 'graphql.macro';
+import { RadioPanelGruppe } from 'nav-frontend-skjema';
+import * as Yup from 'yup';
 import aktørTyper from '../Kodeverk/aktoerTyper';
-import { InputField, RadioGroupField, RadioOption } from '../Form';
 import Spacer from '../Components/Spacer';
-
-import { required, hasValidOrgNumber, hasValidFodselsnummer } from '../Utils/validering';
+import { InputField } from '../Form';
+import { hasValidFodselsnummer } from '../Utils/validering';
 import { ReactComponent as GodkjentIkon } from '../images/innvilget_valgt.svg';
 
 const GET_AKTOER = loader('./GET_AKTOER.gql');
@@ -30,6 +31,10 @@ const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, value
     }
   };
 
+  const onChange = value => {
+    setFieldValue('aktoerType', value);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="okavbrytmodal">
@@ -46,16 +51,24 @@ const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, value
         <Spacer sixteenPx />
 
         <div className="w400">
-          <RadioGroupField label="Type aktør?" name="aktoerType" validate={required}>
-            <RadioOption value={aktørTyper.ORGANISASJON} label="Virksomhet" />
-            <RadioOption value={aktørTyper.AKTOER_ID} label="Privatperson" />
-          </RadioGroupField>
+          <Field
+            component={RadioPanelGruppe}
+            label="Type aktør?"
+            name="aktoerType"
+            legend="Type aktør?"
+            radios={[
+              { name: 'aktoerType', label: 'Virksomhet', value: aktørTyper.ORGANISASJON, id: aktørTyper.ORGANISASJON },
+              { name: 'aktoerType', label: 'Privatperson', value: aktørTyper.AKTOER_ID, id: aktørTyper.AKTOER_ID },
+            ]}
+            onChange={(event, value) => onChange(value)}
+            checked={values.aktoerType}
+          />
           {values.aktoerType === aktørTyper.ORGANISASJON && (
-            <InputField label="Org.Nr" name="identifikator" validate={hasValidOrgNumber} onBlur={() => setNavn()} />
+            <Field component={InputField} label="Organisasjonsnummer" name="identifikator" onBlur={() => setNavn()} />
           )}
 
-          {values.aktoerType === aktørTyper.AKTOER_ID && <InputField label="Fødselsnummer" name="identifikator" validate={hasValidFodselsnummer} />}
-          <InputField label="Navn" name="navn" disabled />
+          {values.aktoerType === aktørTyper.AKTOER_ID && <Field component={InputField} label="Fødselsnummer" name="identifikator" onBlur={() => setNavn()} />}
+          <Field component={InputField} label="Navn" name="navn" disabled />
         </div>
         <Spacer sixteenPx />
         <div className="flex knapprad flexend">
@@ -83,26 +96,34 @@ NyArbeidsgiver.propTypes = {
 export default withFormik({
   mapPropsToValues: () => {
     return {
-      identifikator: undefined,
-      aktoerType: undefined,
       navn: '',
+      identifikator: '',
     };
   },
 
-  validate: (values, props) => {
-    const errors = {};
-
-    // todo sikre at det ikke blir NP
-    if (props.person.vedtak.inntekt.posteringer.some(arbeidsgiver => arbeidsgiver.identifikator === values.identifikator)) {
-      errors.identifikator = 'Arbeidsgiver eksisterer allerede';
-    }
-    return errors;
+  validationSchema: props => {
+    return Yup.lazy(values => {
+      let identifikatorSchema;
+      if (values.aktoerType === aktørTyper.ORGANISASJON) {
+        identifikatorSchema = Yup.string()
+          .required('Required')
+          .test(() => props.person.vedtak.inntekt.posteringer.some(arbeidsgiver => arbeidsgiver.identifikator !== values.identifikator))
+          .length(9);
+      } else {
+        identifikatorSchema = Yup.string()
+          .required('Required')
+          .test(() => hasValidFodselsnummer(values.identifikator));
+      }
+      return Yup.object().shape({
+        identifikator: identifikatorSchema,
+        aktoerType: Yup.string().required('Required'),
+      });
+    });
   },
 
   handleSubmit: (values, { setSubmitting, props }) => {
     const { arrayHelpers, closeModal } = props;
     const datoer = {};
-    // todo bytte ut denne med
     props.måneder.forEach(element => {
       Object.assign(datoer, { [element]: [] });
     });
@@ -113,7 +134,6 @@ export default withFormik({
       naturligIdent: values.identifikator,
       identifikator: values.identifikator,
       __typename: values.aktoerType,
-      // todo legg til 36 måneder
       posteringer: datoer,
     });
     setSubmitting(false);

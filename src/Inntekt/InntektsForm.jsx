@@ -206,6 +206,9 @@ export default withFormik({
     const { initialValues } = props;
     return initialValues;
   },
+
+  validationSchema: () => {},
+
   handleSubmit: (values, formProps) => {
     // console.log(values, formProps);
     const dirty = !isEqual(formProps.props.initialValues, values);
@@ -215,27 +218,22 @@ export default withFormik({
       Object.keys(virksomhet.posteringer).flatMap(dato => virksomhet.posteringer[dato]),
     );
 
-    // todo fiks navn
     const groupBy = list => {
-      const c = new Map();
+      const map = new Map();
       list.forEach(a => {
         const samme = list.filter(b => a.aarMaaned === b.aarMaaned);
-        c.set(a.aarMaaned, {
+        map.set(a.aarMaaned, {
           aarMaaned: a.aarMaaned,
           arbeidsInntektInformasjon: {
             inntektListe: [...samme],
           },
         });
       });
-      return Array.from(c.values());
+      return Array.from(map.values());
     };
 
-    const g = groupBy(posteringer);
+    const gruppertePosteringer = groupBy(posteringer);
 
-    if (dirty) {
-      // mutate posteringer, slettet, nye og endrede
-      return true;
-    }
     try {
       // transform values, brukt GET values
       const inntekt = {
@@ -243,7 +241,7 @@ export default withFormik({
           id: formProps.props.initialValue.person.vedtak.inntekt.id,
         },
         inntekt: {
-          arbeidsInntektMaaned: [...g],
+          arbeidsInntektMaaned: [...gruppertePosteringer],
         },
         inntektsmottaker: {
           pnr: formProps.props.initialValue.person.naturligIdent,
@@ -263,10 +261,6 @@ export default withFormik({
       formProps.setError(error);
       throw new Error(error);
     }
-
-    return false;
-
-    // console.log(dirty);
   },
   displayName: 'InntektsForm',
   enableReinitialize: true,

@@ -1,14 +1,13 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { FieldArray } from 'formik';
+import { FieldArray, Field } from 'formik';
 import Modal from 'nav-frontend-modal';
 import { Flatknapp } from 'nav-frontend-knapper';
-import { InputField, SelectField } from '../Form';
-import { required } from '../Utils/validering';
 import { VerdikoderContext } from '../Context/Verdikoder';
 import { OkAvbrytModal } from '../Components/OkAvbrytModal';
 import NyPostering from './NyPostering';
+import { InputField, SelectField } from '../Form';
 
 import { formatertPengesum } from '../Utils/currencyUtils';
 import { ReactComponent as SlettIkon } from '../images/slett.svg';
@@ -20,7 +19,6 @@ const mapVerdikoder = typer =>
     </option>
   ));
 
-// eslint-disable-next-line max-len
 const sumInntekter = inntekter => inntekter.reduce((acc, val) => Number(acc) + Number(val.beloep), 0);
 
 const Postering = ({ arbeidsgiver, arbeidsgiverIndex, dato, readOnly }) => {
@@ -41,20 +39,20 @@ const Postering = ({ arbeidsgiver, arbeidsgiverIndex, dato, readOnly }) => {
               posteringer[dato].map((inntekt, index) => (
                 <div key={`${inntekt.fordel}${arbeidsgiverIndex}`} className="flex inntekt">
                   <div>
-                    <SelectField
+                    <Field
+                      component={SelectField}
                       bredde="xl"
                       label=""
-                      selectValues={mapVerdikoder(verdikoder)}
-                      validate={required}
                       name={`person.vedtak.inntekt.posteringer[${arbeidsgiverIndex}].posteringer[${dato}][${index}].fordel`}
-                      readOnly={readOnly || editMode}
-                    />
-                    <InputField
+                      disabled={readOnly || editMode}
+                    >
+                      {mapVerdikoder(verdikoder)}
+                    </Field>
+                    <Field
+                      component={InputField}
                       label=""
                       name={`person.vedtak.inntekt.posteringer[${arbeidsgiverIndex}].posteringer[${dato}][${index}].beloep`}
-                      type="number"
-                      validate={required}
-                      readOnly={readOnly || editMode}
+                      disabled={readOnly || editMode}
                     />
                   </div>
                   {!readOnly && !editMode && (

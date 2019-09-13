@@ -1,50 +1,32 @@
 import React from 'react';
+import { Select } from 'nav-frontend-skjema';
 import PropTypes from 'prop-types';
-import { Field } from 'formik';
-import CustomNavSelect from './CustomNavSelect';
 
-import RenderField from './RenderField';
-import { labelPropType } from './Label';
-import { ReadOnlyField } from './ReadOnlyField';
-
-// eslint-disable-next-line react/prop-types
-const renderReadOnly = () => ({ field, selectValues, ...otherProps }) => {
-  const option = selectValues.map(sv => sv.props).find(o => o.value === field.value);
-  const value = option ? option.children : undefined;
-  return <ReadOnlyField label={{ value }} field={field} {...otherProps} />;
+const formatError = (touched, error) => {
+  if (touched && error) {
+    return { feilmelding: error };
+  }
+  return undefined;
 };
 
-const renderNavSelect = RenderField(CustomNavSelect);
-
-const SelectField = ({ name, label, selectValues, validate, readOnly, ...otherProps }) => (
-  <Field
-    name={name}
-    validate={validate}
-    component={readOnly ? renderReadOnly() : renderNavSelect}
-    label={label}
-    selectValues={selectValues}
-    disabled={!!readOnly}
-    {...otherProps}
-    readOnly={readOnly}
-    readOnlyHideEmpty
-  />
-);
+const SelectField = ({
+  field, // { name, value, onChange, onBlur }
+  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  children,
+  ...props
+}) => {
+  const feil = formatError(touched[field.name], errors[field.name]);
+  return (
+    <Select {...field} {...props} feil={feil}>
+      {children}
+    </Select>
+  );
+};
 
 SelectField.propTypes = {
-  name: PropTypes.string.isRequired,
-  selectValues: PropTypes.arrayOf(PropTypes.object).isRequired,
-  label: labelPropType.isRequired,
-  validate: PropTypes.func,
-  readOnly: PropTypes.bool,
-  placeholder: PropTypes.string,
-  hideValueOnDisable: PropTypes.bool,
-};
-
-SelectField.defaultProps = {
-  validate: null,
-  readOnly: false,
-  placeholder: ' ',
-  hideValueOnDisable: false,
+  field: PropTypes.shape().isRequired,
+  form: PropTypes.shape().isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default SelectField;

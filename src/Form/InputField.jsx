@@ -1,43 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Field } from 'formik';
 import { Input } from 'nav-frontend-skjema';
+import PropTypes from 'prop-types';
 
-import RenderField from './RenderField';
-import { ReadOnlyField } from './ReadOnlyField';
-import { labelPropType } from './Label';
-
-const renderNavInput = RenderField(Input);
-
-const InputField = ({ name, type, label, validate, readOnly, isEdited, ...otherProps }) => (
-  <Field
-    name={name}
-    validate={validate}
-    component={readOnly ? ReadOnlyField : renderNavInput}
-    type={type}
-    label={label}
-    {...otherProps}
-    readOnly={readOnly}
-    isEdited={isEdited}
-    autoComplete="off"
-  />
-);
-
-InputField.propTypes = {
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  label: labelPropType,
-  validate: PropTypes.func,
-  readOnly: PropTypes.bool,
-  isEdited: PropTypes.bool,
+const formatError = (touched, error) => {
+  if (touched && error) {
+    return { feilmelding: error };
+  }
+  return undefined;
 };
 
-InputField.defaultProps = {
-  type: 'text',
-  validate: null,
-  readOnly: false,
-  label: '',
-  isEdited: false,
+const InputField = ({ field, form: { touched, errors }, ...props }) => {
+  const feil = formatError(touched[field.name], errors[field.name]);
+
+  return <Input type="text" id={field.name} {...field} {...props} feil={feil} />;
+};
+
+InputField.propTypes = {
+  field: PropTypes.shape().isRequired,
+  form: PropTypes.shape().isRequired,
 };
 
 export default InputField;

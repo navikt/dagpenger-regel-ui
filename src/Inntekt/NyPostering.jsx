@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Form, withFormik } from 'formik';
+import { Form, withFormik, Field } from 'formik';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertittel } from 'nav-frontend-typografi';
-import { SelectField, InputField } from '../Form';
-import { required } from '../Utils/validering';
+import * as Yup from 'yup';
+import { InputField, SelectField } from '../Form';
 import DatoLabel from '../Components/DatoLabel';
 import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
 import { VerdikoderContext } from '../Context/Verdikoder';
@@ -26,7 +26,6 @@ const visNavnOgIdentifikator = virksomhet => {
 const NyPostering = props => {
   const { handleSubmit, isSubmitting, closeModal, values, isValid, dato } = props;
   const verdikoder = useContext(VerdikoderContext);
-
   return (
     <Form onSubmit={handleSubmit}>
       <div className="okavbrytmodal">
@@ -45,9 +44,11 @@ const NyPostering = props => {
         </div>
         <Spacer sixteenPx />
         <div className="w400">
-          <SelectField bredde="xl" label="Beskrivelse" selectValues={mapVerdikoder(verdikoder)} validate={required} name="fordel" readOnly={false} />
+          <Field component={SelectField} bredde="xl" label="Beskrivelse" name="verdikode">
+            {mapVerdikoder(verdikoder)}
+          </Field>
 
-          <InputField label="Beløp" name="beloep" validate={required} type="number" readOnly={false} />
+          <Field component={InputField} label="Beløp" name="beloep" type="number" />
         </div>
         <Spacer sixteenPx />
 
@@ -76,7 +77,7 @@ NyPostering.propTypes = {
 export default withFormik({
   mapPropsToValues: ({ arbeidsgiver, dato }) => {
     return {
-      verdikode: '',
+      fordel: '',
       beloep: '0.00',
       dato,
       virksomhet: {
@@ -89,6 +90,11 @@ export default withFormik({
       },
     };
   },
+
+  validationSchema: Yup.object().shape({
+    beloep: Yup.number().required('Required'),
+    verdikode: Yup.string().required('Required'),
+  }),
 
   handleSubmit: (values, { setSubmitting, props }) => {
     const { closeModal, arrayHelpers } = props;
