@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withFormik, FieldArray } from 'formik';
 import isEqual from 'lodash.isequal';
+import { ToggleGruppe } from 'nav-frontend-toggle';
 // import { useMutation } from '@apollo/react-hooks';
 // import { loader } from 'graphql.macro';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
-import { Hovedknapp, Knapp, Flatknapp } from 'nav-frontend-knapper';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import DisplayFormikState from '../Utils/formikUtils';
 import Spacer from '../Components/Spacer';
 import Inntekt from './Inntekt';
@@ -19,32 +20,29 @@ import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
 import { lagreInntekt } from '../lib/inntektApi';
 
 const scrollToRef = ref => {
-  const elem = document.getElementById('grid');
-  elem.scrollTo({
-    top: 0,
-    left: ref.current.offsetLeft - 250, // 250 is the width of 1 cell
+  ref.current.scrollIntoView({
     behavior: 'smooth',
+    block: 'end',
+    inline: 'end',
   });
 };
 
 /*
-const ADD_INNTEKT = loader('./ADD_INNTEKT.gql');
-const DELETE_INNTEKT = loader('./DELETE_INNTEKT.gql');
-const UPDATE_INNTEKT = loader('./UPDATE_INNTEKT.gql');
+const ADD_INNTEKT = loader('../Graphql/ADD_INNTEKT.gql');
+const DELETE_INNTEKT = loader('../Graphql/DELETE_INNTEKT.gql');
+const UPDATE_INNTEKT = loader('../Graphql/UPDATE_INNTEKT.gql');
 */
 
 const InntektsForm = props => {
-  console.log(props);
   // const [inntektMutation] = useMutation(ADD_INNTEKT);
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
   const [isBekreftModalOpen, setBekreftModal] = useState(false);
-
   const { hentInntektStatus, måneder, values, isValid, dirty, readOnly, handleSubmit, status, errors, isSubmitting } = props;
 
   const { person } = values;
 
-  const bekreftManuellEndring = () => {
-    if (values.redigertAvSaksbehandler) {
+  const bekreftManuellEndring = isRedigertAvSaksbehandler => {
+    if (isRedigertAvSaksbehandler) {
       return setBekreftModal(true);
     }
 
@@ -63,7 +61,7 @@ const InntektsForm = props => {
   const tdRefs = {};
   const executeScroll = index => scrollToRef(tdRefs[index]);
 
-  // Bare kjør en gang
+  // Bare kjør en gang på onload
   if (!dirty) {
     window.setTimeout(() => {
       const elem = document.getElementById('grid');
@@ -76,14 +74,21 @@ const InntektsForm = props => {
   return (
     <>
       {errors.name && <div className="error">{errors.name}</div>}
-      <div className="flex hentinntekter">
+      <div className="flex">
         <div className="flexend">
-          <Flatknapp mini htmlType="button" onClick={() => executeScroll(0)}>
-            {'<<'}
-          </Flatknapp>
-          <Flatknapp mini htmlType="button" onClick={() => executeScroll(35)}>
-            {'>>'}
-          </Flatknapp>
+          <p>Totalt per 12 måneder</p>
+          <ToggleGruppe
+            minstEn
+            kompakt
+            defaultToggles={[
+              { children: '0. år', value: 0 },
+              { children: '1. år', value: 11 },
+              { children: '2. år', value: 23 },
+              { children: '3. år', value: 35, pressed: true },
+            ]}
+            onChange={(event, toggles) => executeScroll(toggles.filter(toggle => toggle.pressed)[0].value)}
+          />
+          <Spacer sixteenPx />
         </div>
       </div>
 
@@ -159,7 +164,7 @@ const InntektsForm = props => {
               </div>
               <Hovedknapp
                 htmlType="button"
-                onClick={bekreftManuellEndring}
+                onClick={() => bekreftManuellEndring(values.person.vedtak.inntekt.redigertAvSaksbehandler)}
                 spinner={isSubmitting}
                 autoDisableVedSpinner
                 disabled={(!hentInntektStatus && !dirty) || !isValid}
@@ -210,8 +215,7 @@ export default withFormik({
 
   validationSchema: () => {},
 
-  handleSubmit: (values, formProps) => {
-    // console.log(values, formProps);
+  handleSubmit: async (values, formProps) => {
     const dirty = !isEqual(formProps.props.initialValues, values);
 
     // TODO ønsker å bruke mutation, men backend har ikke støtte for dette ennå. Så må sende inn som inntekt
@@ -235,31 +239,43 @@ export default withFormik({
 
     const gruppertePosteringer = groupBy(posteringer);
 
+    const inntekt = {
+      inntektId: {
+        id: values.person.vedtak.inntekt.id,
+      },
+      inntekt: {
+        arbeidsInntektMaaned: [...gruppertePosteringer],
+        fraDato: values.person.vedtak.inntekt.fraDato,
+        ident: {
+          aktoerType: 'AKTOER_ID',
+          identifikator: values.person.aktoerId,
+        },
+        tilDato: values.person.vedtak.inntekt.tilDato,
+      },
+      inntektsmottaker: {
+        pnr: values.person.naturligIdent,
+        navn: values.person.navn,
+      },
+      redigertAvSaksbehandler: values.person.vedtak.inntekt.redigertAvSaksbehandler,
+      manueltRedigert: values.person.vedtak.inntekt.manueltRedigert,
+      timestamp: values.person.vedtak.inntekt.timestamp,
+    };
     try {
       // transform values, brukt GET values
-      const inntekt = {
-        inntektId: {
-          id: formProps.props.initialValue.person.vedtak.inntekt.id,
-        },
-        inntekt: {
-          arbeidsInntektMaaned: [...gruppertePosteringer],
-        },
-        inntektsmottaker: {
-          pnr: formProps.props.initialValue.person.naturligIdent,
-          navn: formProps.props.initialValue.person.navn,
-        },
-        redigertAvSaksbehandler: formProps.props.initialValue.person.vedtak.inntekt.redigertAvSaksbehandler,
-        manueltRedigert: formProps.props.initialValue.person.vedtak.inntekt.manueltRedigert,
-        timestamp: formProps.props.initialValue.person.vedtak.inntekt.timestamp,
-      };
+      const response = await lagreInntekt(
+        { ...inntekt, redigertAvSaksbehandler: dirty || values.manueltRedigert },
+        formProps.props.hentInntektStatus,
+        formProps.props.locationData,
+      );
 
-      lagreInntekt({ ...inntekt, redigertAvSaksbehandler: dirty || values.manueltRedigert }, formProps.props.hentInntektStatus, formProps.props.locationData);
-
-      formProps.setStatus({ success: true });
-      formProps.setSubmitting(false);
+      if (response.status === 200) {
+        formProps.setStatus({ success: true });
+        formProps.setSubmitting(false);
+      } else {
+        formProps.setStatus({ success: false, error: response.message });
+        formProps.setSubmitting(false);
+      }
     } catch (error) {
-      formProps.setStatus({ failure: true });
-      formProps.setError(error);
       throw new Error(error);
     }
   },

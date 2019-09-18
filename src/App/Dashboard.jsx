@@ -18,7 +18,7 @@ import Spacer from '../Components/Spacer';
 import { DDMMYYYYHHMM_FORMAT } from '../Utils/datoFormat';
 import { formatDato, getAlleMåneder } from '../Utils/datoUtils';
 
-const GET_INNTEKT = loader('./GET_INNTEKT.gql');
+const GET_INNTEKT = loader('../Graphql/GET_INNTEKT.gql');
 
 const getKjønn = kjoenn => {
   if (kjoenn === 'Kvinne') {
@@ -99,7 +99,7 @@ const Dashboard = ({ readOnly, location }) => {
   }
 
   if (error || !data.person) {
-    return <div>error</div>;
+    throw new Error(error);
   }
 
   const { person } = data;
@@ -170,6 +170,7 @@ const Dashboard = ({ readOnly, location }) => {
       </div>
 
       <InntektsForm
+        locationData={inntektRequest(new URLSearchParams(location.search))}
         initialValues={{
           person: {
             ...person,

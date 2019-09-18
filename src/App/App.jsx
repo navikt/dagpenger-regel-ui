@@ -38,22 +38,21 @@ init({
 
 const App = () => {
   return (
-    <ErrorBoundary>
-      <ApolloProvider client={client}>
-        <Verdikoder>
-          <div className="app">
-            <Header />
-
+    <ApolloProvider client={client}>
+      <Verdikoder>
+        <div className="app">
+          <Header />
+          <ErrorBoundary>
             <div role="main" className="main">
               <Router>
                 <Route exact path="/inntekter/readonly" render={props => <Dashboard readOnly {...props} />} />
                 <Route exact path="/inntekter" render={props => <Dashboard {...props} />} />
               </Router>
             </div>
-          </div>
-        </Verdikoder>
-      </ApolloProvider>
-    </ErrorBoundary>
+          </ErrorBoundary>
+        </div>
+      </Verdikoder>
+    </ApolloProvider>
   );
 };
 

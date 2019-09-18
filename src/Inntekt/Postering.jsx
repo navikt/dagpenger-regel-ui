@@ -44,7 +44,7 @@ const Postering = ({ arbeidsgiver, arbeidsgiverIndex, dato, readOnly }) => {
                       bredde="xl"
                       label=""
                       name={`person.vedtak.inntekt.posteringer[${arbeidsgiverIndex}].posteringer[${dato}][${index}].fordel`}
-                      disabled={readOnly || editMode}
+                      readOnly={readOnly || editMode}
                     >
                       {mapVerdikoder(verdikoder)}
                     </Field>
@@ -52,7 +52,8 @@ const Postering = ({ arbeidsgiver, arbeidsgiverIndex, dato, readOnly }) => {
                       component={InputField}
                       label=""
                       name={`person.vedtak.inntekt.posteringer[${arbeidsgiverIndex}].posteringer[${dato}][${index}].beloep`}
-                      disabled={readOnly || editMode}
+                      readOnly={readOnly || editMode}
+                      formater
                     />
                   </div>
                   {!readOnly && !editMode && (

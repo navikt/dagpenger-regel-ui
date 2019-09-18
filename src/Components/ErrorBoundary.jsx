@@ -20,27 +20,28 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    console.log(error);
     // Update state so the next render will show the fallback UI.
-    return { hasError: true, errors: error };
+    return { hasError: true, error };
   }
 
   componentDidCatch(error, info) {
+    this.setState({
+      hasError: true,
+      error: [
+        error.toString(),
+        info.componentStack
+          .split('\n')
+          .map(line => line.trim())
+          .find(line => !!line),
+      ].join(' '),
+    });
+    // send til sentry
     withScope(scope => {
       Object.keys(info).forEach(key => {
         scope.setExtra(key, info[key]);
         captureException(error);
       });
     });
-    /*
-    showCrashMsg([
-      error.toString(),
-      info.componentStack
-        .split('\n')
-        .map(line => line.trim())
-        .find(line => !!line),
-    ].join(' '));
-    */
   }
 
   render() {
@@ -67,7 +68,7 @@ class ErrorBoundary extends React.Component {
           feilmelding = '500';
           break;
         default:
-          feilmelding = 'Uhåndert feil';
+          feilmelding = error;
           break;
       }
 

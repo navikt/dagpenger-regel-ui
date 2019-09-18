@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { loader } from 'graphql.macro';
 import Spinner from '../Components/Spinner';
 
-const GET_VERDIKODER = loader('./GET_VERDIKODER.gql');
+const GET_VERDIKODER = loader('../Graphql/GET_VERDIKODER.gql');
 
 const VerdikoderContext = createContext({});
 

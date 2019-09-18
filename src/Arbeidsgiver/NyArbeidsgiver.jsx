@@ -13,9 +13,8 @@ import { InputField } from '../Form';
 import { hasValidFodselsnummer } from '../Utils/validering';
 import { ReactComponent as GodkjentIkon } from '../images/innvilget_valgt.svg';
 
-const GET_AKTOER = loader('./GET_AKTOER.gql');
+const GET_AKTOER = loader('../Graphql/GET_AKTOER.gql');
 
-// todo fikse stringifyvalues
 const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, values, setFieldValue }) => {
   const { data } = useQuery(GET_AKTOER, {
     skip: !isValid && values.identifikator && values.aktoerType,
