@@ -21,6 +21,8 @@ spec:
       value: https://isso-q.adeo.no:443/isso/oauth2
     - name: OIDC_AGENTNAME
       value: dagpenger-regel-ui-q1
+    - name: APP_GRAPHQL_BASEURL
+      value: https://dp-graphql.nais.preprod.local
   image: {{version}}
   port: 443
   sessionAffinity: ClientIP # Sticky Session for ingress controller to prevent 404 on rollout
