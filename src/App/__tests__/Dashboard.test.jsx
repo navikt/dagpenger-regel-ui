@@ -5,7 +5,7 @@ import { loader } from 'graphql.macro';
 import Spinner from '../../Components/Spinner';
 import Dashboard from '../Dashboard';
 
-const GET_INNTEKT = loader('../GET_INNTEKT.gql');
+const GET_INNTEKT = loader('../../Graphql/GET_INNTEKT.gql');
 
 const location = {
   search: 'http://localhost/inntekter/?aktorId=3_G_INNTEKT&vedtakId=12345&beregningdato=2019-07-01',
