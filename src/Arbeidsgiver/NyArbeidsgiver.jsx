@@ -17,7 +17,7 @@ const GET_AKTOER = loader('../Graphql/GET_AKTOER.gql');
 
 const NyArbeidsgiver = ({ handleSubmit, isSubmitting, closeModal, isValid, values, setFieldValue }) => {
   const { data } = useQuery(GET_AKTOER, {
-    skip: !isValid && values.identifikator && values.aktoerType,
+    skip: !isValid && values.identifikator !== '' && values.aktoerType !== '',
     variables: {
       aktoerId: values.identifikator,
       aktoerType: values.aktoerType ? values.aktoerType.toUpperCase() : null,
@@ -95,8 +95,9 @@ NyArbeidsgiver.propTypes = {
 export default withFormik({
   mapPropsToValues: () => {
     return {
-      navn: '',
-      identifikator: '',
+      aktoerId: null,
+      navn: null,
+      identifikator: null,
     };
   },
 

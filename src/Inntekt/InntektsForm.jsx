@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { withFormik, FieldArray } from 'formik';
 import isEqual from 'lodash.isequal';
 import { ToggleGruppe } from 'nav-frontend-toggle';
+import { nb } from 'date-fns/locale';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { formatDistance } from 'date-fns';
 // import { useMutation } from '@apollo/react-hooks';
 // import { loader } from 'graphql.macro';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { Element, Undertekst } from 'nav-frontend-typografi';
+import { Element, Undertekst, Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import DisplayFormikState from '../Utils/formikUtils';
@@ -16,8 +18,9 @@ import Arbeidsgiver from '../Arbeidsgiver/Arbeidsgiver';
 import NyArbeidsgiver from '../Arbeidsgiver/NyArbeidsgiver';
 import OkAvbrytModal from '../Components/OkAvbrytModal';
 import DatoLabel from '../Components/DatoLabel';
-import { MMMM_YYYY_FORMAT } from '../Utils/datoFormat';
+import { MMMM_YYYY_FORMAT, DDMMYYYYHHMM_FORMAT } from '../Utils/datoFormat';
 import { lagreInntekt } from '../lib/inntektApi';
+import { formatDato } from '../Utils/datoUtils';
 
 const scrollToRef = ref => {
   ref.current.scrollIntoView({
@@ -37,7 +40,21 @@ const InntektsForm = props => {
   // const [inntektMutation] = useMutation(ADD_INNTEKT);
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
   const [isBekreftModalOpen, setBekreftModal] = useState(false);
-  const { hentInntektStatus, måneder, values, isValid, dirty, readOnly, handleSubmit, status, errors, isSubmitting } = props;
+  const {
+    hentInntektStatus,
+    måneder,
+    values,
+    isValid,
+    dirty,
+    readOnly,
+    handleSubmit,
+    status,
+    errors,
+    isSubmitting,
+    isHentInntektModalOpen,
+    setHentInntektModal,
+    fetchUncachedInntekt,
+  } = props;
 
   const { person } = values;
 
@@ -74,7 +91,35 @@ const InntektsForm = props => {
   return (
     <>
       {errors.name && <div className="error">{errors.name}</div>}
-      <div className="flex">
+      {hentInntektStatus && (
+        <div aria-live="polite">
+          <AlertStripe type="info">Inntekt innhentet. Trykk bekreft for å lagre.</AlertStripe>
+          <Spacer sixteenPx />
+        </div>
+      )}
+
+      <div className="flex hentinntekter">
+        <Knapp onClick={() => setHentInntektModal(true)} autoDisableVedSpinner disabled={readOnly} spinner={hentInntektStatus === 'fetching'}>
+          Hent inntekter på nytt
+        </Knapp>
+        <div className="marginvenstre16">
+          Opplysninger hentet :
+          <Normaltekst>
+            {formatDato(new Date(person.vedtak.inntekt.timestamp), DDMMYYYYHHMM_FORMAT)}
+            {', '}
+            <b>{formatDistance(new Date(person.vedtak.inntekt.timestamp), new Date(), { locale: nb, addSuffix: true })}</b>
+          </Normaltekst>
+        </div>
+        <OkAvbrytModal
+          isOpen={isHentInntektModalOpen}
+          text="Når du henter inn nyeste inntekt fra skatt så vil alle tidligere endringene gå tapt."
+          avbrytCallback={() => setHentInntektModal(false)}
+          OkCallback={() => {
+            fetchUncachedInntekt();
+            setHentInntektModal(false);
+          }}
+        />
+
         <div className="flexend">
           <p>Totalt per 12 måneder</p>
           <ToggleGruppe
@@ -202,6 +247,9 @@ InntektsForm.propTypes = {
   hentInntektStatus: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   status: PropTypes.shape(),
   måneder: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isHentInntektModalOpen: PropTypes.bool.isRequired,
+  setHentInntektModal: PropTypes.func.isRequired,
+  fetchUncachedInntekt: PropTypes.func.isRequired,
 };
 InntektsForm.defaultProps = {
   status: undefined,
@@ -248,7 +296,7 @@ export default withFormik({
         fraDato: values.person.vedtak.inntekt.fraDato,
         ident: {
           aktoerType: 'AKTOER_ID',
-          identifikator: values.person.aktoerId,
+          identifikator: values.person.aktorId,
         },
         tilDato: values.person.vedtak.inntekt.tilDato,
       },

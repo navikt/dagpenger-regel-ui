@@ -21,6 +21,8 @@ query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
             id
             beloep
             fordel
+            verdikode,
+            beskrivelse,
             aarMaaned
             virksomhet {
               __typename
