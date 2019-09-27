@@ -111,7 +111,7 @@ const Dashboard = ({ readOnly, location }) => {
     <>
       <Panel border>
         <div className="flex">
-          {person.naturligIdent && (
+          {person.navn && (
             <>
               <div className="marginhoyre16">{getKjønn(person.kjoenn)}</div>
               <div>
