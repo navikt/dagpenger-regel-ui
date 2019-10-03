@@ -295,13 +295,13 @@ export default withFormik({
         arbeidsInntektMaaned: [...gruppertePosteringer],
         fraDato: values.person.vedtak.inntekt.fraDato,
         ident: {
-          aktoerType: 'AKTOER_ID',
-          identifikator: values.person.aktorId,
+          aktoerType: 'NATURLIG_IDENT',
+          identifikator: values.person.identifikator,
         },
         tilDato: values.person.vedtak.inntekt.tilDato,
       },
       inntektsmottaker: {
-        pnr: values.person.naturligIdent,
+        pnr: values.person.identifikator,
         navn: values.person.navn,
       },
       redigertAvSaksbehandler: values.person.vedtak.inntekt.redigertAvSaksbehandler,

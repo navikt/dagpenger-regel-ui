@@ -100,12 +100,7 @@ const Dashboard = ({ readOnly, location }) => {
 
   const beregningsmåneder = getAlleMåneder(person.vedtak.inntekt.fraDato, person.vedtak.inntekt.tilDato);
 
-  const inntekter =
-    !loading &&
-    set36Måneder(
-      groupBy(person.vedtak.inntekt.posteringer, postering => postering.virksomhet.organisasjonsnummer || postering.virksomhet.naturligIdent),
-      beregningsmåneder,
-    );
+  const inntekter = !loading && set36Måneder(groupBy(person.vedtak.inntekt.posteringer, postering => postering.virksomhet.identifikator), beregningsmåneder);
 
   return (
     <>
@@ -116,7 +111,7 @@ const Dashboard = ({ readOnly, location }) => {
               <div className="marginhoyre16">{getKjønn(person.kjoenn)}</div>
               <div>
                 <Undertittel>{`${person.navn} (${person.alder} år)`}</Undertittel>
-                <Undertekst>{person.naturligIdent}</Undertekst>
+                <Undertekst>{person.identifikator}</Undertekst>
               </div>
             </>
           )}

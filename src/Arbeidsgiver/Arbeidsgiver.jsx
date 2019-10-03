@@ -4,15 +4,14 @@ import { Element, EtikettLiten, Undertittel } from 'nav-frontend-typografi';
 import aktørTyper from '../Kodeverk/aktoerTyper';
 
 const getAktoerType = aktoerType => (aktoerType === aktørTyper.ORGANISASJON ? 'Org. nr' : 'FNR');
-const getAktoerIdent = (aktoerType, arbeidsgiver) => (aktoerType === aktørTyper.ORGANISASJON ? arbeidsgiver.organisasjonsnummer : arbeidsgiver.naturligIdent);
 
 const Arbeidsgiver = ({ arbeidsgiver }) => {
-  const { navn, __typename } = arbeidsgiver;
+  const { navn, identifikator, __typename } = arbeidsgiver;
   return (
     <div className="item arbeidsgiver">
       {navn && <Undertittel>{navn}</Undertittel>}
       <EtikettLiten>{getAktoerType(__typename)}</EtikettLiten>
-      <Element>{getAktoerIdent(__typename, arbeidsgiver)}</Element>
+      <Element>{identifikator}</Element>
     </div>
   );
 };

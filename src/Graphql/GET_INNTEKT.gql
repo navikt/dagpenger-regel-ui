@@ -4,6 +4,7 @@ query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
       fornavn
       aktoerId
       naturligIdent
+      identifikator
       kjoenn
       alder
       vedtak(id: $vedtakId, beregningsdato: $beregningsdato) {
@@ -17,6 +18,7 @@ query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
           redigertAvSaksbehandler
           fraDato
           tilDato
+
           posteringer {
             id
             beloep
@@ -24,14 +26,27 @@ query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
             verdikode,
             beskrivelse,
             aarMaaned
+            inngaarIGrunnlagForTrekk
+            utloeserArbeidsgiveravgift
+            informasjonsstatus
+            inntektType
+            utbetaltIMaaned
+            leveringstidspunkt
+            inntektsperiodetype
+            inntektsstatus
+            inntektskilde
             virksomhet {
               __typename
               ... on Person {
                 navn
                 naturligIdent
+                identifikator
+                aktoerType
               }
               ... on Organisasjon {
+                aktoerType
                 organisasjonsnummer
+                identifikator
                 navn
               }
             }
@@ -39,10 +54,14 @@ query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
               ... on Person {
                 navn
                 naturligIdent
+                identifikator
+                aktoerType
               }
               ... on Organisasjon {
                 organisasjonsnummer
                 navn
+                identifikator
+                aktoerType
               }
             }
           }

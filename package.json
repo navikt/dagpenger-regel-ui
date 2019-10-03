@@ -13,7 +13,7 @@
     "test": "react-scripts test --env=jsdom",
     "test:less": "stylelint \"src/**/*.less\"",
     "eject": "react-scripts eject",
-    "up": "docker-compose -f docker-compose.yml up --build",
+    "up": "yarn build && docker-compose -f docker-compose.yml up --build",
     "down": "docker-compose -f docker-compose.yml down"
   },
   "dependencies": {
