@@ -36,14 +36,14 @@ const Inntekt = ({ arbeidsgiver, arbeidsgiverIndex, readOnly }) =>
     .map((dato, index) => {
       return (
         <React.Fragment key={`${arbeidsgiver}${dato}`}>
-          <div className="item maaned bareprint">
+          <div className="item maaned bareprint tabell__td" role="cell">
             <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
           </div>
-          <div className="item inntekter">
+          <div className="item inntekter tabell__td" role="cell">
             <Postering readOnly={readOnly} arbeidsgiver={arbeidsgiver} dato={dato} arbeidsgiverIndex={arbeidsgiverIndex} />
           </div>
           {(index + 1) % 12 === 0 && (
-            <div className="item inntekter total">
+            <div className="item inntekter total tabell__td" role="cell">
               <TotalInntekt total={sumInntekter(arbeidsgiver.posteringer, index)} />
             </div>
           )}

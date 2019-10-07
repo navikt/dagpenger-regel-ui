@@ -8,7 +8,7 @@ const getAktoerType = aktoerType => (aktoerType === aktørTyper.ORGANISASJON ? '
 const Arbeidsgiver = ({ arbeidsgiver }) => {
   const { navn, identifikator, __typename } = arbeidsgiver;
   return (
-    <div className="item arbeidsgiver">
+    <div className="item arbeidsgiver tabell__td">
       {navn && <Undertittel>{navn}</Undertittel>}
       <EtikettLiten>{getAktoerType(__typename)}</EtikettLiten>
       <Element>{identifikator}</Element>

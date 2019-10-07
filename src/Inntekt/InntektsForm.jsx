@@ -150,36 +150,42 @@ const InntektsForm = props => {
       <form onSubmit={handleSubmit}>
         <div>
           <div className="grid" id="grid">
-            <div className="inntektstabell">
-              <div className="row noprint">
-                <div className="item" />
-                {måneder &&
-                  måneder.map((måned, index) => {
-                    tdRefs[index] = React.createRef();
-                    return (
-                      <React.Fragment key={måned}>
-                        <div className="item maaned" ref={tdRefs[index]}>
-                          <DatoLabel dato={måned} datoFormat={MMMM_YYYY_FORMAT} />
-                        </div>
-                        {(index + 1) % 12 === 0 && (
-                          <div className="item maaned" ref={tdRefs[index]}>
-                            Totalt
+            <div className="inntektstabell tabell tabell--border" role="table">
+              <div className="tabell__thead" role="rowgroup">
+                <div className="row noprint tabell__tr" role="row">
+                  <div className="item tabell__th" role="columnheader">
+                    Arbeidsgiver
+                  </div>
+                  {måneder &&
+                    måneder.map((måned, index) => {
+                      tdRefs[index] = React.createRef();
+                      return (
+                        <React.Fragment key={måned}>
+                          <div className="item maaned tabell__th" role="columnheader" ref={tdRefs[index]}>
+                            <DatoLabel dato={måned} datoFormat={MMMM_YYYY_FORMAT} />
                           </div>
-                        )}
-                      </React.Fragment>
+                          {(index + 1) % 12 === 0 && (
+                            <div className="item maaned tabell__th" role="columnheader" ref={tdRefs[index]}>
+                              Totalt
+                            </div>
+                          )}
+                        </React.Fragment>
+                      );
+                    })}
+                </div>
+              </div>
+              <div className="tabell__tbody" role="rowgroup">
+                {person.vedtak.inntekt.posteringer &&
+                  person.vedtak.inntekt.posteringer.map((arbeidsgiver, arbeidsgiverIndex) => {
+                    const key = arbeidsgiver.organisasjonsnummer || arbeidsgiver.naturligIdent;
+                    return (
+                      <div className="row tabell__tr" key={key} role="row">
+                        <Arbeidsgiver readOnly={readOnly} arbeidsgiver={arbeidsgiver} />
+                        <Inntekt readOnly={readOnly} arbeidsgiver={arbeidsgiver} arbeidsgiverIndex={arbeidsgiverIndex} />
+                      </div>
                     );
                   })}
               </div>
-              {person.vedtak.inntekt.posteringer &&
-                person.vedtak.inntekt.posteringer.map((arbeidsgiver, arbeidsgiverIndex) => {
-                  const key = arbeidsgiver.organisasjonsnummer || arbeidsgiver.naturligIdent;
-                  return (
-                    <div className="row" key={key}>
-                      <Arbeidsgiver readOnly={readOnly} arbeidsgiver={arbeidsgiver} />
-                      <Inntekt readOnly={readOnly} arbeidsgiver={arbeidsgiver} arbeidsgiverIndex={arbeidsgiverIndex} />
-                    </div>
-                  );
-                })}
             </div>
           </div>
           <div className="toolbar flex knapprad">
