@@ -2,7 +2,7 @@
 
 exports[`Arbeidsgiver Skal vise arbeidsgiver 1`] = `
 <div
-  className="item arbeidsgiver"
+  className="item arbeidsgiver tabell__td"
 >
   <h2
     className="typo-undertittel"

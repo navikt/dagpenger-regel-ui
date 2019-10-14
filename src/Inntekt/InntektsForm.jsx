@@ -93,7 +93,10 @@ const InntektsForm = props => {
       {errors.name && <div className="error">{errors.name}</div>}
       {hentInntektStatus && (
         <div aria-live="polite">
-          <AlertStripe type="info">Inntekt innhentet. Trykk bekreft for å lagre.</AlertStripe>
+          <AlertStripe type="info">
+            Inntekt innhentet.
+            {dirty ? 'Trykk bekreft for å lagre.' : 'Ingen endringer'}
+          </AlertStripe>
           <Spacer sixteenPx />
         </div>
       )}

@@ -1,4 +1,4 @@
-query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
+query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!, $forceRefresh: Boolean) {
     person(id: $personId) {
       navn
       fornavn
@@ -11,7 +11,7 @@ query($personId: ID!, $vedtakId: ID!, $beregningsdato: String!) {
         id
         aktoerId
         beregningsdato
-        inntekt(forceRefresh: true) {
+        inntekt(forceRefresh: $forceRefresh) {
           id
           timestamp
           manueltRedigert
