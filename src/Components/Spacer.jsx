@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Spacer = ({
-  fourPx,
-  eightPx,
-  sixteenPx,
-  twentyPx,
-}) => {
+const Spacer = ({ fourPx, eightPx, sixteenPx, twentyPx }) => {
   let height = 'fourPx';
 
   if (eightPx) {
@@ -19,9 +14,7 @@ const Spacer = ({
     height = 'fourPx';
   }
 
-  return (
-    <div className={`spacer ${height}`} />
-  );
+  return <div className={`spacer ${height}`} />;
 };
 
 Spacer.propTypes = {
