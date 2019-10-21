@@ -82,11 +82,13 @@ export default withFormik({
       dato,
       virksomhet: {
         navn: arbeidsgiver.navn,
-        organisasjonsnummer: arbeidsgiver.organisasjonsnummer,
+        identifikator: arbeidsgiver.identifikator,
+        aktoerType: arbeidsgiver.aktoerType,
       },
       opplysningspliktig: {
         navn: arbeidsgiver.navn,
-        organisasjonsnummer: arbeidsgiver.organisasjonsnummer,
+        identifikator: arbeidsgiver.identifikator,
+        aktoerType: arbeidsgiver.aktoerType,
       },
     };
   },
@@ -99,14 +101,17 @@ export default withFormik({
   handleSubmit: (values, { setSubmitting, props }) => {
     const { closeModal, arrayHelpers } = props;
     arrayHelpers.push({
-      fordel: values.fordel,
+      fordel: 'denne kommer',
       beloep: values.beloep,
       utbetaltIMaaned: values.dato,
-      verdikode: 'denne kommer',
+      verdikode: values.verdikode,
       inntektskilde: 'dagpenger-regel-ui',
       inntektsperiodetype: 'Maaned',
       virksomhet: values.virksomhet,
-      inntektsmottaker: arrayHelpers.form.values.person.identifikator,
+      inntektsmottaker: {
+        identifikator: arrayHelpers.form.values.person.identifikator,
+        aktoerType: arrayHelpers.form.values.person.aktoerType,
+      },
       opplysningspliktig: values.virksomhet,
     });
     setSubmitting(false);
