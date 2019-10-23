@@ -62,7 +62,7 @@ workflows:
           image: navikt/dagpenger-regel-ui
           filters:
             branches:
-              only: graphql-api
+              only: master
           requires:
             - build
           github-app-id: 21626
