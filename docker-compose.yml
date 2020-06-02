@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: dp-inntekt-db
   dp-inntekt-api:
-    build: ./../dp-inntekt-api
+    build: ./../dp-inntekt
     hostname: dp-inntekt-api
     ports:
       - "8099:8099"

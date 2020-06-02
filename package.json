@@ -22,7 +22,7 @@
     "classnames": "^2.2.6",
     "date-fns": "^2.0.0-alpha.36",
     "eslint": "^5.16.0",
-    "formik": "^1.5.7",
+    "formik": "^1.5.8",
     "lodash.isequal": "^4.5.0",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-alertstriper": "^3.0.2",
