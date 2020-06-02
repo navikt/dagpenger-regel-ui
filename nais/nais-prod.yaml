@@ -4,7 +4,7 @@ metadata:
   name: dagpenger-regel-ui
   namespace: default
   labels:
-    team: {{team}}
+    team: teamdagpenger
 spec:
   ingresses:
     - "https://dagpenger-regel-ui.nais.adeo.no/"
@@ -21,7 +21,7 @@ spec:
       value: https://isso.adeo.no:443/isso/oauth2
     - name: OIDC_AGENTNAME
       value: dagpenger-regel-ui-p
-  image: {{version}}
+  image: {{image}}
   port: 443
   sessionAffinity: ClientIP # Sticky Session for ingress controller to prevent 404 on rollout
   liveness:

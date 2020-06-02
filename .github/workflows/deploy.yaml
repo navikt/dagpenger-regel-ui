@@ -1,0 +1,73 @@
+name: Build and deploy
+
+on: [push]
+
+env:
+  BASEIMAGE: docker.pkg.github.com/${{ github.repository }}/dagpenger-regel-ui
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+        env:
+          CI: true
+      - name: Lag tag for image
+        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+      - name: Lag full image referanse
+        run: echo "::set-env name=IMAGE::$BASEIMAGE:$TAG"
+      - name: Build docker image
+        run: docker build -t $IMAGE .
+      - name: Login to Github Package Registry
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+      - name: Push Docker image
+        run: docker push $IMAGE
+
+  deploy-preprod:
+    name: Deploy to Preprod
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        name: Checkout code
+      - name: Lag tag for image
+        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+      - name: Lag full image referanse
+        run: echo "::set-env name=IMAGE::$BASEIMAGE:$TAG"
+
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-fss
+          RESOURCE: nais/nais-dev.yaml,nais/alerts.yaml
+
+  deploy-prod:
+    name: Deploy to Prod
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        name: Checkout code
+      - name: Lag tag for image
+        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+      - name: Lag full image referanse
+        run: echo "::set-env name=IMAGE::$BASEIMAGE:$TAG"
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-fss
+          RESOURCE: nais/nais-prod.yaml,nais/alerts.yaml
