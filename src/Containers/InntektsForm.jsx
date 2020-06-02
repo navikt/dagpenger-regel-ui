@@ -142,4 +142,5 @@ export default withFormik({
 
   displayName: 'InntektsForm',
   enableReinitialize: true,
+  isInitialValid: true,
 })(InntektsForm);
