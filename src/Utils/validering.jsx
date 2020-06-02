@@ -35,7 +35,7 @@ const hasValidInt = text => (isEmpty(text) || integerRegex.test(text) ? null : '
 const hasValidDecimal = text => (isEmpty(text) || decimalRegex.test(text) ? null : 'Tallet kan ikke inneholde mer enn to desimaler');
 
 export const required = value => {
-  console.log('reuired', value, isEmpty(value));
+  console.log('required', value, isEmpty(value));
   return isEmpty(value) ? 'Feltet må fylles ut' : undefined;
 };
 export const minLength = length => text => (isEmpty(text) || text.toString().trim().length >= length ? null : `Du må skrive minst ${length} tegn`);

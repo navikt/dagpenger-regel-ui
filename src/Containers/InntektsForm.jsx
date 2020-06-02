@@ -29,6 +29,9 @@ const InntektsForm = props => {
   };
 
   console.log('isValid', isValid);
+  console.log('dirty', dirty);
+  console.log('hentInntektStatus', hentInntektStatus);
+  console.log('errors', JSON.stringify(errors));
   return (
     <>
       {status && status.success && (
