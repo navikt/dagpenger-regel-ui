@@ -1,11 +1,11 @@
 apiVersion: "nais.io/v1"
 kind: "Alert"
 metadata:
-  name: dp-veiviser-ui
+  name: dagpenger-regel-ui
   namespace: default
   labels:
     team: teamdagpenger
-    app: dp-veiviser-ui
+    app: dagpenger-regel-ui
 spec:
   receivers:
     slack:
