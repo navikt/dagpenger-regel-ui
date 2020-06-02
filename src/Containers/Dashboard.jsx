@@ -74,7 +74,7 @@ export const findArbeidsgivere = async inntekt => {
       try {
         resultat = await getOrganisasjonsNavn(key);
       } catch (error) {
-        // throw new Error(error);
+        throw new Error(error);
       }
     }
     const { navn } = (resultat || {}).data || {};
