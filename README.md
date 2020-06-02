@@ -1,4 +1,5 @@
-[![CircleCI](https://circleci.com/gh/navikt/dagpenger-regel-ui.svg?style=svg)](https://circleci.com/gh/navikt/dagpenger-regel-ui)
+![Build and deploy](https://github.com/navikt/dagpenger-regel-ui/workflows/Build%20and%20deploy/badge.svg)
+![Vulnerabilities scanning of dependencies](https://github.com/navikt/dagpenger-regel-ui/workflows/Vulnerabilities%20scanning%20of%20dependencies/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=navikt_dagpenger-regel-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=navikt_dagpenger-regel-ui)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
@@ -28,9 +29,9 @@ opp lokalt vha Docker Compose(som følger med Docker Desktop)
 
 Legg til `127.0.0.1 host.docker.internal` til hostfilen, `/etc/hosts`. OpenID implementasjonen https://github.com/zmartzone/lua-resty-openidc bruker docker interne netverk som "discovery url"
 
-Starte dp-inntekt-api, Postgres og regel-ui (baseres på at dp-inntekt-api er bygget (`./gradlew build`) og regel-ui er bygget (`yarn run build`))
+Starte dp-inntekt-api, Postgres og regel-ui (baseres på at dp-inntekt-api er bygget (`./gradlew build`) og regel-ui er bygget (`npm run build`))
 ```bash
-yarn up
+npm up
 ```
 eller
 ```bash
@@ -57,7 +58,7 @@ feks:
 
 Stopp ved å kjøre:
 ```bash
-yarn down
+npm down
 ```
 eller
 ```bash
