@@ -29,7 +29,6 @@ const InntektsForm = props => {
   };
 
   console.log('isValid', isValid);
-  console.log('errors', errors.name);
   return (
     <>
       {status && status.success && (
