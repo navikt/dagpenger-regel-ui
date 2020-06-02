@@ -74,7 +74,7 @@ const InntektsForm = props => {
               onClick={bekreftManuellEndring}
               spinner={isSubmitting}
               autoDisableVedSpinner
-              disabled={(!hentInntektStatus && !dirty)}
+              disabled={(!hentInntektStatus && !dirty) || !isValid}
             >
               Bekreft
             </Hovedknapp>
