@@ -5,6 +5,6 @@ location /api/ {
 }
 
 location /enhetsregisteret/ {
-  proxy_set_header Host data.brreg.no;
+  proxy_set_header Host webproxy.nais:8088;
   proxy_pass "${APP_OPPSLAG_BASEURL}";
 }
