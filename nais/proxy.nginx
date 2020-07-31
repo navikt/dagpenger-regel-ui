@@ -5,5 +5,6 @@ location /api/ {
 }
 
 location /brreg/ {
+  access_by_lua_file oidc_protected.lua;
   proxy_pass "${APP_OPPSLAG_BASEURL}";
 }
