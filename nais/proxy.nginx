@@ -4,7 +4,7 @@ location /api/ {
     proxy_pass "${APP_INNTEKT_BASEURL}";
 }
 
-location /brreg/ {
-  access_by_lua_file oidc_protected.lua;
+location /enhetsregisteret/ {
+  proxy_set_header Host data.brreg.no;
   proxy_pass "${APP_OPPSLAG_BASEURL}";
 }

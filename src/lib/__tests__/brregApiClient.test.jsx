@@ -4,10 +4,10 @@ import { getOrganisasjonsNavn } from '../brregApiClient';
 const baseURL = 'http://localhost';
 
 
-const apiUri = '/brreg/api';
+const apiUri = '/enhetsregisteret/api';
 
 
-describe('OppslagApiClient', () => {
+describe('BrregApiClient', () => {
   it('Should handle 200 response on org name lookup', async () => {
     const orgNr = 12345678;
     const expectedReturn = { organisasjonsnummer: '12345678', navn: 'Et navn' };

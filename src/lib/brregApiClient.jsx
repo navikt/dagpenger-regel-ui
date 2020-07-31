@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUri = '/brreg/api';
+const apiUri = '/enhetsregisteret/api';
 
 export const getOrganisasjonsNavn = async (orgNr) => {
   try {
