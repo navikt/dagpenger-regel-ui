@@ -1,18 +1,18 @@
 import nock from 'nock';
-import { getOrganisasjonsNavn, getPersonNavn } from '../oppslagApiClient';
+import { getOrganisasjonsNavn } from '../brregApiClient';
 
 const baseURL = 'http://localhost';
 
 
-const apiUri = '/oppslag/api';
+const apiUri = '/brreg/api';
 
 
 describe('OppslagApiClient', () => {
   it('Should handle 200 response on org name lookup', async () => {
     const orgNr = 12345678;
-    const expectedReturn = { orgNr: '12345678', navn: 'Et navn' };
+    const expectedReturn = { organisasjonsnummer: '12345678', navn: 'Et navn' };
     nock(baseURL)
-      .get(`${apiUri}/organisasjon/${orgNr}`)
+      .get(`${apiUri}/enheter/${orgNr}`)
       .reply(200, expectedReturn);
 
     try {
@@ -23,20 +23,22 @@ describe('OppslagApiClient', () => {
     }
   });
 
-  it('Should handle 200 response on person name lookup', async () => {
-    const data = { fødselsnummer: '12345678901' };
-
-    const expectedReturn = {
-      etternavn: 'Test', fornavn: 'Test', mellomnavn: 'Testesen', sammensattNavn: 'Test Testesen Test',
-    };
+  it('Should fetch possible underenhet', async () => {
+    const orgNr = 12345678;
+    const expectedReturn = { organisasjonsnummer: '12345678', navn: 'Et navn' };
     nock(baseURL)
-      .post(`${apiUri}/person/name`, data)
+      .get(`${apiUri}/enheter/${orgNr}`)
+      .reply(404, null);
+    nock(baseURL)
+      .get(`${apiUri}/underenheter/${orgNr}`)
       .reply(200, expectedReturn);
+
     try {
-      const result = await getPersonNavn(data);
+      const result = await getOrganisasjonsNavn(orgNr);
       expect(result.data).toEqual(expectedReturn);
     } catch (error) {
       throw error;
     }
   });
+
 });

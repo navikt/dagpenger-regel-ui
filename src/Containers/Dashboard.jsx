@@ -18,7 +18,7 @@ import EditedIkon from '../Components/EditedIkon';
 import { ReactComponent as MannIkon } from '../images/mann.svg';
 import { ReactComponent as KvinneIkon } from '../images/kvinne.svg';
 import { getInntekt, getUncachedInntekt } from '../lib/inntektApiClient';
-import { getOrganisasjonsNavn } from '../lib/oppslagApiClient';
+import { getOrganisasjonsNavn } from '../lib/brregApiClient';
 
 const getKjønn = (fødselsnr = '') => {
   if (Number(fødselsnr.charAt(8)) % 2 === 0) {

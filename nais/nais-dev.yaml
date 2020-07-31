@@ -12,7 +12,7 @@ spec:
     - name: APP_INNTEKT_BASEURL
       value: http://dp-inntekt-api/
     - name: APP_OPPSLAG_BASEURL
-      value: http://dagpenger-oppslag/
+      value: https://data.brreg.no/enhetsregisteret/
     - name: REDIS_HOST
       value: dagpenger-redis.default.svc.nais.local
     - name: REDIS_PORT
@@ -24,6 +24,7 @@ spec:
   image: {{image}}
   port: 443
   sessionAffinity: ClientIP # Sticky Session for ingress controller to prevent 404 on rollout
+  webproxy: true
   liveness:
     path: /inntekter/health/is-alive
     initialDelay: 20
