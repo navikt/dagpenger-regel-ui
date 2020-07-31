@@ -1,10 +1,10 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: dagpenger-regel-ui
-  namespace: default
+  name: {{app}}
+  namespace: {{namespace}}
   labels:
-    team: teamdagpenger
+    team: {{team}}
 spec:
   ingresses:
     - "https://dagpenger-regel-ui.nais.preprod.local/"
