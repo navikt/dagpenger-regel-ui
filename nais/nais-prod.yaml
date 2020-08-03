@@ -5,6 +5,7 @@ metadata:
   namespace: {{namespace}}
   labels:
     team: {{team}}
+    app: {{app}}
 spec:
   ingresses:
     - "https://dagpenger-regel-ui.nais.adeo.no/"
