@@ -1,15 +1,15 @@
 apiVersion: "nais.io/v1"
 kind: "Alert"
 metadata:
-  name: dagpenger-regel-ui
-  namespace: default
+  name: {{app}}
+  namespace: {{namespace}}
   labels:
-    team: teamdagpenger
-    app: dagpenger-regel-ui
+    team: {{team}}
+    app: {{app}}
 spec:
   receivers:
     slack:
-      channel: '#team-dagpenger-alert'
+      channel: '{{alerts_slack_channel}}'
       prependText: '<!here> | '
   alerts:
     - alert: applikasjon nede

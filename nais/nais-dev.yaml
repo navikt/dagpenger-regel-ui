@@ -1,18 +1,17 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: dagpenger-regel-ui
-  namespace: default
+  name: {{app}}
+  namespace: {{namespace}}
   labels:
-    team: teamdagpenger
+    team: {{team}}
+    app: {{app}}
 spec:
   ingresses:
     - "https://dagpenger-regel-ui.nais.preprod.local/"
   env:
     - name: APP_INNTEKT_BASEURL
       value: http://dp-inntekt-api/
-    - name: APP_OPPSLAG_BASEURL
-      value: http://dagpenger-oppslag/
     - name: REDIS_HOST
       value: dagpenger-redis.default.svc.nais.local
     - name: REDIS_PORT
@@ -24,6 +23,7 @@ spec:
   image: {{image}}
   port: 443
   sessionAffinity: ClientIP # Sticky Session for ingress controller to prevent 404 on rollout
+  webproxy: true
   liveness:
     path: /inntekter/health/is-alive
     initialDelay: 20
