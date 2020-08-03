@@ -55,6 +55,7 @@ jobs:
           RESOURCE: nais/nais-dev.yaml,nais/alerts.yaml
           VARS: nais/vars.yaml
           VAR: alerts_slack_channel=#team-dagpenger-alerts-non-prod
+          PRINT_PAYLOAD: true
 
   deploy-prod:
     name: Deploy to Prod
@@ -75,3 +76,4 @@ jobs:
           RESOURCE: nais/nais-prod.yaml,nais/alerts.yaml
           VARS: nais/vars.yaml
           VAR: alerts_slack_channel=#team-dagpenger-alert
+          PRINT_PAYLOAD: true
