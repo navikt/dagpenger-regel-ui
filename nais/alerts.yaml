@@ -15,13 +15,13 @@ spec:
     - alert: applikasjon nede
       expr: kube_deployment_status_replicas_unavailable{deployment="dagpenger-regel-ui",job="kubernetes-service-endpoints"} > 0
       for: 2m
-      description: "{{ $labels.deployment }} har utilgjengelige podder i {{ $labels.namespace }}"
-      action: "`kubectl describe pod -l app={{ $labels.deployment }} -n {{ $labels.namespace }}` for events og `kubectl get  pods -l app={{ $labels.deployment }} -n {{ $labels.namespace }}` for å se feilende podder"
+      description: "\{{ $labels.deployment }} har utilgjengelige podder i \{{ $labels.namespace }}"
+      action: "`kubectl describe pod -l app=\{{ $labels.deployment }} -n \{{ $labels.namespace }}` for events og `kubectl get  pods -l app=\{{ $labels.deployment }} -n \{{ $labels.namespace }}` for å se feilende podder"
     - alert: høy feilrate i logger
       expr: (100 * sum by (log_app, log_namespace) (rate(logd_messages_total{log_app="dagpenger-regel-ui",log_level="Error"}[3m])) / sum by (log_app, log_namespace) (rate(logd_messages_total{log_app="dagpenger-regel-ui"}[3m]))) > 90
       for: 3m
-      action: "Sjekk loggene til {{ $labels.log_app }} i {{ $labels.log_namespace }}, for å se hvorfor det er så mye feil"
+      action: "Sjekk loggene til \{{ $labels.log_app }} i \{{ $labels.log_namespace }}, for å se hvorfor det er så mye feil"
     - alert: feil i selftest
       expr: selftests_aggregate_result_status{app="dagpenger-regel-ui"} > 0
       for: 1m
-      action: "Sjekk {{ $labels.app }} i {{ $labels.kubernetes_namespace }} sine selftest for å se hva som er galt"
+      action: "Sjekk \{{ $labels.app }} i \{{ $labels.kubernetes_namespace }} sine selftest for å se hva som er galt"
