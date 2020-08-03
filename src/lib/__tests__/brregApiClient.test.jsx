@@ -4,7 +4,7 @@ import { getOrganisasjonsNavn } from '../brregApiClient';
 const baseURL = 'http://localhost';
 
 
-const apiUri = '/enhetsregisteret/api';
+const apiUri = '/api/v1/enhetsregisteret/enhet/';
 
 
 describe('BrregApiClient', () => {
@@ -12,25 +12,7 @@ describe('BrregApiClient', () => {
     const orgNr = 12345678;
     const expectedReturn = { organisasjonsnummer: '12345678', navn: 'Et navn' };
     nock(baseURL)
-      .get(`${apiUri}/enheter/${orgNr}`)
-      .reply(200, expectedReturn);
-
-    try {
-      const result = await getOrganisasjonsNavn(orgNr);
-      expect(result.data).toEqual(expectedReturn);
-    } catch (error) {
-      throw error;
-    }
-  });
-
-  it('Should fetch possible underenhet', async () => {
-    const orgNr = 12345678;
-    const expectedReturn = { organisasjonsnummer: '12345678', navn: 'Et navn' };
-    nock(baseURL)
-      .get(`${apiUri}/enheter/${orgNr}`)
-      .reply(404, null);
-    nock(baseURL)
-      .get(`${apiUri}/underenheter/${orgNr}`)
+      .get(`${apiUri}/${orgNr}`)
       .reply(200, expectedReturn);
 
     try {

@@ -11,8 +11,6 @@ spec:
   env:
     - name: APP_INNTEKT_BASEURL
       value: http://dp-inntekt-api/
-    - name: APP_OPPSLAG_BASEURL
-      value: https://data.brreg.no/enhetsregisteret/
     - name: REDIS_HOST
       value: dagpenger-redis.default.svc.nais.local
     - name: REDIS_PORT

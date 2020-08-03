@@ -3,12 +3,3 @@ location /api/ {
     access_by_lua_file oidc_protected.lua;
     proxy_pass "${APP_INNTEKT_BASEURL}";
 }
-
-location /enhetsregisteret/ {
-  proxy_set_header        Connection "";
-  proxy_set_header        Referer $http_referer;
-  proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-  proxy_set_header        X-NginX-Proxy true;
-  proxy_set_header        X-Real-IP $remote_addr;
-  proxy_pass "${APP_OPPSLAG_BASEURL}";
-}

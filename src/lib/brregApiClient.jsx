@@ -1,28 +1,16 @@
 import axios from 'axios';
 
-const apiUri = '/enhetsregisteret/api';
+const apiUri = '/api/v1/enhetsregisteret/enhet/';
 
 export const getOrganisasjonsNavn = async (orgNr) => {
   try {
-    let result = await axios({
+    return await axios({
       method: 'get',
-      url: `${apiUri}/enheter/${orgNr}`,
+      url: `${apiUri}/${orgNr}`,
       validateStatus(status) {
         return status < 500; // Reject only if the status code is greater than or equal to 500
       },
     });
-    if (result.status === 404) {
-      return await axios({
-        method: 'get',
-        url: `${apiUri}/underenheter/${orgNr}`,
-        validateStatus(status) {
-          return status < 500; // Reject only if the status code is greater than or equal to 500
-        },
-      })
-    } else {
-      return result
-    }
-
   } catch (error) {
     return error;
   }
