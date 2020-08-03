@@ -4,7 +4,7 @@ import { getOrganisasjonsNavn } from '../brregApiClient';
 const baseURL = 'http://localhost';
 
 
-const apiUri = '/enhetsregisteret/v1/enhetsregisteret/enhet/';
+const apiUri = '/enhetsregisteret/v1/enhetsregisteret/enhet';
 
 
 describe('BrregApiClient', () => {
