@@ -11,7 +11,7 @@ spec:
     - "https://dagpenger-regel-ui.nais.preprod.local/"
   env:
     - name: APP_INNTEKT_BASEURL
-      value: http://dp-inntekt-api.teamdagpenger/
+      value: http://dp-inntekt-api.teamdagpenger.svc.nais.local/
     - name: REDIS_HOST
       value: dagpenger-redis.default.svc.nais.local
     - name: REDIS_PORT
