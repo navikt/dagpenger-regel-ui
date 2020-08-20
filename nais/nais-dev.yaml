@@ -13,7 +13,7 @@ spec:
     - name: APP_INNTEKT_BASEURL
       value: http://dp-inntekt-api.teamdagpenger.svc.nais.local/
     - name: REDIS_HOST
-      value: dagpenger-redis.default.svc.nais.local
+      value: dagpenger-redis.teamdagpenger.svc.nais.local
     - name: REDIS_PORT
       value: "6379"
     - name: OIDC_HOST_URL
