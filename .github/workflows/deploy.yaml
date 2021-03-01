@@ -3,7 +3,7 @@ name: Build and deploy
 on: [push]
 
 env:
-  BASEIMAGE: docker.pkg.github.com/${{ github.repository }}/dagpenger-regel-ui
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/dagpenger-regel-ui:${{ github.sha }}
 
 jobs:
   build:
@@ -22,10 +22,6 @@ jobs:
       - run: npm test
         env:
           CI: true
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$BASEIMAGE:$TAG"
       - name: Build docker image
         run: docker build -t $IMAGE .
       - name: Login to Github Package Registry
@@ -43,11 +39,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
         name: Checkout code
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$BASEIMAGE:$TAG"
-
       - uses: nais/deploy/actions/deploy@master
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
@@ -65,10 +56,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
         name: Checkout code
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$BASEIMAGE:$TAG"
       - uses: nais/deploy/actions/deploy@master
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
