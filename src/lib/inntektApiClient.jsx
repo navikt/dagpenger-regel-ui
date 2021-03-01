@@ -3,12 +3,13 @@ import axios from 'axios';
 const apiUri = '/api/v1/inntekt';
 const apiUklassifisertUri = `${apiUri}/uklassifisert`;
 const apiUncachedUri = `${apiUklassifisertUri}/uncached`;
+const kontekst = "VEDTAK"
 
 export const getInntekt = async (uri) => {
   try {
     return await axios({
       method: 'get',
-      url: `${apiUklassifisertUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`,
+      url: `${apiUklassifisertUri}/${uri.aktørId}/${kontekst}/${uri.vedtakId}/${uri.beregningsDato}`,
     });
   } catch (error) {
     return error;
@@ -20,7 +21,7 @@ export const getUncachedInntekt = async (uri) => {
   try {
     return await axios({
       method: 'get',
-      url: `${apiUncachedUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`,
+      url: `${apiUncachedUri}/${uri.aktørId}/${kontekst}/${uri.vedtakId}/${uri.beregningsDato}`,
     });
   } catch (error) {
     return error;
@@ -34,8 +35,8 @@ export const lagreInntekt = async (request, isUncached, uri) => {
     return await axios({
       method: 'post',
       url: isUncached
-        ? `${apiUncachedUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`
-        : `${apiUklassifisertUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`,
+        ? `${apiUncachedUri}/${uri.aktørId}/${kontekst}/${uri.vedtakId}/${uri.beregningsDato}`
+        : `${apiUklassifisertUri}/${uri.aktørId}/${kontekst}/${uri.vedtakId}/${uri.beregningsDato}`,
       data: request,
     });
   } catch (error) {

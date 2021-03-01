@@ -10,6 +10,7 @@ const apiUncachedUri = `${apiUklassifisertUri}/uncached`;
 
 const uri = {
   aktørId: '111',
+  kontekst: 'VEDTAK',
   vedtakId: 12345,
   beregningsDato: '2019-05-01',
 };
@@ -21,7 +22,7 @@ describe('InntektApiClient', () => {
     const expectedReturn = 'data';
 
     nock(baseURL)
-      .get(`${apiUklassifisertUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`)
+      .get(`${apiUklassifisertUri}/${uri.aktørId}/${uri.kontekst}/${uri.vedtakId}/${uri.beregningsDato}`)
       .reply(200, expectedReturn);
 
     await getInntekt(uri).then((result) => {
@@ -34,7 +35,7 @@ describe('InntektApiClient', () => {
 
   it('Should handle 500 response', async () => {
     nock(baseURL)
-      .get(`${apiUklassifisertUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`)
+      .get(`${apiUklassifisertUri}/${uri.aktørId}/${uri.kontekst}/${uri.vedtakId}/${uri.beregningsDato}`)
       .reply(500, {});
 
     try {
@@ -47,7 +48,7 @@ describe('InntektApiClient', () => {
   it('Should save inntekt with 200', async () => {
     const data = { field: '123' };
     nock(baseURL)
-      .post(`${apiUncachedUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`, data)
+      .post(`${apiUncachedUri}/${uri.aktørId}/${uri.kontekst}/${uri.vedtakId}/${uri.beregningsDato}`, data)
       .reply(200, { success: true });
 
     await lagreInntekt(data, isUncached, uri).then((result) => {
@@ -61,7 +62,7 @@ describe('InntektApiClient', () => {
   it('Should fail to save inntekt', async () => {
     const data = { field: '123' };
     nock(baseURL)
-      .post(`${apiUncachedUri}/${uri.aktørId}/${uri.vedtakId}/${uri.beregningsDato}`, data)
+      .post(`${apiUncachedUri}/${uri.aktørId}/${uri.kontekst}/${uri.vedtakId}/${uri.beregningsDato}`, data)
       .reply(500, {});
 
     try {
