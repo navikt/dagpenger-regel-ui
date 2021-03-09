@@ -10,7 +10,7 @@ const apiUncachedUri = `${apiUklassifisertUri}/uncached`;
 
 const uri = {
   aktørId: '111',
-  kontekst: 'VEDTAK',
+  kontekst: 'vedtak',
   vedtakId: 12345,
   beregningsDato: '2019-05-01',
 };
@@ -25,10 +25,11 @@ describe('InntektApiClient', () => {
       .get(`${apiUklassifisertUri}/${uri.aktørId}/${uri.kontekst}/${uri.vedtakId}/${uri.beregningsDato}`)
       .reply(200, expectedReturn);
 
-    await getInntekt(uri).then((result) => {
-      expect(result.data).toEqual(expectedReturn);
-    })
-      .catch((error) => {
+    await getInntekt(uri)
+      .then(result => {
+        expect(result.data).toEqual(expectedReturn);
+      })
+      .catch(error => {
         throw error;
       });
   });
@@ -51,13 +52,14 @@ describe('InntektApiClient', () => {
       .post(`${apiUncachedUri}/${uri.aktørId}/${uri.kontekst}/${uri.vedtakId}/${uri.beregningsDato}`, data)
       .reply(200, { success: true });
 
-    await lagreInntekt(data, isUncached, uri).then((result) => {
-      expect(result.data).toEqual({ success: true });
-    }).catch((error) => {
-      throw error;
-    });
+    await lagreInntekt(data, isUncached, uri)
+      .then(result => {
+        expect(result.data).toEqual({ success: true });
+      })
+      .catch(error => {
+        throw error;
+      });
   });
-
 
   it('Should fail to save inntekt', async () => {
     const data = { field: '123' };

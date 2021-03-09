@@ -3,9 +3,9 @@ import axios from 'axios';
 const apiUri = '/api/v1/inntekt';
 const apiUklassifisertUri = `${apiUri}/uklassifisert`;
 const apiUncachedUri = `${apiUklassifisertUri}/uncached`;
-const kontekst = "VEDTAK"
+const kontekst = 'vedtak';
 
-export const getInntekt = async (uri) => {
+export const getInntekt = async uri => {
   try {
     return await axios({
       method: 'get',
@@ -16,8 +16,7 @@ export const getInntekt = async (uri) => {
   }
 };
 
-
-export const getUncachedInntekt = async (uri) => {
+export const getUncachedInntekt = async uri => {
   try {
     return await axios({
       method: 'get',
@@ -54,4 +53,3 @@ export const getVerdikoder = async () => {
     return error;
   }
 };
-
