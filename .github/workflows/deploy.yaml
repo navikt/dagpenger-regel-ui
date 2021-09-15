@@ -43,9 +43,8 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-fss
-          RESOURCE: nais/nais-dev.yaml,nais/redis.yaml,nais/alerts.yaml
+          RESOURCE: nais/nais-dev.yaml,nais/redis.yaml
           VARS: nais/vars.yaml
-          VAR: alerts_slack_channel=#team-dagpenger-alert-non-prod
           PRINT_PAYLOAD: true
 
   deploy-prod:
@@ -60,7 +59,6 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-fss
-          RESOURCE: nais/nais-prod.yaml,nais/redis.yaml,nais/alerts.yaml
+          RESOURCE: nais/nais-prod.yaml,nais/redis.yaml
           VARS: nais/vars.yaml
-          VAR: alerts_slack_channel=#team-dagpenger-alert
           PRINT_PAYLOAD: true
