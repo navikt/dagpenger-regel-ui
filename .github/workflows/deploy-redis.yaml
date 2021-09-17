@@ -5,30 +5,18 @@ on:
     branches:
       - master
     paths:
-      - !redis/**
-      - !.github/workflows/deploy-redis.yaml
-      - !nais/redis.yaml
+      - redis/**
+      - .github/workflows/deploy-redis.yaml
+      - nais/redis.yaml
+
 env:
-  IMAGE: ghcr.io/${{ github.repository }}/dagpenger-regel-ui:${{ github.sha }}
+  IMAGE: ghcr.io/${{ github.repository }}/dagpenger-redis:${{ github.sha }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
-        env:
-          CI: true
-
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
@@ -40,21 +28,16 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push image
+      - name: Build and push redis image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: redis
           builder: ${{ steps.buildx.outputs.name }}
           tags: ${{ env.IMAGE }}
           push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Archive NAIS yaml
-        uses: actions/upload-artifact@v1
-        with:
-          name: nais-yaml
-          path: nais
 
   deploy-preprod:
     name: Deploy to Preprod
@@ -68,7 +51,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-fss
-          RESOURCE: nais/nais-dev.yaml
+          RESOURCE: nais/redis.yaml
           VARS: nais/vars.yaml
           PRINT_PAYLOAD: true
 
