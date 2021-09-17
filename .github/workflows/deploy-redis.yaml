@@ -1,4 +1,4 @@
-name: Build and deploy
+name: Build and deploy redis
 
 on:
   push:
@@ -38,6 +38,11 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Archive NAIS yaml
+        uses: actions/upload-artifact@v2
+        with:
+          name: redis-nais-yaml
+          path: nais/redis.yaml
 
   deploy-preprod:
     name: Deploy to Preprod
@@ -55,18 +60,18 @@ jobs:
           VARS: nais/vars.yaml
           PRINT_PAYLOAD: true
 
-#  deploy-prod:
-#    name: Deploy to Prod
-#    needs: [build, deploy-preprod]
-#    if: github.ref == 'refs/heads/master'
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@master
-#        name: Checkout code
-#      - uses: nais/deploy/actions/deploy@master
-#        env:
-#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-#          CLUSTER: prod-fss
-#          RESOURCE: nais/redis.yaml,nais/nais-prod.yaml
-#          VARS: nais/vars.yaml
-#          PRINT_PAYLOAD: true
+  deploy-prod:
+    name: Deploy to Prod
+    needs: [build, deploy-preprod]
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        name: Checkout code
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-fss
+          RESOURCE: nais/redis.yaml
+          VARS: nais/vars.yaml
+          PRINT_PAYLOAD: true

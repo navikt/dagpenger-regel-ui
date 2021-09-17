@@ -1,4 +1,4 @@
-name: Build and deploy
+name: Build and deploy dagpenger-regel-ui
 
 on:
   push:
@@ -51,10 +51,12 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Archive NAIS yaml
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: nais-yaml
-          path: nais
+          path: |
+            nais
+            !nais/redis.yaml
 
   deploy-preprod:
     name: Deploy to Preprod
@@ -72,18 +74,18 @@ jobs:
           VARS: nais/vars.yaml
           PRINT_PAYLOAD: true
 
-#  deploy-prod:
-#    name: Deploy to Prod
-#    needs: [build, deploy-preprod]
-#    if: github.ref == 'refs/heads/master'
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@master
-#        name: Checkout code
-#      - uses: nais/deploy/actions/deploy@master
-#        env:
-#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-#          CLUSTER: prod-fss
-#          RESOURCE: nais/redis.yaml,nais/nais-prod.yaml
-#          VARS: nais/vars.yaml
-#          PRINT_PAYLOAD: true
+  deploy-prod:
+    name: Deploy to Prod
+    needs: [build, deploy-preprod]
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        name: Checkout code
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-fss
+          RESOURCE: nais/nais-prod.yaml
+          VARS: nais/vars.yaml
+          PRINT_PAYLOAD: true
