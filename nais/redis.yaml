@@ -10,7 +10,7 @@ metadata:
     nais.io/run-as-group: "0"
     nais.io/read-only-file-system: "false"
 spec:
-  image: redis:5-alpine # or a custom Redis-image
+  image: {{redis_image}}
   port: 6379
   replicas:
     min: 1

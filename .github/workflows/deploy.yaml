@@ -4,6 +4,7 @@ on: [push]
 
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/dagpenger-regel-ui:${{ github.sha }}
+  REDIS_IMAGE: docker.pkg.github.com/${{ github.repository }}/dagpenger-redis:${{ github.sha }}
 
 jobs:
   build:
@@ -30,6 +31,15 @@ jobs:
         run: docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
       - name: Push Docker image
         run: docker push $IMAGE
+      - name: Build redis docker image
+        run: docker build -t $IMAGE_REDIS redis/.
+      - name: Login to Github Package Registry
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+      - name: Push Docker image
+        run: docker push $IMAGE_REDIS
+
 
   deploy-preprod:
     name: Deploy to Preprod
