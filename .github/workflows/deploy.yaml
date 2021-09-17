@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - master
-    paths:
-      - !redis/**
-      - !.github/workflows/deploy-redis.yaml
-      - !nais/redis.yaml
+    paths-ignore:
+      - redis/**
+      - .github/workflows/deploy-redis.yaml
+      - nais/redis.yaml
 env:
   IMAGE: ghcr.io/${{ github.repository }}/dagpenger-regel-ui:${{ github.sha }}
 
