@@ -4,7 +4,7 @@ on: [push]
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}/dagpenger-regel-ui:${{ github.sha }}
-  REDIS_IMAGE: ghcr.io/${{ github.repository }}/dagpenger-redis:${{ github.sha }}
+  REDISIMAGE: ghcr.io/${{ github.repository }}/dagpenger-redis:${{ github.sha }}
 
 jobs:
   build:
@@ -50,7 +50,7 @@ jobs:
         with:
           context: redis
           builder: ${{ steps.buildx.outputs.name }}
-          tags: ${{ env.REDIS_IMAGE }}
+          tags: ${{ env.REDISIMAGE }}
           push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -73,7 +73,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-fss
-          RESOURCE: nais/redis.yaml,nais/nais-dev.yaml
+          RESOURCE: nais/redis.yaml
           VARS: nais/vars.yaml
           PRINT_PAYLOAD: true
 
