@@ -19,7 +19,7 @@
     "prepare": "npm run snyk-protect"
   },
   "dependencies": {
-    "@sentry/browser": "^5.20.1",
+    "@sentry/browser": "^5.30.0",
     "axios": "^0.21.4",
     "classnames": "^2.2.6",
     "date-fns": "^2.15.0",
