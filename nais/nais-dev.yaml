@@ -6,6 +6,9 @@ metadata:
   labels:
     team: {{team}}
     app: {{app}}
+  annotations:
+    nais.io/run-as-group: "0"
+    nais.io/read-only-file-system: "false"
 spec:
   ingresses:
     - "https://dagpenger-regel-ui.nais.preprod.local/"
