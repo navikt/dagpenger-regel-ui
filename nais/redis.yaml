@@ -6,6 +6,9 @@ metadata:
   labels:
     team: {{team}}
     app: dagpenger-redis
+  annotations:
+    nais.io/run-as-group: "0"
+    nais.io/read-only-file-system: "false"
 spec:
   image: redis:5-alpine # or a custom Redis-image
   port: 6379
