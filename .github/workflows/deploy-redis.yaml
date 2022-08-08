@@ -7,7 +7,7 @@ on:
     paths:
       - redis/**
       - .github/workflows/deploy-redis.yaml
-      - nais/redis.yaml
+      - .nais/redis.yaml
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}/dagpenger-redis:${{ github.sha }}

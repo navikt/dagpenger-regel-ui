@@ -6,5 +6,5 @@ ENV APP_DIR="/app" \
 
 COPY build /app/inntekter/
 
-COPY nais/proxy.nginx      /nginx/proxy.nginx
+COPY .nais/proxy.nginx      /nginx/proxy.nginx
 EXPOSE 3000 443
