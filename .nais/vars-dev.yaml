@@ -1,0 +1,6 @@
+ingresses:
+  - "https://dagpenger-regel-ui.nais.preprod.local/"
+
+oidc:
+  host_url: https://isso-q.adeo.no:443/isso/oauth2
+  agentname: dagpenger-regel-ui-q1

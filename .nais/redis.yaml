@@ -2,9 +2,9 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
   name: dagpenger-redis
-  namespace: {{namespace}}
+  namespace: teamdagpenger
   labels:
-    team: {{team}}
+    team: teamdagpenger
     app: dagpenger-redis
 spec:
   image: {{image}}

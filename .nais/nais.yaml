@@ -1,16 +1,18 @@
-apiVersion: "nais.io/v1alpha1"
-kind: "Application"
+apiVersion: nais.io/v1alpha1
+kind: Application
 metadata:
-  name: {{app}}
-  namespace: {{namespace}}
+  name: dp-soknadsdialog
+  namespace: teamdagpenger
   labels:
-    team: {{team}}
-    app: {{app}}
+    team: teamdagpenger
+    app: dp-soknadsdialog
   annotations:
     nais.io/security-does-not-matter: "true"
 spec:
+  image: {{image}}
+  port: 443
   ingresses:
-    - "https://dagpenger-regel-ui.nais.preprod.local/"
+    {{ ingresses }}
   env:
     - name: APP_INNTEKT_BASEURL
       value: http://dp-inntekt-api.teamdagpenger.svc.nais.local/
@@ -19,19 +21,21 @@ spec:
     - name: REDIS_PORT
       value: "6379"
     - name: OIDC_HOST_URL
-      value: https://isso-q.adeo.no:443/isso/oauth2
+      value: {{ oidc.host_url }}
     - name: OIDC_AGENTNAME
-      value: dagpenger-regel-ui-q1
-  image: {{image}}
-  port: 443
-  sessionAffinity: ClientIP # Sticky Session for ingress controller to prevent 404 on rollout
+      value: {{ oidc.agentname }}
   webproxy: true
+  azure:
+    application:
+      enabled: true
+      replyURLs:
+        - "https://my-app.dev.nav.no/oauth2/callback"
   liveness:
     path: /inntekter/health/is-alive
     initialDelay: 20
     timeout: 1
-    periodSeconds: 5     # How often (in seconds) to perform the probe. Default to 10 seconds
-    failureThreshold: 10 # when a Pod starts and the probe fails,
+    periodSeconds: 5
+    failureThreshold: 10
   readiness:
     path: /inntekter/health/is-alive
     initialDelay: 20

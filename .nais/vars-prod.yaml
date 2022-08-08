@@ -1,0 +1,6 @@
+ingresses:
+  - "https://dagpenger-regel-ui.nais.adeo.no/"
+
+oidc:
+  host_url: https://isso.adeo.no:443/isso/oauth2
+  agentname: dagpenger-regel-ui-p
