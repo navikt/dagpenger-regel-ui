@@ -1,11 +1,11 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-  name: dp-soknadsdialog
+  name: dagpenger-regel-ui
   namespace: teamdagpenger
   labels:
     team: teamdagpenger
-    app: dp-soknadsdialog
+    app: dagpenger-regel-ui
   annotations:
     nais.io/security-does-not-matter: "true"
 spec:
