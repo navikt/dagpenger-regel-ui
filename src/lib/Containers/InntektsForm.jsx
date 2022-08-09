@@ -19,7 +19,6 @@ function InntektsForm(props) {
   const {
     hentInntektStatus,
     values,
-    isValid,
     dirty,
     readOnly,
     handleSubmit,
@@ -34,8 +33,6 @@ function InntektsForm(props) {
     if (values.redigertAvSaksbehandler) {
       setBekreftModal(true);
     }
-
-    handleSubmit();
   };
 
   return (

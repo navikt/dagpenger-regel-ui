@@ -9,8 +9,7 @@ function Verdikoder({ children }) {
 
   useEffect(() => {
     const getVerdikoderFromApi = async () => {
-      const result = await getVerdikoder();
-      setVerdikoder(result.data);
+      setVerdikoder(await getVerdikoder());
     };
 
     getVerdikoderFromApi();

@@ -154,10 +154,8 @@ function Inntekter({ readOnly, visFor }) {
   useEffect(() => {
     const getInntektFromApi = async () => {
       let resultat;
-      console.log(visFor);
       try {
         resultat = await getInntekt(visFor);
-        console.log(resultat);
       } catch (error) {
         throw new Error(
           `En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`

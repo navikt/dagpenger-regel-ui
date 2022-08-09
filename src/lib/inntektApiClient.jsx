@@ -37,7 +37,7 @@ export const lagreInntekt = async (request, isUncached, uri) => {
 
   return fetcher(url, {
     method: "post",
-    body: request,
+    body: JSON.stringify(request),
   });
 };
 

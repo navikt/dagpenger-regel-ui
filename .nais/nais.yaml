@@ -16,20 +16,10 @@ spec:
   env:
     - name: APP_INNTEKT_BASEURL
       value: http://dp-inntekt-api.teamdagpenger.svc.nais.local/
-    - name: REDIS_HOST
-      value: dagpenger-redis.teamdagpenger.svc.nais.local
-    - name: REDIS_PORT
-      value: "6379"
-    - name: OIDC_HOST_URL
-      value: {{ oidc.host_url }}
-    - name: OIDC_AGENTNAME
-      value: {{ oidc.agentname }}
   webproxy: true
   azure:
     application:
       enabled: true
-      replyURLs:
-        - "https://my-app.dev.nav.no/oauth2/callback"
   liveness:
     path: /inntekter/health/is-alive
     initialDelay: 20
