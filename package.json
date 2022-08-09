@@ -5,7 +5,7 @@
   "homepage": "https://app.adeo.no/inntekter",
   "scripts": {
     "start:js": "react-scripts start",
-    "build:js": "react-scripts build",
+    "build:js": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "start:css": "less-watch-compiler --config less.json",
     "build:css": "less-watch-compiler --run-once --config less.json",
     "start": "npm-run-all -p start:*",
@@ -71,6 +71,9 @@
     "lint-staged": "^9.2.0",
     "nock": "^13.2.9",
     "npm-run-all": "^4.0.2",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-normalize": "^10.0.1",
+    "postcss-preset-env": "^7.7.2",
     "prettier": "^1.18.2",
     "react-scripts": "^5.0.1",
     "react-test-renderer": "^18.2.0",
