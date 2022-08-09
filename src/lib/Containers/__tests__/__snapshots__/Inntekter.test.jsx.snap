@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Inntekter Mapper arbeidsgivere 1`] = `
+Array [
+  Object {
+    "aktoerType": "ORGANISASJON",
+    "identifikator": "444444444",
+    "navn": "Sopra Steria",
+  },
+  Object {
+    "aktoerType": "ORGANISASJON",
+    "identifikator": "333333333",
+    "navn": "Sopra Steria",
+  },
+  Object {
+    "aktoerType": "ORGANISASJON",
+    "identifikator": "222222222",
+    "navn": "Sopra Steria",
+  },
+  Object {
+    "aktoerType": "ORGANISASJON",
+    "identifikator": "111111111",
+    "navn": "Sopra Steria",
+  },
+]
+`;
+
+exports[`Inntekter Skal vise Dashboard med loader 1`] = `
+<div
+  className="flex center"
+>
+  <svg
+    aria-label="Laster innhold"
+    className="spinner spinner--xl"
+    focusable="false"
+    height={32}
+    kind="spinner-negativ"
+    preserveAspectRatio="xMidYMid"
+    viewBox="0 0 50 50"
+    width={32}
+  >
+    <title>
+      Venter...
+    </title>
+    <circle
+      cx="25"
+      cy="25"
+      fill="none"
+      r="20"
+      stroke="#eee"
+      strokeWidth="5"
+      xmlns="http://www.w3.org/2000/svg"
+    />
+    <circle
+      cx="25"
+      cy="25"
+      fill="none"
+      r="20"
+      stroke="#888"
+      strokeDasharray="50 155"
+      strokeLinecap="round"
+      strokeWidth="5"
+    />
+  </svg>
+</div>
+`;

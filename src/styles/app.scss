@@ -1,0 +1,289 @@
+$width: 250px;
+
+.app {
+  margin: 0 auto;
+  header {
+    .dekorator {
+      background-color: var(navMorkGra);
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+
+      .logo {
+        width: 60px;
+        height: auto;
+        margin-right: 16px;
+      }
+    }
+  }
+
+  .feilmelding {
+    color: white;
+    background-color: var(navRod);
+    padding: 16px;
+  }
+
+  .main {
+    margin-top: 32px;
+    padding: 16px 16px 48px 16px;
+  }
+
+  .toolbar {
+    background: white;
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    left: 0;
+    padding: 16px 0;
+    border-top: 1px solid var(navGra40);
+  }
+}
+
+// grid
+.grid {
+  display: grid;
+  overflow-x: auto;
+  width: 100%;
+  margin-bottom: 24px;
+  position: relative;
+  border-bottom: 1px solid var(navGra20);
+  transition: all 0.3s ease-in-out;
+
+  .item {
+    padding: 16px;
+    border-right: 1px solid var(navGra20);
+    border-top: 1px solid var(navGra20);
+
+    &.arbeidsgiver {
+      background-color: var(navLysGra);
+      border-left: 1px solid var(navGra20);
+      border-right: 4px solid var(navGra40);
+      position: sticky;
+      left: 0;
+      min-width: $width;
+      z-index: 2;
+    }
+
+    &.maaned {
+      min-width: $width;
+      background: var(navMorkGra);
+      color: white;
+      text-transform: capitalize;
+
+      &.total {
+        background: var(navMorkGra);
+      }
+    }
+
+    &.inntekter {
+      .inntekt {
+        margin-bottom: 18px;
+      }
+
+      &.total {
+        background: var(navMorkGra);
+        color: white;
+        padding: 32px;
+      }
+    }
+  }
+}
+
+// form
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.radioGroupLabel {
+  padding-bottom: 16px;
+  display: block;
+}
+
+// Modal
+.okavbrytmodal {
+  width: 500px;
+
+  .okavbrytmodal--ikon {
+    border-right: 1px solid var(navGra40);
+    padding: 8px 18px;
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .okavbrytmodal--text {
+    align-self: center;
+    padding: 8px 18px;
+    width: 100%;
+  }
+}
+
+// Spacer
+.spacer {
+  &.fourPx {
+    margin-bottom: 4px;
+  }
+
+  &.eightPx {
+    margin-bottom: 8px;
+  }
+
+  &.sixteenPx {
+    margin-bottom: 16px;
+  }
+
+  &.twentyPx {
+    margin-bottom: 20px;
+  }
+
+  &.dashed {
+    border-bottom: 3px dashed var(navGra20);
+    margin-left: -10px;
+    margin-top: 13px;
+  }
+}
+
+// Ikoner
+.ikon {
+  cursor: pointer;
+  appearance: none;
+  background: transparent;
+  padding: 0 0 0 12px;
+  border: 0;
+
+  &.ikon--slett {
+    fill: var(navRod);
+  }
+
+  &.ikon--leggtil {
+    fill: var(navBla);
+  }
+
+  &.ikon--rediger {
+    margin-right: 6px;
+    color: var(navOransje);
+
+    svg {
+      vertical-align: middle;
+    }
+  }
+}
+
+// Misc
+
+.w200 {
+  width: 200px;
+}
+
+.w400 {
+  width: 400px;
+}
+
+.marginvenstre16 {
+  margin-left: 16px;
+}
+
+.marginhoyre16 {
+  margin-right: 16px;
+}
+
+.hoyre {
+  text-align: right;
+}
+
+.venstre {
+  text-align: left;
+}
+
+.midstill {
+  text-align: center;
+}
+
+// todo rydde opp i navn
+.paddingleft {
+  padding-left: 16px;
+}
+
+.knapprad {
+  .knapp {
+    margin-left: 6px;
+  }
+}
+
+// FLEX
+.flex {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.flexend {
+    justify-content: flex-end;
+  }
+
+  .flexend {
+    flex-grow: 1;
+    text-align: right;
+  }
+}
+
+.bareprint {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: auto;   /* auto is the initial value */
+    margin: 0;  /* this affects the margin in the printer settings */
+  }
+
+  body {
+    //transform: rotate(90deg);
+    position: static;
+    overflow: initial;
+  }
+
+  .grid {
+    display: inline;
+    overflow-y: visible;
+    position: static;
+
+    .item {
+      border-right: 0;
+
+      &.arbeidsgiver {
+        display: none;
+      }
+
+      &.inntekter {
+        .ekspanderbartPanel__hode {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .toolbar,
+  .hentinntekter,
+  .total,
+  .noprint {
+    display: none;
+  }
+
+  .bareprint {
+    display: block;
+  }
+}

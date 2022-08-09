@@ -1,17 +1,7 @@
-import axios from 'axios';
+import { join } from "path";
+import { fetcher } from "./api/fetcher";
 
-const apiUri = '/enhetsregisteret/v1/enhetsregisteret/enhet';
+const apiUri = join(process.env.BASE_URL || "", "/api/enhet");
 
-export const getOrganisasjonsNavn = async (orgNr) => {
-  try {
-    return await axios({
-      method: 'get',
-      url: `${apiUri}/${orgNr}`,
-      validateStatus(status) {
-        return status < 500; // Reject only if the status code is greater than or equal to 500
-      },
-    });
-  } catch (error) {
-    return error;
-  }
-};
+export const getOrganisasjonsNavn = async (orgNr) =>
+  fetcher(`${apiUri}/${orgNr}`).catch((err) => console.error(err));

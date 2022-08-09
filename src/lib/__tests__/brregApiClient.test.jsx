@@ -1,26 +1,11 @@
-import nock from 'nock';
-import { getOrganisasjonsNavn } from '../brregApiClient';
+import { getOrganisasjonsNavn } from "../brregApiClient";
 
-const baseURL = 'http://localhost';
+describe("BrregApiClient", () => {
+  it("Should handle 200 response on org name lookup", async () => {
+    const organisasjonsnummer = "123456789";
+    const expectedReturn = { organisasjonsnummer, navn: "Sopra Steria" };
 
-
-const apiUri = '/enhetsregisteret/v1/enhetsregisteret/enhet';
-
-
-describe('BrregApiClient', () => {
-  it('Should handle 200 response on org name lookup', async () => {
-    const orgNr = 12345678;
-    const expectedReturn = { organisasjonsnummer: '12345678', navn: 'Et navn' };
-    nock(baseURL)
-      .get(`${apiUri}/${orgNr}`)
-      .reply(200, expectedReturn);
-
-    try {
-      const result = await getOrganisasjonsNavn(orgNr);
-      expect(result.data).toEqual(expectedReturn);
-    } catch (error) {
-      throw error;
-    }
+    const result = await getOrganisasjonsNavn(organisasjonsnummer);
+    expect(result).toEqual(expectedReturn);
   });
-
 });
