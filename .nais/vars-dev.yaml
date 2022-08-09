@@ -1,5 +1,6 @@
 ingresses:
   - "https://dagpenger-regel-ui.nais.preprod.local/"
+  - "https://dagpenger-regel-ui.dev.intern.nav.no/"
 
 oidc:
   host_url: https://isso-q.adeo.no:443/isso/oauth2
