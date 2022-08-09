@@ -11,7 +11,10 @@ metadata:
 spec:
   image: {{image}}
   port: 443
-  {{ ingresses }}
+  ingresses:
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}
   env:
     - name: APP_INNTEKT_BASEURL
       value: http://dp-inntekt-api.teamdagpenger.svc.nais.local/
