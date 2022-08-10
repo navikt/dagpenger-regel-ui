@@ -22,7 +22,7 @@ async function handleGet(req, res) {
   if (!session) return res.status(401).end();
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
-  const apiToken = await session.apiToken(audience("dp-inntekt-api"));
+  const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
     headers: {
@@ -39,7 +39,7 @@ async function handlePost(req, res) {
   if (!session) return res.status(401).end();
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
-  const apiToken = await session.apiToken(audience("dp-inntekt-api"));
+  const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
     method: "POST",

@@ -22,11 +22,9 @@ async function handleGet(req, res) {
   if (!session) return res.status(401).end();
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
-  const apiToken = await session.apiToken(audience("dp-inntekt-api"));
+  const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
   console.log(
-    `Doing request for${audience("dp-inntekt-api")}. Token length: ${
-      apiToken.length
-    }`
+    `Doing request for${process.env.INNTEKT_API_AUDIENCE}. Token length: ${apiToken.length}`
   );
   const data = await fetch(uklassifisert(aktorId, vedtakId, beregningsDato), {
     headers: {
@@ -43,7 +41,7 @@ async function handlePost(req, res) {
   if (!session) return res.status(401).end();
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
-  const apiToken = await session.apiToken(audience("dp-inntekt-api"));
+  const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   const data = await fetch(uklassifisert(aktorId, vedtakId, beregningsDato), {
     method: "POST",
