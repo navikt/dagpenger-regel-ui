@@ -1,10 +1,12 @@
+@import "variables.scss";
+
 $width: 250px;
 
 .app {
   margin: 0 auto;
   header {
     .dekorator {
-      background-color: var(navMorkGra);
+      background-color: $navMorkGra;
       color: white;
       padding: 16px;
       display: flex;
@@ -20,7 +22,7 @@ $width: 250px;
 
   .feilmelding {
     color: white;
-    background-color: var(navRod);
+    background-color: $navRod;
     padding: 16px;
   }
 
@@ -36,7 +38,7 @@ $width: 250px;
     z-index: 3;
     left: 0;
     padding: 16px 0;
-    border-top: 1px solid var(navGra40);
+    border-top: 1px solid $navGra40;
   }
 }
 
@@ -47,18 +49,18 @@ $width: 250px;
   width: 100%;
   margin-bottom: 24px;
   position: relative;
-  border-bottom: 1px solid var(navGra20);
+  border-bottom: 1px solid $navGra20;
   transition: all 0.3s ease-in-out;
 
   .item {
     padding: 16px;
-    border-right: 1px solid var(navGra20);
-    border-top: 1px solid var(navGra20);
+    border-right: 1px solid $navGra20;
+    border-top: 1px solid $navGra20;
 
     &.arbeidsgiver {
-      background-color: var(navLysGra);
-      border-left: 1px solid var(navGra20);
-      border-right: 4px solid var(navGra40);
+      background-color: $navLysGra;
+      border-left: 1px solid $navGra20;
+      border-right: 4px solid $navGra40;
       position: sticky;
       left: 0;
       min-width: $width;
@@ -67,12 +69,12 @@ $width: 250px;
 
     &.maaned {
       min-width: $width;
-      background: var(navMorkGra);
+      background: $navMorkGra;
       color: white;
       text-transform: capitalize;
 
       &.total {
-        background: var(navMorkGra);
+        background: $navMorkGra;
       }
     }
 
@@ -82,7 +84,7 @@ $width: 250px;
       }
 
       &.total {
-        background: var(navMorkGra);
+        background: $navMorkGra;
         color: white;
         padding: 32px;
       }
@@ -111,7 +113,7 @@ input::-webkit-inner-spin-button {
   width: 500px;
 
   .okavbrytmodal--ikon {
-    border-right: 1px solid var(navGra40);
+    border-right: 1px solid $navGra40;
     padding: 8px 18px;
 
     svg {
@@ -146,7 +148,7 @@ input::-webkit-inner-spin-button {
   }
 
   &.dashed {
-    border-bottom: 3px dashed var(navGra20);
+    border-bottom: 3px dashed $navGra20;
     margin-left: -10px;
     margin-top: 13px;
   }
@@ -161,16 +163,16 @@ input::-webkit-inner-spin-button {
   border: 0;
 
   &.ikon--slett {
-    fill: var(navRod);
+    fill: $navRod;
   }
 
   &.ikon--leggtil {
-    fill: var(navBla);
+    fill: $navBla;
   }
 
   &.ikon--rediger {
     margin-right: 6px;
-    color: var(navOransje);
+    color: $navOransje;
 
     svg {
       vertical-align: middle;

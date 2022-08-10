@@ -31,6 +31,7 @@ export const lagreInntekt = async (request, isUncached, uri) => {
     vedtakId: uri.vedtakId,
     beregningsDato: uri.beregningsDato,
   });
+
   const url = isUncached
     ? `${apiUri}?${params}`
     : `${apiUri}/uncached?${params}`;

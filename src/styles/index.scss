@@ -1,5 +1,5 @@
 @import "~nav-frontend-core/dist/main.css";
-
+@import "variables.scss";
 * {
   box-sizing: border-box;
 }
@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  color: var(navMorkGra);
+  color: $navMorkGra;
   height: 100%;
   line-height: 1.42857143;
   margin: 0;
