@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY scripts/ /usr/src/app/scripts
 COPY package*.json /usr/src/app/
-RUN npm ci --prefer-offline --no-audit
+RUN npm ci --prefer-offline --no-audit --legacy-peer-deps
 
 COPY . /usr/src/app
 RUN npm run build
