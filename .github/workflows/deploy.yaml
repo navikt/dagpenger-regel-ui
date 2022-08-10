@@ -14,7 +14,11 @@ jobs:
         with:
           node-version: 16
           cache: npm
-      - run: npm ci --legacy-peer-deps
+          registry-url: "https://npm.pkg.github.com"
+      - run: npm ci --legacy-peer-deps --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - run: npm rebuild && npm run prepare --if-present
       - run: npm run build --if-present
       - run: npm test
         env:
@@ -27,6 +31,13 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+          registry-url: "https://npm.pkg.github.com"
+
+      - run: cp $NPM_CONFIG_USERCONFIG .npmrc
       - name: Build and push image
         uses: docker/build-push-action@v3
         with:
@@ -35,6 +46,8 @@ jobs:
           push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          secrets: |
+            "NODE_AUTH_TOKEN=${{ secrets.READER_TOKEN }}"
 
   deploy-dev:
     needs: build

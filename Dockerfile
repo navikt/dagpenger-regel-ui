@@ -3,8 +3,13 @@ FROM node:16 AS builder
 WORKDIR /usr/src/app
 
 COPY scripts/ /usr/src/app/scripts
-COPY package*.json /usr/src/app/
-RUN npm ci --prefer-offline --no-audit --legacy-peer-deps
+COPY .npmrc package*.json /usr/src/app/
+RUN --mount=type=secret,id=NODE_AUTH_TOKEN \
+    NODE_AUTH_TOKEN=$(cat /run/secrets/NODE_AUTH_TOKEN) \
+    npm ci --prefer-offline --no-audit --ignore-scripts --legacy-peer-deps
+
+# Kjør evt. script uten NODE_AUTH_TOKEN tilgjengelig
+RUN npm rebuild && npm run prepare --if-present
 
 COPY . /usr/src/app
 RUN npm run build
