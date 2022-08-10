@@ -20,6 +20,9 @@ spec:
   azure:
     application:
       enabled: true
+    sidecar:
+      enabled: true
+      autoLogin: false
   liveness:
     path: /api/isalive
   readiness:
