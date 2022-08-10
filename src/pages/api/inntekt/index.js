@@ -11,9 +11,10 @@ export default async function handler(req, res) {
     case "POST":
       await handlePost(req, res);
       break;
+    default:
+      res.status(405).text("Method Not Allowed");
+      break;
   }
-
-  res.status(405).text("Method Not Allowed");
 }
 
 async function handleGet(req, res) {
