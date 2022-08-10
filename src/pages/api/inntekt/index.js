@@ -22,7 +22,11 @@ async function handleGet(req, res) {
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
   const apiToken = await session.apiToken(audience("dp-inntekt-api"));
-
+  console.log(
+    `Doing request for${audience("dp-inntekt-api")}. Token length: ${
+      apiToken.length
+    }`
+  );
   const data = await fetch(uklassifisert(aktorId, vedtakId, beregningsDato), {
     headers: {
       Accept: `application/json`,
