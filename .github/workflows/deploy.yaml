@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npm run build --if-present
       - run: npm test
         env:
@@ -35,8 +35,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  deploy-preprod:
-    name: Deploy to Preprod
+  deploy-dev:
     needs: build
     #if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
@@ -51,8 +50,7 @@ jobs:
           PRINT_PAYLOAD: true
 
   deploy-prod:
-    name: Deploy to Prod
-    needs: [ build, deploy-preprod ]
+    needs: [ build, deploy-dev ]
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
