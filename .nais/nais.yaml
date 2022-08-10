@@ -13,10 +13,16 @@ spec:
   {{#each ingresses as |url|}}
      - {{url}}
   {{/each}}
-  env:
-    - name: APP_INNTEKT_BASEURL
-      value: http://dp-inntekt-api.teamdagpenger.svc.nais.local/
   webproxy: true
+  env:
+    - name: INNTEKT_API
+      value: https://{{inntekt_api.ingress}}
+    - name: INNTEKT_API_AUDIENCE
+      value: {{inntekt_api.audience}}
+  accessPolicy:
+    outbound:
+      external:
+        - host: {{inntekt_api.ingress}}
   azure:
     application:
       enabled: true
@@ -29,8 +35,6 @@ spec:
     path: /api/isready
   prometheus:
     enabled: false
-  vault:
-    enabled: true
   replicas:
     min: 2
     max: 4

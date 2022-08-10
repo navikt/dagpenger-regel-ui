@@ -4,7 +4,7 @@ const rootUri = "/v1/inntekt";
 
 export const uklassifisert = (aktørId, vedtakId, beregningsDato) =>
   join(
-    process.env.APP_INNTEKT_BASEURL,
+    process.env.INNTEKT_API,
     rootUri,
     "uklassifisert",
     aktørId,
@@ -15,7 +15,7 @@ export const uklassifisert = (aktørId, vedtakId, beregningsDato) =>
 
 export const uncached = (aktørId, vedtakId, beregningsDato) =>
   join(
-    process.env.APP_INNTEKT_BASEURL,
+    process.env.INNTEKT_API,
     rootUri,
     "uklassifisert/uncached",
     aktørId,
@@ -25,4 +25,4 @@ export const uncached = (aktørId, vedtakId, beregningsDato) =>
   );
 
 export const verdikoder = () =>
-  join(process.env.APP_INNTEKT_BASEURL, rootUri, "verdikoder");
+  join(process.env.INNTEKT_API, rootUri, "verdikoder");
