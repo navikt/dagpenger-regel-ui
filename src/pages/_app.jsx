@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import { init } from "@sentry/browser";
 import { Verdikoder } from "../lib/Context/Verdikoder";
 import Header from "../lib/Components/Header";
-import ErrorBoundary from "../lib/Components/ErrorBoundary";
 
 import "../styles/index.scss";
 import "../styles/app.scss";
@@ -19,25 +17,13 @@ if (process.env.NODE_ENVIRONMENT == "production") {
 }
 
 function App({ Component, pageProps }) {
-  const [errors, setError] = useState({
-    hasError: false,
-    status: null,
-    statusText: null,
-  });
-  // apply interceptor on response
-  axios.interceptors.response.use(
-    (response) => response,
-    (error) => setError({ hasError: true, ...error })
-  );
   return (
     <Verdikoder>
       <div className="app">
         <Header />
-        <ErrorBoundary apiErrors={errors}>
-          <div role="main" className="main">
-            <Component {...pageProps} />
-          </div>
-        </ErrorBoundary>
+        <div role="main" className="main">
+          <Component {...pageProps} />
+        </div>
       </div>
     </Verdikoder>
   );

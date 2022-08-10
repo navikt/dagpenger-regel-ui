@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FieldArray, Form, withFormik } from "formik";
 import AlertStripe from "nav-frontend-alertstriper";
-import isEqual from "lodash.isequal";
+import { isEqual } from "lodash";
 import { Element, Undertekst } from "nav-frontend-typografi";
 import Modal from "nav-frontend-modal";
 import { Hovedknapp, Knapp } from "nav-frontend-knapper";
