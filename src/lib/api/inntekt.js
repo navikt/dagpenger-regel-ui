@@ -1,6 +1,6 @@
 import { join } from "path";
 
-const rootUri = "/api/v1/inntekt";
+const rootUri = "/v1/inntekt";
 
 export const uklassifisert = (aktørId, vedtakId, beregningsDato) =>
   join(
