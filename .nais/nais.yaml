@@ -1,18 +1,18 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-  name: dp-soknadsdialog
+  name: dagpenger-regel-ui
   namespace: teamdagpenger
   labels:
     team: teamdagpenger
-    app: dp-soknadsdialog
-  annotations:
-    nais.io/security-does-not-matter: "true"
+    app: dagpenger-regel-ui
 spec:
   image: {{image}}
-  port: 443
+  port: 3000
   ingresses:
-    {{ ingresses }}
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}
   env:
     - name: APP_INNTEKT_BASEURL
       value: http://dp-inntekt-api.teamdagpenger.svc.nais.local/
