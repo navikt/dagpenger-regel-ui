@@ -1,3 +1,3 @@
-export default function (req, res) {
+export default function isready(req, res) {
   res.status(200).end("ready");
 }

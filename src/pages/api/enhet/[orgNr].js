@@ -1,4 +1,4 @@
-export default async function (req, res) {
+export default async function enhet(req, res) {
   const { orgNr } = req.query;
 
   const data = await fetch(
