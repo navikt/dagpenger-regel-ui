@@ -1,7 +1,6 @@
 import { uklassifisert } from "../../../lib/api/inntekt";
 import { getSession } from "@navikt/dp-auth/session";
 import { provider } from "../../../middleware";
-import { audience } from "../../../lib/api/fetcher";
 
 export default async function handler(req, res) {
   switch (req.method) {
