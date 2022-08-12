@@ -61,7 +61,7 @@ jobs:
   deploy-preprod:
     name: Deploy to Preprod
     needs: build
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/masterss'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
