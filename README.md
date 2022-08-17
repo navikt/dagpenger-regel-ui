@@ -17,7 +17,7 @@ Interne henvendelser kan sendes via Slack i kanalen #team-dagpenger.
 
 ## Utvikling av applikasjonen
 
-For å kjøre enkelte av testene kreves det at Docker kjører.
+For å kjøre enkelte av testene kreves det at Docker kjører. Bruk colima.
 
 [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
