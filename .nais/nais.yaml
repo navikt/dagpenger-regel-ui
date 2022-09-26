@@ -26,6 +26,7 @@ spec:
   azure:
     application:
       enabled: true
+      tenant: nav.no
     sidecar:
       enabled: true
       autoLogin: false
