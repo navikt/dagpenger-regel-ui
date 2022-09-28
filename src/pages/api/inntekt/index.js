@@ -1,4 +1,4 @@
-import { uklassifisert } from "../../../lib/api/inntekt";
+import inntekt from "../../../lib/api/inntekt";
 import { getSession } from "@navikt/dp-auth/session";
 import { provider } from "../../../middleware";
 
@@ -22,17 +22,15 @@ async function handleGet(req, res) {
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
-  console.log(
-    `Doing request for${process.env.INNTEKT_API_AUDIENCE}. Token length: ${apiToken.length}`
-  );
-  const data = await fetch(uklassifisert(aktorId, vedtakId, beregningsDato), {
-    headers: {
-      Accept: `application/json`,
-      Authorization: `Bearer ${apiToken}`,
-    },
-  });
 
-  res.json(await data.json());
+  const data = await inntekt.getUklassifisert(
+    aktorId,
+    vedtakId,
+    beregningsDato,
+    apiToken
+  );
+
+  res.json(data);
 }
 
 async function handlePost(req, res) {
@@ -42,15 +40,12 @@ async function handlePost(req, res) {
   const { aktorId, vedtakId, beregningsDato } = req.query;
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
-  const data = await fetch(uklassifisert(aktorId, vedtakId, beregningsDato), {
-    method: "POST",
-    headers: {
-      Accept: `application/json`,
-      Authorization: `Bearer ${apiToken}`,
-      "Content-type": "application/json",
-    },
-    body: req.body,
-  });
-
-  res.json(await data.json());
+  let response = await inntekt.postUklassifisert(
+    aktorId,
+    vedtakId,
+    beregningsDato,
+    apiToken,
+    req.body
+  );
+  res.json(response);
 }
