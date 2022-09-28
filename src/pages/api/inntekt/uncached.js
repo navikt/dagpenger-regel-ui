@@ -40,8 +40,6 @@ async function handlePost(req, res) {
   const { aktorId, vedtakId, beregningsDato } = req.query;
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
-  console.log("request");
-  console.log(req.body, typeof req.body);
   const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
     method: "POST",
     headers: {
