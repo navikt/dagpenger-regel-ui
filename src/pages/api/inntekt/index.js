@@ -48,7 +48,7 @@ async function handlePost(req, res) {
       Accept: `application/json`,
       Authorization: `Bearer ${apiToken}`,
     },
-    body: JSON.stringify(req.body),
+    body: req.body,
   });
 
   res.json(await data.json());
