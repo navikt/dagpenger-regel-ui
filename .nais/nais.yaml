@@ -1,0 +1,47 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: dagpenger-regel-ui
+  namespace: teamdagpenger
+  labels:
+    team: teamdagpenger
+    app: dagpenger-regel-ui
+spec:
+  image: {{image}}
+  port: 3000
+  ingresses:
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}
+  webproxy: true
+  env:
+    - name: INNTEKT_API
+      value: https://{{inntekt_api.ingress}}
+    - name: INNTEKT_API_AUDIENCE
+      value: {{inntekt_api.audience}}
+  accessPolicy:
+    outbound:
+      external:
+        - host: {{inntekt_api.ingress}}
+  azure:
+    application:
+      enabled: true
+    sidecar:
+      enabled: true
+      autoLogin: false
+  liveness:
+    path: /api/isalive
+  readiness:
+    path: /api/isready
+  prometheus:
+    enabled: false
+  replicas:
+    min: 2
+    max: 4
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 256Mi
+    requests:
+      cpu: 500m
+      memory: 128Mi

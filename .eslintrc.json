@@ -1,11 +1,6 @@
 {
   "extends": [
-    "react-app",
-    "airbnb",
+    "next",
     "plugin:prettier/recommended"
-  ],
-  "rules": {
-    "import/no-named-as-default": 0
-  }
+  ]
 }
-

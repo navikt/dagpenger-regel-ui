@@ -1,0 +1,5 @@
+ingresses:
+  - "https://dagpenger-regel-ui.dev.intern.nav.no/"
+inntekt_api:
+  ingress: dp-inntekt-api.dev-fss-pub.nais.io
+  audience: api://dev-fss.teamdagpenger.dp-inntekt-api/.default

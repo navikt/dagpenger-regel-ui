@@ -1,55 +1,45 @@
-import axios from 'axios';
+import { fetcher } from "./api/fetcher";
+import { join } from "path";
 
-const apiUri = '/api/v1/inntekt';
-const apiUklassifisertUri = `${apiUri}/uklassifisert`;
-const apiUncachedUri = `${apiUklassifisertUri}/uncached`;
-const kontekst = 'vedtak';
+const apiUri = join(process.env.BASE_URL || "", "/api/inntekt");
 
-export const getInntekt = async uri => {
-  try {
-    return await axios({
-      method: 'get',
-      url: `${apiUklassifisertUri}/${uri.aktørId}/${kontekst}/${uri.vedtakId}/${uri.beregningsDato}`,
-    });
-  } catch (error) {
-    return error;
-  }
+export const getInntekt = async (uri) => {
+  const params = new URLSearchParams({
+    aktorId: uri.aktørId,
+    vedtakId: uri.vedtakId,
+    beregningsDato: uri.beregningsDato,
+  });
+
+  return fetcher(`${apiUri}?${params}`);
 };
 
-export const getUncachedInntekt = async uri => {
-  try {
-    return await axios({
-      method: 'get',
-      url: `${apiUncachedUri}/${uri.aktørId}/${kontekst}/${uri.vedtakId}/${uri.beregningsDato}`,
-    });
-  } catch (error) {
-    return error;
-  }
+export const getUncachedInntekt = async (uri) => {
+  const params = new URLSearchParams({
+    aktorId: uri.aktørId,
+    vedtakId: uri.vedtakId,
+    beregningsDato: uri.beregningsDato,
+  });
+
+  return fetcher(`${apiUri}/uncached?${params}`);
 };
 
 // todo post til uncached hvis henter nye opplysninger
 // todo legge til ${request.aktørId}/${request.vedtakId}/${request.beregningsDato}`,
 export const lagreInntekt = async (request, isUncached, uri) => {
-  try {
-    return await axios({
-      method: 'post',
-      url: isUncached
-        ? `${apiUncachedUri}/${uri.aktørId}/${kontekst}/${uri.vedtakId}/${uri.beregningsDato}`
-        : `${apiUklassifisertUri}/${uri.aktørId}/${kontekst}/${uri.vedtakId}/${uri.beregningsDato}`,
-      data: request,
-    });
-  } catch (error) {
-    return error;
-  }
+  const params = new URLSearchParams({
+    aktorId: uri.aktørId,
+    vedtakId: uri.vedtakId,
+    beregningsDato: uri.beregningsDato,
+  });
+
+  const url = isUncached
+    ? `${apiUri}?${params}`
+    : `${apiUri}/uncached?${params}`;
+
+  return fetcher(url, {
+    method: "post",
+    body: JSON.stringify(request),
+  });
 };
 
-export const getVerdikoder = async () => {
-  try {
-    return await axios({
-      method: 'get',
-      url: `${apiUri}/verdikoder`,
-    });
-  } catch (error) {
-    return error;
-  }
-};
+export const getVerdikoder = async () => fetcher(`${apiUri}/verdikoder`);

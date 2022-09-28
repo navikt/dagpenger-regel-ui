@@ -1,10 +1,32 @@
-FROM navikt/nginx-oidc:latest
+FROM node:16 AS builder
 
-ENV APP_DIR="/app" \
-	APP_PATH_PREFIX="/inntekter" \
-	APP_CALLBACK_PATH="/inntekter/oidc/callback"
+WORKDIR /usr/src/app
 
-COPY build /app/inntekter/
+COPY scripts/ /usr/src/app/scripts
+COPY .npmrc package*.json /usr/src/app/
+RUN --mount=type=secret,id=NODE_AUTH_TOKEN \
+    NODE_AUTH_TOKEN=$(cat /run/secrets/NODE_AUTH_TOKEN) \
+    npm ci --prefer-offline --no-audit --ignore-scripts --legacy-peer-deps
 
-COPY nais/proxy.nginx      /nginx/proxy.nginx
-EXPOSE 3000 443
+# Kjør evt. script uten NODE_AUTH_TOKEN tilgjengelig
+RUN npm rebuild && npm run prepare --if-present
+
+COPY . /usr/src/app
+RUN npm run build
+
+FROM node:16-alpine AS runtime
+
+WORKDIR /usr/src/app
+
+ENV PORT=3000 \
+    NODE_ENV=production
+
+COPY --from=builder /usr/src/app/.env* /usr/src/app/
+COPY --from=builder /usr/src/app/public /usr/src/app/public
+COPY --from=builder /usr/src/app/.next/static /usr/src/app/.next/static
+COPY --from=builder /usr/src/app/.next/standalone /usr/src/app/
+
+EXPOSE 3000
+USER node
+
+CMD ["node", "server.js"]
