@@ -1,7 +1,6 @@
 import { uncached } from "../../../lib/api/inntekt";
 import { getSession } from "@navikt/dp-auth/session";
 import { provider } from "../../../middleware";
-import { audience } from "../../../lib/api/fetcher";
 
 export default async function handler(req, res) {
   switch (req.method) {
@@ -46,6 +45,7 @@ async function handlePost(req, res) {
     headers: {
       Accept: `application/json`,
       Authorization: `Bearer ${apiToken}`,
+      "Content-type": "application/json",
     },
     body: JSON.stringify(req.body),
   });
