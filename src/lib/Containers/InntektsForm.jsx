@@ -30,6 +30,7 @@ function InntektsForm(props) {
   const { arbeidsgivere } = values;
 
   const bekreftManuellEndring = () => {
+    console.log("bekreft", values);
     if (values.redigertAvSaksbehandler) {
       setBekreftModal(true);
     }
