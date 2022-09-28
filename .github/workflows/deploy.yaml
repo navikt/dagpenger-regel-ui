@@ -68,8 +68,8 @@ jobs:
           PRINT_PAYLOAD: true
 
   deploy-prod:
-    needs: [ build, deploy-dev ]
-    if: github.ref == 'refs/heads/masters'
+    needs: [ deploy-dev ]
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

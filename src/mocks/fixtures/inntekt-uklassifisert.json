@@ -618,8 +618,8 @@
     "pnr" :	"12345678910",
     "navn" : "Navn Navnesen"
   },
-  "redigertAvSaksbehandler": true,
-  "manueltRedigert": true,
+  "redigertAvSaksbehandler": false,
+  "manueltRedigert": false,
   "timestamp": "2019-06-24T11:03:56.907821"
 }
 

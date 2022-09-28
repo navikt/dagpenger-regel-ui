@@ -621,8 +621,8 @@ Object {
     "navn": "Navn Navnesen",
     "pnr": "12345678910",
   },
-  "manueltRedigert": true,
-  "redigertAvSaksbehandler": true,
+  "manueltRedigert": false,
+  "redigertAvSaksbehandler": false,
   "timestamp": "2019-06-24T11:03:56.907821",
 }
 `;
