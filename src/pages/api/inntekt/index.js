@@ -47,6 +47,7 @@ async function handlePost(req, res) {
     headers: {
       Accept: `application/json`,
       Authorization: `Bearer ${apiToken}`,
+      "Content-type": "application/json",
     },
     body: req.body,
   });
