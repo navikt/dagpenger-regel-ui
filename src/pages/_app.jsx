@@ -13,7 +13,7 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 if (process.env.NODE_ENVIRONMENT == "production") {
   init({
     dsn: "https://c55f9219358540998cb57ae406b9ccf1@sentry.gc.nav.no/150",
-    tracesSampleRate: 1.0
+    tracesSampleRate: 1.0,
   });
 }
 
