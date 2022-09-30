@@ -40,12 +40,19 @@ async function handlePost(req, res) {
   const { aktorId, vedtakId, beregningsDato } = req.query;
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
-  let response = await inntekt.postUklassifisert(
-    aktorId,
-    vedtakId,
-    beregningsDato,
-    apiToken,
-    req.body
-  );
-  res.json(response);
+  try {
+    let response = await inntekt.postUklassifisert(
+      aktorId,
+      vedtakId,
+      beregningsDato,
+      apiToken,
+      req.body
+    );
+    res.json(response);
+  } catch (err) {
+    console.log(
+      `Klarte ikke å håndtere POST mot uklassifisert inntekt. Feilmelding: ${err.message}`
+    );
+    res.status(500).send("Klarte ikke å oppdatere inntekt");
+  }
 }
