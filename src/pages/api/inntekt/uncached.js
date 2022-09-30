@@ -35,20 +35,28 @@ async function handleGet(req, res) {
 
 async function handlePost(req, res) {
   const session = await getSession(provider, { req });
+  console.log(`Forsøker å oppdatere inntekt`);
   if (!session) return res.status(401).end();
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
-  const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
-    method: "POST",
-    headers: {
-      Accept: `application/json`,
-      Authorization: `Bearer ${apiToken}`,
-      "Content-type": "application/json",
-    },
-    body: req.body,
-  });
+  try {
+    const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
+      method: "POST",
+      headers: {
+        Accept: `application/json`,
+        Authorization: `Bearer ${apiToken}`,
+        "Content-type": "application/json",
+      },
+      body: req.body,
+    });
 
-  res.json(await data.json());
+    res.json(await data.json());
+  } catch (e) {
+    console.log(
+      `Klarte ikke å håndtere POST mot uklassifisert inntekt. Feilmelding: ${err.message}`
+    );
+    res.status(500).send("Klarte ikke å oppdatere inntekt");
+  }
 }
