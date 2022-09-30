@@ -6,6 +6,12 @@ metadata:
   labels:
     team: teamdagpenger
     app: dagpenger-regel-ui
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-body-size: "8m"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "800k"
 spec:
   image: {{image}}
   port: 3000
