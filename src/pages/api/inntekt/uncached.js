@@ -42,6 +42,8 @@ async function handlePost(req, res) {
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   try {
+    let body = req.body;
+    console.log(`request body: ${JSON.stringify(body)}`);
     const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
       method: "POST",
       headers: {
@@ -49,7 +51,7 @@ async function handlePost(req, res) {
         Authorization: `Bearer ${apiToken}`,
         "Content-type": "application/json",
       },
-      body: req.body,
+      body: body,
     });
 
     res.json(await data.json());
