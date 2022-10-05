@@ -34,7 +34,7 @@ spec:
       enabled: true
     sidecar:
       enabled: true
-      autoLogin: false
+      autoLogin: true
   liveness:
     path: /api/isalive
   readiness:
