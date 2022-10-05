@@ -1,6 +1,6 @@
-import { uncached } from "../../../lib/api/inntekt";
-import { getSession } from "@navikt/dp-auth/session";
-import { azureAd } from "@navikt/dp-auth";
+import {uncached} from "../../../lib/api/inntekt";
+import {getSession} from "@navikt/dp-auth/session";
+import {azureAd} from "@navikt/dp-auth";
 
 const provider = azureAd;
 
@@ -44,8 +44,6 @@ async function handlePost(req, res) {
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   try {
-    let body = req.body;
-    console.log(`request body: ${JSON.stringify(body)}`);
     const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
       method: "POST",
       headers: {
@@ -53,7 +51,7 @@ async function handlePost(req, res) {
         Authorization: `Bearer ${apiToken}`,
         "Content-type": "application/json",
       },
-      body: body,
+      body: req.body,
     });
 
     res.json(await data.json());
