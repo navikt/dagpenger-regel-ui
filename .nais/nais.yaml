@@ -33,7 +33,7 @@ spec:
     application:
       enabled: true
     sidecar:
-      enabled: true
+      enabled: false
       autoLogin: false
   liveness:
     path: /api/isalive
