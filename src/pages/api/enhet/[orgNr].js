@@ -5,5 +5,9 @@ export default async function enhet(req, res) {
     `${process.env.INNTEKT_API}/v1/enhetsregisteret/enhet/${orgNr}`
   );
 
-  res.json(await data.json());
+  if (data.ok) {
+    res.json(await data.json());
+  } else {
+    res.json({ navn: "Fant ikke bedrift i brreg" });
+  }
 }
