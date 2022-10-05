@@ -1,6 +1,8 @@
 import inntekt from "../../../lib/api/inntekt";
 import { getSession } from "@navikt/dp-auth/session";
-import { provider } from "../../../middleware";
+import { azureAd } from "@navikt/dp-auth";
+
+const provider = azureAd;
 
 export default async function handler(req, res) {
   switch (req.method) {

@@ -1,6 +1,8 @@
 import { uncached } from "../../../lib/api/inntekt";
 import { getSession } from "@navikt/dp-auth/session";
-import { provider } from "../../../middleware";
+import { azureAd } from "@navikt/dp-auth";
+
+const provider = azureAd;
 
 export default async function handler(req, res) {
   switch (req.method) {
@@ -34,12 +36,12 @@ async function handleGet(req, res) {
 }
 
 async function handlePost(req, res) {
-  const session = await getSession(provider, { req });
+  // const session = await getSession(provider, { req });
   console.log(`Forsøker å oppdatere inntekt`);
-  if (!session) return res.status(401).end();
+  // if (!session) return res.status(401).end();
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
-  const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
+  // const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   try {
     let body = req.body;
@@ -48,7 +50,7 @@ async function handlePost(req, res) {
       method: "POST",
       headers: {
         Accept: `application/json`,
-        Authorization: `Bearer ${apiToken}`,
+        Authorization: `Bearer token}`,
         "Content-type": "application/json",
       },
       body: body,
