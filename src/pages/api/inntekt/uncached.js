@@ -36,12 +36,12 @@ async function handleGet(req, res) {
 }
 
 async function handlePost(req, res) {
-  // const session = await getSession(provider, { req });
+  const session = await getSession(provider, { req });
   console.log(`Forsøker å oppdatere inntekt`);
-  // if (!session) return res.status(401).end();
+  if (!session) return res.status(401).end();
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
-  // const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
+  const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   try {
     let body = req.body;
@@ -50,7 +50,7 @@ async function handlePost(req, res) {
       method: "POST",
       headers: {
         Accept: `application/json`,
-        Authorization: `Bearer token}`,
+        Authorization: `Bearer ${apiToken}`,
         "Content-type": "application/json",
       },
       body: body,
