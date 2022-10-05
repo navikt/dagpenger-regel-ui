@@ -55,8 +55,12 @@ export const findArbeidsgivere = async (inntekt) => {
   );
 
   const medNavn = arbeidsgivere.map(async (a) => {
-    const { navn } = await getOrganisasjonsNavn(a.identifikator);
-    return { ...a, navn };
+    if (a.aktoerType === "NATURLIG_IDENT") {
+      return { ...a, navn: "Privatperson" };
+    } else {
+      const { navn } = await getOrganisasjonsNavn(a.identifikator);
+      return { ...a, navn };
+    }
   });
 
   return Array.from(await Promise.all(medNavn)).sort(
