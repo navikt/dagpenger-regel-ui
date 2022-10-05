@@ -1,6 +1,6 @@
-import {uncached} from "../../../lib/api/inntekt";
-import {getSession} from "@navikt/dp-auth/session";
-import {azureAd} from "@navikt/dp-auth";
+import { uncached } from "../../../lib/api/inntekt";
+import { getSession } from "@navikt/dp-auth/session";
+import { azureAd } from "@navikt/dp-auth";
 
 const provider = azureAd;
 
