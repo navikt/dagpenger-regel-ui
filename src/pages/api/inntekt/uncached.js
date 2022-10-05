@@ -2,12 +2,6 @@ import { uncached } from "../../../lib/api/inntekt";
 import { getSession } from "@navikt/dp-auth/session";
 import { provider } from "../../../middleware";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export default async function handler(req, res) {
   switch (req.method) {
     case "GET":
@@ -47,25 +41,9 @@ async function handlePost(req, res) {
   const { aktorId, vedtakId, beregningsDato } = req.query;
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
-  const buffers = [];
-
-  await new Promise((resolve) => {
-    req
-      .on("readable", () => {
-        const chunk = req.read();
-        if (chunk !== null) {
-          buffers.push(chunk);
-        }
-      })
-      .on("end", async () => {
-        return resolve(buffers);
-      });
-  });
-
-  let body = Buffer.concat(buffers);
-
   try {
-    console.log(`request body: ${body}`);
+    let body = req.body;
+    console.log(`request body: ${JSON.stringify(body)}`);
     const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
       method: "POST",
       headers: {
