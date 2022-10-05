@@ -1,4 +1,4 @@
 export default function middleware(req, ev) {
-    console.log("Treffer midleware")
-    req.next()
+    console.log("Treffer midleware");
+    req.next();
 }
