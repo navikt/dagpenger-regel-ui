@@ -190,8 +190,8 @@ function Inntekter({ readOnly, visFor }) {
       );
     }
 
-    if (resultat && resultat.data) {
-      const data = set36Måneder(resultat.data);
+    if (resultat) {
+      const data = set36Måneder(resultat);
 
       setInntektdata({ ...data });
       setArbeidsgivere(await findArbeidsgivere(data.inntekt));
