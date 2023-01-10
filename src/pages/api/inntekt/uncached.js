@@ -54,7 +54,9 @@ async function handlePost(req, res) {
       body: req.body,
     });
 
-    res.json(await data.json());
+    const jsonData = await data.json();
+    console.log(`Oppdatert inntekt OK`);
+    res.json(jsonData);
   } catch (e) {
     console.log(
       `Klarte ikke å håndtere POST mot uklassifisert inntekt. Feilmelding: ${e.message}`
