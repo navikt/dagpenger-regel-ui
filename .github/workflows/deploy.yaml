@@ -55,7 +55,7 @@ jobs:
 
   deploy-dev:
     needs: [ test, build ]
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/knut'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
