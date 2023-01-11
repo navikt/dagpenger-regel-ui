@@ -33,8 +33,8 @@ export const lagreInntekt = async (request, isUncached, uri) => {
   });
 
   const url = isUncached
-    ? `${apiUri}?${params}`
-    : `${apiUri}/uncached?${params}`;
+    ? `${apiUri}/uncached?${params}`
+    : `${apiUri}?${params}`;
 
   return fetcher(url, {
     method: "post",
