@@ -48,6 +48,11 @@ async function handlePost(req, res) {
   const { aktorId, vedtakId, beregningsDato } = req.query;
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
+  console.log(
+    "Hva er urlen vi går til for POST?",
+    uncached(aktorId, vedtakId, beregningsDato)
+  );
+
   try {
     const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
       method: "POST",
