@@ -44,7 +44,9 @@ describe("InntektApiClient", () => {
   it("Should fail to save inntekt", async () => {
     const data = { field: "123" };
     server.use(
-      rest.post("/api/inntekt", (req, res, ctx) => res(ctx.status(500)))
+      rest.post("/api/inntekt/uncached", (req, res, ctx) =>
+        res(ctx.status(500))
+      )
     );
 
     await expect(lagreInntekt(data, isUncached, params)).rejects.toThrow(
