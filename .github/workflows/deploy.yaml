@@ -67,16 +67,16 @@ jobs:
           VARS: .nais/vars-dev.yaml
           PRINT_PAYLOAD: true
 
-#  deploy-prod:
-#    needs: [ deploy-dev ]
-#    if: github.ref == 'refs/heads/master'
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: nais/deploy/actions/deploy@master
-#        env:
-#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-#          CLUSTER: prod-gcp
-#          RESOURCE: .nais/nais.yaml
-#          VARS: .nais/vars-prod.yaml
-#          PRINT_PAYLOAD: true
+  deploy-prod:
+    needs: [ deploy-dev ]
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-gcp
+          RESOURCE: .nais/nais.yaml
+          VARS: .nais/vars-prod.yaml
+          PRINT_PAYLOAD: true

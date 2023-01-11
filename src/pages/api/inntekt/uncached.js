@@ -1,6 +1,8 @@
 import { uncached } from "../../../lib/api/inntekt";
 import { getSession } from "@navikt/dp-auth/session";
-import { provider } from "../../../middleware";
+import { azureAd } from "@navikt/dp-auth";
+
+const provider = azureAd;
 
 export default async function handler(req, res) {
   switch (req.method) {
@@ -42,8 +44,6 @@ async function handlePost(req, res) {
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   try {
-    let body = req.body;
-    console.log(`request body: ${JSON.stringify(body)}`);
     const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
       method: "POST",
       headers: {
@@ -51,10 +51,12 @@ async function handlePost(req, res) {
         Authorization: `Bearer ${apiToken}`,
         "Content-type": "application/json",
       },
-      body: body,
+      body: req.body,
     });
 
-    res.json(await data.json());
+    const jsonData = await data.json();
+    console.log(`Oppdatert inntekt OK`);
+    res.json(jsonData);
   } catch (e) {
     console.log(
       `Klarte ikke å håndtere POST mot uklassifisert inntekt. Feilmelding: ${e.message}`
