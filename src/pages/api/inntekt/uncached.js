@@ -25,6 +25,11 @@ async function handleGet(req, res) {
   const { aktorId, vedtakId, beregningsDato } = req.query;
   const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
+  console.log(
+    "Hva er urlen vi går til?",
+    uncached(aktorId, vedtakId, beregningsDato)
+  );
+
   const data = await fetch(uncached(aktorId, vedtakId, beregningsDato), {
     headers: {
       Accept: `application/json`,
