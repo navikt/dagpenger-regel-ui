@@ -32,6 +32,10 @@ async function handleGet(req, res) {
     },
   });
 
+  if (!data.ok) {
+    return res.status(data.status).send(data.statusText);
+  }
+
   res.json(await data.json());
 }
 
@@ -53,6 +57,10 @@ async function handlePost(req, res) {
       },
       body: req.body,
     });
+
+    if (!data.ok) {
+      return res.status(data.status).send(data.statusText);
+    }
 
     const jsonData = await data.json();
     console.log(`Oppdatert inntekt OK`);
