@@ -55,7 +55,7 @@ jobs:
 
   deploy-dev:
     needs: [ test, build ]
-    if: github.ref == 'refs/heads/returner-feil-i-api'
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
