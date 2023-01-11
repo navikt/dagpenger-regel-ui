@@ -151,6 +151,7 @@ function Inntekter({ readOnly, visFor }) {
   const [arbeidsgivere, setArbeidsgivere] = useState([]);
   const [hentInntektStatus, setHentInntekttatus] = useState(false);
   const [isHentInntektModalOpen, setHentInntektModal] = useState(false);
+  const [hentetInntektPåNytt, setHentetInntektPåNytt] = useState(false);
 
   // todo endre struktur fra backend slik at vi slipper å bruke til å hacke ting på plass
   // DOM order matches the visual order, improving navigation for assistive technology. Learn more.
@@ -195,6 +196,7 @@ function Inntekter({ readOnly, visFor }) {
 
       setInntektdata({ ...data });
       setArbeidsgivere(await findArbeidsgivere(data.inntekt));
+      setHentetInntektPåNytt(true);
     }
     setHentInntekttatus(true);
   };
@@ -308,6 +310,7 @@ function Inntekter({ readOnly, visFor }) {
           ...inntektdata,
           arbeidsgivere: [...arbeidsgivere],
         }}
+        hentetInntektPåNytt
       />
     </>
   );

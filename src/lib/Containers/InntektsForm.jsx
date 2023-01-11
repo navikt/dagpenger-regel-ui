@@ -25,12 +25,13 @@ function InntektsForm(props) {
     status,
     errors,
     isSubmitting,
+    hentetInntektPåNytt,
   } = props;
 
   const { arbeidsgivere } = values;
 
   const bekreftManuellEndring = () => {
-    if (values.redigertAvSaksbehandler || dirty) {
+    if (values.redigertAvSaksbehandler || hentetInntektPåNytt || dirty) {
       setBekreftModal(true);
     }
   };
@@ -127,6 +128,7 @@ InntektsForm.propTypes = {
   hentInntektStatus: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
     .isRequired,
   status: PropTypes.shape(),
+  hentetInntektPåNytt: PropTypes.bool.isRequired,
 };
 
 InntektsForm.defaultProps = {
