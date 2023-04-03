@@ -24,6 +24,7 @@ ENV PORT=3000 \
 COPY --from=builder /usr/src/app/.env* /usr/src/app/
 COPY --from=builder /usr/src/app/public /usr/src/app/public
 COPY --from=builder /usr/src/app/.next/static /usr/src/app/.next/static
+COPY --from=builder /usr/src/app/.next/standalone /usr/src/app/
 
 EXPOSE 3000
 USER node
