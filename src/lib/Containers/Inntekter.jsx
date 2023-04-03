@@ -22,10 +22,10 @@ import { uniqBy } from "lodash";
 
 const getKjønn = (fødselsnr = "") => {
   if (Number(fødselsnr.charAt(8)) % 2 === 0) {
-    return <KvinneIkon />;
+    return <img src={KvinneIkon} alt="" />;
   }
 
-  return <MannIkon />;
+  return <img src={MannIkon} alt="" />;
 };
 
 const sendTilbakemelding = () => {

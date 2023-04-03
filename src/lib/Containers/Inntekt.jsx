@@ -94,7 +94,7 @@ function Inntekt({ readOnly, inntekter, virksomhet, columnId, monthIndex }) {
                                 onClick={() => setSlettInntektModal(index)}
                                 title="Slett inntekt"
                               >
-                                <SlettIkon />
+                                <img src={SlettIkon} alt="" />;
                               </button>
 
                               <OkAvbrytModal

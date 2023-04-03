@@ -19,7 +19,7 @@ export function OkAvbrytModal({ isOpen, text, avbrytCallback, OkCallback }) {
         <div className="flex">
           <div className="flexcolumn">
             <div className="okavbrytmodal--ikon">
-              <AdvarselIkon />
+              <img src={AdvarselIkon} alt="" />
             </div>
           </div>
           <div className="flexcolumn okavbrytmodal--text">
