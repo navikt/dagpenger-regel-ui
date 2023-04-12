@@ -10,7 +10,7 @@ import EditIkon from "../../assets/svg/editert.svg";
 function EditedIkon() {
   return (
     <span className="ikon ikon--rediger">
-      <EditIkon />
+      <img src={EditIkon} alt="" />;
     </span>
   );
 }

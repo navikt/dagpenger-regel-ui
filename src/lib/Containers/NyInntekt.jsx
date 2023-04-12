@@ -35,7 +35,7 @@ function NyInntekt(props) {
         <div className="flex">
           <div className="flexcolumn">
             <div className="okavbrytmodal--ikon">
-              <GodkjentIkon />
+              <img src={GodkjentIkon} alt="" />;
             </div>
           </div>
           <div className="flexcolumn okavbrytmodal--text">
