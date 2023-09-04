@@ -9,8 +9,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "test": "jest",
-    "snyk-protect": "snyk-protect",
-    "prepare": "./scripts/strip-less && npm run snyk-protect && husky install"
+    "prepare": "./scripts/strip-less && husky install"
   },
   "dependencies": {
     "@navikt/dp-auth": "^0.1.6",
@@ -55,7 +54,6 @@
     "react-modal": "^3.16.1"
   },
   "devDependencies": {
-    "@snyk/protect": "^1.984.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "enzyme": "^3.10.0",
@@ -71,7 +69,6 @@
     "react-test-renderer": "^18.2.0",
     "sass": "^1.54.4"
   },
-  "snyk": true,
   "msw": {
     "workerDirectory": "public"
   }
