@@ -12,7 +12,7 @@
     "prepare": "./scripts/strip-less && husky install"
   },
   "dependencies": {
-    "@navikt/dp-auth": "^0.3.7",
+    "@navikt/dp-auth": "^0.1.6",
     "@navikt/fnrvalidator": "^1.3.0",
     "@sentry/browser": "^7.9.0",
     "classnames": "^2.3.2",
