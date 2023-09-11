@@ -1,8 +1,5 @@
 import inntekt from "../../../lib/api/inntekt";
-import { getSession } from "@navikt/dp-auth/session";
-import { azureAd } from "@navikt/dp-auth";
-
-const provider = azureAd;
+import { getAzureSession, getInntektOboToken } from "../../../lib/Utils/auth";
 
 export default async function handler(req, res) {
   switch (req.method) {
@@ -19,11 +16,11 @@ export default async function handler(req, res) {
 }
 
 async function handleGet(req, res) {
-  const session = await getSession(provider, { req });
+  const session = await getAzureSession(request);
   if (!session) return res.status(401).end();
+  const apiToken = await getInntektOboToken(session);
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
-  const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   const data = await inntekt.getUklassifisert(
     aktorId,
@@ -36,11 +33,11 @@ async function handleGet(req, res) {
 }
 
 async function handlePost(req, res) {
-  const session = await getSession(provider, { req });
+  const session = await getAzureSession(request);
   if (!session) return res.status(401).end();
+  const apiToken = await getInntektOboToken(session);
 
   const { aktorId, vedtakId, beregningsDato } = req.query;
-  const apiToken = await session.apiToken(process.env.INNTEKT_API_AUDIENCE);
 
   try {
     let response = await inntekt.postUklassifisert(
