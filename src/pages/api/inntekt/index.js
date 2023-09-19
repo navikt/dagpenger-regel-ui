@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 }
 
 async function handleGet(req, res) {
-  const session = await getAzureSession(request);
+  const session = await getAzureSession(req);
   if (!session) return res.status(401).end();
   const apiToken = await getInntektOboToken(session);
 
@@ -33,7 +33,7 @@ async function handleGet(req, res) {
 }
 
 async function handlePost(req, res) {
-  const session = await getAzureSession(request);
+  const session = await getAzureSession(req);
   if (!session) return res.status(401).end();
   const apiToken = await getInntektOboToken(session);
 
