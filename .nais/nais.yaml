@@ -41,7 +41,8 @@ spec:
   readiness:
     path: /api/isready
   prometheus:
-    enabled: false
+    enabled: true
+    path: /api/internal/metrics
   replicas:
     min: 2
     max: 4
