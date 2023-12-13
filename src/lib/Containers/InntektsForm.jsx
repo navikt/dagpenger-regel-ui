@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FieldArray, Form, withFormik } from "formik";
-import AlertStripe from "nav-frontend-alertstriper";
 import { isEqual } from "lodash";
-import { Element, Undertekst } from "nav-frontend-typografi";
+import { Undertekst } from "nav-frontend-typografi";
 import Modal from "nav-frontend-modal";
 import { Hovedknapp, Knapp } from "nav-frontend-knapper";
-import Spacer from "../Components/Spacer";
 import { Inntektstabell } from "./Inntektstabell";
 import { lagreInntekt } from "../inntektApiClient";
 import NyArbeidsgiver from "./NyArbeidsgiver";
 import OkAvbrytModal from "../Components/OkAvbrytModal";
+import { Alert, BodyShort } from "@navikt/ds-react";
 
 function InntektsForm(props) {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
@@ -39,15 +38,13 @@ function InntektsForm(props) {
   return (
     <>
       {status && status.success && (
-        <div aria-live="polite">
-          <AlertStripe type="suksess">
-            <Element>Inntekt er lagret.</Element>
-            Husk å beregn reglene på nytt i Arena slik at de inntektene du
-            lagret nå blir med i beregningene.
-          </AlertStripe>
-          <Spacer sixteenPx />
-        </div>
+        <Alert variant="success" className="my-4">
+          <BodyShort weight="semibold"> Inntekt er lagret. </BodyShort>
+          Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret
+          nå blir med i beregningene.
+        </Alert>
       )}
+
       <Form onSubmit={handleSubmit}>
         <Inntektstabell
           {...props}

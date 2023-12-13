@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Flatknapp, Knapp } from "nav-frontend-knapper";
-import AlertStripe from "nav-frontend-alertstriper";
 import { Element, Ingress, Normaltekst } from "nav-frontend-typografi";
 import Panel from "nav-frontend-paneler";
 import { formatDistance } from "date-fns";
@@ -19,6 +18,7 @@ import KvinneIkon from "../../assets/svg/kvinne.svg";
 import { getInntekt, getUncachedInntekt } from "../../lib/inntektApiClient";
 import { getOrganisasjonsNavn } from "../../lib/brregApiClient";
 import { uniqBy } from "lodash";
+import { Alert } from "@navikt/ds-react";
 
 const getKjønn = (fødselsnr = "") => {
   if (Number(fødselsnr.charAt(8)) % 2 === 0) {
@@ -251,12 +251,9 @@ function Inntekter({ readOnly, visFor }) {
       <Spacer sixteenPx />
 
       {hentInntektStatus && (
-        <div aria-live="polite">
-          <AlertStripe type="info">
-            Inntekt innhentet. Trykk bekreft for å lagre.
-          </AlertStripe>
-          <Spacer sixteenPx />
-        </div>
+        <Alert variant="info" className="my-4">
+          Inntekt innhentet. Trykk bekreft for å lagre.
+        </Alert>
       )}
 
       <div className="flex hentinntekter">
