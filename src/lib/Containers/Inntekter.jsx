@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Element, Ingress, Normaltekst } from "nav-frontend-typografi";
-import Panel from "nav-frontend-paneler";
 import { formatDistance } from "date-fns";
 import { nb } from "date-fns/locale";
 import { captureException, showReportDialog } from "@sentry/browser";
@@ -200,7 +199,7 @@ function Inntekter({ readOnly, visFor }) {
 
   return (
     <>
-      <Panel border>
+      <div className="inntekter__person-box">
         <div className="flex">
           {inntektdata.inntektsmottaker.pnr && (
             <div className="marginhoyre16">{getKjønn(inntektdata.inntektsmottaker.pnr)}</div>
@@ -214,27 +213,27 @@ function Inntekter({ readOnly, visFor }) {
               <Ingress>{inntektdata.inntektsmottaker.pnr}</Ingress>
             )}
           </div>
-
-          <div className="flexend flex noprint">
-            {inntektdata.manueltRedigert && (
-              <div className="marginhoyre16 flex">
-                <EditedIkon />
-                <Element>Manuelt redigert</Element>
-              </div>
-            )}
-
-            <Button
-              type="button"
-              variant="secondary"
-              size="small"
-              disabled={readOnly}
-              onClick={() => sendTilbakemelding()}
-            >
-              Hvordan opplever du løsningen?
-            </Button>
-          </div>
         </div>
-      </Panel>
+
+        <div className="flexend flex noprint">
+          {inntektdata.manueltRedigert && (
+            <div className="marginhoyre16 flex">
+              <EditedIkon />
+              <Element>Manuelt redigert</Element>
+            </div>
+          )}
+
+          <Button
+            type="button"
+            variant="secondary"
+            size="small"
+            disabled={readOnly}
+            onClick={() => sendTilbakemelding()}
+          >
+            Hvordan opplever du løsningen?
+          </Button>
+        </div>
+      </div>
 
       <Spacer sixteenPx />
 

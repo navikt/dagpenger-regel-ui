@@ -283,6 +283,14 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.inntekter__person-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--a-gray-300);
+  padding: var(--a-spacing-4);
+  border-radius: var(--a-border-radius-medium);
+}
+
 .my-4 {
   margin: var(--a-spacing-4) 0;
 }
