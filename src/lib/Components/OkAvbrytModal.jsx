@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Modal from "nav-frontend-modal";
-import { Hovedknapp, Knapp } from "nav-frontend-knapper";
 import { Normaltekst } from "nav-frontend-typografi";
 import Spacer from "./Spacer";
 import AdvarselIkon from "../../assets/svg/advarsel.svg";
+import { Button } from "@navikt/ds-react";
 
 export function OkAvbrytModal({ isOpen, text, avbrytCallback, OkCallback }) {
   return (
@@ -27,13 +27,14 @@ export function OkAvbrytModal({ isOpen, text, avbrytCallback, OkCallback }) {
           </div>
         </div>
         <Spacer sixteenPx />
-        <div className="knapprad hoyre">
-          <Knapp htmlType="button" onClick={avbrytCallback}>
+
+        <div className="knapprad">
+          <Button type="button" variant="secondary" onClick={avbrytCallback}>
             Avbryt
-          </Knapp>
-          <Hovedknapp htmlType="button" onClick={OkCallback}>
+          </Button>
+          <Button type="button" variant="primary" onClick={OkCallback}>
             Bekreft
-          </Hovedknapp>
+          </Button>
         </div>
       </div>
     </Modal>

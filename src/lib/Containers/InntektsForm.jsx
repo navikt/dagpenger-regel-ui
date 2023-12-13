@@ -4,12 +4,11 @@ import { FieldArray, Form, withFormik } from "formik";
 import { isEqual } from "lodash";
 import { Undertekst } from "nav-frontend-typografi";
 import Modal from "nav-frontend-modal";
-import { Hovedknapp, Knapp } from "nav-frontend-knapper";
 import { Inntektstabell } from "./Inntektstabell";
 import { lagreInntekt } from "../inntektApiClient";
 import NyArbeidsgiver from "./NyArbeidsgiver";
 import OkAvbrytModal from "../Components/OkAvbrytModal";
-import { Alert, BodyShort } from "@navikt/ds-react";
+import { Alert, BodyShort, Button } from "@navikt/ds-react";
 
 function InntektsForm(props) {
   const [isArbeidsgiverModalOpen, setArbeidsgiverModal] = useState(false);
@@ -40,28 +39,26 @@ function InntektsForm(props) {
       {status && status.success && (
         <Alert variant="success" className="my-4">
           <BodyShort weight="semibold"> Inntekt er lagret. </BodyShort>
-          Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret
-          nå blir med i beregningene.
+          Husk å beregn reglene på nytt i Arena slik at de inntektene du lagret nå blir med i
+          beregningene.
         </Alert>
       )}
 
       <Form onSubmit={handleSubmit}>
-        <Inntektstabell
-          {...props}
-          readOnly={readOnly}
-          hentInntektStatus={hentInntektStatus}
-        />
+        <Inntektstabell {...props} readOnly={readOnly} hentInntektStatus={hentInntektStatus} />
         {errors.name && <div className="error">{errors.name}</div>}
 
-        <div className="toolbar flex knapprad">
+        <div className="toolbar knapprad">
           <div className="leggtilarbeidsgiver">
-            <Knapp
-              htmlType="button"
+            <Button
+              type="button"
+              variant="secondary"
               disabled={readOnly}
               onClick={() => setArbeidsgiverModal(!isArbeidsgiverModalOpen)}
             >
               Legg til arbeidsgiver
-            </Knapp>
+            </Button>
+
             <Modal
               isOpen={isArbeidsgiverModalOpen}
               onRequestClose={() => setArbeidsgiverModal(false)}
@@ -84,19 +81,18 @@ function InntektsForm(props) {
 
           <div className="flexend flex">
             <div className="w200 marginhoyre16">
-              <Undertekst>
-                Du må bekrefte at de nye opplysningene skal benyttes.
-              </Undertekst>
+              <Undertekst>Du må bekrefte at de nye opplysningene skal benyttes.</Undertekst>
             </div>
-            <Hovedknapp
-              htmlType="button"
+            <Button
+              type="button"
+              variant="primary"
+              loading={isSubmitting}
+              disabled={(!hentInntektStatus && !dirty) || isSubmitting}
               onClick={bekreftManuellEndring}
-              spinner={isSubmitting}
-              autoDisableVedSpinner
-              disabled={!hentInntektStatus && !dirty}
             >
               Bekreft
-            </Hovedknapp>
+            </Button>
+
             <OkAvbrytModal
               isOpen={isBekreftModalOpen}
               text="Når du bekrefter ny inntekt så vil alle tidligere endringene overskrives."
@@ -122,8 +118,7 @@ InntektsForm.propTypes = {
   isValid: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
   values: PropTypes.shape().isRequired,
-  hentInntektStatus: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-    .isRequired,
+  hentInntektStatus: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   status: PropTypes.shape(),
   hentetInntektPåNytt: PropTypes.bool.isRequired,
 };

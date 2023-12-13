@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import Modal from "nav-frontend-modal";
-import { Flatknapp } from "nav-frontend-knapper";
 import { FieldArray } from "formik";
 import SelectField from "../Components/SelectField";
 import InputField from "../Components/InputField";
@@ -11,7 +10,7 @@ import { formatertPengesum } from "../Utils/currencyUtils";
 import { VerdikoderContext } from "../Context/Verdikoder";
 import SlettIkon from "../../assets/svg/slett.svg";
 import NyInntekt from "./NyInntekt";
-import { ExpansionCard } from "@navikt/ds-react";
+import { Button, ExpansionCard } from "@navikt/ds-react";
 
 const mapVerdikoder = (typer) =>
   typer.map((navn) => (
@@ -93,7 +92,7 @@ function Inntekt({ readOnly, inntekter, virksomhet, columnId, monthIndex }) {
                                   onClick={() => setSlettInntektModal(index)}
                                   title="Slett inntekt"
                                 >
-                                  <img src={SlettIkon} alt="" />;
+                                  <img src={SlettIkon} alt="" />
                                 </button>
 
                                 <OkAvbrytModal
@@ -113,17 +112,25 @@ function Inntekt({ readOnly, inntekter, virksomhet, columnId, monthIndex }) {
                         )
                     )}
                   {!readOnly && (
-                    <div className="knapprad midstill">
-                      <Flatknapp htmlType="button" mini onClick={() => setEditMode(!editMode)}>
+                    <div className="knapprad">
+                      <Button
+                        type="button"
+                        variant="tertiary"
+                        size="xsmall"
+                        onClick={() => setEditMode(!editMode)}
+                      >
                         Rediger
-                      </Flatknapp>
-                      <Flatknapp
-                        htmlType="button"
-                        mini
+                      </Button>
+
+                      <Button
+                        type="button"
+                        variant="tertiary"
+                        size="xsmall"
                         onClick={() => setNyInntektModal(!isNyInntektModalOpen)}
                       >
                         Legg til inntekt
-                      </Flatknapp>
+                      </Button>
+
                       <Modal
                         isOpen={isNyInntektModalOpen}
                         onRequestClose={() => setNyInntektModal(false)}

@@ -216,9 +216,8 @@ input::-webkit-inner-spin-button {
 }
 
 .knapprad {
-  .knapp {
-    margin-left: 6px;
-  }
+  display: flex;
+  gap: var(--a-spacing-2);
 }
 
 // FLEX

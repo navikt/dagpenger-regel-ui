@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Form, withFormik } from "formik";
-import { Hovedknapp, Knapp } from "nav-frontend-knapper";
 import { Undertittel } from "nav-frontend-typografi";
 import InputField from "../Components/InputField";
 import SelectField from "../Components/SelectField";
@@ -11,6 +10,7 @@ import { MMMM_YYYY_FORMAT } from "../Utils/datoFormat";
 import { VerdikoderContext } from "../Context/Verdikoder";
 import GodkjentIkon from "../../assets/svg/innvilget_valgt.svg";
 import Spacer from "../Components/Spacer";
+import { Button } from "@navikt/ds-react";
 
 const mapVerdikoder = (typer) =>
   typer.map((navn) => (
@@ -25,8 +25,7 @@ const visNavnOgIdentifikator = (virksomhet) => {
 };
 
 function NyInntekt(props) {
-  const { handleSubmit, isSubmitting, closeModal, virksomhet, isValid, dato } =
-    props;
+  const { handleSubmit, isSubmitting, closeModal, virksomhet, isValid, dato } = props;
   const verdikoder = useContext(VerdikoderContext);
 
   return (
@@ -35,14 +34,12 @@ function NyInntekt(props) {
         <div className="flex">
           <div className="flexcolumn">
             <div className="okavbrytmodal--ikon">
-              <img src={GodkjentIkon} alt="" />;
+              <img src={GodkjentIkon} alt="" />
             </div>
           </div>
           <div className="flexcolumn okavbrytmodal--text">
             <Undertittel>
-              {`Legg til ny inntektspost for ${visNavnOgIdentifikator(
-                virksomhet
-              )} i `}
+              {`Legg til ny inntektspost for ${visNavnOgIdentifikator(virksomhet)} i `}
               <DatoLabel dato={dato} datoFormat={MMMM_YYYY_FORMAT} />
             </Undertittel>
           </div>
@@ -68,17 +65,18 @@ function NyInntekt(props) {
         </div>
         <Spacer sixteenPx />
 
-        <div className="flex knapprad flexend">
-          <Hovedknapp
-            htmlType="submit"
+        <div className="knapprad">
+          <Button
+            type="submit"
+            variant="primary"
             onClick={handleSubmit}
             disabled={!isValid || isSubmitting}
           >
             Legg til
-          </Hovedknapp>
-          <Knapp htmlType="button" onClick={closeModal}>
+          </Button>
+          <Button type="button" variant="secondary" onClick={closeModal}>
             Avbryt
-          </Knapp>
+          </Button>
         </div>
       </div>
     </Form>

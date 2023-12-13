@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Flatknapp, Knapp } from "nav-frontend-knapper";
 import { Element, Ingress, Normaltekst } from "nav-frontend-typografi";
 import Panel from "nav-frontend-paneler";
 import { formatDistance } from "date-fns";
@@ -18,7 +17,7 @@ import KvinneIkon from "../../assets/svg/kvinne.svg";
 import { getInntekt, getUncachedInntekt } from "../../lib/inntektApiClient";
 import { getOrganisasjonsNavn } from "../../lib/brregApiClient";
 import { uniqBy } from "lodash";
-import { Alert } from "@navikt/ds-react";
+import { Alert, Button } from "@navikt/ds-react";
 
 const getKjønn = (fødselsnr = "") => {
   if (Number(fødselsnr.charAt(8)) % 2 === 0) {
@@ -47,9 +46,7 @@ const sendTilbakemelding = () => {
 export const findArbeidsgivere = async (inntekt) => {
   const arbeidsgivere = uniqBy(
     inntekt.arbeidsInntektMaaned.flatMap((mnd) =>
-      mnd.arbeidsInntektInformasjon.inntektListe.map(
-        ({ virksomhet }) => virksomhet
-      )
+      mnd.arbeidsInntektInformasjon.inntektListe.map(({ virksomhet }) => virksomhet)
     ),
     "identifikator"
   );
@@ -63,9 +60,7 @@ export const findArbeidsgivere = async (inntekt) => {
     }
   });
 
-  return Array.from(await Promise.all(medNavn)).sort(
-    (a, b) => b.identifikator - a.identifikator
-  );
+  return Array.from(await Promise.all(medNavn)).sort((a, b) => b.identifikator - a.identifikator);
 };
 
 export const inntektRequest = (queryParams) => ({
@@ -182,9 +177,7 @@ function Inntekter({ readOnly, visFor }) {
 
     let resultat;
     try {
-      resultat = await getUncachedInntekt(
-        inntektRequest(new URLSearchParams(location.search))
-      );
+      resultat = await getUncachedInntekt(inntektRequest(new URLSearchParams(location.search)));
     } catch (error) {
       throw new Error(
         `En feil har oppstått i forbindelse med tjenestekallet til inntekt. ${error}`
@@ -201,10 +194,7 @@ function Inntekter({ readOnly, visFor }) {
     setHentInntekttatus(true);
   };
 
-  if (
-    !inntektdata.inntektId &&
-    !inntektdata.inntekt.arbeidsInntektMaaned.length
-  ) {
+  if (!inntektdata.inntektId && !inntektdata.inntekt.arbeidsInntektMaaned.length) {
     return <Spinner type="XL" />;
   }
 
@@ -213,17 +203,13 @@ function Inntekter({ readOnly, visFor }) {
       <Panel border>
         <div className="flex">
           {inntektdata.inntektsmottaker.pnr && (
-            <div className="marginhoyre16">
-              {getKjønn(inntektdata.inntektsmottaker.pnr)}
-            </div>
+            <div className="marginhoyre16">{getKjønn(inntektdata.inntektsmottaker.pnr)}</div>
           )}
           <div>
             {inntektdata.inntektsmottaker.navn && (
               <Ingress>{inntektdata.inntektsmottaker.navn}</Ingress>
             )}
-            {inntektdata.inntektsmottaker.pnr && (
-              <Normaltekst>Fødselsnummer</Normaltekst>
-            )}
+            {inntektdata.inntektsmottaker.pnr && <Normaltekst>Fødselsnummer</Normaltekst>}
             {inntektdata.inntektsmottaker.pnr && (
               <Ingress>{inntektdata.inntektsmottaker.pnr}</Ingress>
             )}
@@ -236,14 +222,16 @@ function Inntekter({ readOnly, visFor }) {
                 <Element>Manuelt redigert</Element>
               </div>
             )}
-            <Knapp
-              htmlType="button"
-              mini
+
+            <Button
+              type="button"
+              variant="secondary"
+              size="small"
               disabled={readOnly}
               onClick={() => sendTilbakemelding()}
             >
               Hvordan opplever du løsningen?
-            </Knapp>
+            </Button>
           </div>
         </div>
       </Panel>
@@ -257,14 +245,16 @@ function Inntekter({ readOnly, visFor }) {
       )}
 
       <div className="flex hentinntekter">
-        <Knapp
+        <Button
+          variant="secondary"
           onClick={() => setHentInntektModal(true)}
           autoDisableVedSpinner
           disabled={readOnly}
           spinner={hentInntektStatus === "fetching"}
         >
           Hent inntekter på nytt
-        </Knapp>
+        </Button>
+
         <div className="marginvenstre16">
           Opplysninger hentet :
           <Normaltekst>
@@ -278,16 +268,14 @@ function Inntekter({ readOnly, visFor }) {
             </b>
           </Normaltekst>
         </div>
-
         <div className="flexend">
-          <Flatknapp mini htmlType="button" onClick={() => gåTilForrige12()}>
+          <Button type="button" variant="tertiary" size="small" onClick={() => gåTilForrige12()}>
             {"< 12 mnd"}
-          </Flatknapp>
-          <Flatknapp mini htmlType="button" onClick={() => gåTilNeste12()}>
+          </Button>
+          <Button type="button" variant="tertiary" size="small" onClick={() => gåTilNeste12()}>
             {"12 mnd >"}
-          </Flatknapp>
+          </Button>
         </div>
-
         <OkAvbrytModal
           isOpen={isHentInntektModalOpen}
           text="Når du henter inn nyeste inntekt fra skatt så vil alle tidligere endringene gå tapt."
