@@ -94,7 +94,7 @@ $width: 250px;
 
 // form
 
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -248,8 +248,8 @@ input::-webkit-inner-spin-button {
 
 @media print {
   @page {
-    size: auto;   /* auto is the initial value */
-    margin: 0;  /* this affects the margin in the printer settings */
+    size: auto; /* auto is the initial value */
+    margin: 0; /* this affects the margin in the printer settings */
   }
 
   body {
@@ -268,12 +268,6 @@ input::-webkit-inner-spin-button {
 
       &.arbeidsgiver {
         display: none;
-      }
-
-      &.inntekter {
-        .ekspanderbartPanel__hode {
-          padding: 0;
-        }
       }
     }
   }
