@@ -247,9 +247,8 @@ function Inntekter({ readOnly, visFor }) {
         <Button
           variant="secondary"
           onClick={() => setHentInntektModal(true)}
-          autoDisableVedSpinner
-          disabled={readOnly}
-          spinner={hentInntektStatus === "fetching"}
+          disabled={readOnly || hentInntektStatus === "fetching"}
+          loading={hentInntektStatus === "fetching"}
         >
           Hent inntekter på nytt
         </Button>
