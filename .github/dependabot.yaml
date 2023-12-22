@@ -5,10 +5,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    groups:
-      github-actions:
-        patterns:
-          - "*"
   # Maintain dependencies for gradle
   - package-ecosystem: "gradle"
     directory: "/"
@@ -17,10 +13,6 @@ updates:
       time: "12:20"
       day: "wednesday"
       timezone: "Europe/Oslo"
-    groups:
-      gradle:
-        patterns:
-          - "*"
   # Maintain dependencies for docker
   - package-ecosystem: "docker"
     directory: "/"
@@ -34,7 +26,3 @@ updates:
       time: "12:20"
       day: "wednesday"
       timezone: "Europe/Oslo"
-    groups:
-      gradle:
-        patterns:
-          - "*"
