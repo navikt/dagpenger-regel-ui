@@ -1,5 +1,5 @@
 ingresses:
   - "https://dagpenger-regel-ui.intern.dev.nav.no/"
 inntekt_api:
-  ingress: dp-inntekt-api.dev-fss-pub.nais.io
-  audience: api://dev-fss.teamdagpenger.dp-inntekt-api/.default
+  ingress: dp-inntekt-api.intern.dev.nav.no
+  audience: api://dev-gcp.teamdagpenger.dp-inntekt-api/.default

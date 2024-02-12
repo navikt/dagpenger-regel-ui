@@ -19,7 +19,6 @@ spec:
   {{#each ingresses as |url|}}
      - {{url}}
   {{/each}}
-  webproxy: true
   env:
     - name: INNTEKT_API
       value: https://{{inntekt_api.ingress}}
