@@ -45,7 +45,7 @@ jobs:
       - run: cp $NPM_CONFIG_USERCONFIG .npmrc
 
       - name: Build and push image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           tags: ${{ env.IMAGE }}
