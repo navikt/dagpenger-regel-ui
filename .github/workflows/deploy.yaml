@@ -2,9 +2,6 @@ name: Build and deploy
 
 on: [ push ]
 
-env:
-  IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -25,6 +22,7 @@ jobs:
           CI: true
 
   build:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -44,40 +42,39 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
       - run: cp $NPM_CONFIG_USERCONFIG .npmrc
 
-      - name: Build and push image
-        uses: docker/build-push-action@v6
+      - name: docker-build-push
+        uses: nais/docker-build-push@v0
+        id: docker-build-push
         with:
-          context: .
-          tags: ${{ env.IMAGE }}
-          push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          secrets: |
-            "NODE_AUTH_TOKEN=${{ secrets.READER_TOKEN }}"
+          team: teamdagpenger
+          tag: ${{ github.sha }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
 
   deploy-dev:
-    needs: [ test, build ]
+    needs: [ build, test ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: nais/deploy/actions/deploy@master
+      - uses: nais/deploy/actions/deploy@v2
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: .nais/nais.yaml
           VARS: .nais/vars-dev.yaml
+          VAR: image=${{ needs.build.outputs.image }}
           PRINT_PAYLOAD: true
 
   deploy-prod:
-    needs: [ deploy-dev ]
-    if: github.ref == 'refs/heads/master'
+    needs: [ build, deploy-dev ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: nais/deploy/actions/deploy@master
+      - uses: nais/deploy/actions/deploy@v2
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
           RESOURCE: .nais/nais.yaml
           VARS: .nais/vars-prod.yaml
+          VAR: image=${{ needs.build.outputs.image }}
           PRINT_PAYLOAD: true

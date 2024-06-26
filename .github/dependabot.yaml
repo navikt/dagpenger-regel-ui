@@ -22,7 +22,4 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
-      time: "12:20"
-      day: "wednesday"
-      timezone: "Europe/Oslo"
+      interval: "daily"
