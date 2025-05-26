@@ -13,7 +13,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "8m"
     nginx.ingress.kubernetes.io/proxy-buffer-size: "800k"
 spec:
-  image: {{image}}
+  image: "{{image}}"
   port: 3000
   ingresses:
   {{#each ingresses as |url|}}
@@ -23,11 +23,11 @@ spec:
     - name: INNTEKT_API
       value: https://{{inntekt_api.ingress}}
     - name: INNTEKT_API_AUDIENCE
-      value: {{inntekt_api.audience}}
+      value: "{{inntekt_api.audience}}"
   accessPolicy:
     outbound:
       external:
-        - host: {{inntekt_api.ingress}}
+        - host: "{{inntekt_api.ingress}}"
   azure:
     application:
       allowAllUsers: true
