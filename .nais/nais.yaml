@@ -51,3 +51,11 @@ spec:
     requests:
       cpu: 20m
       memory: 128Mi
+  observability:
+    logging:
+      destinations:
+        - id: loki
+        - id: elastic
+    autoInstrumentation:
+      enabled: true
+      runtime: java
