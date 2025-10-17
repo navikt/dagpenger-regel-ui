@@ -1,4 +1,4 @@
-FROM node:18 AS builder
+FROM node:25 AS builder
 
 WORKDIR /usr/src/app
 
@@ -14,7 +14,7 @@ RUN npm rebuild && npm run prepare --if-present
 COPY . /usr/src/app
 RUN npm run build
 
-FROM node:18-alpine AS runtime
+FROM node:25-alpine AS runtime
 
 WORKDIR /usr/src/app
 
