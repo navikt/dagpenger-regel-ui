@@ -45,7 +45,7 @@
     "nav-frontend-toggle-style": "^2.1.2",
     "nav-frontend-typografi": "^4.0.2",
     "nav-frontend-typografi-style": "^2.0.2",
-    "next": "^12.3.5",
+    "next": "^16.1.6",
     "next-images": "^1.8.4",
     "prom-client": "^15.0.0",
     "prop-types": "^15.8.1",
