@@ -1,3 +1,8 @@
+## Denne applikasjonen er arkivert
+**Ny frontend for redigring av inntekt er [dp-inntekt-frontend](https://github.com/navikt/dp-inntekt-frontend)**  
+
+  
+
 ![Build and deploy](https://github.com/navikt/dagpenger-regel-ui/workflows/Build%20and%20deploy/badge.svg)
 ![Vulnerabilities scanning of dependencies](https://github.com/navikt/dagpenger-regel-ui/workflows/Vulnerabilities%20scanning%20of%20dependencies/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=navikt_dagpenger-regel-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=navikt_dagpenger-regel-ui)
